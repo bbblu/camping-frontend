@@ -1,9 +1,77 @@
 div{
     text-align: center;
-    margin: 0% auto;
-    width: 33%;
+    font-size: 130%;
+    color: #C0DD6F;
+    margin: 10% 33% 4.8% 33%;
+    width: 34%;
     height: 33%;
     border-style: solid;
     border-color: #C0DD6F;
     border-radius: 20pt;
+    padding-bottom: 1%;
+}
+
+input{
+    border-style: solid;
+    border-radius: 20pt;
+    border-color: #C0DD6F;
+    width: 80%;
+    height: 25pt;
+    margin-bottom: 2%;
+    padding-left: 5%;
+}
+
+#RememberMe{
+    border-style: solid;
+    border-color: #C0DD6F;
+    width: 7pt;
+    height: 7pt;
+    margin-left: 15%;
+}
+#RememberMe:checked{
+    background-color: #C0DD6F;
+}
+
+a{
+    color: #C0DD6F;
+    text-decoration: none;
+}
+
+span{
+    font-weight: bold;
+    font-size: 70%;
+}
+
+::placeholder{
+    font-size: 100%;
+    padding-left: 10%;
+}
+
+#signup{
+    width: 35%;
+    color: #C0DD6F;
+    font-weight: bold;
+    margin:2% 5% 20% 10%;
+    border-style: solid;
+    border-radius: 20pt;
+    border-color: #C0DD6F;
+    background-color: #FFF;
+}
+
+#login{
+    width: 35%;
+    color: #FFF;
+    font-weight: bold;
+    margin:2% 10% 20% 5%;
+    border-style: solid;
+    border-radius: 20pt;
+    border-color: #C0DD6F;
+    background-color: #C0DD6F;
+}
+
+@media screen and (max-width: 500px){
+    div{
+        width: 80%;
+        margin: 10% 10% 4.8% 10%
+    }
 }

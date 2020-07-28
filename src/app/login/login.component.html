@@ -1,6 +1,12 @@
 <div class="container">
-  <h5>
+  <p>
     <i class="material-icons">shopping_cart</i>借借露
-  </h5>
-
+  </p>
+  <form [formGroup]="login" (ngSubmit)="onSubmit()">
+      <input required type="text" placeholder="帳號" formControlName="accountnumber"><br>
+      <input required type="password" placeholder="密碼" formControlName="password"><br>
+      <a [routerLink]="['/']"><span>忘記密碼</span></a><input type="checkbox" id="RememberMe"><span>記住我</span><br>
+      <button type="button" id="signup" [routerLink]="['/']">註冊</button>
+      <button type="submit" id="login" [disabled]="!login.valid">登入</button>
+  </form>
 </div>
