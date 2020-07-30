@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl,Validators } from '@angular/forms';
+import { FormGroup, FormControl,FormBuilder,Validators} from '@angular/forms';
+import { get } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-login',
@@ -8,19 +9,40 @@ import { FormGroup, FormControl,Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+ 
   login = new FormGroup({
-    accountnumber: new FormControl(''),
+    account: new FormControl(''),
     password: new FormControl('')
   })
-
-  constructor() { }
-
+  
+  /*
+  public form: FormGroup;
+  constructor(
+    private fb: FormBuilder
+  ){}
+  */
+  
   onSubmit() {
     // TODO: Use EventEmitter with form value
-    window.alert('submited');
+    
   }
+  
 
   ngOnInit() {
+    /*
+    this.form = this.fb.group({
+      username: ['',Validators.pattern('^[a-zA-Z0-9-_]{5,20}')],
+      password: ['',Validators.pattern('^[a-zA-Z0-9-_]{5,20}')],
+      rememberMe :[false]
+    })
+    */
   }
+  /*
+  get username() {return this.form.get('username');}
+  get password() {return this.form.get('password');}
+  get rememberMe() {return this.form.get('rememberMe');}
 
+  login(){
+  }
+  */
 }

@@ -1,10 +1,11 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <div class="container">
   <p>
     <i class="material-icons">shopping_cart</i>借借露
   </p>
   <form [formGroup]="login" (ngSubmit)="onSubmit()">
-      <input required type="text" placeholder="帳號" formControlName="accountnumber"><br>
-      <input required type="password" placeholder="密碼" formControlName="password"><br>
+      <label class="account-icon"><input required type="text" placeholder="帳號" formControlName="account" id="inputaccount"></label>
+      <input required type="password" placeholder="密碼" formControlName="password" id="inputpassword"><br>
       <a [routerLink]="['/']"><span>忘記密碼</span></a><input type="checkbox" id="RememberMe"><span>記住我</span><br>
       <button type="button" id="signup" [routerLink]="['/']">註冊</button>
       <button type="submit" id="login" [disabled]="!login.valid">登入</button>

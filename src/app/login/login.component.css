@@ -1,14 +1,27 @@
-div{
+.container{
     text-align: center;
     font-size: 130%;
     color: #C0DD6F;
-    margin: 10% 33% 4.8% 33%;
-    width: 34%;
-    height: 33%;
+    margin: 10% 38% 4.8% 38%;
+    width: 24%;
+    height: 23%;
     border-style: solid;
     border-color: #C0DD6F;
     border-radius: 20pt;
     padding-bottom: 1%;
+}
+
+.account-icon{
+    position: relative;
+}
+.account-icon:before{
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f007";
+    position: absolute;
+    left: 90%;
+    top: 20%;
+    transform: translate(-50%);
 }
 
 input{
@@ -70,7 +83,7 @@ span{
 }
 
 @media screen and (max-width: 500px){
-    div{
+    .container{
         width: 80%;
         margin: 10% 10% 4.8% 10%
     }
