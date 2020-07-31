@@ -1,4 +1,4 @@
-export interface Response<T> {
+export interface ApiModel<T> {
     result:boolean;
     errorCode:string;
     message:string;

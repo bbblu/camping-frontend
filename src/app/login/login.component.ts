@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl,FormBuilder,Validators} from '@angular/forms';
-import { HttpClient,HttpResponse } from '@angular/common/http';
-import { Response } from '../models//response'
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { ApiModel } from '../models/api-model'
+import { HttpService } from '../services/http.service'
 
 @Component({
   selector: 'app-login',
@@ -10,49 +11,29 @@ import { Response } from '../models//response'
 })
 export class LoginComponent implements OnInit {
 
-  login = new FormGroup({
-    account: new FormControl(''),
-    password: new FormControl('')
-  })
-  
-  
+  userForm!: FormGroup;
+  result!: ApiModel<object>;
+
   constructor(
     private formBuilder: FormBuilder,
-    private http :HttpClient
-  ){}
+    private http: HttpClient,
+    private httpSerivce: HttpService
+  ) { }
 
-  getAlertList(){
-    let url = "http://localhost:3000/posts"
-
-    this.http.get<any>(url).subscribe(res => {
-      console.log(res);
+  ngOnInit(): void {
+    this.userForm = this.formBuilder.group({
+      account: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]*')]],
+      password: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]*')]]
     });
   }
-  
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    
-  }
-  
+    console.log(this.userForm.value);
+    this.httpSerivce.postData<object>('/login',this.userForm.value)
+      .subscribe(response =>{
+        this.result = response;
+      });
 
-  ngOnInit():void {
-    this.userForm = this.formBuilder.group({
-      
-    })
-    /*
-    this.form = this.fb.group({
-      username: ['',Validators.pattern('^[a-zA-Z0-9-_]{5,20}')],
-      password: ['',Validators.pattern('^[a-zA-Z0-9-_]{5,20}')],
-      rememberMe :[false]
-    })
-    */
   }
-  /*
-  get username() {return this.form.get('username');}
-  get password() {return this.form.get('password');}
-  get rememberMe() {return this.form.get('rememberMe');}
 
-  login(){
-  }
-  */
+
 }
