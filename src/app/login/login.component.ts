@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormBuilder,Validators} from '@angular/forms';
-import { get } from 'selenium-webdriver/http';
+import { HttpClient,HttpResponse } from '@angular/common/http';
+import { Response } from '../models//response'
 
 @Component({
   selector: 'app-login',
@@ -9,18 +10,24 @@ import { get } from 'selenium-webdriver/http';
 })
 export class LoginComponent implements OnInit {
 
- 
   login = new FormGroup({
     account: new FormControl(''),
     password: new FormControl('')
   })
   
-  /*
-  public form: FormGroup;
+  
   constructor(
-    private fb: FormBuilder
+    private formBuilder: FormBuilder,
+    private http :HttpClient
   ){}
-  */
+
+  getAlertList(){
+    let url = "http://localhost:3000/posts"
+
+    this.http.get<any>(url).subscribe(res => {
+      console.log(res);
+    });
+  }
   
   onSubmit() {
     // TODO: Use EventEmitter with form value
@@ -28,7 +35,10 @@ export class LoginComponent implements OnInit {
   }
   
 
-  ngOnInit() {
+  ngOnInit():void {
+    this.userForm = this.formBuilder.group({
+      
+    })
     /*
     this.form = this.fb.group({
       username: ['',Validators.pattern('^[a-zA-Z0-9-_]{5,20}')],
