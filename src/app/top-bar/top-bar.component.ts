@@ -12,4 +12,9 @@ export class TopBarComponent implements OnInit {
   ngOnInit() {
   }
 
+  clcikBurgerBar() {
+    const elems = document.querySelectorAll('.sidenav');
+    console.log(elems);
+  }
+
 }
