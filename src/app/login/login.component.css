@@ -1,6 +1,7 @@
 .container{
     text-align: center;
     font-size: 130%;
+    font-family:微軟正黑體; 
     color: #C0DD6F;
     margin: 10% 33% 4.8% 33%;
     width: 34%;
@@ -9,10 +10,10 @@
     border-radius: 20pt;
 }
 
-.account-icon{
+.icon{
     position: relative;
 }
-.account-icon:before{
+.icon:before{
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     content: "\f007";
@@ -22,35 +23,42 @@
     transform: translate(-50%);
 }
 
+#passwordIcon:before{
+    content: "\f06e";
+}
+
+.accountInput{
+    margin-bottom: 1%;
+}
+
 input{
     border-style: solid;
     border-radius: 20pt;
     border-color: #C0DD6F;
     width: 80%;
-    height: 25pt;
-    margin-bottom: 2%;
-    padding-left: 5%;
+    height: 100%;
+    padding:3% 5% 3% 5% ;
+
 }
 
-#RememberMe{
-    border-style: solid;
-    border-color: #C0DD6F;
-    width: 7pt;
-    height: 7pt;
-    margin-left: 15%;
+
+.rememberCheckbox{
+    font-family: 微軟正黑體;
+    color:#C0DD6F;
 }
-#RememberMe:checked{
-    background-color: #C0DD6F;
+
+.flex-forgetPasswordAndRememberMe{
+    display: block;
+    font-weight: bold;
+    font-size: 70%;
+    justify-content: space-around;
+    flex-direction: row;
 }
 
 a{
     color: #C0DD6F;
     text-decoration: none;
-}
-
-span{
-    font-weight: bold;
-    font-size: 70%;
+    
 }
 
 ::placeholder{
@@ -58,11 +66,12 @@ span{
     padding-left: 10%;
 }
 
-#signup{
+button{
+    font-size: 100%;
     width: 35%;
     color: #C0DD6F;
     font-weight: bold;
-    margin:2% 5% 20% 10%;
+    margin:2% 5% 2% 10%;
     border-style: solid;
     border-radius: 20pt;
     border-color: #C0DD6F;
@@ -70,19 +79,21 @@ span{
 }
 
 #login{
-    width: 35%;
     color: #FFF;
-    font-weight: bold;
-    margin:2% 10% 20% 5%;
-    border-style: solid;
-    border-radius: 20pt;
-    border-color: #C0DD6F;
+    margin:2% 10% 2% 5%;
     background-color: #C0DD6F;
 }
 
 @media screen and (max-width: 500px){
     .container{
         width: 80%;
-        margin: 10% 10% 4.8% 10%
+        margin: 10% 10% 4.8% 10%;
+    }
+}
+
+@media screen and (min-width: 1900px){
+    .container{
+        width: 20%;
+        margin: 10% 40% 4.8% 40%;
     }
 }
