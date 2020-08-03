@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule,FormsModule } from '@angular/forms'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
       MatCheckboxModule,
       MatInputModule,
       BrowserAnimationsModule,
-      HttpClientModule
+      HttpClientModule,
+      FlexLayoutModule
    ],
    exports: [
       MatToolbarModule,
@@ -42,7 +44,7 @@ import { HttpClientModule } from '@angular/common/http';
       MatCheckboxModule,
       MatInputModule,
       ReactiveFormsModule
-  ],
+   ],
    providers: [],
    bootstrap: [
       AppComponent

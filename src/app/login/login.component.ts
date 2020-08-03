@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { ApiModel } from '../models/api-model'
-import { HttpService } from '../services/http.service'
+import { Router, ActivatedRoute } from '@angular/router';
+import { ApiModel } from '../models/api-model';
+import { HttpService } from '../services/http.service';
+import { error } from 'selenium-webdriver';
+
 
 @Component({
   selector: 'app-login',
@@ -17,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private httpSerivce: HttpService
+    private httpSerivce: HttpService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -26,12 +30,19 @@ export class LoginComponent implements OnInit {
       password: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]*')]]
     });
   }
+
   onSubmit() {
     console.log(this.userForm.value);
-    this.httpSerivce.postData<object>('/login',this.userForm.value)
-      .subscribe(response =>{
+    this.httpSerivce.postData<object>('/login', this.userForm.value)
+      .subscribe(response => {
         this.result = response;
-      });
+        if (response.result) {
+          this.router.navigateByUrl('/');
+        }
+      }, error => {
+        alert(error.error.message);
+      }
+      );
 
   }
 
