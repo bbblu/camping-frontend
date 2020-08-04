@@ -45,6 +45,7 @@ input{
 .rememberCheckbox{
     font-family: 微軟正黑體;
     color:#C0DD6F;
+    margin-left: 10%;
 }
 
 .flex-forgetPasswordAndRememberMe{
@@ -58,6 +59,8 @@ input{
 a{
     color: #C0DD6F;
     text-decoration: none;
+    vertical-align: middle;
+    margin-right: 5%;
     
 }
 
