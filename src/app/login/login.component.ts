@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ApiModel } from '../models/api-model';
 import { HttpService } from '../services/http.service';
 import { error } from 'selenium-webdriver';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { error } from 'selenium-webdriver';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  hide = true;
   userForm!: FormGroup;
   result!: ApiModel<object>;
 

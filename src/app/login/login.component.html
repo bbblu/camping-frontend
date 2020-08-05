@@ -1,30 +1,22 @@
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-  crossorigin="anonymous">
 <div class="container">
   <p>
     <i class="material-icons">shopping_cart</i>借借露
   </p>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <div class="accountInput">
-      <label class="icon">
-        <input required type="text" placeholder="帳號" formControlName="account" id="inputaccount">
-      </label>
-    </div>
-    <div class="passwordInput">
-      <label class="icon" id="passwordIcon">
-        <input required type="password" placeholder="密碼" formControlName="password" id="inputpassword">
-      </label>
+    <div class="inputStyle">
+      <mat-form-field floatLabel="never">
+        <input matInput required type="text" placeholder="帳號" formControlName="account">
+        <i class="material-icons" matSuffix>person</i>
+      </mat-form-field>
+      <mat-form-field floatLabel="never">
+        <input matInput required [type]="hide ? 'password' : 'text'" placeholder="密碼" formControlName="password">
+        <i class="material-icons" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</i>
+      </mat-form-field>
     </div>
     <div class="flex-forgetPasswordAndRememberMe">
-        <a [routerLink]="['/']"><span>忘記密碼</span></a>
-        <mat-checkbox class="rememberCheckbox">記住我</mat-checkbox>
+      <a [routerLink]="['/']"><span>忘記密碼</span></a>
+      <mat-checkbox class="rememberCheckbox">記住我</mat-checkbox>
     </div>
-    <!--
-    <div class="flex-forgetPasswordAndRememberMe">
-      <div class="forgetPassword"><a [routerLink]="['/']"><span>忘記密碼</span></a></div>
-      <div class="rememberMe"><mat-checkbox class="rememberCheckbox">記住我</mat-checkbox></div>
-    </div>
-    -->
     <div class="signUpAndLogin">
       <button mat-button type="button" id="signup" [routerLink]="['/']">註冊</button>
       <button mat-button type="submit" id="login" [disabled]="!userForm.valid">登入</button>

@@ -1,7 +1,7 @@
 .container{
     text-align: center;
     font-size: 130%;
-    font-family:微軟正黑體; 
+    font-family:Microsoft JhengHei; 
     color: #C0DD6F;
     margin: 10% 33% 4.8% 33%;
     width: 34%;
@@ -10,40 +10,12 @@
     border-radius: 20pt;
 }
 
-.icon{
-    position: relative;
+.material-icons{
+    vertical-align: middle;
 }
-.icon:before{
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    content: "\f007";
-    position: absolute;
-    left: 85%;
-    top: 20%;
-    transform: translate(-50%);
-}
-
-#passwordIcon:before{
-    content: "\f06e";
-}
-
-.accountInput{
-    margin-bottom: 1%;
-}
-
-input{
-    border-style: solid;
-    border-radius: 20pt;
-    border-color: #C0DD6F;
-    width: 80%;
-    height: 100%;
-    padding:3% 5% 3% 5% ;
-
-}
-
 
 .rememberCheckbox{
-    font-family: 微軟正黑體;
+    font-family: Microsoft JhengHei;
     color:#C0DD6F;
     margin-left: 10%;
 }
@@ -65,12 +37,12 @@ a{
 }
 
 ::placeholder{
-    font-size: 100%;
+    font-size: 70%;
     padding-left: 10%;
 }
 
 button{
-    font-size: 100%;
+    font-size: 70%;
     width: 35%;
     color: #C0DD6F;
     font-weight: bold;
