@@ -10,30 +10,46 @@
     border-radius: 20pt;
 }
 
-.material-icons{
-    vertical-align: middle;
+::ng-deep .mat-form-field-outline.ng-tns-c77-0.ng-star-inserted{
+    border: solid #C0DD6F;
+    border-radius: 30pt;
 }
 
-.rememberCheckbox{
-    font-family: Microsoft JhengHei;
-    color:#C0DD6F;
-    margin-left: 10%;
+::ng-deep .mat-form-field-outline.ng-tns-c77-1.ng-star-inserted{
+     border: solid #C0DD6F;
+    border-radius: 30pt;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start{
+    border: none !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end{
+    border:none !important;
+}
+
+.material-icons{
+    font-size: 34px;
 }
 
 .flex-forgetPasswordAndRememberMe{
     display: block;
     font-weight: bold;
-    font-size: 70%;
+    font-size: 100%;
     justify-content: space-around;
     flex-direction: row;
+    padding-bottom: 2%;
 }
 
-a{
+.forgetPassword{
+    font-weight: bold;
     color: #C0DD6F;
     text-decoration: none;
-    vertical-align: middle;
-    margin-right: 5%;
-    
+    vertical-align: middle;    
+}
+
+.mat-checkbox{
+    font-family: Microsoft JhengHei;
 }
 
 ::placeholder{
@@ -41,12 +57,15 @@ a{
     padding-left: 10%;
 }
 
+.signUpAndLogin{
+    padding-bottom: 2%;
+}
+
 button{
     font-size: 70%;
     width: 35%;
     color: #C0DD6F;
     font-weight: bold;
-    margin:2% 5% 2% 10%;
     border-style: solid;
     border-radius: 20pt;
     border-color: #C0DD6F;
@@ -55,7 +74,6 @@ button{
 
 #login{
     color: #FFF;
-    margin:2% 10% 2% 5%;
     background-color: #C0DD6F;
 }
 
@@ -63,6 +81,12 @@ button{
     .container{
         width: 80%;
         margin: 10% 10% 4.8% 10%;
+    }
+}
+
+@media screen and (min-width: 1300px){
+    .material-icons{
+        font-size: 40px;
     }
 }
 
