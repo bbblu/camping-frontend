@@ -3,7 +3,7 @@
     font-size: 130%;
     font-family:Microsoft JhengHei; 
     color: #C0DD6F;
-    margin: 10% 33% 4.8% 33%;
+    // margin: 10% 33% 4.8% 33%;
     width: 34%;
     border-style: solid;
     border-color: #C0DD6F;
@@ -26,6 +26,10 @@
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end{
     border:none !important;
+}
+
+input{
+    padding:0 0 2% 2%;
 }
 
 .material-icons{
@@ -53,7 +57,7 @@
 }
 
 ::placeholder{
-    font-size: 70%;
+    font-size: 20px;
     padding-left: 10%;
 }
 
@@ -77,22 +81,21 @@ button{
     background-color: #C0DD6F;
 }
 
-@media screen and (max-width: 500px){
-    .container{
-        width: 80%;
-        margin: 10% 10% 4.8% 10%;
-    }
-}
-
 @media screen and (min-width: 1300px){
     .material-icons{
         font-size: 40px;
     }
 }
-
 @media screen and (min-width: 1900px){
-    .container{
-        width: 20%;
-        margin: 10% 40% 4.8% 40%;
+    ::placeholder{
+        font-size: 24px;
+    }
+
+    button{
+        font-size: 110%;
+    }
+
+    .flex-forgetPasswordAndRememberMe{
+        font-size: 110%;
     }
 }
