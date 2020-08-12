@@ -1,0 +1,30 @@
+<div>
+  <app-navbar></app-navbar>
+  <div class="content">
+    <div class="center">
+      <form [formGroup]="userForm">
+        <mat-form-field appearance="outline">
+          <mat-label>帳號</mat-label>
+          <input matInput  value="{{user.account}}" formControlName="account" disabled>
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <input type="text" name="name" placeholder="請輸入姓名" class="name" value="{{user.account}}" disabled>
+        <input type="tel" name="phone" placeholder="請輸入手機" class="phone" disabled>
+        <input type="tel" name="phone" placeholder="請輸入手機" class="phone" disabled>
+        <input type="tel" name="phone" placeholder="請輸入手機" class="phone" disabled>
+        <input type="tel" name="phone" placeholder="請輸入手機" class="phone" disabled>
+        <input type="tel" name="phone" placeholder="請輸入手機" class="phone" disabled>
+        <input type="tel" name="phone" placeholder="請輸入手機" class="phone" disabled>
+        <input type="radio" name="sex" value="male" class="radio">男性
+        <input type="radio" name="sex" value="female" class="radio">女性
+        <input type="checkbox" value="facebook">Facebook
+        <input type="checkbox" value="google">google
+        <input type="checkbox" value="yahoo">Yahoo!
+        <label for="info">其他意見：</label>
+        <input id="info" type="textarea" class="info" name="info" placeholder="請在此留下您的建議">
+        <input type="submit" class="submit" value="送出">
+      </form>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>

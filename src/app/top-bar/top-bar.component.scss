@@ -37,7 +37,7 @@
   display: inline-flex;
   align-items: center;
   border-radius: 2px;
-  font-size: 14px;
+  font-size: 18px;
   cursor: pointer;
   background-color: #00bcd4;
   color: #FFF;
@@ -92,3 +92,10 @@ nav .brand-logo {
 .logo {
   width: 40px;
 }
+
+.mat-button, .mat-raised-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button, .mat-fab, .mat-mini-fab {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
