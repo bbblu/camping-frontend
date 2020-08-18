@@ -9,8 +9,6 @@
     font-size: 130%;
     font-family:Microsoft JhengHei; 
     color: #C0DD6F;
-    // margin: 10% 33% 4.8% 33%;
-    width: 34%;
     border-style: solid;
     border-color: #C0DD6F;
     border-radius: 20pt;
@@ -25,7 +23,7 @@
 /*帳號密碼輸入*/
 
 .inputStyle{
-    padding: 0% 1%;
+    padding: 0% 2%;
 }
 
 ::ng-deep .mat-form-field-outline.ng-tns-c77-0.ng-star-inserted{
@@ -89,11 +87,12 @@ input{
 }
 
 button{
-    font-size: 70%;
+    font-size: 100%;
     width: 35%;
     height: 10%;
     color: #C0DD6F;
     font-weight: bold;
+    padding: 1% 0%;
     border-style: solid;
     border-radius: 20pt;
     border-color: #C0DD6F;
