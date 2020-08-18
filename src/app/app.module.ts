@@ -10,6 +10,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { ShareModule } from './module/share.module';
+import { FAQComponent } from './FAQ/FAQ.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ShareModule } from './module/share.module';
       AppComponent,
       TopBarComponent,
       NavbarComponent,
-      UserInfoComponent
+      UserInfoComponent,
+      FAQComponent
    ],
    imports: [
       BrowserModule,
@@ -25,7 +27,7 @@ import { ShareModule } from './module/share.module';
       ReactiveFormsModule,
       BrowserAnimationsModule,
       FlexLayoutModule,
-      ShareModule,
+      ShareModule
    ],
    providers: [],
    bootstrap: [
