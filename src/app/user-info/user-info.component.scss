@@ -1,114 +1,93 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-body {
-  line-height: 1;
-}
-ol, ul {
-  list-style: none;
-}
-blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-* {
-  box-sizing: border-box;
-}
-
-.clearfix{
-  clear:both;
-}
-
-.wrap{
-  width: 900px;
-  margin: 0 auto;
-}
 
 
 .center {
-    width: 80%;
-    min-width: 100px;
-    height: 600px;
-    margin: 20px auto;
-    background: #FFF;
+  width: 80%;
+  min-width: 100px;
+  height: 600px;
+  margin: 20px auto;
+  background: #fff;
 }
 
-
-form{
-  border:3px solid #00bcd4;
+form {
+  border: 3px solid #00bcd4;
   border-radius: 23px;
-  padding: 20px;
-  color:white;
-}
-label{
-  margin:10px;
-  display:block;
-}
-.name,.phone,.email,.info,.submit{
-  width: 100%;
+  padding: 5%;
+  color: white;
+  margin-bottom: 30px;
 }
 
-.info{
-  height: 150px;
+.userimg {
+  border-radius: 50%;
+  width: 60px;
+  float: left;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  border-style: solid;
+  border-color: #00bcd4;
 }
 
-.submit{
-  width: 100%;
+.userNickName {
+  float: left;
+  color: #00bcd4;
+  font-size: 30px;
+  margin-left: 10px;
   margin-top: 10px;
 }
 
-::placeholder { /* CSS 3 標準 */
+.nickNameIcon{
+  float: left;
+    margin-top: 14px;
+    border: none;
+    background-color: #FFF;
+    border: none;
+    color: #00bcd4;
+    font-size: 16px;
+    cursor: pointer;
+    padding-left: 10px;
+}
 
-    color: #74C1D1;
-    padding-left: 8px;
-  }
-  
+.mat-icon {
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  position: absolute;
+  height: 24px;
+  color: #00bcd4;
+  width: 24px;
+  padding-left: 10px;
+  padding-top: 9px;
+}
 
-// input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
-//     border: 1px solid #74C1D1;
-//     border-radius: 23px;
-//     outline: none;
-//     width: 95%;
-//     font-size: 16px;
-//     margin: 0 0 20px 0;
-//     background-color: #FFF;
-// }
+input[type="text"]:not(.browser-default),
+textarea.materialize-textarea {
+  border: 1px solid #74c1d1;
+  border-radius: 23px;
+  outline: none;
+  width: 85%;
+  font-size: 16px;
+  margin: 0px;
+  background-color: #fff;
+  color: cadetblue;
+  padding-left: 40px;
+  text-align: left;
+}
 
-.outline{
-  border-radius:23px;
+.input-icons i {
+  position: absolute;
+}
+
+.input-icons {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.icon {
+  padding: 10px;
+  min-width: 40px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
 }
