@@ -1,3 +1,11 @@
+.holder{
+    margin-top: 1%;
+}
+
+.formTitle{
+    margin-top: 1%;
+}
+
 .container{
     text-align: center;
     font-size: 130%;
@@ -8,6 +16,10 @@
     border-style: solid;
     border-color: #C0DD6F;
     border-radius: 20pt;
+}
+
+.inputStyle{
+    padding: 0% 1%;
 }
 
 ::ng-deep .mat-form-field-outline.ng-tns-c77-0.ng-star-inserted{
@@ -30,6 +42,7 @@
 
 input{
     padding:0 0 2% 2%;
+    font-size: x-large;
 }
 
 .material-icons{
@@ -68,6 +81,7 @@ input{
 button{
     font-size: 70%;
     width: 35%;
+    height: 10%;
     color: #C0DD6F;
     font-weight: bold;
     border-style: solid;
