@@ -1,8 +1,6 @@
-.holder{
-    margin-top: 1%;
-}
+/*表單外框*/
 
-.formTitle{
+.holder{
     margin-top: 1%;
 }
 
@@ -17,6 +15,14 @@
     border-color: #C0DD6F;
     border-radius: 20pt;
 }
+
+/*表單標題*/
+
+.formTitle{
+    margin-top: 1%;
+}
+
+/*帳號密碼輸入*/
 
 .inputStyle{
     padding: 0% 1%;
@@ -45,9 +51,16 @@ input{
     font-size: x-large;
 }
 
+::placeholder{
+    font-size: 20px;
+    padding-left: 10%;
+}
+
 .material-icons{
     font-size: 34px;
 }
+
+/*記住帳密與忘記密碼*/
 
 .flex-forgetPasswordAndRememberMe{
     display: block;
@@ -69,10 +82,7 @@ input{
     font-family: Microsoft JhengHei;
 }
 
-::placeholder{
-    font-size: 20px;
-    padding-left: 10%;
-}
+/*註冊與登入按鈕*/
 
 .signUpAndLogin{
     padding-bottom: 2%;
@@ -94,6 +104,8 @@ button{
     color: #FFF;
     background-color: #C0DD6F;
 }
+
+/*RWD調整*/
 
 @media screen and (min-width: 1300px){
     .material-icons{
