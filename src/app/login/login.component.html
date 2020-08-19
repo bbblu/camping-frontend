@@ -1,0 +1,36 @@
+<div class="holder" fxLayout="row">
+  <div class="leftBlock" fxFlex></div>
+  <div class="container"  fxFlex="40" fxFlex.lt-md="80" fxFlex.gt-lg="20">
+    <div class="formTitle" fxLayout="row" fxLayoutAlign="center">
+      <img src="assets/images/logo.png" height="50px" width="50px">
+      <p>借借露</p>
+    </div>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="inputStyle" fxLayout="column" fxLayoutGap="0%" fxFlexFill>
+        <mat-form-field floatLabel="never" appearance="outline">
+          <input matInput required type="text" placeholder="帳號" formControlName="account">
+          <i class="material-icons" matSuffix>person</i>
+          <mat-error *ngIf="userForm.controls['account'].hasError('required')">
+            Please enter your account!!!
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field floatLabel="never" appearance="outline">
+          <input matInput required [type]="hide ? 'password' : 'text'" placeholder="密碼" formControlName="password">
+          <i class="material-icons" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</i>
+          <mat-error *ngIf="userForm.controls['password'].hasError('required')">
+            Please enter your password!!!
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="flex-forgetPasswordAndRememberMe" fxLayoutGap="10%">
+        <a [routerLink]="['/']" class="forgetPassword"><span>忘記密碼</span></a>
+        <mat-checkbox class="rememberCheckbox">記住我</mat-checkbox>
+      </div>
+      <div class="signUpAndLogin" fxLayout="row" fxLayoutAlign="space-around center">
+        <button mat-button type="button" id="signup" [routerLink]="['/']">註冊</button>
+        <button mat-button type="submit" id="login" [disabled]="!userForm.valid">登入</button>
+      </div>
+    </form>
+  </div>
+  <div class="rightBlock" fxFlex></div>
+</div>
