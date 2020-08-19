@@ -1,0 +1,39 @@
+.FAQtext {
+    color: #00bcd4;
+    font-size: 30px;
+    margin-top: 20px;
+    text-align: center;
+    margin-right: -50px;
+    font-weight: bold;
+}
+.feedback {
+    background-color: #00bcd4;
+    margin-left: 10px;
+}
+
+.mat-form-field + .mat-form-field {
+    margin-left: 8px;
+}
+
+// .FAQBorder{
+//     border: solid;
+//     border-color: #00bcd4 ;
+//     margin: 20px;
+// }
+
+.Expansion-panel {
+    border-radius: 0;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.mat-expansion-panel-header-title {
+    display: flex;
+    flex-grow: 1;
+    color: #00bcd4;
+    margin-right: 16px;
+}
+
+.mat-accordion p{
+    color: #00bcd4;
+}

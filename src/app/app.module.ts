@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { ShareModule } from './module/share.module';
 import { FAQComponent } from './FAQ/FAQ.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { FAQComponent } from './FAQ/FAQ.component';
       ReactiveFormsModule,
       BrowserAnimationsModule,
       FlexLayoutModule,
-      ShareModule
+      ShareModule,
+      MatExpansionModule
    ],
    providers: [],
    bootstrap: [

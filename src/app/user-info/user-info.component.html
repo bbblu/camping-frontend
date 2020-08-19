@@ -30,15 +30,11 @@
 
             <p></p>
             <mat-icon>cake</mat-icon>
-            <span><input value="{{user.birthday}}" type="text" disabled></span>
+            <span><input value="{{user.birthday|date:'yyyy-mm-dd'}}" type="text" disabled></span>
 
             <p></p>
             <mat-icon>golf_course</mat-icon>
             <span><input value="{{user.experience}}" type="text" disabled></span>
-
-            <p></p>
-            <mat-icon>call</mat-icon>
-            <span><input value="{{user.phone}}" type="text" disabled></span>
 
             <p></p>
             <mat-icon>mail</mat-icon>

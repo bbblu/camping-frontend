@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./FAQ.component.scss']
 })
 export class FAQComponent implements OnInit {
+  panelOpenState = false;
 
   constructor() { }
 
