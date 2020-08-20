@@ -1,13 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms'
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,25 +24,31 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
 // Buttons 
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { Product_launchComponent } from './product_launch/product_launch.component';
+
 @NgModule({
+   declarations: [
       AppComponent,
-    RegisterComponent,
-      LoginComponent
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatMomentDateModule,
-      FlexLayoutModule
+      RegisterComponent,
+      LoginComponent,
+      Product_launchComponent
+   ],
+   imports:[
+      BrowserModule,
+      AppRoutingModule,
+      BrowserAnimationsModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MatAutocompleteModule,
+      MatCheckboxModule,
+      MatDatepickerModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatRadioModule,
+      MatButtonModule,
+      MatButtonToggleModule,
+      MatMomentDateModule,
+      FlexLayoutModule,
       HttpClientModule,
    ],
    exports: [
@@ -64,6 +64,5 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
    bootstrap: [
       AppComponent
    ]
-    MatButtonModule,
 })
 export class AppModule { }
