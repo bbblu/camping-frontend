@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { MatSelectModule } from '@angular/material/select';
 // Buttons 
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -48,12 +49,14 @@ import { Product_launchComponent } from './product_launch/product_launch.compone
       MatButtonModule,
       MatButtonToggleModule,
       MatMomentDateModule,
+      MatSelectModule,
       FlexLayoutModule,
       HttpClientModule,
    ],
    exports: [
       MatToolbarModule,
       MatCardModule,
+      MatSelectModule,
       MatButtonModule,
       MatFormFieldModule,
       MatCheckboxModule,

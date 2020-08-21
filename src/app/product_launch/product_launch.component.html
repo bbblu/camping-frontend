@@ -1,3 +1,49 @@
-<p>
-  product_launch works!
-</p>
+<div class="holder" fxLayoutAlign="center">
+  <div class="container" fxFlex="20">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="inputStyle" fxLayout="column" fxLayoutGap="0%" fxFlexFill>
+        <mat-form-field [hideRequiredMarker]="true">
+          <i class="material-icons" matPrefix>tour</i>
+          <input matInput required type="text" placeholder="標題" formControlName="title">
+          <mat-error *ngIf="productForm.controls['title'].hasError('required')">
+            此為必填
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field [hideRequiredMarker]="true">
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate formControlName="start_date" placeholder="開始開放租借">
+            <input matEndDate  formControlName="end_date" placeholder="結束開放租借">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker>
+          </mat-date-range-picker>
+          <mat-error *ngIf="productForm.controls['date_range'].hasError('required')">
+            此為必填
+          </mat-error>
+        </mat-form-field>
+        <!-- <mat-form-field [hideRequiredMarker]="true">
+          <i class="material-icons" matPrefix>gps_fixed</i>
+          <mat-select formControlName="area" aria-placeholder="請選擇地區">
+            <mat-option [value]="undefined">無</mat-option>
+            <mat-optgroup *ngFor="let city of nestInterestList; let index = index" [label]="city.name" [disabled]="index===1">
+              <mat-option *ngFor="let District of parent.subItems" [value]="District.id">{{ child.name }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+          <mat-error *ngIf="productForm.controls['area'].hasError('required')">
+            此為必填
+          </mat-error>
+        </mat-form-field> -->
+        <mat-form-field [hideRequiredMarker]="true">
+          <i class="material-icons" matPrefix>attach_money</i>
+          <input matInput required type="number" placeholder="金額 (以天計算)" formControlName="price">
+          <mat-error *ngIf="productForm.controls['price'].hasError('required')">
+            此為必填
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button type="button" id="signup">註冊</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
