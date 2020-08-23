@@ -72,6 +72,32 @@
           </mat-form-field>
         </div>
       </div>
+      <!-- 已加入的物品 -->
+      <div class="alreadAdd">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              {{products.ProductName}} : {{products.ProductQuantity}}
+            </mat-expansion-panel-header>
+            <!-- 內容 -->
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <div fxLayout="column" fxLayoutGap="1%">
+                <div><i class="material-icons" matPrefix>tour</i>物品名稱: {{products.ProductName}}</div>
+                <div><i class="material-icons" matPrefix>tour</i>數量: {{products.ProductQuantity}}</div>
+                <div><i class="material-icons" matPrefix>tour</i>外觀狀況: {{products.ProductSize}}</div>
+                <div><i class="material-icons" matPrefix>tour</i>使用方式: {{products.ProductUse}}</div>
+                <div><i class="material-icons" matPrefix>tour</i>相關連結: <a>{{products.ProductLink}}</a></div>
+                <div><i class="material-icons" matPrefix>tour</i>品牌: {{products.ProductBrand}}</div>
+                <div><i class="material-icons" matPrefix>gavel</i>損壞賠償: {{products.Compensation}}</div>
+                <div><i class="material-icons" matPrefix>tour</i>其他備註: {{products.Remarks}}</div>
+              </div>
+              <div>
+                <img src={{products.coverImage}} height="300px" width="300px">
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
       <!-- 添加物品表單 -->
       <form [formGroup]="goodsForm" (ngSubmit)="onSubmit()">
         <div class="goodsInformation" fxLayout="row" fxFlexFill fxLayoutAlign="space-between">

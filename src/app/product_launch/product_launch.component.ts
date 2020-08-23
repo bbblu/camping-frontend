@@ -25,23 +25,23 @@ export class Product_launchComponent implements OnInit {
   productTypes: Type[] = [];
   city!: City;
 
-  /* prodcuts: Product = {
-    id: 1,
+  products: Product = {
     title: '標題',
-    start_date:new Date(2020,08,15),
-    end_date: new Date(2020,08,20),
+    start_date:new Date(),
+    end_date: new Date(),
     city: '台北市',
     price: 2000,
-    coverImage: new URL("https://youtu.be/5qeY9f0hrxc"),
-    ProductName: '客廳帳篷',
+    bank:'香港3345678',
+    coverImage: new URL("https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AAHqtxV.img?h=630&w=1200&m=6&q=60&o=t&l=f&f=jpg&x=829&y=428"),
+    ProductName: '快搭客廳炊事帳',
     ProductQuantity: 2,
-    ProductSize: '3m*3m*2m',
-    ProductUse: '自己搭 廢物',
+    ProductSize: '3m*3m*2.5m(高)',
+    ProductUse: '四人同時往外拉，並往上推，小心不要夾到手。若遇下雨，必須曬乾再收起來',
     ProductLink: new URL("https://youtu.be/5qeY9f0hrxc"),
-    ProductBrand: 'Nike',
-    Compensation: '全額',
-    Remarks: '小夫我要進去囉'
-  }; */
+    ProductBrand: '無',
+    Compensation: '損壞至無法使用，原價七折賠償。損壞布面，原價五成賠償。損壞小部分但堪用，原價三成賠償',
+    Remarks: '無'
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,8 +64,8 @@ export class Product_launchComponent implements OnInit {
     });
 
     this.goodsForm = this.formBuilder.group({
-      ProductName: [null, [Validators.required]],
       coverImage: [null, [Validators.required]],
+      ProductName: [null, [Validators.required]],
       ProductQuantity: [null, [Validators.required]],
       ProductSize: [null, [Validators.required]],
       ProductUse: [null, []],

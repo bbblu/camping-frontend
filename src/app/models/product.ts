@@ -1,10 +1,10 @@
 export interface Product {
-  id: number;
   title:string;
   start_date:Date;
   end_date:Date;
   city:string;
   price:number;
+  bank:string;
   coverImage:URL;
   ProductName: string;
   ProductQuantity: number;

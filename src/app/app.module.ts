@@ -26,6 +26,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { Product_launchComponent } from './product_launch/product_launch.component';
+// Expansion Panels
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 @NgModule({
    declarations: [
@@ -52,6 +55,7 @@ import { Product_launchComponent } from './product_launch/product_launch.compone
       MatSelectModule,
       FlexLayoutModule,
       HttpClientModule,
+      MatExpansionModule,
    ],
    exports: [
       MatToolbarModule,
@@ -61,7 +65,8 @@ import { Product_launchComponent } from './product_launch/product_launch.compone
       MatFormFieldModule,
       MatCheckboxModule,
       MatInputModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      MatExpansionModule,
    ],
    providers: [],
    bootstrap: [
