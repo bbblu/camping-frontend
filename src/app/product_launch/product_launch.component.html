@@ -100,8 +100,8 @@
       </div>
       <!-- 添加物品表單 -->
       <form [formGroup]="goodsForm" (ngSubmit)="onSubmit()">
-        <div class="goodsInformation" fxLayout="row" fxFlexFill fxLayoutAlign="space-between">
-          <div class="goods" fxLayout="column" fxLayoutGap="0%" fxFlexFill>
+        <div class="goodsInformation" fxLayout="row" fxFlexFill fxLayoutAlign="space-evenly">
+          <div class="goods" fxLayout="column" fxLayoutGap="0%">
             <div class="inputStyle">
               <mat-form-field [hideRequiredMarker]="true">
                 <i class="material-icons" matPrefix>tour</i>
@@ -171,12 +171,17 @@
             </div>
           </div>
           <div class="goodsImages">
-
+            <input type="file" (change)="fileChangeEvent($event)" />
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
+              format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+              (loadImageFailed)="loadImageFailed()"></image-cropper>
+            <img [src]="croppedImage" width="200px" height="200px">
           </div>
         </div>
       </form>
       <div class="sendOut" fxLayout="row" fxLayoutAlign="space-around center">
-        <button mat-button type="button">送出</button>
+        <button mat-button type="button">預覽</button>
+        <button mat-button type="button">上架</button>
       </div>
     </form>
   </div>

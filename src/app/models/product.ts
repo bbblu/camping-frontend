@@ -1,11 +1,11 @@
 export interface Product {
-  title:string;
-  start_date:Date;
-  end_date:Date;
-  city:string;
-  price:number;
-  bank:string;
-  coverImage:URL;
+  title: string;
+  start_date: Date;
+  end_date: Date;
+  city: string;
+  price: number;
+  bank: string;
+  coverImage: URL;
   ProductName: string;
   ProductQuantity: number;
   ProductSize: string;

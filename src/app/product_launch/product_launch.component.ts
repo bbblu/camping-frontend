@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 import { ApiModel } from '../models/api-model';
 import { HttpService } from '../services/http.service';
@@ -20,18 +21,37 @@ import { City, ProductGroupFilter, Type } from '../models/product-group-filter';
 export class Product_launchComponent implements OnInit {
 
   productForm!: FormGroup;
-  goodsForm!:FormGroup;
+  goodsForm!: FormGroup;
   result!: ApiModel<object>;
   productTypes: Type[] = [];
   city!: City;
 
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+  }
+  imageLoaded() {
+    // show cropper
+  }
+  cropperReady() {
+    // cropper ready
+  }
+  loadImageFailed() {
+    // show message
+  }
+
   products: Product = {
     title: '標題',
-    start_date:new Date(),
+    start_date: new Date(),
     end_date: new Date(),
     city: '台北市',
     price: 2000,
-    bank:'香港3345678',
+    bank: '香港3345678',
     coverImage: new URL("https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AAHqtxV.img?h=630&w=1200&m=6&q=60&o=t&l=f&f=jpg&x=829&y=428"),
     ProductName: '快搭客廳炊事帳',
     ProductQuantity: 2,
@@ -60,7 +80,7 @@ export class Product_launchComponent implements OnInit {
       city: [null, [Validators.required]],
       cityAreaName: [null, [Validators.required]],
       price: [null, [Validators.required]],
-      bank:[null, [Validators.required]],
+      bank: [null, [Validators.required]],
     });
 
     this.goodsForm = this.formBuilder.group({

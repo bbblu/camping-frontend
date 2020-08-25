@@ -11,11 +11,16 @@
     padding: 2%;
 }
 
+.goods{
+    max-width: 50%;
+    min-width: 50%;
+}
+
 .mat-expansion-panel:not([class*='mat-elevation-z']) {
     box-shadow: none;
     border: solid yellow 1px;
 }
 
 .goodsInformation mat-form-field{
-    width: 50%;
+    width: 90%;
 }

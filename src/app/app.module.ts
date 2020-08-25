@@ -28,6 +28,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { Product_launchComponent } from './product_launch/product_launch.component';
 // Expansion Panels
 import { MatExpansionModule } from '@angular/material/expansion';
+// 圖片裁切器
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 
 
 @NgModule({
@@ -37,7 +40,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
       LoginComponent,
       Product_launchComponent
    ],
-   imports:[
+   imports: [
       BrowserModule,
       AppRoutingModule,
       BrowserAnimationsModule,
@@ -56,6 +59,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
       FlexLayoutModule,
       HttpClientModule,
       MatExpansionModule,
+      ImageCropperModule,
    ],
    exports: [
       MatToolbarModule,
@@ -67,6 +71,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
       MatInputModule,
       ReactiveFormsModule,
       MatExpansionModule,
+      ImageCropperModule,
    ],
    providers: [],
    bootstrap: [
