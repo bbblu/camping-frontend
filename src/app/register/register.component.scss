@@ -1,27 +1,124 @@
-*{
-    font-family: Microsoft JhengHei !important;
+* {
+    padding: 0;
+    margin: 0;
 }
-input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea{
-    border:2px #FCD947 solid;
-    border-radius: 30px;
-    box-shadow:none;
-    padding: 0px 20px;
-    box-sizing:border-box;
-    width: 100%;
-}
-input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=text]:not(.browser-default), input.invalid[type=text]:not(.browser-default):focus, input.invalid[type=password]:not(.browser-default), input.invalid[type=password]:not(.browser-default):focus, input.invalid[type=email]:not(.browser-default), input.invalid[type=email]:not(.browser-default):focus, input.invalid[type=url]:not(.browser-default), input.invalid[type=url]:not(.browser-default):focus, input.invalid[type=time]:not(.browser-default), input.invalid[type=time]:not(.browser-default):focus, input.invalid[type=date]:not(.browser-default), input.invalid[type=date]:not(.browser-default):focus, input.invalid[type=datetime]:not(.browser-default), input.invalid[type=datetime]:not(.browser-default):focus, input.invalid[type=datetime-local]:not(.browser-default), input.invalid[type=datetime-local]:not(.browser-default):focus, input.invalid[type=tel]:not(.browser-default), input.invalid[type=tel]:not(.browser-default):focus, input.invalid[type=number]:not(.browser-default), input.invalid[type=number]:not(.browser-default):focus, input.invalid[type=search]:not(.browser-default), input.invalid[type=search]:not(.browser-default):focus, textarea.materialize-textarea.invalid, textarea.materialize-textarea.invalid:focus, .select-wrapper.invalid>input.select-dropdown, .select-wrapper.invalid>input.select-dropdown:focus{
-    border: 2px solid #F44336;
-    box-shadow: none;
-}
-input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]){
-    border: 2px solid #26a69a ;
-    box-shadow: none;
+.container {
+    text-align: center;
+    font-size: 130%;
+    font-family: Microsoft JhengHei;
+    color: #c0dd6f;
+    // margin: 10% 33% 4.8% 33%;
+    width: 34%;
+    border-style: solid;
+    border-color: #c0dd6f;
+    border-radius: 20pt;
 }
 
-.input-field{
-    max-width: 100%;
+.logo {
+    height: 50px;
+    width: 50px;
 }
-.mat-radio-button ~ .mat-radio-button {
-    margin-left: 16px;
-  }
-  
+.formTitle {
+    margin: 5px 0px 0px 0px;
+    p {
+        margin: auto 0;
+    }
+}
+.mat-form-field {
+    padding: 0 20px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.5rem 0;
+}
+
+::ng-deep mat-form-field.mat-form-field {
+    // font-size: 16px;
+    .mat-form-field-wrapper{
+        .mat-form-field-flex {
+            .mat-form-field-infix{
+                margin: auto 0;
+                padding: 1rem 0;
+                border: 0;
+            }
+            .mat-form-field-outline {
+                border: 2px solid #c0dd6f;
+                border-radius: 30pt;
+            }
+            .mat-form-field-outline-start,.mat-form-field-outline-end,.mat-form-field-outline-gap{
+                border:0px
+            }
+            .mat-form-field-suffix {
+                margin: auto 0;
+            }
+        }
+    }
+}
+
+
+.material-icons {
+    font-size: 34px;
+}
+
+.flex-forgetPasswordAndRememberMe {
+    display: block;
+    font-weight: bold;
+    font-size: 100%;
+    justify-content: space-around;
+    flex-direction: row;
+    padding-bottom: 2%;
+}
+
+.forgetPassword {
+    font-weight: bold;
+    color: #c0dd6f;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.mat-checkbox {
+    font-family: Microsoft JhengHei;
+}
+
+::placeholder {
+    font-size: 20px;
+}
+
+.signUpAndLogin {
+    padding-bottom: 2%;
+}
+
+button {
+    font-size: 70%;
+    width: 35%;
+    color: #c0dd6f;
+    font-weight: bold;
+    border-style: solid;
+    border-radius: 20pt;
+    border-color: #c0dd6f;
+    background-color: #fff;
+}
+
+.register_btn {
+    color: #fff;
+    background-color: #c0dd6f;
+}
+
+@media screen and (min-width: 1300px) {
+    .material-icons {
+        font-size: 40px;
+    }
+}
+@media screen and (min-width: 1900px) {
+    ::placeholder {
+        font-size: 24px;
+    }
+
+    button {
+        font-size: 110%;
+    }
+
+    .flex-forgetPasswordAndRememberMe {
+        font-size: 110%;
+    }
+}

@@ -1,71 +1,81 @@
-
-
-<div class="row">
-    <div class="col s12">
-        <h2 class="center">借借露註冊</h2>
-    </div>
-    <div class="col s12 l2"></div>
-    <div class="col s12 l8">
+<div class="holder" fxLayout="row">
+    <div class="leftBlock" fxFlex></div>
+    <div class="container" fxFlex="90">
+        <div class="formTitle" fxLayout="row" fxLayoutAlign="center">
+            <h3>借借露註冊</h3>
+        </div>
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            <div class="row">
-                <div class="col s12 l6">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input placeholder="account" id="account" formControlName="account" required type="text"
-                                class="validate">
-                        </div>
-                        <div class="input-field col s12">
-                            <input placeholder="password" type="password" id="password" formControlName="password"
-                                required>
-                        </div>
-                    </div>
-                    <div class="row" formGroupName="connection">
-                        <h3>填寫聯絡方式</h3>
-                        <div class="input-field col s12">
-                            <input placeholder="phone" id="phone" type="text" formControlName="phone">
-                        </div>
-                        <div class="input-field col s12">
-                            <input placeholder="email" id="email" type="text" formControlName="email">
-                        </div>
-                        <div class="input-field col s12">
-                            <input placeholder="address" id="address" type="text" formControlName="address">
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 l6">
-                    <div formGroupName="basic_information">
-                        <h3>基本資料</h3>
-                        <div class="input-field col s12">
-                            <input placeholder="性" id="firstname" type="text" formControlName="firstname">
-                        </div>
-                        <div class="input-field col s12">
-                            <input placeholder="名" id="lastname" type="text"formControlName="lastname">
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input placeholder="暱稱" id="diminutive" type="text" formControlName="diminutive">
-                        </div>
-
-                        <div class="input-field col s12">
-                            <mat-radio-group aria-label="Select an option" formControlName="gender">
-                                <mat-radio-button value="1">男</mat-radio-button>
-                                <mat-radio-button value="2">女</mat-radio-button>
-                              </mat-radio-group>
-                        </div>
-
-                        <mat-form-field>
-                            <input type="text" name="birthday" matInput placeholder="生日" [matDatepicker]="birthdayPicker" />
-                            <mat-datepicker-toggle [for]="birthdayPicker" matSuffix></mat-datepicker-toggle>
-                            <mat-datepicker #birthdayPicker></mat-datepicker>
+            <div class="inputStyle" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0%" fxFlexFill>
+                <div fxFlex="50">
+                    <div fxLayout="column">
+                        <mat-form-field floatLabel="never" appearance="outline" fxFlex="100">
+                            <input matInput required type="text" placeholder="帳號" formControlName="account">
+                            <mat-error *ngIf="registerForm.controls['account']">
+                                Please enter your account!!!
+                            </mat-error>
                         </mat-form-field>
-                        
+                        <mat-form-field floatLabel="never" appearance="outline" fxFlex="100">
+                            <input matInput required placeholder="密碼" formControlName="password">
+                            <mat-error *ngIf="registerForm.controls['password']">
+                                Please enter your password!!!
+                            </mat-error>
+                        </mat-form-field>
+                        <!-- <mat-form-field floatLabel="never" appearance="outline" fxFlex="100">
+                            <input matInput required [type]="hide ? 'confirmpassword' : 'text'" placeholder="確認密碼"
+                                formControlName="confirmpassword">
+                            <mat-error *ngIf="registerForm.controls['confirmpassword']">
+                                Please enter your password!!!
+                            </mat-error>
+                        </mat-form-field> -->
+                        <div fxLayout="column">
+                            <p class="">填寫聯絡方式</p>
+                            <mat-form-field floatLabel="never" appearance="outline" fxFlex="100">
+                                <input matInput required placeholder="email" formControlName="email">
+                                <mat-error *ngIf="registerForm.controls['email']">
+                                    Please enter your email!!!
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field floatLabel="never" appearance="outline" fxFlex="100">
+                                <input matInput required placeholder="address" formControlName="address">
+                                <mat-error *ngIf="registerForm.controls['address']">
+                                    Please enter your address!!!
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
                     </div>
+
                 </div>
+                <div fxFlex="50">
+                    <div fxLayout="column">
+                        <p>填寫基本資料</p>
+                        <mat-form-field floatLabel="never" appearance="outline">
+                            <input matInput required type="text" placeholder="lastName" formControlName="lastName">
+                            <mat-error *ngIf="registerForm.controls['lastName']">
+                                Please enter your lastName!!!
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field floatLabel="never" appearance="outline">
+                            <input matInput required type="text" placeholder="firstName" formControlName="firstName">
+                            <mat-error *ngIf="registerForm.controls['firstName']">
+                                Please enter your firstName!!!
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field floatLabel="never" appearance="outline">
+                            <input matInput required type="text" placeholder="nickName" formControlName="nickName">
+                            <mat-error *ngIf="registerForm.controls['nickName']">
+                                Please enter your password!!!
+                            </mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                </div>
+
             </div>
-
-
-            <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+            <div class="signUpAndLogin" fxLayout="row" fxLayoutAlign="space-around center">
+                <button class="register_btn" mat-button fxFlex="10" type="submit" id="signup">註冊</button>
+            </div>
         </form>
     </div>
-    <div class="col s12 l2 "></div>
+    <div class="rightBlock" fxFlex></div>
 </div>
