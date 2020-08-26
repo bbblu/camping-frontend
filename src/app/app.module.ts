@@ -16,39 +16,35 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';// 引入表單模塊
 
 // Angular Material Module List
 // Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatMomentDateModule } from "@angular/material-moment-adapter";
-// Buttons 
-import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 @NgModule({
+   declarations: [
       AppComponent,
-    RegisterComponent,
-      LoginComponent
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatMomentDateModule,
-      FlexLayoutModule
+      RegisterComponent,
+      LoginComponent,
+   ],
+   imports: [
+      BrowserModule,
+      AppRoutingModule,
+      BrowserAnimationsModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MatAutocompleteModule,
+      MatCheckboxModule,
+      MatDatepickerModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatRadioModule,
+      MatButtonModule,
+      MatButtonToggleModule,
+      FlexLayoutModule,
       HttpClientModule,
    ],
    exports: [
@@ -64,6 +60,5 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
    bootstrap: [
       AppComponent
    ]
-    MatButtonModule,
 })
 export class AppModule { }
