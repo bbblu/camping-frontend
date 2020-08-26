@@ -1,62 +1,61 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { ShareModule } from './module/share.module';
+import { FAQComponent } from './FAQ/FAQ.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
+import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
 
-// Angular Material Module List
-// Form Controls
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
    declarations: [
       AppComponent,
       RegisterComponent,
       LoginComponent,
+      TopBarComponent,
+      NavbarComponent,
+      UserInfoComponent,
+      FAQComponent,
+      FAQDialogComponent,
    ],
    imports: [
+       
       BrowserModule,
       AppRoutingModule,
-      BrowserAnimationsModule,
-      FormsModule,
       ReactiveFormsModule,
-      MatAutocompleteModule,
-      MatCheckboxModule,
-      MatDatepickerModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatRadioModule,
-      MatButtonModule,
-      MatButtonToggleModule,
+      BrowserAnimationsModule,
       FlexLayoutModule,
-      HttpClientModule,
+      ShareModule,
+      MatExpansionModule,
+      MatDialogModule
    ],
+   
+   
    exports: [
       MatToolbarModule,
       MatCardModule,
       MatButtonModule,
-      MatFormFieldModule,
       MatCheckboxModule,
+      MatFormFieldModule,
       MatInputModule,
       ReactiveFormsModule
-   ],
    providers: [],
+   ],
    bootstrap: [
       AppComponent
    ]

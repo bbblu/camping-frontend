@@ -1,0 +1,57 @@
+<div style="background-color:#FFF ;">
+  <app-navbar></app-navbar>
+  <div class="content">
+    <div class="center">
+      <form [formGroup]="userForm">
+
+        <img class="userimg" alt="bblu Logo" src="assets/image/頭貼.png" />
+        <div class="userNickName">{{user.userNickName}}</div>
+        <button class="nickNameIcon">
+          <i class="material-icons">
+            create
+          </i></button>
+
+        <div style="max-width:600px;margin:auto">
+          <div class="input-icons">
+            <mat-icon>person</mat-icon>
+            <span><input value="{{user.account}}" type="text" disabled></span>
+
+            <p></p>
+            <mat-icon>perm_identity</mat-icon>
+            <input value="{{user.fName}}" type="text" disabled>
+
+            <p></p>
+            <mat-icon>perm_identity</mat-icon>
+            <span><input value="{{user.sName}}" type="text" disabled></span>
+
+            <p></p>
+            <mat-icon>wc</mat-icon>
+            <span><input value="{{user.gender}}" type="text" disabled></span>
+
+            <p></p>
+            <mat-icon>cake</mat-icon>
+            <span><input value="{{user.birthday|date:'yyyy-mm-dd'}}" type="text" disabled></span>
+
+            <p></p>
+            <mat-icon>golf_course</mat-icon>
+            <span><input value="{{user.experience}}" type="text" disabled></span>
+
+            <p></p>
+            <mat-icon>mail</mat-icon>
+            <span><input value="{{user.mail}}" type="text" disabled></span>
+
+            <p></p>
+            <mat-icon>room</mat-icon>
+            <span><input value="{{user.addr}}" type="text" disabled></span>
+
+
+          </div>
+        </div>
+
+        <button class="user-info-change">變更</button>
+
+      </form>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
