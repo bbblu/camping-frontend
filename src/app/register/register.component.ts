@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators  } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -9,22 +9,19 @@ import { FormBuilder, FormControl, FormGroup, Validators  } from '@angular/forms
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  imageSrc = 'assets/images/logo.png';
+  imageAlt ='logo';
   registerForm = this.fb.group({
-    account: ['',Validators.required],
-    password: ['',Validators.required],
-    connection: this.fb.group({
-      phone: [''],
-      email: [''],
-      address: ['']
-    }),
-    basic_information: this.fb.group({
-      firstname: [''],
-      lastname: [''],
-      diminutive: [''],
-      gender: [''],
-      birthday: [''],
-      camping: ['']
-    }),
+    account: ['', Validators.required],
+    password: ['', Validators.required],
+    email: [''],
+    address: [''],
+    firstName: [''],
+    lastName: [''],
+    nickName: [''],
+    gender: [''],
+    birthday: [''],
+    experience: [''],
   });
 
 
@@ -36,7 +33,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
+
   }
 
 }

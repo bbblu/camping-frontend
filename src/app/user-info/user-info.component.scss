@@ -1,0 +1,98 @@
+.center {
+  width: 80%;
+  min-width: 100px;
+  height: 600px;
+  margin: 20px auto;
+  background: #fff;
+}
+
+form {
+  border: 3px solid #00bcd4;
+  border-radius: 23px;
+  padding: 5%;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.userimg {
+  border-radius: 50%;
+  width: 60px;
+  float: left;
+  margin-left: 20%;
+  border-style: solid;
+  border-color: #00bcd4;
+}
+
+.userNickName {
+  float: left;
+  color: #00bcd4;
+  font-size: 30px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.nickNameIcon {
+  float: left;
+  margin-top: 14px;
+  border: none;
+  background-color: #fff;
+  border: none;
+  color: #00bcd4;
+  font-size: 16px;
+  cursor: pointer;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+.mat-icon {
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  position: absolute;
+  height: 24px;
+  color: #00bcd4;
+  width: 24px;
+  padding-left: 10px;
+  padding-top: 9px;
+}
+
+input[type="text"]:not(.browser-default),
+textarea.materialize-textarea {
+  border: 1px solid #74c1d1;
+  border-radius: 23px;
+  outline: none;
+  width: 85%;
+  font-size: 16px;
+  margin: 0px;
+  background-color: #fff;
+  color: cadetblue;
+  padding-left: 40px;
+  text-align: left;
+}
+
+.input-icons i {
+  position: absolute;
+}
+
+.input-icons {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.icon {
+  padding: 10px;
+  min-width: 40px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+.user-info-change {
+  margin-top: 10px;
+  padding: 10px 30px 13px;
+  background-color: #00bcd4;
+}

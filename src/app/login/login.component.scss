@@ -1,66 +1,66 @@
-/*表單外框*/
-
-.holder{
-    margin-top: 1%;
+* {
+    padding: 0;
+    margin: 0;
 }
-
-.container{
+.container {
     text-align: center;
     font-size: 130%;
-    font-family:Microsoft JhengHei; 
-    color: #C0DD6F;
+    font-family: Microsoft JhengHei;
+    color: #c0dd6f;
+    // margin: 10% 33% 4.8% 33%;
+    width: 34%;
     border-style: solid;
-    border-color: #C0DD6F;
+    border-color: #c0dd6f;
     border-radius: 20pt;
 }
 
-/*表單標題*/
-
-.formTitle{
-    margin-top: 1%;
+.logo {
+    height: 50px;
+    width: 50px;
+}
+.formTitle {
+    margin: 5px 0px 0px 0px;
+    p {
+        margin: auto 0;
+    }
+}
+.mat-form-field {
+    padding: 0 20px;
 }
 
-/*帳號密碼輸入*/
-
-.inputStyle{
-    padding: 0% 2%;
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.5rem 0;
 }
 
-::ng-deep .mat-form-field-outline.ng-tns-c77-0.ng-star-inserted{
-    border: solid #C0DD6F;
-    border-radius: 30pt;
+::ng-deep mat-form-field.mat-form-field {
+    // font-size: 16px;
+    .mat-form-field-wrapper{
+        .mat-form-field-flex {
+            .mat-form-field-infix{
+                margin: auto 0;
+                padding: 1rem 0;
+                border: 0;
+            }
+            .mat-form-field-outline {
+                border: 2px solid #c0dd6f;
+                border-radius: 30pt;
+            }
+            .mat-form-field-outline-start,.mat-form-field-outline-end,.mat-form-field-outline-gap{
+                border:0px
+            }
+            .mat-form-field-suffix {
+                margin: auto 0;
+            }
+        }
+    }
 }
 
-::ng-deep .mat-form-field-outline.ng-tns-c77-1.ng-star-inserted{
-     border: solid #C0DD6F;
-    border-radius: 30pt;
-}
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start{
-    border: none !important;
-}
-
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end{
-    border:none !important;
-}
-
-input{
-    padding:0 0 2% 2%;
-    font-size: x-large;
-}
-
-::placeholder{
-    font-size: 20px;
-    padding-left: 10%;
-}
-
-.material-icons{
+.material-icons {
     font-size: 34px;
 }
 
-/*記住帳密與忘記密碼*/
-
-.flex-forgetPasswordAndRememberMe{
+.flex-forgetPasswordAndRememberMe {
     display: block;
     font-weight: bold;
     font-size: 100%;
@@ -69,58 +69,56 @@ input{
     padding-bottom: 2%;
 }
 
-.forgetPassword{
+.forgetPassword {
     font-weight: bold;
-    color: #C0DD6F;
+    color: #c0dd6f;
     text-decoration: none;
-    vertical-align: middle;    
+    vertical-align: middle;
 }
 
-.mat-checkbox{
+.mat-checkbox {
     font-family: Microsoft JhengHei;
 }
 
-/*註冊與登入按鈕*/
+::placeholder {
+    font-size: 20px;
+}
 
-.signUpAndLogin{
+.signUpAndLogin {
     padding-bottom: 2%;
 }
 
-button{
-    font-size: 100%;
+button {
+    font-size: 70%;
     width: 35%;
-    height: 10%;
-    color: #C0DD6F;
+    color: #c0dd6f;
     font-weight: bold;
-    padding: 1% 0%;
     border-style: solid;
     border-radius: 20pt;
-    border-color: #C0DD6F;
-    background-color: #FFF;
+    border-color: #c0dd6f;
+    background-color: #fff;
 }
 
-#login{
-    color: #FFF;
-    background-color: #C0DD6F;
+#login {
+    color: #fff;
+    background-color: #c0dd6f;
 }
 
-/*RWD調整*/
-
-@media screen and (min-width: 1300px){
-    .material-icons{
+@media screen and (min-width: 1300px) {
+    .material-icons {
         font-size: 40px;
     }
 }
-@media screen and (min-width: 1900px){
-    ::placeholder{
+@media screen and (min-width: 1900px) {
+    ::placeholder {
         font-size: 24px;
     }
 
-    button{
+    button {
         font-size: 110%;
     }
 
-    .flex-forgetPasswordAndRememberMe{
+    .flex-forgetPasswordAndRememberMe {
         font-size: 110%;
     }
 }
