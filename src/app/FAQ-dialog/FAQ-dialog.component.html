@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>問題回報</p>
+  <textarea cols="50" rows="10" placeholder="輸入你想要寫的內容..."></textarea>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">取消</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>送出</button>
+</div> 

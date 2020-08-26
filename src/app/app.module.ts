@@ -12,6 +12,8 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { ShareModule } from './module/share.module';
 import { FAQComponent } from './FAQ/FAQ.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
+import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
       TopBarComponent,
       NavbarComponent,
       UserInfoComponent,
-      FAQComponent
+      FAQComponent,
+      FAQDialogComponent
    ],
    imports: [
       BrowserModule,
@@ -29,7 +32,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
       BrowserAnimationsModule,
       FlexLayoutModule,
       ShareModule,
-      MatExpansionModule
+      MatExpansionModule,
+      MatDialogModule
    ],
    providers: [],
    bootstrap: [
