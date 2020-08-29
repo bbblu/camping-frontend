@@ -12,13 +12,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { Product } from '../models/product';
 import { City, ProductGroupFilter, Type } from '../models/product-group-filter';
 
-
 @Component({
-  selector: 'app-product_launch',
-  templateUrl: './product_launch.component.html',
-  styleUrls: ['./product_launch.component.scss']
+  selector: 'app-product-create',
+  templateUrl: './product-create.component.html',
+  styleUrls: ['./product-create.component.scss']
 })
-export class Product_launchComponent implements OnInit {
+export class ProductCreateComponent implements OnInit {
 
   productForm!: FormGroup;
   goodsForm!: FormGroup;
@@ -47,11 +46,11 @@ export class Product_launchComponent implements OnInit {
 
   products: Product = {
     title: '標題',
-    start_date: new Date(),
-    end_date: new Date(),
+    borrowStartDate: new Date(),
+    borrowEndDate: new Date(),
     city: '台北市',
     price: 2000,
-    bank: '香港3345678',
+    bankAccount: '香港3345678',
     coverImage: new URL("https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AAHqtxV.img?h=630&w=1200&m=6&q=60&o=t&l=f&f=jpg&x=829&y=428"),
     ProductName: '快搭客廳炊事帳',
     ProductQuantity: 2,
@@ -74,25 +73,26 @@ export class Product_launchComponent implements OnInit {
     this.getCityData();
 
     this.productForm = this.formBuilder.group({
-      title: [null, [Validators.required]],
-      start_date: [null, [Validators.required]],
-      end_date: [null, [Validators.required]],
+      name: [null, [Validators.required]],
+      borrowStartDate: [null, [Validators.required]],
+      borrowEndDate: [null, [Validators.required]],
       city: [null, [Validators.required]],
       cityAreaName: [null, [Validators.required]],
       price: [null, [Validators.required]],
-      bank: [null, [Validators.required]],
+      bankAccount: [null, [Validators.required]],
+      coverImage:[null, [Validators.required]]
     });
 
     this.goodsForm = this.formBuilder.group({
-      coverImage: [null, [Validators.required]],
-      ProductName: [null, [Validators.required]],
-      ProductQuantity: [null, [Validators.required]],
+      imageArray: [null, [Validators.required]],
+      name: [null, [Validators.required]],
+      count: [null, [Validators.required]],
       ProductSize: [null, [Validators.required]],
-      ProductUse: [null, []],
-      ProductLink: [null, []],
-      ProductBrand: [null, []],
-      Compensation: [null, []],
-      Remarks: [null, []]
+      useInformation: [null, []],
+      relatedLinkArray: [null, []],
+      brand: [null, []],
+      brokenCompensation: [null, []],
+      memo: [null, []]
     });
   }
 
@@ -107,6 +107,5 @@ export class Product_launchComponent implements OnInit {
   onSubmit() {
     console.log(this.productForm.value);
   };
-
 
 }

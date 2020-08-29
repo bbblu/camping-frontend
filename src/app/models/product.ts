@@ -1,10 +1,10 @@
 export interface Product {
   title: string;
-  start_date: Date;
-  end_date: Date;
+  borrowStartDate: Date;
+  borrowEndDate: Date;
   city: string;
   price: number;
-  bank: string;
+  bankAccount: string;
   coverImage: URL;
   ProductName: string;
   ProductQuantity: number;

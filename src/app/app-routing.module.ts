@@ -2,13 +2,13 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { Product_launchComponent } from './product_launch/product_launch.component';
+import { ProductCreateComponent } from './product-create/product-create.component';
 
 
 const routes: Routes = [
   { path: 'login' , component: LoginComponent },
   { path: 'register' , component: RegisterComponent },
-  { path: 'productLaunch' , component: Product_launchComponent} 
+  { path: 'product-create' , component: ProductCreateComponent} 
 ];
 
 @NgModule({

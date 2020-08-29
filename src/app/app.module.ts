@@ -25,11 +25,11 @@ import { MatSelectModule } from '@angular/material/select';
 // Buttons 
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { Product_launchComponent } from './product_launch/product_launch.component';
 // Expansion Panels
 import { MatExpansionModule } from '@angular/material/expansion';
 // 圖片裁切器
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { ProductCreateComponent } from './product-create/product-create.component';
 
 
 
@@ -38,7 +38,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
       AppComponent,
       RegisterComponent,
       LoginComponent,
-      Product_launchComponent
+      ProductCreateComponent
    ],
    imports: [
       BrowserModule,
