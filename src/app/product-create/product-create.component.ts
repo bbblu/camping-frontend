@@ -43,6 +43,18 @@ export class ProductCreateComponent implements OnInit {
   loadImageFailed() {
     // show message
   }
+  /*圖片輪播器測試*/
+  imageObject: Array<object> = [{
+    image: 'assets/images/logo.png',
+    thumbImage: 'assets/images/logo.png',
+  }, {
+    image: 'assets/images/logo.png', // Support base64 image
+    thumbImage: 'assets/images/logo.png', // Support base64 image
+  }, {
+    image: 'assets/images/logo.png', // Support base64 image
+    thumbImage: 'assets/images/logo.png', // Support base64 image
+  }
+  ];
 
   products: Product = {
     title: '標題',
@@ -80,7 +92,7 @@ export class ProductCreateComponent implements OnInit {
       cityAreaName: [null, [Validators.required]],
       price: [null, [Validators.required]],
       bankAccount: [null, [Validators.required]],
-      coverImage:[null, [Validators.required]]
+      coverImage: [null, [Validators.required]]
     });
 
     this.goodsForm = this.formBuilder.group({

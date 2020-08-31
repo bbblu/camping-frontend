@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { ProductCreateComponent } from './product-create/product-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -22,60 +23,67 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { MatSelectModule } from '@angular/material/select';
-// Buttons 
+// Buttons
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 // Expansion Panels
 import { MatExpansionModule } from '@angular/material/expansion';
-// 圖片裁切器
+// 圖片
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { ProductCreateComponent } from './product-create/product-create.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { NgImageSliderModule } from 'ng-image-slider';
+
+
 
 
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      RegisterComponent,
-      LoginComponent,
-      ProductCreateComponent
-   ],
-   imports: [
-      BrowserModule,
-      AppRoutingModule,
-      BrowserAnimationsModule,
-      FormsModule,
-      ReactiveFormsModule,
-      MatAutocompleteModule,
-      MatCheckboxModule,
-      MatDatepickerModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatRadioModule,
-      MatButtonModule,
-      MatButtonToggleModule,
-      MatMomentDateModule,
-      MatSelectModule,
-      FlexLayoutModule,
-      HttpClientModule,
-      MatExpansionModule,
-      ImageCropperModule,
-   ],
-   exports: [
-      MatToolbarModule,
-      MatCardModule,
-      MatSelectModule,
-      MatButtonModule,
-      MatFormFieldModule,
-      MatCheckboxModule,
-      MatInputModule,
-      ReactiveFormsModule,
-      MatExpansionModule,
-      ImageCropperModule,
-   ],
-   providers: [],
-   bootstrap: [
-      AppComponent
-   ]
+  declarations: [
+    AppComponent,
+    RegisterComponent,
+    LoginComponent,
+    ProductCreateComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatMomentDateModule,
+    MatSelectModule,
+    FlexLayoutModule,
+    HttpClientModule,
+    MatExpansionModule,
+    ImageCropperModule,
+    IvyCarouselModule,
+    NgImageSliderModule
+  ],
+  exports: [
+    MatToolbarModule,
+    MatCardModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatExpansionModule,
+    ImageCropperModule,
+    IvyCarouselModule,
+    NgImageSliderModule
+  ],
+  providers: [],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
