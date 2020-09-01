@@ -73,32 +73,34 @@
         </div>
       </div>
       <!-- 已加入的物品 -->
-      <div class="alread-add">
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              {{products.ProductName}} : {{products.ProductQuantity}}
-            </mat-expansion-panel-header>
-            <!-- 內容 -->
-            <div fxLayout="row" fxLayoutAlign="space-between">
-              <div fxLayout="column" fxLayoutGap="1%">
-                <div><i class="material-icons" matPrefix>tour</i>物品名稱: {{products.ProductName}}</div>
-                <div><i class="material-icons" matPrefix>tour</i>數量: {{products.ProductQuantity}}</div>
-                <div><i class="material-icons" matPrefix>tour</i>外觀狀況: {{products.ProductSize}}</div>
-                <div><i class="material-icons" matPrefix>tour</i>使用方式: {{products.ProductUse}}</div>
-                <div><i class="material-icons" matPrefix>tour</i>相關連結: <a>{{products.ProductLink}}</a></div>
-                <div><i class="material-icons" matPrefix>tour</i>品牌: {{products.ProductBrand}}</div>
-                <div><i class="material-icons" matPrefix>gavel</i>損壞賠償: {{products.Compensation}}</div>
-                <div><i class="material-icons" matPrefix>tour</i>其他備註: {{products.Remarks}}</div>
-              </div>
-              <div>
-                <div style="width: 200px; min-height: 200px;">
-                  <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+      <div class="alread-add" formArrayName="productArray" class="well well-lg">
+        <div *ngFor="let student of students.controls; let i=index" [formGroupName]="i">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                {{products.ProductName}} : {{products.ProductQuantity}}
+              </mat-expansion-panel-header>
+              <!-- 內容 -->
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxLayout="column" fxLayoutGap="1%">
+                  <div><i class="material-icons" matPrefix>tour</i>物品名稱: {{products.ProductName}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>數量: {{products.ProductQuantity}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>外觀狀況: {{products.ProductSize}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>使用方式: {{products.ProductUse}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>相關連結: <a>{{products.ProductLink}}</a></div>
+                  <div><i class="material-icons" matPrefix>tour</i>品牌: {{products.ProductBrand}}</div>
+                  <div><i class="material-icons" matPrefix>gavel</i>損壞賠償: {{products.Compensation}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>其他備註: {{products.Remarks}}</div>
+                </div>
+                <div>
+                  <div style="width: 200px; min-height: 200px;">
+                    <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+                  </div>
                 </div>
               </div>
-            </div>
-          </mat-expansion-panel>
-        </mat-accordion>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
       </div>
       <!-- 添加物品表單 -->
       <form [formGroup]="goodsForm" (ngSubmit)="onSubmit()">
@@ -168,7 +170,7 @@
               </mat-form-field>
             </div>
             <div class="add-goods" fxLayout="row" fxLayoutAlign="end">
-              <button mat-button type="button">添加物品</button>
+              <button mat-button type="button" (click)="doCreateProduct()">添加物品</button>
             </div>
           </div>
           <div class="goods-images">

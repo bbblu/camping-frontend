@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -43,6 +43,7 @@ export class ProductCreateComponent implements OnInit {
   loadImageFailed() {
     // show message
   }
+
   /*圖片輪播器測試*/
   imageObject: Array<object> = [{
     image: 'assets/images/logo.png',
@@ -51,8 +52,8 @@ export class ProductCreateComponent implements OnInit {
     image: 'assets/images/logo.png', // Support base64 image
     thumbImage: 'assets/images/logo.png', // Support base64 image
   }, {
-    image: 'assets/images/logo.png', // Support base64 image
-    thumbImage: 'assets/images/logo.png', // Support base64 image
+    image: '', // Support base64 image
+    thumbImage: '', // Support base64 image
   }
   ];
 
@@ -92,7 +93,9 @@ export class ProductCreateComponent implements OnInit {
       cityAreaName: [null, [Validators.required]],
       price: [null, [Validators.required]],
       bankAccount: [null, [Validators.required]],
-      coverImage: [null, [Validators.required]]
+      coverImage: [null, [Validators.required]],
+      productArray: this.formBuilder.array([
+      ]),
     });
 
     this.goodsForm = this.formBuilder.group({
@@ -114,6 +117,21 @@ export class ProductCreateComponent implements OnInit {
         this.productTypes = response.data.type;
         this.city = response.data.city;
       });
+  }
+
+  doCreateProduct() {
+    let control = <FormArray>this.productForm.controls['productArray'];
+
+    control.push(new FormGroup({
+      id: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required)
+    }));
+  }
+
+  get students() {
+    let control = <FormArray>this.productForm.controls['productArray'];
+
+    return control;
   }
 
   onSubmit() {
