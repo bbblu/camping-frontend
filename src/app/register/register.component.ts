@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
+import { ApiModel } from '../models/api-model';
+import { Experience } from '../models/experience';
 
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'app-register',
@@ -9,36 +13,67 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  hide = true;
-  hideConfimPassword = true;
   registerForm!: FormGroup;
-  imageSrc = 'assets/image/logo.png';
-  imageAlt = 'logo';
-  constructor(private formBuilder: FormBuilder) { }
-  myFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    // Prevent Saturday and Sunday from being selected.
-    return day !== 0 && day !== 6;
-  }
+  experiences!: Experience[];
+  isPasswordHide = true;
+  isConfimPasswordHide = true;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private httpService: HttpService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+    this.getExperienceList();
+
     this.registerForm = this.formBuilder.group({
-      account: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]*')]],
-      password: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]*')]],
-      confirmPassword: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]*')]],
-      email: [''],
-      address: [''],
-      firstName: [''],
-      lastName: [''],
-      nickName: [''],
-      gender: [''],
-      birthday: [''],
-      experience: [''],
+      account: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+')]],
+      password: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+')]],
+      confirmPassword: [null, { validator: this.checkPassword }],
+      email: [null, [Validators.required]],
+      address: [null, [Validators.required]],
+      firstName: [null, [Validators.required]],
+      lastName: [null, [Validators.required]],
+      nickName: [null, [Validators.required]],
+      gender: [null, [Validators.required]],
+      birthday: [null, [Validators.required]],
+      experience: [null, [Validators.required]],
     });
   }
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.registerForm.value);
+
+  checkPassword(group: FormGroup): object | null {
+    const password = group.get('password')!.value;
+    const confirmPassword = group.get('confirmPassword')!.value;
+
+    return password === confirmPassword ? null : { notSame: true };
+  }
+
+  getExperienceList(): void {
+    this.httpService.getData<Experience[]>('/user/experience')
+      .subscribe((response: ApiModel<Experience[]>) => {
+        this.experiences = response.data;
+      }, error => {
+        console.log(error.error);
+      });
+  }
+
+  onSubmit(): void {
+    const birthday = this.registerForm.value.birthday as Date;
+    const formatBirthday = Intl.DateTimeFormat('zh-TW').format(birthday);
+    this.httpService.postData<string>('/user', {
+      ...this.registerForm.value,
+      birthday: formatBirthday,
+    })
+      .subscribe((res: ApiModel<string>) => {
+        if (!res.result) {
+          console.log(res);
+        }
+
+        this.router.navigate(['']);
+      }, err => {
+        console.log(err.error);
+      });
   }
 
 }
