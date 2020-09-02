@@ -2,51 +2,112 @@
     padding: 0;
     margin: 0;
 }
+
 .container {
     text-align: center;
-    font-size: 130%;
     font-family: Microsoft JhengHei;
     color: #c0dd6f;
-    // margin: 10% 33% 4.8% 33%;
     width: 34%;
     border-style: solid;
     border-color: #c0dd6f;
-    border-radius: 20pt;
+    border-radius: 20px;
 }
-
-.logo {
-    height: 50px;
-    width: 50px;
-}
+/* title*/
 .formTitle {
-    margin: 5px 0px 0px 0px;
+    margin: 1% 0px 3% 0px;
     p {
         margin: auto 0;
     }
 }
-.mat-form-field {
-    padding: 0 20px;
+.register-form {
+    .password_visibility {
+        cursor: pointer;
+    }
+    .matPrefix-icon {
+        margin: 0.5rem 0.5rem 0.5rem 0;
+    }
+    /* radio button */
+    .mat-field {
+        padding: 5px 0;
+        border: 2px solid #c0dd6f;
+        border-radius: 30px;
+        margin: 0px 20px 20px 20px;
+        .radioButton {
+            margin: auto 12px;
+            .radio-button-icon {
+                margin-right: 0.5rem;
+            }
+            .mat-radio-button ~ .mat-radio-button {
+                margin-left: 16px;
+            }
+            .radio-text {
+                font-size: 16px;
+                color: #757575;
+                margin-right: 5px;
+            }
+            @media screen and (min-width: 960px) {
+                .radio-text {
+                    display: auto;
+                }
+            }
+            @media screen and (min-width: 600px) and (max-width: 960px) {
+                .radio-text {
+                    display: none;
+                }
+            }
+            @media screen and (min-width: 400px) and (max-width: 600px) {
+                .radio-text {
+                    display: auto;
+                }
+            }
+            @media screen and (max-width: 400px) {
+                .radio-text {
+                    display: none;
+                }
+            }
+            ::ng-deep {
+                .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+                    border-color: #c0dd6f;
+                }
+                .mat-radio-button.mat-accent .mat-radio-inner-circle {
+                    background: #c0dd6f;
+                }
+            }
+        }
+    }
+    ::ng-deep {
+        .mat-button-wrapper {
+            svg {
+                color: #c0dd6f;
+            }
+        }
+    }
 }
-
-.mat-form-field-appearance-outline .mat-form-field-infix {
-    padding: 0.5rem 0;
-}
-
+/* mat-form-field  */
 ::ng-deep mat-form-field.mat-form-field {
-    // font-size: 16px;
-    .mat-form-field-wrapper{
+    padding: 0 20px;
+    ::placeholder {
+        font-size: 1rem;
+        color: #757575;
+    }
+    .material-icons {
+        font-size: 24px;
+    }
+    .mat-form-field-wrapper {
         .mat-form-field-flex {
-            .mat-form-field-infix{
+            .mat-form-field-infix {
                 margin: auto 0;
-                padding: 1rem 0;
+                padding: 1rem 0 0.7rem 0;
                 border: 0;
             }
             .mat-form-field-outline {
                 border: 2px solid #c0dd6f;
                 border-radius: 30pt;
             }
-            .mat-form-field-outline-start,.mat-form-field-outline-end,.mat-form-field-outline-gap{
-                border:0px
+            .mat-form-field-outline-start,
+            .mat-form-field-outline-end,
+            .mat-form-field-outline-gap {
+                border: 0px;
             }
             .mat-form-field-suffix {
                 margin: auto 0;
@@ -55,70 +116,35 @@
     }
 }
 
-
-.material-icons {
-    font-size: 34px;
-}
-
-.flex-forgetPasswordAndRememberMe {
-    display: block;
-    font-weight: bold;
-    font-size: 100%;
-    justify-content: space-around;
-    flex-direction: row;
-    padding-bottom: 2%;
-}
-
-.forgetPassword {
-    font-weight: bold;
-    color: #c0dd6f;
-    text-decoration: none;
-    vertical-align: middle;
-}
-
-.mat-checkbox {
-    font-family: Microsoft JhengHei;
-}
-
-::placeholder {
-    font-size: 20px;
-}
-
 .signUpAndLogin {
     padding-bottom: 2%;
-}
-
-button {
-    font-size: 70%;
-    width: 35%;
-    color: #c0dd6f;
-    font-weight: bold;
-    border-style: solid;
-    border-radius: 20pt;
-    border-color: #c0dd6f;
-    background-color: #fff;
-}
-
-.register_btn {
-    color: #fff;
-    background-color: #c0dd6f;
-}
-
-@media screen and (min-width: 1300px) {
-    .material-icons {
-        font-size: 40px;
+    .register_btn {
+        font-size: 70%;
+        width: 35%;
+        color: #fff;
+        background-color: #c0dd6f;
+        font-weight: bold;
+        border-style: solid;
+        border-radius: 20px;
+    }
+    .login_btn {
+        font-size: 70%;
+        width: 35%;
+        box-sizing: border-box;
+        color: #c0dd6f;
+        font-weight: bold;
+        border-style: solid;
+        border-radius: 20px;
+        border-color: #c0dd6f;
+        background-color: #fff;
     }
 }
+
 @media screen and (min-width: 1900px) {
     ::placeholder {
         font-size: 24px;
     }
-
     button {
-        font-size: 110%;
-    }
-
-    .flex-forgetPasswordAndRememberMe {
         font-size: 110%;
     }
 }

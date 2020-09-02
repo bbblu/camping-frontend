@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   userForm!: FormGroup;
   result!: ApiModel<object>;
-  imageSrc = 'assets/images/logo.png';
+  imageSrc = 'assets/image/logo.png';
   imageAlt ='logo';
   constructor(
     private formBuilder: FormBuilder,
