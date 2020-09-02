@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 import { environment } from '../../environments/environment';
+
 import { ApiModel } from '../models/api-model';
+
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +17,13 @@ export class HttpService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token': this.authSerive.getToken() || '',
     })
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authSerive: AuthService,
   ) {
   }
 
