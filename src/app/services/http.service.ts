@@ -26,7 +26,24 @@ export class HttpService {
   }
 
   postData<T>(url: string, data: object): Observable<ApiModel<T>> {
+    if (url === '/login') {
+      // @ts-ignore
+      this.httpOptions['observe'] = 'response' as 'response';
+    }
+
     return this.http.post<ApiModel<T>>(this.serverIp + url, data, this.httpOptions);
+  }
+
+  putData<T>(url: string, data: object): Observable<ApiModel<T>> {
+    return this.http.put<ApiModel<T>>(this.serverIp + url, data, this.httpOptions);
+  }
+
+  patchData<T>(url: string, data: object): Observable<ApiModel<T>> {
+    return this.http.patch<ApiModel<T>>(this.serverIp + url, data, this.httpOptions);
+  }
+
+  deleteData<T>(url: string, data: object): Observable<ApiModel<T>> {
+    return this.http.delete<ApiModel<T>>(this.serverIp + url, this.httpOptions);
   }
 
 }

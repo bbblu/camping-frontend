@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ShareModule } from './module/share.module';
@@ -36,6 +37,15 @@ import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
       FlexLayoutModule,
       AppRoutingModule,
       ShareModule,
+
+      JwtModule.forRoot({
+        config: {
+          tokenGetter: () => {
+            return localStorage.getItem('access_token');
+          },
+          allowedDomains: ['211.75.1.201:50004']
+        }
+      })
    ],
    exports: [
       ReactiveFormsModule
