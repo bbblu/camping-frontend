@@ -1,4 +1,4 @@
-import { User } from '../model/user';
+import { User } from 'src/app/models/user';
 
 export const user: User = {
     userNickName:"bergin",
