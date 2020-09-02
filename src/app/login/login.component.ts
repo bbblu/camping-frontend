@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 import { ApiModel } from '../models/api-model';
+
 import { HttpService } from '../services/http.service';
-import { error } from 'selenium-webdriver';
-import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from './../services/auth.service';
 
 
 @Component({
@@ -14,39 +15,35 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  hide = true;
   userForm!: FormGroup;
-  result!: ApiModel<object>;
-  imageSrc = 'assets/image/logo.png';
-  imageAlt ='logo';
+  isVisibility = true;
+
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private httpSerivce: HttpService,
+    private httpService: HttpService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
-      account: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]*')]],
-      password: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]*')]]
+      account: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+')]],
+      password: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+')]]
     });
   }
 
-  onSubmit() {
-    console.log(this.userForm.value);
-    this.httpSerivce.postData<object>('/login', this.userForm.value)
-      .subscribe(response => {
-        this.result = response;
-        if (response.result) {
-          this.router.navigateByUrl('/');
+  onSubmit(): void {
+    this.httpService.postData<object>('/login', this.userForm.value)
+      // @ts-ignore
+      .subscribe((response: HttpResponse<ApiModel<object>>) => {
+        const result = response.headers.get('X-Auth-Token') || '';
+        if (result) {
+          this.authService.setToken(result);
+          this.router.navigate(['']);
         }
-      }, error => {
-        alert(error.error.message);
-      }
-      );
-
+      }, err => {
+        alert(err.error.message);
+      });
   }
-
 
 }
