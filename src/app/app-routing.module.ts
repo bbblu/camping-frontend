@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { UserInfoComponent } from './user-info/user-info.component';
-import { FAQComponent } from './FAQ/FAQ.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { UserComponent } from './user/user.component';
+import { FAQComponent } from './FAQ/FAQ.component';
 
 const routes: Routes = [
-  { path: 'login' , component: LoginComponent },
-  { path: 'register' , component: RegisterComponent },
-  { path: 'user-info', component: UserInfoComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'product/:id', component: ProductDetailComponent },
+  { path: 'user-info', component: UserComponent },
   { path: 'FAQ', component: FAQComponent },
 ];
 

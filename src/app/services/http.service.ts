@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { ApiModel } from '../models/api-model';
@@ -12,6 +12,7 @@ export class HttpService {
   private serverIp = environment.serverIp;
   private httpOptions = {
     headers: new HttpHeaders({
+      'X-Auth-Token': '',
       'Content-Type': 'application/json',
     })
   };
