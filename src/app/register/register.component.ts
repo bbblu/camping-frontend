@@ -6,6 +6,7 @@ import { ApiModel } from '../models/api-model';
 import { Experience } from '../models/experience';
 
 import { HttpService } from '../services/http.service';
+import { SnakeBarService } from './../services/snake-bar.service';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +22,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpService,
+    private snakeBarService: SnakeBarService,
     private router: Router,
   ) { }
 
@@ -67,12 +69,13 @@ export class RegisterComponent implements OnInit {
     })
       .subscribe((res: ApiModel<string>) => {
         if (!res.result) {
-          console.log(res);
+          this.snakeBarService.open(res.message);
+          return;
         }
 
         this.router.navigate(['']);
       }, err => {
-        console.log(err.error);
+        this.snakeBarService.open(err.error.message);
       });
   }
 

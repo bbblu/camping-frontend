@@ -16,6 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -38,6 +39,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatExpansionModule,
     MatDialogModule,
     MatRadioModule,
+    MatSnackBarModule,
   ]
 })
 export class ShareModule { }
