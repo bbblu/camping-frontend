@@ -34,7 +34,7 @@
       </div>
 
       <div class="flex-RememberMe" fxLayoutGap="10%" fxLayoutAlign="start">
-        <mat-checkbox class="rememberCheckbox">記住我</mat-checkbox>
+        <mat-checkbox class="rememberCheckbox" (change)="changeRememberMe($event)">記住我</mat-checkbox>
       </div>
 
       <div class="signUpAndLogin" fxLayout="row" fxLayoutAlign="space-around">
