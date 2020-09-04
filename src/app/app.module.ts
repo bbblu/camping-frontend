@@ -11,7 +11,7 @@ import { ProductCreateComponent } from './product-create/product-create.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';// 引入表單模塊
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // 引入表單模塊
 
 // Angular Material Module List
 // Form Controls
@@ -21,7 +21,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatSelectModule } from '@angular/material/select';
 // Buttons
 import { MatButtonModule } from '@angular/material/button';
@@ -32,7 +32,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { NgImageSliderModule } from 'ng-image-slider';
-
+import { ImageCroppedDialogComponent } from './image-cropped-dialog/image-cropped-dialog.component';
 
 
 
@@ -42,7 +42,8 @@ import { NgImageSliderModule } from 'ng-image-slider';
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    ProductCreateComponent
+    ProductCreateComponent,
+    ImageCroppedDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +66,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
     MatExpansionModule,
     ImageCropperModule,
     IvyCarouselModule,
-    NgImageSliderModule
+    NgImageSliderModule,
   ],
   exports: [
     MatToolbarModule,
@@ -81,6 +82,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
     IvyCarouselModule,
     NgImageSliderModule
   ],
+  entryComponents: [ImageCroppedDialogComponent],
   providers: [],
   bootstrap: [
     AppComponent

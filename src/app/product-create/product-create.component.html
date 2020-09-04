@@ -74,7 +74,7 @@
       </div>
       <!-- 已加入的物品 -->
       <div class="alread-add" formArrayName="productArray" class="well well-lg">
-        <div *ngFor="let student of students.controls; let i=index" [formGroupName]="i">
+        <div *ngFor="let productArray of productArrays.controls; let i=index" [formGroupName]="i">
           <mat-accordion>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
@@ -174,11 +174,10 @@
             </div>
           </div>
           <div class="goods-images">
-            <input type="file" (change)="fileChangeEvent($event)" />
-            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
-              format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
-              (loadImageFailed)="loadImageFailed()"></image-cropper>
-            <img [src]="croppedImage" width="200px" height="200px">
+            <button mat-raised-button (click)="openDialog()">選擇圖片</button>
+            <div style="width: 200px; min-height: 200px;">
+              <ng-image-slider [images]="goodsImages" #nav></ng-image-slider>
+            </div>
           </div>
         </div>
       </form>

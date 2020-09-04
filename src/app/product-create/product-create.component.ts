@@ -4,6 +4,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ApiModel } from '../models/api-model';
 import { HttpService } from '../services/http.service';
@@ -11,6 +12,8 @@ import { error } from 'selenium-webdriver';
 import { MatIconModule } from '@angular/material/icon';
 import { Product } from '../models/product';
 import { City, ProductGroupFilter, Type } from '../models/product-group-filter';
+import { ImageCroppedDialogComponent } from '../image-cropped-dialog/image-cropped-dialog.component';
+import { DialogData } from '../models/dialog-data';
 
 @Component({
   selector: 'app-product-create',
@@ -24,9 +27,22 @@ export class ProductCreateComponent implements OnInit {
   result!: ApiModel<object>;
   productTypes: Type[] = [];
   city!: City;
+  croppedImageBase64: string;
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ImageCroppedDialogComponent, {
+      width: '70%',
+      data: { croppedImageBase64: this.croppedImageBase64 }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.croppedImageBase64 = result;
+    });
+  }
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
@@ -34,17 +50,17 @@ export class ProductCreateComponent implements OnInit {
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
   }
-  imageLoaded() {
+  imageLoaded(): void {
     // show cropper
   }
-  cropperReady() {
+  cropperReady(): void {
     // cropper ready
   }
-  loadImageFailed() {
+  loadImageFailed(): void {
     // show message
   }
 
-  /*圖片輪播器測試*/
+  /*已新增商品之圖片陣列*/
   imageObject: Array<object> = [{
     image: 'assets/images/logo.png',
     thumbImage: 'assets/images/logo.png',
@@ -54,7 +70,13 @@ export class ProductCreateComponent implements OnInit {
   }, {
     image: '', // Support base64 image
     thumbImage: '', // Support base64 image
-  }
+  }];
+
+  /*新增中商品之圖片陣列*/
+  goodsImages: Array<object> = [{
+    image: '', // Support base64 image
+    thumbImage: '', // Support base64 image
+  },
   ];
 
   products: Product = {
@@ -79,7 +101,8 @@ export class ProductCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private httpService: HttpService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -124,11 +147,20 @@ export class ProductCreateComponent implements OnInit {
 
     control.push(new FormGroup({
       id: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required)
+      email: new FormControl('', Validators.required),
+      imageArray: new FormControl('', Validators.required),
+      name: new FormControl('', Validators.required),
+      count: new FormControl('', Validators.required),
+      ProductSize: new FormControl('', Validators.required),
+      useInformation: new FormControl(''),
+      relatedLinkArray: new FormControl(''),
+      brand: new FormControl(''),
+      brokenCompensation: new FormControl(''),
+      memo: new FormControl(''),
     }));
   }
 
-  get students() {
+  get productArrays() {
     let control = <FormArray>this.productForm.controls['productArray'];
 
     return control;
