@@ -27,7 +27,7 @@ export class ProductCreateComponent implements OnInit {
   result!: ApiModel<object>;
   productTypes: Type[] = [];
   city!: City;
-  croppedImageBase64: string;
+  croppedImageBase64!: string;
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
