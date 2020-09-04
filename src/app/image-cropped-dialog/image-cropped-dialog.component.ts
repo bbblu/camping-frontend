@@ -1,7 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../models/dialog-data';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+
+export interface DialogData {
+  croppedImageBase64: string;
+}
+
 
 @Component({
   selector: 'app-image-cropped-dialog',

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -12,12 +12,14 @@ import { ShareModule } from './module/share.module';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { LoginComponent } from './login/login.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { FAQComponent } from './FAQ/FAQ.component';
 import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
+import { ProductCreateComponent } from './product-create/product-create.component';
+import { ImageCroppedDialogComponent } from './image-cropped-dialog/image-cropped-dialog.component';
+
 
 @NgModule({
    declarations: [
@@ -29,6 +31,8 @@ import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
       UserInfoComponent,
       FAQComponent,
       FAQDialogComponent,
+      ProductCreateComponent,
+      ImageCroppedDialogComponent,
    ],
    imports: [
       BrowserModule,

@@ -13,7 +13,7 @@ import { ProductCreateComponent } from './product-create/product-create.componen
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'product-create' , component: ProductCreateComponent} 
+  { path: 'product-create' , component: ProductCreateComponent},
   { path: 'user-info', component: UserInfoComponent, canActivate: [AuthGuard] },
   { path: 'FAQ', component: FAQComponent },
 ];
