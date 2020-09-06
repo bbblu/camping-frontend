@@ -3,7 +3,8 @@
   <mat-dialog-actions>
     <button mat-raised-button (click)="onClose()" color="warn">OK</button>
   </mat-dialog-actions>
-  <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4" format="png"
+  <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1024 / 768"
+  [resizeToWidth]="1024" [resizeToHeight]="768" format="png" [onlyScaleDown]="false"
     (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
     (loadImageFailed)="loadImageFailed()"></image-cropper>
 </div>

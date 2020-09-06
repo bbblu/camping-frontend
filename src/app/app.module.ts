@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ShareModule } from './module/share.module';
@@ -41,6 +43,8 @@ import { ImageCroppedDialogComponent } from './image-cropped-dialog/image-croppe
       HttpClientModule,
       FlexLayoutModule,
       AppRoutingModule,
+      NgImageSliderModule,
+      ImageCropperModule,
       ShareModule,
 
       JwtModule.forRoot({

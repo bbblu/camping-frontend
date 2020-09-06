@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import {base64ToFile} from 'ngx-image-cropper';
 
 export interface DialogData {
   croppedImageBase64: string;
@@ -22,6 +23,7 @@ export class ImageCroppedDialogComponent implements OnInit {
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
+    console.log(event, base64ToFile(event.base64));
   }
   imageLoaded(): void {
     // show cropper
