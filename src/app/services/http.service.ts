@@ -16,7 +16,6 @@ export class HttpService {
   private serverIp = environment.serverIp;
   private httpOptions = {
     headers: new HttpHeaders({
-      'X-Auth-Token': '',
       'Content-Type': 'application/json',
       'X-Auth-Token': this.authSerive.getToken() || '',
     })

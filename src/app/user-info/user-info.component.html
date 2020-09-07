@@ -10,67 +10,76 @@
 
     <div class="clean-float"></div>
 
-    <mat-form-field appearance="outline">
-      <mat-icon matPrefix>person</mat-icon>
-      <mat-label>Account</mat-label>
-      <input matInput placeholder="account" [value]="user.account">
-    </mat-form-field>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix>person</mat-icon>
+        <mat-label>Account</mat-label>
+        <input matInput placeholder="account" [value]="user.account">
+      </mat-form-field>
+    </p>
 
-    <p></p>
-    <mat-form-field appearance="outline">
-      <mat-icon matPrefix>perm_identity</mat-icon>
-      <mat-label>lastName</mat-label>
-      <input matInput placeholder="account" [value]="user.lastName">
-    </mat-form-field>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix>perm_identity</mat-icon>
+        <mat-label>lastName</mat-label>
+        <input matInput placeholder="account" [value]="user.lastName">
+      </mat-form-field>
+    </p>
 
-    <p></p>
-    <mat-form-field appearance="outline">
-      <mat-icon matPrefix>perm_identity</mat-icon>
-      <mat-label>firstName</mat-label>
-      <input matInput placeholder="account" [value]="user.firstName">
-    </mat-form-field>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix>perm_identity</mat-icon>
+        <mat-label>firstName</mat-label>
+        <input matInput placeholder="account" [value]="user.firstName">
+      </mat-form-field>
+    </p>
 
-    <p></p>
-    <mat-form-field appearance="outline">
-      <mat-icon matPrefix>wc</mat-icon>
-      <mat-label>gender</mat-label>
-      <input matInput placeholder="account" [value]="user.gender">
-    </mat-form-field>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix>wc</mat-icon>
+        <mat-label>gender</mat-label>
+        <input matInput placeholder="account" [value]="user.gender">
+      </mat-form-field>
+    </p>
 
-    <p></p>
-    <mat-form-field appearance="outline">
-      <mat-icon matPrefix>cake</mat-icon>
-      <mat-label>birthday</mat-label>
-      <input matInput placeholder="account" [value]="user.birthday">
-    </mat-form-field>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix>cake</mat-icon>
+        <mat-label>birthday</mat-label>
+        <input matInput placeholder="account" [value]="user.birthday">
+      </mat-form-field>
+    </p>
 
-    <p></p>
-    <mat-form-field appearance="outline">
-      <mat-icon matPrefix>golf_course</mat-icon>
-      <mat-label>Experience</mat-label>
-      <mat-select formControlName="experience">
-        <mat-option *ngFor="let experience of experiences" [value]="experience.id">
-          {{ experience.display }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix>golf_course</mat-icon>
+        <mat-label>Experience</mat-label>
+        <mat-select formControlName="experience">
+          <mat-option *ngFor="let experience of experiences" [value]="experience.id">
+            {{ experience.display }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
 
-    <p></p>
-    <mat-form-field appearance="outline">
-      <mat-icon matPrefix>mail</mat-icon>
-      <mat-label>email</mat-label>
-      <input matInput placeholder="account" [value]="user.email">
-    </mat-form-field>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix>mail</mat-icon>
+        <mat-label>email</mat-label>
+        <input matInput placeholder="account" [value]="user.email">
+      </mat-form-field>
+    </p>
 
-    <p></p>
-    <mat-form-field appearance="outline">
-      <mat-icon matPrefix>room</mat-icon>
-      <mat-label>address</mat-label>
-      <input matInput placeholder="account" [value]="user.address">
-    </mat-form-field>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix>room</mat-icon>
+        <mat-label>address</mat-label>
+        <input matInput placeholder="account" [value]="user.address">
+      </mat-form-field>
+    </p>
 
-    <p></p>
-    <button mat-raised-button (click)="changeEditable()">變更</button>
-
+    <p>
+      <button mat-raised-button (click)="changeEditable()">變更</button>
+    </p>
   </form>
 </div>
