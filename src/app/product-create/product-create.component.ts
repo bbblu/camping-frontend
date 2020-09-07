@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ApiModel } from '../models/api-model';
-import { HttpService } from '../services/http.service';
-import { error } from 'selenium-webdriver';
 import { Product } from '../models/product';
 import { City, ProductGroupFilter, Type } from '../models/product-group-filter';
+
+import { HttpService } from '../services/http.service';
+
 import { ImageCroppedDialogComponent } from '../image-cropped-dialog/image-cropped-dialog.component';
 
 @Component({
@@ -22,32 +19,21 @@ export class ProductCreateComponent implements OnInit {
 
   productForm!: FormGroup;
   goodsForm!: FormGroup;
-  result!: ApiModel<object>;
   productTypes: Type[] = [];
   city!: City;
-  croppedImageBase64!: string;
-
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
+  croppedImages: string[] = [];
 
   /*已新增商品之圖片陣列*/
   imageObject: Array<object> = [{
-    image: 'assets/images/logo.png',
-    thumbImage: 'assets/images/logo.png',
-  }, {
-    image: 'assets/images/logo.png', // Support base64 image
-    thumbImage: 'assets/images/logo.png', // Support base64 image
-  }, {
-    image: '', // Support base64 image
-    thumbImage: '', // Support base64 image
+    image: 'assets/image/logo.png',
+    thumbImage: 'assets/image/logo.png',
   }];
 
   /*新增中商品之圖片陣列*/
   goodsImages: Array<object> = [{
-    image: '', // Support base64 image
-    thumbImage: '', // Support base64 image
-  },
-  ];
+    image: 'assets/image/logo.png',
+    thumbImage: 'assets/image/logo.png',
+  }];
 
   products: Product = {
     title: '標題',
@@ -70,36 +56,34 @@ export class ProductCreateComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(ImageCroppedDialogComponent, {
       width: '70%',
-      data: { croppedImageBase64: this.croppedImageBase64 }
+      data: { croppedImageBase64: this.croppedImages },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.croppedImageBase64 = result;
-    });
-  }
+    dialogRef.afterClosed().subscribe(images => {
+      this.croppedImages = images;
+      this.imageObject = [];
+      this.goodsImages = [];
 
-  fileChangeEvent(event: any): void {
-    this.imageChangedEvent = event;
-  }
-  imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64;
-  }
-  imageLoaded(): void {
-    // show cropper
-  }
-  cropperReady(): void {
-    // cropper ready
-  }
-  loadImageFailed(): void {
-    // show message
+      for (const image of images) {
+        if (!image) {
+          continue;
+        }
+
+        this.imageObject.push({
+          image,
+          thumbImage: image,
+        });
+        this.goodsImages.push({
+          image,
+          thumbImage: image,
+        });
+      }
+    });
   }
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient,
     private httpService: HttpService,
-    private router: Router,
     public dialog: MatDialog
   ) { }
 
@@ -140,10 +124,8 @@ export class ProductCreateComponent implements OnInit {
       });
   }
 
-  doCreateProduct() {
-    let control = <FormArray>this.productForm.controls['productArray'];
-
-    control.push(new FormGroup({
+  doCreateProduct(): void {
+    this.productArrays.push(new FormGroup({
       id: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
       imageArray: new FormControl('', Validators.required),
@@ -158,14 +140,12 @@ export class ProductCreateComponent implements OnInit {
     }));
   }
 
-  get productArrays() {
-    let control = <FormArray>this.productForm.controls['productArray'];
-
-    return control;
+  get productArrays(): FormArray {
+    return this.productForm.controls.productArray as FormArray;
   }
 
-  onSubmit() {
+  onSubmit(): void {
     console.log(this.productForm.value);
-  };
+  }
 
 }

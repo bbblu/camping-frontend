@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import {base64ToFile} from 'ngx-image-cropper';
+import { base64ToFile } from 'ngx-image-cropper';
 
 export interface DialogData {
   croppedImageBase64: string;
@@ -15,15 +15,24 @@ export interface DialogData {
 })
 export class ImageCroppedDialogComponent implements OnInit {
 
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
+  imageChangedEvent!: Event;
+  croppedImages: string[] = [];
+  currentIndex = 0;
 
-  fileChangeEvent(event: any): void {
+  constructor(
+    public dialogRef: MatDialogRef<ImageCroppedDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
+
+  ngOnInit(): void {
+  }
+
+  fileChangeEvent(event: Event): void {
     this.imageChangedEvent = event;
   }
-  imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64;
-    console.log(event, base64ToFile(event.base64));
+  imageCropped(event: ImageCroppedEvent): void {
+    const croppedImage = event.base64 || '';
+    this.croppedImages[this.currentIndex] = croppedImage;
   }
   imageLoaded(): void {
     // show cropper
@@ -35,11 +44,8 @@ export class ImageCroppedDialogComponent implements OnInit {
     // show message
   }
 
-  constructor(
-    public dialogRef: MatDialogRef<ImageCroppedDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
-
-  ngOnInit(): void {
+  changeCurrentIndex(index: number): void {
+    this.currentIndex = index;
   }
 
   onClose(): void {
