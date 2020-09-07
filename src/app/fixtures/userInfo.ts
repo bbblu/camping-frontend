@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { User } from '../models/user';
+=======
+import { User } from 'src/app/models/user';
+>>>>>>> upstream/develop
 
 export const user: User = {
     nickName:"bergin",

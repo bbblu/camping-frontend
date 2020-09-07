@@ -4,49 +4,93 @@
 }
 .container {
     text-align: center;
-    font-size: 130%;
     font-family: Microsoft JhengHei;
     color: #c0dd6f;
-    // margin: 10% 33% 4.8% 33%;
     width: 34%;
     border-style: solid;
     border-color: #c0dd6f;
-    border-radius: 20pt;
+    border-radius: 20px;
 }
-
-.logo {
-    height: 50px;
-    width: 50px;
-}
-.formTitle {
-    margin: 5px 0px 0px 0px;
+/* title & image logo */
+.form-title {
+    margin: 1% 0px 3% 0px;
     p {
         margin: auto 0;
     }
+    .logo {
+        height: 50px;
+        width: 50px;
+    }
 }
-.mat-form-field {
+/* user form */
+.user-form {
     padding: 0 20px;
-}
 
-.mat-form-field-appearance-outline .mat-form-field-infix {
-    padding: 0.5rem 0;
-}
+    /* 記住我的checkbox */
+    .flex-RememberMe {
+        display: block;
+        font-weight: bold;
+        font-size: 100%;
+        justify-content: space-around;
+        flex-direction: row;
+        padding-bottom: 2%;
+    }
+    .rememberCheckbox {
+        padding-left: 15px;
+    }
+    ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+        background-color: #c0dd6f;
+    }
+    .password_visibility {
+        cursor: pointer;
+    }
 
+    /* signup & login button*/
+    .signUpAndLogin {
+        padding: 2% 0px 4% 0px;
+        .signup-btn {
+            font-size: 70%;
+            width: 35%;
+            color: #c0dd6f;
+            font-weight: bold;
+            border-style: solid;
+            border-radius: 20px;
+            border-color: #c0dd6f;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        .login-btn {
+            font-size: 70%;
+            width: 35%;
+            color: #fff;
+            background-color: #c0dd6f;
+            font-weight: bold;
+            border-style: solid;
+            border-radius: 20px;
+        }
+    }
+}
+/* mat-form-field  */
 ::ng-deep mat-form-field.mat-form-field {
-    // font-size: 16px;
-    .mat-form-field-wrapper{
+    ::placeholder {
+        font-size: 16px;
+    }
+    .mat-form-field-wrapper {
         .mat-form-field-flex {
-            .mat-form-field-infix{
+            .mat-form-field-infix {
                 margin: auto 0;
-                padding: 1rem 0;
+                padding: 1rem 0 0.7rem 0;
                 border: 0;
             }
             .mat-form-field-outline {
                 border: 2px solid #c0dd6f;
                 border-radius: 30pt;
             }
-            .mat-form-field-outline-start,.mat-form-field-outline-end,.mat-form-field-outline-gap{
-                border:0px
+            .mat-form-field-outline-start,
+            .mat-form-field-outline-end,
+            .mat-form-field-outline-gap {
+                border: 0px;
             }
             .mat-form-field-suffix {
                 margin: auto 0;
@@ -55,60 +99,7 @@
     }
 }
 
-
-.material-icons {
-    font-size: 34px;
-}
-
-.flex-forgetPasswordAndRememberMe {
-    display: block;
-    font-weight: bold;
-    font-size: 100%;
-    justify-content: space-around;
-    flex-direction: row;
-    padding-bottom: 2%;
-}
-
-.forgetPassword {
-    font-weight: bold;
-    color: #c0dd6f;
-    text-decoration: none;
-    vertical-align: middle;
-}
-
-.mat-checkbox {
-    font-family: Microsoft JhengHei;
-}
-
-::placeholder {
-    font-size: 20px;
-}
-
-.signUpAndLogin {
-    padding-bottom: 2%;
-}
-
-button {
-    font-size: 70%;
-    width: 35%;
-    color: #c0dd6f;
-    font-weight: bold;
-    border-style: solid;
-    border-radius: 20pt;
-    border-color: #c0dd6f;
-    background-color: #fff;
-}
-
-#login {
-    color: #fff;
-    background-color: #c0dd6f;
-}
-
-@media screen and (min-width: 1300px) {
-    .material-icons {
-        font-size: 40px;
-    }
-}
+/* 螢幕尺寸大於1900 */
 @media screen and (min-width: 1900px) {
     ::placeholder {
         font-size: 24px;
@@ -118,7 +109,7 @@ button {
         font-size: 110%;
     }
 
-    .flex-forgetPasswordAndRememberMe {
+    .flex-RememberMe {
         font-size: 110%;
     }
 }

@@ -15,6 +15,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
@@ -37,6 +39,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatCheckboxModule,
     MatExpansionModule,
     MatDialogModule,
+    MatRadioModule,
+    MatSnackBarModule,
     MatTabsModule,
   ]
 })

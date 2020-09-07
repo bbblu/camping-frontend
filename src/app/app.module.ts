@@ -4,8 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatExpansionModule } from '@angular/material/expansion';
-
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ShareModule } from './module/share.module';
@@ -22,32 +21,37 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { from } from 'rxjs';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TopBarComponent,
-    LoginComponent,
-    RegisterComponent,
-    UserInfoComponent,
-    FAQComponent,
-    FAQDialogComponent,
-    UserComponent,
+   declarations: [
+      AppComponent,
+      TopBarComponent,
+      LoginComponent,
+      RegisterComponent,
     ProductDetailComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FlexLayoutModule,
-    AppRoutingModule,
-    ShareModule,
-    MatExpansionModule,
-  ],
-  exports: [
-    ReactiveFormsModule
-  ], providers: [],
-  bootstrap: [
-    AppComponent
-  ]
+    UserComponent,
+      UserInfoComponent,
+      FAQComponent,
+      FAQDialogComponent,
+   ],
+   imports: [
+      BrowserModule,
+      BrowserAnimationsModule,
+      ReactiveFormsModule,
+      HttpClientModule,
+      FlexLayoutModule,
+      AppRoutingModule,
+      ShareModule,
+
+      JwtModule.forRoot({
+        config: {
+          tokenGetter: () => {
+            return localStorage.getItem('access_token');
+          },
+          allowedDomains: ['211.75.1.201:50004']
+        }
+      })
+   ], providers: [],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule { }
