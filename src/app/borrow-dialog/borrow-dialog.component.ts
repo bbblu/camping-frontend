@@ -16,10 +16,10 @@ import { HttpService } from '../services/http.service';
 })
 export class BorrowDialogComponent implements OnInit {
   isLinear = false;
-  firstFormGroup!: FormGroup;
-  secondFormGroup!: FormGroup;
+  firstForm!: FormGroup;
+  secondForm!: FormGroup;
   user!: User;
-  // productGroup!: ProductGroup;
+  productGroup!: ProductGroup;
   selectFormControl = new FormControl('', Validators.required);
 
   constructor(
@@ -36,21 +36,27 @@ export class BorrowDialogComponent implements OnInit {
   ngOnInit(): void {
     this.getUserInfo();
 
-    this.firstFormGroup = this.formBuilder.group({
-      billLastName: [null, Validators.required],
-      billFirstName: [null, Validators.required],
+    this.firstForm = this.formBuilder.group({
+      borrowLastName: [null, Validators.required],
+      borrowFirstName: [null, Validators.required],
       billEmail: [null, Validators.required],
       billCellPhone: [null, Validators.required],
     });
-    this.secondFormGroup = this.formBuilder.group({
+    this.secondForm = this.formBuilder.group({
       billLastName: [null, Validators.required],
       billFirstName: [null, Validators.required],
       cardId: [null, Validators.required],
       safeCode: [null, Validators.required],
       expireDate: [null, Validators.required],
       billAddress: [null, Validators.required],
-      selectFormControl: [null, Validators.required],
+      billCountry: ['台灣', Validators.required],
+      billCity: [null, Validators.required],
     });
+  }
+
+  intRange(start: number, end: number): number[] {
+    const range = [...Array(end + 1).keys()];
+    return range.slice(start, end + 1);
   }
 
   getUserInfo(): void {
@@ -58,12 +64,12 @@ export class BorrowDialogComponent implements OnInit {
       .subscribe((response: ApiModel<User>) => {
         this.user = response.data;
 
-        this.firstFormGroup.patchValue({
-          billLastName: this.user.lastName,
-          billFirstName: this.user.firstName,
+        this.firstForm.patchValue({
+          borrowLastName: this.user.lastName,
+          borrowFirstName: this.user.firstName,
           billEmail: this.user.email,
         });
-        this.secondFormGroup.patchValue({
+        this.secondForm.patchValue({
           billLastName: this.user.lastName,
           billFirstName: this.user.firstName,
           billAddress: this.user.address,
@@ -71,6 +77,11 @@ export class BorrowDialogComponent implements OnInit {
       }, error => {
         console.log(error.error);
       });
+  }
+
+  onSubmit(): void {
+    console.log(this.firstForm.value);
+    console.log(this.secondForm.value);
   }
 
 }

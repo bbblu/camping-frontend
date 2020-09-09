@@ -1,75 +1,96 @@
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
+  <!-- step 1 -->
+  <mat-step [stepControl]="firstForm">
+    <form [formGroup]="firstForm">
       <ng-template matStepLabel>填寫基本資料</ng-template>
       <mat-form-field>
         <mat-label>姓氏</mat-label>
-        <input matInput placeholder="真實姓名" formControlName="billLastName" required>
+        <input matInput placeholder="真實姓名" formControlName="borrowLastName" required>
       </mat-form-field>
+
       <mat-form-field>
         <mat-label>名</mat-label>
-        <input matInput placeholder="真實姓名" formControlName="billFirstName" required>
+        <input matInput placeholder="真實姓名" formControlName="borrowFirstName" required>
       </mat-form-field>
+
       <p>
         <mat-form-field>
           <mat-label>電子信箱</mat-label>
           <input matInput placeholder="聯絡用" formControlName="billEmail" required>
         </mat-form-field>
       </p>
-      <P>
+
+      <p>
         <mat-form-field>
           <mat-label>手機號碼</mat-label>
           <input matInput placeholder="聯絡用" formControlName="billCellPhone" required>
         </mat-form-field>
-      </P>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
+      </p>
+
+      <button mat-button matStepperNext>Next</button>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup" label="填寫付款資訊">
-    <form [formGroup]="secondFormGroup">
-      <p>
-        <mat-form-field>
-          <mat-label>訂單金額</mat-label>
-          <input matInput [value]="data.price" disabled>
-        </mat-form-field>
-      </p>
+
+  <!-- step 2 -->
+  <mat-step [stepControl]="secondForm" label="填寫付款資訊">
+    <form [formGroup]="secondForm">
+      <p>商品名稱：{{data.name}}</p>
+      <p>訂單金額：{{data.price}}</p>
+      <p>租借期間：{{data.borrowDateRange}}</p>
 
       <mat-form-field>
         <mat-label>姓氏</mat-label>
         <input matInput formControlName="billLastName" required>
       </mat-form-field>
+
       <mat-form-field>
         <mat-label>名</mat-label>
         <input matInput formControlName="billFirstName" required>
       </mat-form-field>
+
       <p>
         <mat-form-field>
           <mat-label>卡號</mat-label>
           <input matInput formControlName="cardId" required>
         </mat-form-field>
       </p>
+
       <p>
+        <mat-form-field appearance="fill">
+          <mat-label>有效年份</mat-label>
+          <mat-select>
+            <mat-option>{{ '-- 填寫年 --' }}</mat-option>
+            <mat-option *ngFor="let year of intRange(20, 26)" [value]="year">{{ year }}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
-          <mat-label>有效期限</mat-label>
-          <select matNativeControl required [formControl]="selectFormControl">
-            <option label="--填寫年 --"></option>
-            <option value="26">26</option>
-            <option value="25">25</option>
-            <option value="24">24</option>
-            <option value="23">23</option>
-            <option value="22">22</option>
-            <option value="21">21</option>
-            <option value="20">20</option>
-          </select>
+          <mat-label>有效月份</mat-label>
+          <mat-select formControlName="expireDate">
+            <mat-option>{{ '-- 填寫月 --' }}</mat-option>
+            <mat-option *ngFor="let month of intRange(1, 12)" [value]="month">{{ month }}</mat-option>
+          </mat-select>
         </mat-form-field>
       </p>
       <p>
         <mat-form-field>
           <mat-label>安全碼</mat-label>
           <input matInput placeholder="卡片背面三碼" formControlName="safeCode" required>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-label>國家</mat-label>
+          <input matInput formControlName="billCountry" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>城市</mat-label>
+          <mat-select formControlName="billCity">
+            <mat-option>{{ '--填寫城市 --' }}</mat-option>
+            <mat-option value="台北市">台北市</mat-option>
+            <mat-option value="新北市">新北市</mat-option>
+          </mat-select>
         </mat-form-field>
       </p>
 
@@ -86,11 +107,18 @@
       </div>
     </form>
   </mat-step>
+
+  <!-- step 3 -->
   <mat-step>
     <ng-template matStepLabel>完成訂單</ng-template>
-    <p>You are now done.</p>
+    <p>商品名稱：{{data.name}}</p>
+    <p>訂單金額：{{data.price}}</p>
+    <p>租借期間：{{data.borrowDateRange}}</p>
     <div>
       <button mat-button matStepperPrevious>Back</button>
+      <button mat-button type="submit" (click)="onSubmit()" [disabled]="!firstForm.valid || !secondForm.valid">
+        Submit
+      </button>
       <button mat-button (click)="stepper.reset()">Reset</button>
     </div>
   </mat-step>
