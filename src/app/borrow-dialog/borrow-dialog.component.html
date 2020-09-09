@@ -1,0 +1,97 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>填寫基本資料</ng-template>
+      <mat-form-field>
+        <mat-label>姓氏</mat-label>
+        <input matInput placeholder="真實姓名" formControlName="billLastName" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>名</mat-label>
+        <input matInput placeholder="真實姓名" formControlName="billFirstName" required>
+      </mat-form-field>
+      <p>
+        <mat-form-field>
+          <mat-label>電子信箱</mat-label>
+          <input matInput placeholder="聯絡用" formControlName="billEmail" required>
+        </mat-form-field>
+      </p>
+      <P>
+        <mat-form-field>
+          <mat-label>手機號碼</mat-label>
+          <input matInput placeholder="聯絡用" formControlName="billCellPhone" required>
+        </mat-form-field>
+      </P>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="填寫付款資訊">
+    <form [formGroup]="secondFormGroup">
+      <p>
+        <mat-form-field>
+          <mat-label>訂單金額</mat-label>
+          <input matInput [value]="data.price" disabled>
+        </mat-form-field>
+      </p>
+
+      <mat-form-field>
+        <mat-label>姓氏</mat-label>
+        <input matInput formControlName="billLastName" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>名</mat-label>
+        <input matInput formControlName="billFirstName" required>
+      </mat-form-field>
+      <p>
+        <mat-form-field>
+          <mat-label>卡號</mat-label>
+          <input matInput formControlName="cardId" required>
+        </mat-form-field>
+      </p>
+      <p>
+
+        <mat-form-field appearance="fill">
+          <mat-label>有效期限</mat-label>
+          <select matNativeControl required [formControl]="selectFormControl">
+            <option label="--填寫年 --"></option>
+            <option value="26">26</option>
+            <option value="25">25</option>
+            <option value="24">24</option>
+            <option value="23">23</option>
+            <option value="22">22</option>
+            <option value="21">21</option>
+            <option value="20">20</option>
+          </select>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>安全碼</mat-label>
+          <input matInput placeholder="卡片背面三碼" formControlName="safeCode" required>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-label>地址</mat-label>
+          <input matInput formControlName="billAddress" required>
+        </mat-form-field>
+      </p>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>完成訂單</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

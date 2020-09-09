@@ -5,48 +5,29 @@
   <p>{{productGroup.city}}</p>
   <p>{{productGroup.price}}</p>
   <p>{{productGroup.borrowDateRange}}</p>
-  <button>我要租</button>
+  <button mat-raised-button (click)="openDialog()">我要租</button>
 </div>
 
-<div *ngFor="let product of productGroup.productArray">
-  <div class='expansion-panel' >
-    <mat-accordion>
-      <mat-expansion-panel hideToggle>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{product.name}}
-          </mat-panel-title>
-          數量:{{product.count}}
-        </mat-expansion-panel-header>
-        照片:<p *ngFor="let Image of product.imageArray"><img src={{Image.url}} /></p>
-        <p>外觀狀況：{{product.appearance}}</p>
-        <p>使用方法：{{product.useInformation}}</p>
-        連結:<p *ngFor="let RelatedLink of product.relatedLinkArray">
-          <a href={{RelatedLink.url}}>{{RelatedLink.url}}</a>
-        </p>
-        <p>品牌：{{product.brand}}</p>
-        <p>損壞賠償：{{product.brokenCompensation}}</p>
-        <p>其他備註：{{product.memo}}</p>
-
-      </mat-expansion-panel>
-
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngFor="let product of productGroup.productArray">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{product.name}}
-          </mat-panel-title>
-          數量:{{product.count}}
-        </mat-expansion-panel-header>
-        照片:<p *ngFor="let Image of product.imageArray"><img src={{Image.url}} /></p>
-        <p>外觀狀況：</p>
-        <p>使用方法：{{product.useInformation}}</p>
-        連結:<p *ngFor="let RelatedLink of product.relatedLinkArray">
-          <a href={{RelatedLink.url}}>{{RelatedLink.url}}</a>
-        </p>
-        <p>品牌：{{product.brand}}</p>
-        <p>損壞賠償：{{product.brokenCompensation}}</p>
-        <p>其他備註：{{product.memo}}</p>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
+<div class='expansion-panel'>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle *ngFor="let product of productGroup.productArray">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{product.name}}
+        </mat-panel-title>
+        數量:{{product.count}}
+      </mat-expansion-panel-header>
+      照片:<p *ngFor="let Image of product.imageArray">
+        <img alt="商品圖片" src={{Image.url}} />
+      </p>
+      <p>外觀狀況：{{product.appearance}}</p>
+      <p>使用方法：{{product.useInformation}}</p>
+      連結:<p *ngFor="let RelatedLink of product.relatedLinkArray">
+        <a href={{RelatedLink.url}}>{{RelatedLink.url}}</a>
+      </p>
+      <p>品牌：{{product.brand}}</p>
+      <p>損壞賠償：{{product.brokenCompensation}}</p>
+      <p>其他備註：{{product.memo}}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

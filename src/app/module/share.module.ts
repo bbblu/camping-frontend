@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [],
@@ -42,6 +43,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatRadioModule,
     MatSnackBarModule,
     MatTabsModule,
+    MatStepperModule
   ]
 })
 export class ShareModule { }

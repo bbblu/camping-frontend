@@ -19,6 +19,7 @@ import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
 import { UserComponent } from './user/user.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { from } from 'rxjs';
+import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
 
 @NgModule({
    declarations: [
@@ -31,6 +32,7 @@ import { from } from 'rxjs';
       UserInfoComponent,
       FAQComponent,
       FAQDialogComponent,
+      BorrowDialogComponent,
    ],
    imports: [
       BrowserModule,

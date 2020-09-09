@@ -1,8 +1,10 @@
+import { BorrowDialogComponent } from './../borrow-dialog/borrow-dialog.component';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ProductGroup } from '../models/product';
 
 import { ApiModel } from '../models/api-model';
+import { MatDialog } from '@angular/material/dialog';
 
 import { HttpService } from '../services/http.service';
 
@@ -14,12 +16,15 @@ import { HttpService } from '../services/http.service';
 export class ProductDetailComponent implements OnInit {
 
   panelOpenState = false;
+  animal: string = 'cat';
+  name: string = 'name';
 
   productGroup!: ProductGroup;
 
   constructor(
     private httpService: HttpService,
     private router: ActivatedRoute,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -39,4 +44,12 @@ export class ProductDetailComponent implements OnInit {
       });
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(BorrowDialogComponent, {
+      width: '70%',
+      height: '50%',
+      data: this.productGroup
+    });
+
+  }
 }
