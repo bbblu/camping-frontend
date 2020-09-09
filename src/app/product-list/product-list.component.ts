@@ -29,6 +29,8 @@ export class ProductListComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
+  page = 1;
+
   @ViewChild('typeInput') typeInput!: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete!: MatAutocomplete;
 
