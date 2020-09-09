@@ -14,11 +14,10 @@ import { HttpService } from '../services/http.service';
 })
 export class UserInfoComponent implements OnInit {
 
-  editable = false;
-
   user!: User;
   experiences: Experience[] = [];
   form!: FormGroup;
+  isEditable = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,19 +29,31 @@ export class UserInfoComponent implements OnInit {
     this.getUserInfo();
 
     this.form = this.formBuilder.group({
-      account: [null],
+      nickName: [null],
       experience: [null],
+      email: [null],
+      address: [null],
     });
+    this.form.disable();
   }
 
-  changeEditable(): void {
-    this.editable = !this.editable;
+  getUserInfo(): void {
+    this.httpService.getData<User>('/user')
+      .subscribe((res: ApiModel<User>) => {
+        this.user = res.data;
+        this.updateFormValue(res.data);
+      }, err => {
+        console.error(err);
+      });
+  }
 
-    if (this.editable) {
-      this.form.enable();
-    } else {
-      this.form.disable();
-    }
+  updateFormValue(data: User): void {
+    this.form.setValue({
+      nickName: data.nickName,
+      experience: data.experience.toString(),
+      email: data.email,
+      address: data.address,
+    });
   }
 
   getExperienceList(): void {
@@ -54,12 +65,21 @@ export class UserInfoComponent implements OnInit {
       });
   }
 
-  getUserInfo(): void {
-    this.httpService.getData<User>('/user')
-      .subscribe((response: ApiModel<User>) => {
-        this.user = response.data;
-      }, error => {
-        console.log(error.error);
+  onEditClick(): void {
+    this.isEditable = !this.isEditable;
+    if (this.isEditable) {
+      this.form.enable();
+    } else {
+      this.form.disable();
+    }
+  }
+
+  onSubmit(): void {
+    this.httpService.patchData<string>('/user', this.form.value)
+      .subscribe((res: ApiModel<string>) => {
+        console.log(res.message);
+      }, err => {
+        console.error(err.error);
       });
   }
 
