@@ -13,10 +13,13 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { FAQComponent } from './FAQ/FAQ.component';
 import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
+import { UserComponent } from './user/user.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { from } from 'rxjs';
+import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
 
 @NgModule({
    declarations: [
@@ -24,10 +27,12 @@ import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
       TopBarComponent,
       LoginComponent,
       RegisterComponent,
-      NavbarComponent,
+    ProductDetailComponent,
+    UserComponent,
       UserInfoComponent,
       FAQComponent,
       FAQDialogComponent,
+      BorrowDialogComponent,
    ],
    imports: [
       BrowserModule,
@@ -46,9 +51,6 @@ import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
           allowedDomains: ['211.75.1.201:50004']
         }
       })
-   ],
-   exports: [
-      ReactiveFormsModule
    ], providers: [],
    bootstrap: [
       AppComponent

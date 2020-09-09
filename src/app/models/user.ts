@@ -1,12 +1,12 @@
 export interface User {
-    userNickName:string;
-    account: string;
-    fName: string;
-    sName: string;
-    gender: string;
-    birthday: Date;
-    experience: string;
-    phone: string;
-    mail: string;
-    addr: string;
+  account: string;
+  password: string;
+  experience: string;
+  lastName: string;
+  firstName: string;
+  nickName: string;
+  gender: string;
+  email: string;
+  address: string;
+  birthday: Date;
 }

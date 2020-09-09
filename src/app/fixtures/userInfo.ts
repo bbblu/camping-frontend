@@ -1,14 +1,18 @@
+<<<<<<< HEAD
+import { User } from '../models/user';
+=======
 import { User } from 'src/app/models/user';
+>>>>>>> upstream/develop
 
 export const user: User = {
-    userNickName:"bergin",
+    nickName:"bergin",
+    password:"1234567",
     account: "kevin_WU",
-    fName: '吳',
-    sName: '佳俊',
+    lastName: '吳',
+    firstName: '佳俊',
     gender: '男',
     birthday: new Date('1994/9/12'),
     experience: '0-5次 新手',
-    phone: '0972533596',
-    mail: 'kevin1994912@gmail.com',
-    addr: '新竹市竹北縣縣政一街58號'
+    email: 'kevin1994912@gmail.com',
+    address: '新竹市竹北縣縣政一街58號'
 };
