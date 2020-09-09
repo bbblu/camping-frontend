@@ -8,6 +8,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ShareModule } from './module/share.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -17,6 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { FAQComponent } from './FAQ/FAQ.component';
 import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 @NgModule({
    declarations: [
@@ -28,6 +30,7 @@ import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
       UserInfoComponent,
       FAQComponent,
       FAQDialogComponent,
+      ProductListComponent,
    ],
    imports: [
       BrowserModule,
@@ -37,6 +40,7 @@ import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
       FlexLayoutModule,
       AppRoutingModule,
       ShareModule,
+      NgxPaginationModule,
 
       JwtModule.forRoot({
         config: {
