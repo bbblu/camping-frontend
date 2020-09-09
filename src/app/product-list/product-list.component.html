@@ -77,47 +77,22 @@
 
     <div class="list">
       <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
-        <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap="10px" fxFlex="100" fxFlexFill
-          fxLayoutAlign="space-between">
-          <div fxFlex.gt-xs="30" fxFlex.lt-sm="100">
+        <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between" fxLayoutGap="10px"
+          fxFlex="100" fxFlexFill>
+          <div fxFlex.gt-xs="30" fxFlex.lt-sm="100" *ngFor="let productGroup of productGroups">
             <mat-card class="card">
-              <img mat-card-image src="assets/image/logo.png" alt="'帳篷'">
+              <img mat-card-image [src]="productGroup.coverImage" alt="商品圖片">
               <mat-card-content>
                 <h4 fxFlex.gt-md="66" fxFlex.lt-lg="100" fxFlex.sm="66">戶外野營折疊全自動帳篷</h4>
                 <div fxFlex.gt-md="30" fxFlex.lt-lg="100" fxFlex.sm="33" class="cost-and-score">
                   <div fxLayoutWrap>
-                    <span class="cost">$1000/天</span>
-                    <p>中正區 <span class="score"><i class="material-icons star" matPrefix>star_rate</i>5</span></p>
-                  </div>
-                </div>
-              </mat-card-content>
-            </mat-card>
-          </div>
-
-          <div fxFlex.gt-xs="30" fxFlex.lt-sm="100">
-            <mat-card class="card">
-              <img mat-card-image src="assets/image/logo.png" alt="'帳篷'">
-              <mat-card-content>
-                <h4 fxFlex.gt-md="66" fxFlex.lt-lg="100" fxFlex.sm="66">戶外野營折疊全自動帳篷</h4>
-                <div fxFlex.gt-md="30" fxFlex.lt-lg="100" fxFlex.sm="33" class="cost-and-score">
-                  <div fxLayoutWrap>
-                    <span class="cost">$1000/天</span>
-                    <p>中正區 <span class="score"><i class="material-icons star" matPrefix>star_rate</i>5</span></p>
-                  </div>
-                </div>
-              </mat-card-content>
-            </mat-card>
-          </div>
-
-          <div fxFlex.gt-xs="30" fxFlex.lt-sm="100">
-            <mat-card class="card">
-              <img mat-card-image src="assets/image/logo.png" alt="'帳篷'">
-              <mat-card-content>
-                <h4 fxFlex.gt-md="66" fxFlex.lt-lg="100" fxFlex.sm="66">戶外野營折疊全自動帳篷</h4>
-                <div fxFlex.gt-md="33" fxFlex.lt-lg="100" fxFlex.sm="33" class="cost-and-score">
-                  <div>
-                    <span class="cost">$1000/天</span>
-                    <p>中正區 <span class="score"><i class="material-icons star" matPrefix>star_rate</i>5</span></p>
+                    <span class="cost">{{ productGroup.price }}</span>
+                    <p>
+                      {{ productGroup.city }}
+                      <span class="score">
+                        <i class="material-icons star" matPrefix>star_rate</i>5
+                      </span>
+                    </p>
                   </div>
                 </div>
               </mat-card-content>
@@ -125,10 +100,10 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="pagination">
-        <pagination-controls></pagination-controls>
-      </div>
+    <div class="pagination">
+      <pagination-controls></pagination-controls>
     </div>
   </div>
 

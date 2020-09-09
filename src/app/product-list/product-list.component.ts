@@ -9,7 +9,7 @@ import { HttpService } from '../services/http.service';
 
 import { ApiModel } from '../models/api-model';
 import { City, ProductGroupFilter, Type } from '../models/product-group-filter';
-import { Product } from '../models/product';
+import { ProductGroup } from '../models/product-group';
 
 @Component({
   selector: 'app-product-list',
@@ -20,6 +20,7 @@ export class ProductListComponent implements OnInit {
   form!: FormGroup;
   productTypes: Type[] = [];
   city!: City;
+  productGroups: ProductGroup[] = [];
 
   chipTypes: Type[] = [];
   visible = true;
@@ -39,6 +40,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCityData();
+    this.getProductGroupData();
 
     this.form = this.formBuilder.group({
       borrowStartDate: [null],
@@ -54,6 +56,13 @@ export class ProductListComponent implements OnInit {
       .subscribe((response: ApiModel<ProductGroupFilter>) => {
         this.productTypes = response.data.type;
         this.city = response.data.city;
+      });
+  }
+
+  getProductGroupData(params: string = ''): void {
+    this.httpService.getData<ProductGroup[]>(`/product-group?${params}`)
+      .subscribe((response: ApiModel<ProductGroup[]>) => {
+        this.productGroups = response.data;
       });
   }
 
@@ -109,10 +118,7 @@ export class ProductListComponent implements OnInit {
       params += `${key}=${value}&`;
     }
 
-    this.httpService.getData<Product>(`/product-group?${params}`)
-      .subscribe((response: ApiModel<Product>) => {
-        console.log(response);
-      });
+    this.getProductGroupData(params);
   }
 
 }
