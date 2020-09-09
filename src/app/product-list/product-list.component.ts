@@ -1,14 +1,15 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { FormControl } from '@angular/forms';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { ElementRef } from '@angular/core';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+
+import { HttpService } from '../services/http.service';
+
+import { ApiModel } from '../models/api-model';
+import { City, ProductGroupFilter, Type } from '../models/product-group-filter';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-product-list',
@@ -16,85 +17,102 @@ import { MatChipInputEvent } from '@angular/material/chips';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  searchForm!: FormGroup;
-  dist = new FormControl();
-  collection = [];
-  distList: string[] = ['松山區', '大安區', '古亭區', '雙園區', '龍山區', '城中區'];
+  form!: FormGroup;
+  productTypes: Type[] = [];
+  city!: City;
 
-  visible: boolean = true;
-  selectable: boolean = true;
-  removable: boolean = true;
-  addOnBlur: boolean = false;
+  chipTypes: Type[] = [];
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  separatorKeysCodes = [ENTER, COMMA];
-
-  CampingSuppliesCtrl = new FormControl();
-
-  filteredCampingSuppliess: Observable<any[]>;
-
-  CampingSuppliess: string[] = [];
-
-  allCampingSuppliess = [
-    '桌子',
-    '椅子',
-    '帳篷',
-  ];
-
-  @ViewChild('CampingSuppliesInput')
-  CampingSuppliesInput!: ElementRef;
+  @ViewChild('typeInput') typeInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete!: MatAutocomplete;
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
+    private httpService: HttpService,
   ) {
-    this.filteredCampingSuppliess = this.CampingSuppliesCtrl.valueChanges.pipe(
-      startWith(null),
-      map((CampingSupplies: string | null) => CampingSupplies ? this.filter(CampingSupplies) : this.allCampingSuppliess.slice()));
-  }
-
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our CampingSupplies
-    if ((value || '').trim()) {
-      this.CampingSuppliess.push(value.trim());
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    this.CampingSuppliesCtrl.setValue(null);
-  }
-
-  remove(CampingSupplies: any): void {
-    const index = this.CampingSuppliess.indexOf(CampingSupplies);
-
-    if (index >= 0) {
-      this.CampingSuppliess.splice(index, 1);
-    }
-  }
-
-  filter(name: string) {
-    return this.allCampingSuppliess.filter(CampingSupplies =>
-      CampingSupplies.toLowerCase().indexOf(name.toLowerCase()) === 0);
-  }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.CampingSuppliess.push(event.option.viewValue);
-    this.CampingSuppliesInput.nativeElement.value = '';
-    this.CampingSuppliesCtrl.setValue(null);
   }
 
   ngOnInit(): void {
-    this.searchForm = this.formBuilder.group({
-      startDate: [null, [Validators.required]],
-      endDate: [null, [Validators.required]],
+    this.getCityData();
+
+    this.form = this.formBuilder.group({
+      borrowStartDate: [null],
+      borrowEndDate: [null],
+      cityAreaName: [null],
+      typeArray: [[]],
+      priceRange: [null],
     });
   }
 
+  getCityData(): void {
+    this.httpService.getData<ProductGroupFilter>('/product-group/filter')
+      .subscribe((response: ApiModel<ProductGroupFilter>) => {
+        this.productTypes = response.data.type;
+        this.city = response.data.city;
+      });
+  }
+
+  addType(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    const findType = this.productTypes.find(item => item.name === value.trim());
+
+    if (findType) {
+      this.form.value.typeArray.push(findType.id);
+      this.chipTypes.push(findType);
+    }
+
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  removeType(type: Type): void {
+    const index = this.productTypes.indexOf(type);
+
+    if (index >= 0) {
+      this.form.value.typeArray.splice(index, 1);
+      this.chipTypes.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    const findType = this.productTypes.find(item => item.name === event.option.viewValue.trim());
+
+    if (findType) {
+      this.form.value.typeArray.push(findType.id);
+      this.chipTypes.push(findType);
+    }
+
+    this.typeInput.nativeElement.value = '';
+  }
+
+  onSubmit(): void {
+    let params = '';
+
+    for (let [key, value] of Object.entries(this.form.value)) {
+      if (!value || (Array.isArray(value) && value.length === 0)) {
+        continue;
+      }
+
+      if (key.endsWith('Date')) {
+        const date = new Date(value as Date);
+        value = Intl.DateTimeFormat('zh-TW').format(date);
+      }
+
+      params += `${key}=${value}&`;
+    }
+
+    this.httpService.getData<Product>(`/product-group?${params}`)
+      .subscribe((response: ApiModel<Product>) => {
+        console.log(response);
+      });
+  }
 
 }
-
