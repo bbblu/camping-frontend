@@ -1,0 +1,36 @@
+$colors: (
+  main: #c0dd6f,
+  font: #000000,
+  font-white: #ffffff,
+  danger: red
+);
+.formTitle {
+    color: #125a8c;
+}
+.search-form .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+}
+.card {
+    background: map-get($colors, main);
+    border-radius: 20px;
+    ::ng-deep .mat-card-image {
+        border-radius: 20px;
+        background: #fff;
+    }
+    .cost-and-score{
+        text-align:right;
+    }
+    .cost{
+        color:  map-get($colors, danger);
+    }
+    .score {
+        color:  map-get($colors, font-white);
+        .star {
+            font-size: inherit;
+        }
+    }
+}
+
+.pagination{
+    text-align: center;
+}

@@ -1,0 +1,139 @@
+<div class="holder" fxLayout="row">
+    <div class="leftBlock" fxFlex></div>
+    <div class="container" fxFlex="90">
+        <form [formGroup]="searchForm" class="search-form" fxLayout.gt-xs="row" fxLayout.lt-sm="column">
+            <div fxFlex="90">
+                <div fxLayout="column">
+                    <div  fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between">
+                        <mat-form-field fxFlex.gt-xs="25" fxFlex.lt-sm="100" appearance="fill"
+                            (click)="picker.opened = true">
+                            <mat-label>日期</mat-label>
+                            <mat-date-range-input [rangePicker]="picker">
+                                <input matStartDate placeholder="Start date" formControlName="startDate">
+                                <input matEndDate placeholder="End date" formControlName="endDate">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
+                        </mat-form-field>
+                        <mat-form-field fxFlex.gt-xs="25" fxFlex.lt-sm="100" appearance="fill">
+                            <mat-label>縣市</mat-label>
+                            <i class="material-icons matPrefix-icon" matPrefix>location_on</i>
+                            <mat-select>
+                                <mat-option value="taipei">台北</mat-option>
+                                <mat-option value="newTaipei">新北</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field fxFlex.gt-xs="25" fxFlex.lt-sm="100" appearance="fill">
+                            <mat-label>區</mat-label>
+                            <i class="material-icons matPrefix-icon" matPrefix>location_on</i>
+                            <mat-select [formControl]="dist" multiple>
+                                <mat-select-trigger>
+                                    {{dist.value ? dist.value[0] : ''}}
+                                    <span *ngIf="dist.value?.length > 1" class="example-additional-selection">
+                                        (+{{dist.value.length - 1}} {{dist.value?.length === 2 ? 'other' : 'others'}})
+                                    </span>
+                                </mat-select-trigger>
+                                <mat-option *ngFor="let topping of distList" [value]="topping">{{topping}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field fxFlex.gt-xs="25" fxFlex.lt-sm="100" appearance="fill">
+                            <mat-label>預算</mat-label>
+                            <i class="material-icons matPrefix-icon" matPrefix>local_atm</i>
+                            <mat-select>
+                                <mat-option value="taipei">0-2000</mat-option>
+                                <mat-option value="newTaipei">2000-4000</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field fxFlex.gt-xs="100" fxFlex.lt-sm="100" class="demo-chip-list" appearance="fill">
+                            <mat-chip-list #chipList>
+                                <mat-chip *ngFor="let CampingSupplies of CampingSuppliess" [selectable]="selectable"
+                                    [removable]="removable" (removed)="remove(CampingSupplies)">
+                                    {{CampingSupplies}}
+                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                </mat-chip>
+                                <input placeholder="New CampingSupplies..." #CampingSuppliesInput
+                                    [formControl]="CampingSuppliesCtrl" [matAutocomplete]="auto"
+                                    [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                    [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" />
+                            </mat-chip-list>
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                <mat-option *ngFor="let CampingSupplies of filteredCampingSuppliess | async"
+                                    [value]="CampingSupplies">
+                                    {{ CampingSupplies }}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+            </div>
+            <div fxFlex="10">
+                <button class="search-btn" mat-button type="submit" id="search">
+                    <i class="material-icons matPrefix-icon" matPrefix>search</i>
+                </button>
+            </div>
+
+        </form>
+        <div class="formTitle" fxLayout="row" fxLayoutAlign="left">
+            <h4>篩選結果</h4>
+        </div>
+        <div class="list">
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+                <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap="10px" fxFlex="100" fxFlexFill
+                    fxLayoutAlign="space-between">
+                    <div fxFlex.gt-xs="30" fxFlex.lt-sm="100">
+                        <mat-card class="card">
+                            <img mat-card-image src="assets/image/logo.png" alt="'帳篷'">
+                            <mat-card-content>
+                                <h4 fxFlex.gt-md="66" fxFlex.lt-lg="100" fxFlex.sm="66">戶外野營折疊全自動帳篷</h4>
+                                <div fxFlex.gt-md="30" fxFlex.lt-lg="100" fxFlex.sm="33" class="cost-and-score">
+                                    <div fxLayoutWrap>
+                                        <span class="cost">$1000/天</span>
+                                        <p>中正區 <span class="score"><i class="material-icons star"
+                                                    matPrefix>star_rate</i>5</span></p>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div fxFlex.gt-xs="30" fxFlex.lt-sm="100">
+                        <mat-card class="card">
+                            <img mat-card-image src="assets/image/logo.png" alt="'帳篷'">
+                            <mat-card-content>
+                                <h4 fxFlex.gt-md="66" fxFlex.lt-lg="100" fxFlex.sm="66">戶外野營折疊全自動帳篷</h4>
+                                <div fxFlex.gt-md="30" fxFlex.lt-lg="100" fxFlex.sm="33" class="cost-and-score">
+                                    <div fxLayoutWrap>
+                                        <span class="cost">$1000/天</span>
+                                        <p>中正區 <span class="score"><i class="material-icons star"
+                                                    matPrefix>star_rate</i>5</span></p>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div fxFlex.gt-xs="30" fxFlex.lt-sm="100">
+                        <mat-card class="card">
+                            <img mat-card-image src="assets/image/logo.png" alt="'帳篷'">
+                            <mat-card-content >
+                                <h4 fxFlex.gt-md="66" fxFlex.lt-lg="100" fxFlex.sm="66">戶外野營折疊全自動帳篷</h4>
+                                <div fxFlex.gt-md="33" fxFlex.lt-lg="100" fxFlex.sm="33" class="cost-and-score">
+                                    <div >
+                                        <span class="cost">$1000/天</span>
+                                        <p>中正區 <span class="score"><i class="material-icons star"
+                                                    matPrefix>star_rate</i>5</span></p>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+            <div class="pagination">
+                <pagination-controls></pagination-controls>
+            </div>
+        </div>
+    </div>
+    <div class="rightBlock" fxFlex></div>
+</div>
