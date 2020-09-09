@@ -13,8 +13,10 @@ import { FAQComponent } from './FAQ/FAQ.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'product-list', component: ProductListComponent },
+
+  { path: 'product', component: ProductListComponent },
   { path: 'product/:id', component: ProductDetailComponent },
+
   { path: 'user-info', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'FAQ', component: FAQComponent },
 ];

@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 
 import { ApiModel } from '../models/api-model';
 import { User } from '../models/user';
-import { ProductGroup } from '../models/product';
+import { ProductGroup } from '../models/product-group-detail';
 
 import { HttpService } from '../services/http.service';
 
