@@ -99,9 +99,8 @@ export class ProductCreateComponent implements OnInit {
       price: [null, [Validators.required]],
       bankAccount: [null, [Validators.required]],
       coverImage: [null, [Validators.required]],
-      productArray: this.formBuilder.array([
-      ]),
-    });
+      productArrays: this.formBuilder.array([])
+    }) ;
 
     this.goodsForm = this.formBuilder.group({
       imageArray: [null, [Validators.required]],
@@ -124,7 +123,7 @@ export class ProductCreateComponent implements OnInit {
       });
   }
 
-  doCreateProduct(): void {
+  /* doCreateProduct(): void {
     this.productArrays.push(new FormGroup({
       id: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
@@ -138,13 +137,44 @@ export class ProductCreateComponent implements OnInit {
       brokenCompensation: new FormControl(''),
       memo: new FormControl(''),
     }));
+  } */
+
+  doCreateProduct(): void {
+    this.updateGoodsForm();
+    this.pushToArray();
   }
 
+
   get productArrays(): FormArray {
-    return this.productForm.controls.productArray as FormArray;
+    return this.productForm.controls.productArrays as FormArray;
   }
 
   onSubmit(): void {
+  }
+
+  updateGoodsForm(): void {
+    this.goodsForm.patchValue({
+      imageArray: this.goodsImages,
+    });
+    console.log(this.goodsForm.value);
+  }
+
+  pushToArray(): void {
+    const productArrays = this.productForm.get('productArrays');
+    (productArrays as FormArray).push(this.formBuilder.group({
+      imageArray: this.goodsImages,
+      name: this.goodsForm.value.name,
+      count: this.goodsForm.value.count,
+      ProductSize: this.goodsForm.value.ProductSize,
+      useInformation: this.goodsForm.value.useInformation,
+      relatedLinkArray: this.goodsForm.value.relatedLinkArray,
+      brand: this.goodsForm.value.brand,
+      brokenCompensation: this.goodsForm.value.brokenCompensation,
+      memo: this.goodsForm.value.memo
+    }));
+  }
+
+  thatMeSeeSee(): void{
     console.log(this.productForm.value);
   }
 

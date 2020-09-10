@@ -73,8 +73,8 @@
         </div>
       </div>
       <!-- 已加入的物品 -->
-      <div class="alread-add" formArrayName="productArray" class="well well-lg">
-        <div *ngFor="let productArray of productArrays.controls; let i=index" [formGroupName]="i">
+      <div class="alread-add" formArrayName="productArrays" class="well well-lg">
+        <div *ngFor="let productArrays of productArrays.controls; let i=index" [formGroupName]="i">
           <mat-accordion>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
@@ -83,7 +83,7 @@
               <!-- 內容 -->
               <div fxLayout="row" fxLayoutAlign="space-between">
                 <div fxLayout="column" fxLayoutGap="1%">
-                  <div><i class="material-icons" matPrefix>tour</i>物品名稱: {{products.ProductName}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>物品名稱: {{productArrays.get('name')}}</div>
                   <div><i class="material-icons" matPrefix>tour</i>數量: {{products.ProductQuantity}}</div>
                   <div><i class="material-icons" matPrefix>tour</i>外觀狀況: {{products.ProductSize}}</div>
                   <div><i class="material-icons" matPrefix>tour</i>使用方式: {{products.ProductUse}}</div>
@@ -182,8 +182,8 @@
         </div>
       </form>
       <div class="sendOut" fxLayout="row" fxLayoutAlign="space-around center">
-        <button mat-button type="button">預覽</button>
-        <button mat-button type="button">上架</button>
+        <button mat-button type="button" (click)="thatMeSeeSee()">預覽</button>
+        <button mat-button type="submit">上架</button>
       </div>
     </form>
   </div>
