@@ -1,16 +1,15 @@
 <div class="holder" fxLayout="row">
   <div class="leftBlock" fxFlex></div>
-  <div class="container" fxFlex="40" fxFlex.lt-md="80" fxFlex.gt-lg="20">
+  <div class="container" fxFlex="40" fxFlex.lt-md="60" fxFlex.lt-sm="80" fxFlex.gt-lg="20">
     <div class="form-title" fxLayout="row" fxLayoutAlign="center">
       <img src="assets/image/logo.png" class="logo">
       <p>借借露</p>
     </div>
-
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
       <div class="inputStyle" fxLayout="column" fxLayoutGap="0%" fxFlexFill>
         <mat-form-field floatLabel="never" appearance="outline">
           <input matInput required type="text" placeholder="帳號" formControlName="account">
-          <i class="material-icons" matSuffix>person</i>
+          <i class="material-icons matPrefix-icon" matPrefix>person</i>
           <mat-error *ngIf="userForm.controls['account'].hasError('required')">
             請輸入你的帳號！！！
           </mat-error>
@@ -22,6 +21,7 @@
         <mat-form-field floatLabel="never" appearance="outline">
           <input matInput required [type]="isVisibility ? 'password' : 'text'" placeholder="密碼"
             formControlName="password">
+          <i class="material-icons matPrefix-icon" matPrefix>lock</i>
           <i class="material-icons password_visibility" matSuffix
             (click)="isVisibility = !isVisibility">{{isVisibility ? 'visibility_off' : 'visibility'}}</i>
           <mat-error *ngIf="userForm.controls['password'].hasError('required')">
@@ -43,6 +43,5 @@
       </div>
     </form>
   </div>
-
   <div class="rightBlock" fxFlex></div>
 </div>
