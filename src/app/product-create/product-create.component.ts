@@ -22,6 +22,23 @@ export class ProductCreateComponent implements OnInit {
   productTypes: Type[] = [];
   city!: City;
   croppedImages: string[] = [];
+  order!: 0;
+  name: string[] = [];
+  gooodName = this.name[this.order];
+  count: string[] = [];
+  gooodCount = this.count[this.order];
+  productSize: string[] = [];
+  gooodProductSize = this.productSize[this.order];
+  useInformation: string[] = [];
+  gooodUseInformation = this.useInformation[this.order];
+  relatedLinkArray: string[] = [];
+  gooodRelatedLinkArray = this.relatedLinkArray[this.order];
+  brand: string[] = [];
+  gooodBrand = this.brand[this.order];
+  brokenCompensation: string[] = [];
+  gooodBrokenCompensation = this.brokenCompensation[this.order];
+  memo: string[] = [];
+  gooodMemo = this.memo[this.order];
 
   /*已新增商品之圖片陣列*/
   imageObject: Array<object> = [{
@@ -100,13 +117,13 @@ export class ProductCreateComponent implements OnInit {
       bankAccount: [null, [Validators.required]],
       coverImage: [null, [Validators.required]],
       productArrays: this.formBuilder.array([])
-    }) ;
+    });
 
     this.goodsForm = this.formBuilder.group({
       imageArray: [null, [Validators.required]],
       name: [null, [Validators.required]],
       count: [null, [Validators.required]],
-      ProductSize: [null, [Validators.required]],
+      productSize: [null, [Validators.required]],
       useInformation: [null, []],
       relatedLinkArray: [null, []],
       brand: [null, []],
@@ -172,9 +189,17 @@ export class ProductCreateComponent implements OnInit {
       brokenCompensation: this.goodsForm.value.brokenCompensation,
       memo: this.goodsForm.value.memo
     }));
+    this.name.push(this.goodsForm.value.name);
+    this.count.push(this.goodsForm.value.count);
+    this.ProductSize.push(this.goodsForm.value.ProductSize);
+    this.useInformation.push(this.goodsForm.value.useInformation);
+    this.relatedLinkArray.push(this.goodsForm.value.relatedLinkArray);
+    this.brand.push(this.goodsForm.value.brand);
+    this.brokenCompensation.push(this.goodsForm.value.brokenCompensation);
+    this.memo.push(this.goodsForm.value.memo);
   }
 
-  thatMeSeeSee(): void{
+  thatMeSeeSee(): void {
     console.log(this.productForm.value);
   }
 
