@@ -16,42 +16,104 @@
         <p>This is the primary content of the panel.</p>
       </mat-expansion-panel>
 
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Self aware panel
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
-      </mat-expansion-panel>
+      <div>
+        <h3>帳號相關</h3>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              忘記密碼怎麼辦?
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>如果忘記密碼，可以至登入畫面點選「忘記密碼」，系統會發送密碼重設信件至註冊信箱，請至註冊信箱收取信件後，利用信件內的連結進行密碼重設，並在以後接用新密碼進行登入。</p>
+        </mat-expansion-panel>
 
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Self aware panel
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
-      </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              如何更改個人資料?
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>若要更改個人資料，請至「個人資料」頁面當中，選取「編輯個人資料」。輸入完成後進行密碼驗證即可儲存您的變更的內容。</p>
+        </mat-expansion-panel>
 
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Self aware panel
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
-      </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              我的哪些資訊會被租借/出借方得知?
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>租借/出租方僅會得知您的聯絡方式、暱稱以及評價，剩下的資訊皆不會公開。</p>
+        </mat-expansion-panel>
+      </div>
 
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Self aware panel
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
-      </mat-expansion-panel>
+      <div>
+        <h3>租借相關</h3>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              物品毀損該怎麼辦?
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>借借露在租借時便會預先扣除一筆保證金，當物品出現毀損時.....</p>
+        </mat-expansion-panel>
 
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              我可以取消租借嗎?
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              可以提前/延後歸還物品嗎?
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              借借露提供哪些付款方式?
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>目前僅提供信用卡的付款方式</p>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              商品內容有誤該怎麼辦?
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p></p>
+        </mat-expansion-panel>
+      </div>
+
+      <div>
+        <h3>款項相關</h3>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              損毀賠償該怎麼繳納/收取?
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>借借露在租借時便會預先扣除一筆保證金，當租借方不慎使物品出現毀損，並已確定是租借方之疏失，此筆保證金將會在交易結束後一併匯入出租方的帳戶。</p>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              我何時可以收到款項?
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>在雙方皆確認完成交易，且沒有損毀或者其他問題後，借借露會將款項匯入您預先所填寫的帳戶並通知您，依據不同銀行的效率，在一定的工作天後您將會收到租借款項。</p>
+        </mat-expansion-panel>
+      </div>
     </mat-accordion>
   </div>
 </div>
