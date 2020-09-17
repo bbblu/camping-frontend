@@ -83,7 +83,7 @@
               <!-- 內容 -->
               <div fxLayout="row" fxLayoutAlign="space-between">
                 <div fxLayout="column" fxLayoutGap="1%">
-                  <div><i class="material-icons" matPrefix>tour</i>物品名稱: {{productArrays.get('name')}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>物品名稱: {{gooodName}}</div>
                   <div><i class="material-icons" matPrefix>tour</i>數量: {{products.ProductQuantity}}</div>
                   <div><i class="material-icons" matPrefix>tour</i>外觀狀況: {{products.ProductSize}}</div>
                   <div><i class="material-icons" matPrefix>tour</i>使用方式: {{products.ProductUse}}</div>
@@ -130,7 +130,7 @@
               <mat-form-field [hideRequiredMarker]="true">
                 <i class="material-icons" matPrefix>tour</i>
                 <input matInput required type="text" placeholder="外觀狀況" formControlName="productSize">
-                <mat-error *ngIf="goodsForm.controls['ProductSize'].hasError('required')">
+                <mat-error *ngIf="goodsForm.controls['productSize'].hasError('required')">
                   此為必填
                 </mat-error>
               </mat-form-field>

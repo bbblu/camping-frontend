@@ -28,7 +28,7 @@ export class ProductCreateComponent implements OnInit {
   count: string[] = [];
   gooodCount = this.count[this.order];
   productSize: string[] = [];
-  gooodProductSize = this.productSize[this.order];
+  gooodproductSize = this.productSize[this.order];
   useInformation: string[] = [];
   gooodUseInformation = this.useInformation[this.order];
   relatedLinkArray: string[] = [];
@@ -147,7 +147,7 @@ export class ProductCreateComponent implements OnInit {
       imageArray: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
       count: new FormControl('', Validators.required),
-      ProductSize: new FormControl('', Validators.required),
+      productSize: new FormControl('', Validators.required),
       useInformation: new FormControl(''),
       relatedLinkArray: new FormControl(''),
       brand: new FormControl(''),
@@ -182,7 +182,7 @@ export class ProductCreateComponent implements OnInit {
       imageArray: this.goodsImages,
       name: this.goodsForm.value.name,
       count: this.goodsForm.value.count,
-      ProductSize: this.goodsForm.value.ProductSize,
+      productSize: this.goodsForm.value.productSize,
       useInformation: this.goodsForm.value.useInformation,
       relatedLinkArray: this.goodsForm.value.relatedLinkArray,
       brand: this.goodsForm.value.brand,
@@ -191,7 +191,7 @@ export class ProductCreateComponent implements OnInit {
     }));
     this.name.push(this.goodsForm.value.name);
     this.count.push(this.goodsForm.value.count);
-    this.ProductSize.push(this.goodsForm.value.ProductSize);
+    this.productSize.push(this.goodsForm.value.productSize);
     this.useInformation.push(this.goodsForm.value.useInformation);
     this.relatedLinkArray.push(this.goodsForm.value.relatedLinkArray);
     this.brand.push(this.goodsForm.value.brand);
