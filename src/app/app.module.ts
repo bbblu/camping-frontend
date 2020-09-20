@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ShareModule } from './module/share.module';
@@ -21,6 +23,9 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { UserComponent } from './user/user.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
+import { ProductCreateComponent } from './product-create/product-create.component';
+import { ImageCroppedDialogComponent } from './image-cropped-dialog/image-cropped-dialog.component';
+
 
 @NgModule({
    declarations: [
@@ -35,6 +40,8 @@ import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
       FAQDialogComponent,
       ProductListComponent,
       BorrowDialogComponent,
+      ProductCreateComponent,
+      ImageCroppedDialogComponent,
    ],
    imports: [
       BrowserModule,
@@ -43,6 +50,8 @@ import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
       HttpClientModule,
       FlexLayoutModule,
       AppRoutingModule,
+      NgImageSliderModule,
+      ImageCropperModule,
       ShareModule,
       NgxPaginationModule,
 
