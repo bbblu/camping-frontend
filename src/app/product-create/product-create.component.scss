@@ -1,0 +1,31 @@
+/* .transactionInformation{
+    align-items: center;
+} */
+
+.product-input{
+    width: 60%;
+}
+
+.goods-information{
+    border: solid yellow 1px;
+    padding: 2%;
+}
+
+.goods{
+    max-width: 50%;
+    min-width: 50%;
+}
+
+.mat-expansion-panel:not([class*='mat-elevation-z']) {
+    box-shadow: none;
+    border: solid yellow 1px;
+}
+
+.goods-information mat-form-field{
+    width: 90%;
+}
+
+.image-slider {
+  width: 300px;
+  height: 200px;
+}
