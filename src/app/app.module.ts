@@ -10,15 +10,19 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ShareModule } from './module/share.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { FAQComponent } from './FAQ/FAQ.component';
 import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { UserComponent } from './user/user.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ImageCroppedDialogComponent } from './image-cropped-dialog/image-cropped-dialog.component';
 
@@ -29,10 +33,13 @@ import { ImageCroppedDialogComponent } from './image-cropped-dialog/image-croppe
       TopBarComponent,
       LoginComponent,
       RegisterComponent,
-      NavbarComponent,
+    ProductDetailComponent,
+    UserComponent,
       UserInfoComponent,
       FAQComponent,
       FAQDialogComponent,
+      ProductListComponent,
+      BorrowDialogComponent,
       ProductCreateComponent,
       ImageCroppedDialogComponent,
    ],
@@ -46,6 +53,7 @@ import { ImageCroppedDialogComponent } from './image-cropped-dialog/image-croppe
       NgImageSliderModule,
       ImageCropperModule,
       ShareModule,
+      NgxPaginationModule,
 
       JwtModule.forRoot({
         config: {
@@ -55,9 +63,6 @@ import { ImageCroppedDialogComponent } from './image-cropped-dialog/image-croppe
           allowedDomains: ['211.75.1.201:50004']
         }
       })
-   ],
-   exports: [
-      ReactiveFormsModule
    ], providers: [],
    bootstrap: [
       AppComponent

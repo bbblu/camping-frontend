@@ -17,6 +17,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatOptionModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -42,6 +47,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDialogModule,
     MatRadioModule,
     MatSnackBarModule,
+    MatTabsModule,
+    MatStepperModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+    MatCardModule,
   ]
 })
 export class ShareModule { }
