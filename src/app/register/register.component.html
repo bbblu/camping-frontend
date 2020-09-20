@@ -83,18 +83,21 @@
             </mat-form-field>
             <div class="mat-field">
               <div class="radioButton" fxLayoutAlign="left">
-                <i class="material-icons radio-button-icon" matPrefix>sentiment_very_satisfied</i>
+                <i class="material-icons radio-button-icon" matPrefix>wc</i>
                 <label class="radio-text">性別</label>
                 <mat-radio-group aria-label="Select an option" formControlName="gender">
                   <mat-radio-button value="0">男</mat-radio-button>
                   <mat-radio-button value="1">女</mat-radio-button>
                   <mat-radio-button value="2">未提供</mat-radio-button>
                 </mat-radio-group>
-                <mat-error *ngIf="registerForm.controls['gender'].hasError('required')" class="gender-error">
-                  請選擇您的性別
-                </mat-error>
               </div>
             </div>
+            <div class="mat-form-field-error" >
+              <mat-error *ngIf="registerForm.controls['gender'].hasError('required')" class="gender-error">
+                請選擇您的性別
+              </mat-error>
+            </div>
+
             <mat-form-field floatLabel="never" appearance="outline" (click)="picker.opened = true">
               <input matInput class="birthday" [matDatepicker]="picker" placeholder="生日" formControlName="birthday">
               <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
@@ -104,7 +107,7 @@
               </mat-error>
             </mat-form-field>
             <mat-form-field floatLabel="never" appearance="outline">
-              <i class="material-icons matPrefix-icon" matPrefix>sentiment_very_satisfied</i>
+              <i class="material-icons matPrefix-icon" matPrefix>face</i>
               <mat-select formControlName="experience" placeholder="經驗">
                 <mat-option *ngFor="let experience of experiences" [value]="experience.id">
                   {{ experience.display }}
@@ -114,9 +117,9 @@
           </div>
         </div>
       </div>
-      <div class="signUpAndLogin" fxLayout="row" fxLayoutAlign="space-around center">
-        <button class="login_btn" mat-button type="submit" id="login">已有帳號，登入</button>
-        <button class="register_btn" mat-button type="submit" id="signup" [disabled]="!registerForm.valid">註冊</button>
+      <div class="signUpAndLogin" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around">
+        <button mat-button fxFlex="40" fxFlex.lt-sm="100" class="login_btn" mat-button type="submit" id="login">已有帳號，登入</button>
+        <button mat-button fxFlex="40" fxFlex.lt-sm="100" class="register_btn" mat-button type="submit" id="signup" [disabled]="!registerForm.valid">註冊</button>
       </div>
     </form>
   </div>

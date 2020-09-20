@@ -1,26 +1,13 @@
-$colors: (
-    main: #c0dd6f,
-    font: #000000,
-    font-white: #ffffff,
-    danger: red,
-    background-white: #ffffff,
-    gray: #757575,
-    blue: #2699fb,
-    yello: #fcd947,
-);
-* {
-    padding: 0;
-    margin: 0;
-}
+@import "../color.scss";
 
 .container {
     text-align: center;
     font-family: Microsoft JhengHei;
     color: map-get($colors, main);
-    width: 34%;
     border-style: solid;
     border-color: map-get($colors, main);
     border-radius: 20px;
+    margin: 5% 0;
 }
 /*icon*/
 
@@ -40,9 +27,9 @@ $colors: (
         margin: 0.9rem 0.5rem 0.5rem 0;
     }
     /*subtitle*/
-    p.subtitle{
+    p.subtitle {
         text-align: left;
-        margin:15px 25px;
+        margin: 15px 25px;
         color: map-get($colors, gray);
     }
     /* radio button */
@@ -50,7 +37,8 @@ $colors: (
         padding: 5px 0;
         border: 2px solid map-get($colors, yello);
         border-radius: 30px;
-        margin: 0px 20px 20px 20px;
+        margin: 0px 10px;
+        color: map-get($colors, gray);
         .radioButton {
             margin: auto 12px;
             padding: 0.4rem 0;
@@ -59,7 +47,7 @@ $colors: (
                 color: map-get($colors, blue);
             }
             .mat-radio-button ~ .mat-radio-button {
-                margin-left: 16px;
+                margin-left: 8px;
             }
             .radio-text {
                 font-size: 16px;
@@ -96,11 +84,17 @@ $colors: (
             }
         }
     }
-    .gender-error {
-        position: absolute;
-        margin-top: 40px;
-        font-size: x-small;
+    .mat-form-field-error {
+        text-align: left;
+        box-sizing: border-box;
+        padding: 0 1em;
+        font-size: 75%;
+        margin: 0px 10px;
+        .gender-error {
+            margin-top: 0.6666666667em;
+        }
     }
+    /*birthday*/
     ::ng-deep {
         .mat-form-field-prefix .mat-icon-button {
             width: 24px;
@@ -114,15 +108,15 @@ $colors: (
                 height: 24px;
             }
         }
-        .mat-select-arrow{
+        .mat-select-arrow {
             margin-top: 10px;
         }
     }
 }
 /* mat-form-field  */
 ::ng-deep mat-form-field.mat-form-field {
-    padding: 0 20px;
-    color:map-get($colors, font);
+    padding: 0 10px;
+    color: map-get($colors, font);
     ::placeholder {
         font-size: 1rem;
         color: map-get($colors, gray);
@@ -155,26 +149,28 @@ $colors: (
 }
 
 .signUpAndLogin {
-    padding: 5% 0px;
+    padding: 1% 20px 10% 20px;
     .register_btn {
-        font-size: 70%;
-        width: 35%;
+        margin: 2% 0;
+        padding:8px 0;
         color: map-get($colors, font-white);
+        border-color: map-get($colors, main);
         background-color: map-get($colors, main);
         font-weight: bold;
         border-style: solid;
-        border-radius: 20px;
+        border-radius: 30px;
+        box-sizing: border-box;
     }
     .login_btn {
-        font-size: 70%;
-        width: 35%;
-        box-sizing: border-box;
+        margin: 2% 0;
+        padding:8px 0;
         color: map-get($colors, main);
         font-weight: bold;
         border-style: solid;
-        border-radius: 20px;
+        border-radius: 30px;
         border-color: map-get($colors, main);
         background-color: map-get($colors, background-white);
+        box-sizing: border-box;
     }
 }
 

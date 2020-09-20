@@ -1,6 +1,6 @@
 <div class="holder" fxLayout="row">
   <div class="leftBlock" fxFlex></div>
-  <div class="container" fxFlex="40" fxFlex.lt-md="60" fxFlex.lt-sm="80" fxFlex.gt-lg="20">
+  <div class="container" fxFlex="40" fxFlex.lt-md="60" fxFlex.lt-sm="80">
     <div class="form-title" fxLayout="row" fxLayoutAlign="center">
       <img src="assets/image/logo.png" class="logo">
       <p>借借露</p>
@@ -37,9 +37,9 @@
         <mat-checkbox class="rememberCheckbox" (change)="changeRememberMe($event)">記住我</mat-checkbox>
       </div>
 
-      <div class="signUpAndLogin" fxLayout="row" fxLayoutAlign="space-around">
-        <button mat-button type="button" class="signup-btn" id="signup" [routerLink]="['/register']">註冊</button>
-        <button mat-button type="submit" class="login-btn" id="login" [disabled]="!userForm.valid">登入</button>
+      <div class="signUpAndLogin" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around">
+        <button mat-button fxFlex="40" fxFlex.lt-sm="100" type="button" class="signup-btn" id="signup" [routerLink]="['/register']">註冊</button>
+        <button mat-button fxFlex="40" fxFlex.lt-sm="100" type="submit" class="login-btn" id="login" [disabled]="!userForm.valid">登入</button>
       </div>
     </form>
   </div>

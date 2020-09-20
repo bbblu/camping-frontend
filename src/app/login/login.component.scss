@@ -1,28 +1,20 @@
-$colors: (
-  main: #c0dd6f,
-  font: #000000,
-  font-white: #ffffff,
-  danger: red,
-  background-white:#ffffff,
-);
-* {
-    padding: 0;
-    margin: 0;
-}
+@import '../color.scss' ;
+
 .container {
     text-align: center;
     font-family: Microsoft JhengHei;
     color:  map-get($colors, main);
-    width: 34%;
     border-style: solid;
     border-color:  map-get($colors, main);
     border-radius: 20px;
+    margin: 5% 0;
 }
 /* title & image logo */
 .form-title {
     margin: 5% 0px;
     p {
-        margin: auto 0;
+        margin: auto 20px;
+        font-size:25px;
     }
     .logo {
         height: 50px;
@@ -56,10 +48,10 @@ $colors: (
     }
     /* signup & login button*/
     .signUpAndLogin {
-        padding: 5% 0px 20% 0px;
+        padding: 1% 0px 10% 0px;
         .signup-btn {
+            margin:2% 0;
             font-size: 70%;
-            width: 35%;
             color: map-get($colors, main);
             font-weight: bold;
             border-style: solid;
@@ -70,13 +62,15 @@ $colors: (
         }
 
         .login-btn {
+            margin:2% 0;
             font-size: 70%;
-            width: 35%;
             color: map-get($colors, font-white);
+            border-color: map-get($colors, main);
             background-color: map-get($colors, main);
             font-weight: bold;
             border-style: solid;
             border-radius: 20px;
+            box-sizing: border-box;
         }
     }
 }
