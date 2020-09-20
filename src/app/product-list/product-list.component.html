@@ -3,23 +3,20 @@
 
   <div class="container" fxFlex="90">
     <form class="search-form" [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout.gt-xs="row" fxLayout.lt-sm="column">
-      <div fxFlex="90">
-        <div fxLayout="column">
+      <div fxFlex="90"  class="inputStyle" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0%" fxFlexFill>
+        <div fxFlex="100">
           <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between">
-            <mat-form-field appearance="fill" fxFlex.gt-xs="33" fxFlex.lt-sm="100" (click)="picker.opened=true">
-              <mat-label>日期</mat-label>
-              <mat-date-range-input [rangePicker]="picker">
+            <mat-form-field floatLabel="never" appearance="fill" fxFlex.gt-xs="37" fxFlex.lt-sm="100" (click)="picker.opened=true">
+              <mat-date-range-input [rangePicker]="picker" placeholder="日期">
                 <input matStartDate placeholder="Start date" formControlName="borrowStartDate">
                 <input matEndDate placeholder="End date" formControlName="borrowEndDate">
               </mat-date-range-input>
               <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
               <mat-date-range-picker #picker></mat-date-range-picker>
             </mat-form-field>
-
-            <mat-form-field appearance="fill" fxFlex.gt-xs="33" fxFlex.lt-sm="100">
-              <mat-label>地區</mat-label>
+            <mat-form-field floatLabel="never" appearance="fill" fxFlex.gt-xs="33" fxFlex.lt-sm="100">
               <i class="material-icons matPrefix-icon" matPrefix>location_on</i>
-              <mat-select formControlName="cityAreaName">
+              <mat-select formControlName="cityAreaName" placeholder="地區">
                 <mat-optgroup *ngFor="let cityName of city.nameArray; let cityIndex = index" [label]="cityName">
                   <mat-option *ngFor="let areaName of city.areaNameArray[cityIndex]" [value]="areaName">
                     {{areaName}}
@@ -27,19 +24,16 @@
                 </mat-optgroup>
               </mat-select>
             </mat-form-field>
-
-            <mat-form-field appearance="fill" fxFlex.gt-xs="33" fxFlex.lt-sm="100">
-              <mat-label>預算</mat-label>
+            <mat-form-field floatLabel="never" appearance="fill" fxFlex.gt-xs="30" fxFlex.lt-sm="100">
               <i class="material-icons matPrefix-icon" matPrefix>local_atm</i>
-              <mat-select formControlName="priceRange">
+              <mat-select formControlName="priceRange" placeholder="預算">
                 <mat-option value="0">0 ~ 2,000</mat-option>
                 <mat-option value="1">2,001 ~ 4,000</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
-
           <div>
-            <mat-form-field class="demo-chip-list" appearance="fill" fxFlex.gt-xs="100" fxFlex.lt-sm="100">
+            <mat-form-field floatLabel="never" class="demo-chip-list" appearance="fill" fxFlex.gt-xs="100" fxFlex.lt-sm="100">
               <mat-chip-list #chipList>
                 <mat-chip *ngFor="let type of chipTypes" [selectable]="selectable"
                           [removable]="removable" (removed)="removeType(type)">
@@ -64,9 +58,9 @@
         </div>
       </div>
 
-      <div fxFlex="10">
-        <button class="search-btn" mat-button type="submit" id="search">
-          <i class="material-icons matPrefix-icon" matPrefix>search</i>
+      <div fxFlex="10" fxFlex.lt-sm="100" class="search" fxLayoutAlign="center">
+        <button mat-button type="submit" id="search">
+          <i class="material-icons">search</i>
         </button>
       </div>
     </form>
@@ -82,7 +76,9 @@
           <div fxFlex.gt-xs="30" fxFlex.lt-sm="100"
             *ngFor="let productGroup of productGroups | paginate: { itemsPerPage: 10, currentPage: page }">
             <mat-card class="card">
-              <img mat-card-image [src]="productGroup.coverImage" alt="商品圖片">
+              <div class="card-image">
+                <img mat-card-image [src]="productGroup.coverImage" alt="商品圖片">
+              </div>
               <mat-card-content>
                 <h4 fxFlex.gt-md="66" fxFlex.lt-lg="100" fxFlex.sm="66">戶外野營折疊全自動帳篷</h4>
                 <div fxFlex.gt-md="30" fxFlex.lt-lg="100" fxFlex.sm="33" class="cost-and-score">
