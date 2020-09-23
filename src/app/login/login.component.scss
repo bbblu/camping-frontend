@@ -1,21 +1,20 @@
-* {
-    padding: 0;
-    margin: 0;
-}
+@import '../color.scss' ;
+
 .container {
     text-align: center;
     font-family: Microsoft JhengHei;
-    color: #c0dd6f;
-    width: 34%;
+    color:  map-get($colors, main);
     border-style: solid;
-    border-color: #c0dd6f;
+    border-color:  map-get($colors, main);
     border-radius: 20px;
+    margin: 5% 0;
 }
 /* title & image logo */
 .form-title {
-    margin: 1% 0px 3% 0px;
+    margin: 5% 0px;
     p {
-        margin: auto 0;
+        margin: auto 20px;
+        font-size:25px;
     }
     .logo {
         height: 50px;
@@ -24,7 +23,7 @@
 }
 /* user form */
 .user-form {
-    padding: 0 20px;
+    padding: 0 10%;
 
     /* 記住我的checkbox */
     .flex-RememberMe {
@@ -39,35 +38,39 @@
         padding-left: 15px;
     }
     ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
-        background-color: #c0dd6f;
+        background-color: map-get($colors, main);
     }
     .password_visibility {
         cursor: pointer;
     }
-
+    .matPrefix-icon {
+        margin: 0.9rem 0.5rem 0.5rem 0;
+    }
     /* signup & login button*/
     .signUpAndLogin {
-        padding: 2% 0px 4% 0px;
+        padding: 1% 0px 10% 0px;
         .signup-btn {
+            margin:2% 0;
             font-size: 70%;
-            width: 35%;
-            color: #c0dd6f;
+            color: map-get($colors, main);
             font-weight: bold;
             border-style: solid;
             border-radius: 20px;
-            border-color: #c0dd6f;
-            background-color: #fff;
+            border-color: map-get($colors, main);
+            background-color: map-get($colors, background-white);
             box-sizing: border-box;
         }
 
         .login-btn {
+            margin:2% 0;
             font-size: 70%;
-            width: 35%;
-            color: #fff;
-            background-color: #c0dd6f;
+            color: map-get($colors, font-white);
+            border-color: map-get($colors, main);
+            background-color: map-get($colors, main);
             font-weight: bold;
             border-style: solid;
             border-radius: 20px;
+            box-sizing: border-box;
         }
     }
 }
@@ -80,11 +83,11 @@
         .mat-form-field-flex {
             .mat-form-field-infix {
                 margin: auto 0;
-                padding: 1rem 0 0.7rem 0;
+                padding: 1.4rem 0 1.1rem 0;
                 border: 0;
             }
             .mat-form-field-outline {
-                border: 2px solid #c0dd6f;
+                border: 2px solid map-get($colors, main);
                 border-radius: 30pt;
             }
             .mat-form-field-outline-start,
@@ -94,6 +97,9 @@
             }
             .mat-form-field-suffix {
                 margin: auto 0;
+            }
+            input.mat-input-element{
+                color:map-get($colors, font);
             }
         }
     }

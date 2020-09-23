@@ -1,10 +1,9 @@
 <div class="holder" fxLayout="row">
   <div class="leftBlock" fxFlex></div>
-  <div class="container" fxFlex="90">
+  <div class="container" fxFlex="80">
     <div class="formTitle" fxLayout="row" fxLayoutAlign="center">
       <h3>借借露註冊</h3>
     </div>
-
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
       <div class="inputStyle" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0%" fxFlexFill>
         <div fxFlex="50">
@@ -16,7 +15,6 @@
                 請輸入您的帳號
               </mat-error>
             </mat-form-field>
-
             <mat-form-field floatLabel="never" appearance="outline" fxFlex="100">
               <input matInput required [type]="isPasswordHide ? 'password' : 'text'" placeholder="密碼"
                 formControlName="password">
@@ -27,7 +25,6 @@
                 請輸入您的密碼
               </mat-error>
             </mat-form-field>
-
             <mat-form-field floatLabel="never" appearance="outline" fxFlex="100">
               <input matInput required [type]="isConfimPasswordHide ? 'password' : 'text'" placeholder="確認密碼"
                 formControlName="confirmPassword">
@@ -38,10 +35,9 @@
                 請再次輸入您的密碼
               </mat-error>
             </mat-form-field>
-
             <!-- 聯絡方式 -->
             <div fxLayout="column">
-              <p class="">填寫聯絡方式</p>
+              <p class="subtitle">填寫聯絡方式</p>
               <mat-form-field floatLabel="never" appearance="outline" fxFlex="100">
                 <input matInput required placeholder="電子郵件" formControlName="email">
                 <i class="material-icons matPrefix-icon" matPrefix>email</i>
@@ -63,7 +59,7 @@
 
         <div fxFlex="50">
           <div fxLayout="column">
-            <p>填寫基本資料</p>
+            <p class="subtitle">填寫基本資料</p>
             <mat-form-field floatLabel="never" appearance="outline">
               <input matInput required type="text" placeholder="姓氏" formControlName="lastName">
               <i class="material-icons matPrefix-icon" matPrefix>person</i>
@@ -71,7 +67,6 @@
                 請輸入您的姓氏
               </mat-error>
             </mat-form-field>
-
             <mat-form-field floatLabel="never" appearance="outline">
               <input matInput required type="text" placeholder="名字" formControlName="firstName">
               <i class="material-icons matPrefix-icon" matPrefix>person</i>
@@ -79,7 +74,6 @@
                 請輸入您的名字
               </mat-error>
             </mat-form-field>
-
             <mat-form-field floatLabel="never" appearance="outline">
               <input matInput required type="text" placeholder="暱稱" formControlName="nickName">
               <i class="material-icons matPrefix-icon" matPrefix>sentiment_very_satisfied</i>
@@ -87,34 +81,34 @@
                 請輸入您的暱稱
               </mat-error>
             </mat-form-field>
-
             <div class="mat-field">
               <div class="radioButton" fxLayoutAlign="left">
-                <i class="material-icons radio-button-icon" matPrefix>sentiment_very_satisfied</i>
+                <i class="material-icons radio-button-icon" matPrefix>wc</i>
                 <label class="radio-text">性別</label>
                 <mat-radio-group aria-label="Select an option" formControlName="gender">
                   <mat-radio-button value="0">男</mat-radio-button>
                   <mat-radio-button value="1">女</mat-radio-button>
                   <mat-radio-button value="2">未提供</mat-radio-button>
                 </mat-radio-group>
-                <mat-error *ngIf="registerForm.controls['gender'].hasError('required')">
-                  請選擇您的性別
-                </mat-error>
               </div>
             </div>
+            <div class="mat-form-field-error" >
+              <mat-error *ngIf="registerForm.controls['gender'].hasError('required')" class="gender-error">
+                請選擇您的性別
+              </mat-error>
+            </div>
 
-            <mat-form-field floatLabel="never" appearance="outline">
-              <input matInput [matDatepicker]="picker" placeholder="生日" formControlName="birthday">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+            <mat-form-field floatLabel="never" appearance="outline" (click)="picker.opened = true">
+              <input matInput class="birthday" [matDatepicker]="picker" placeholder="生日" formControlName="birthday">
+              <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker disabled="false"></mat-datepicker>
               <mat-error *ngIf="registerForm.controls['birthday'].hasError('required')">
                 請選擇您的生日
               </mat-error>
             </mat-form-field>
-
             <mat-form-field floatLabel="never" appearance="outline">
-              <mat-label>Experience</mat-label>
-              <mat-select formControlName="experience">
+              <i class="material-icons matPrefix-icon" matPrefix>face</i>
+              <mat-select formControlName="experience" placeholder="經驗">
                 <mat-option *ngFor="let experience of experiences" [value]="experience.id">
                   {{ experience.display }}
                 </mat-option>
@@ -123,10 +117,9 @@
           </div>
         </div>
       </div>
-
-      <div class="signUpAndLogin" fxLayout="row" fxLayoutAlign="space-around center">
-        <button class="login_btn" mat-button type="submit" id="login">已有帳號，登入</button>
-        <button class="register_btn" mat-button type="submit" id="signup" [disabled]="!registerForm.valid">註冊</button>
+      <div class="signUpAndLogin" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around">
+        <button mat-button fxFlex="40" fxFlex.lt-sm="100" class="login_btn" mat-button type="submit" id="login">已有帳號，登入</button>
+        <button mat-button fxFlex="40" fxFlex.lt-sm="100" class="register_btn" mat-button type="submit" id="signup" [disabled]="!registerForm.valid">註冊</button>
       </div>
     </form>
   </div>

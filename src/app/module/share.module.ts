@@ -12,13 +12,18 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatOptionModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
+
+
 
 @NgModule({
   declarations: [],
@@ -43,7 +48,10 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatRadioModule,
     MatSnackBarModule,
     MatTabsModule,
-    MatStepperModule
+    MatStepperModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+    MatCardModule,
   ]
 })
 export class ShareModule { }

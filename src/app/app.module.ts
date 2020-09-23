@@ -5,9 +5,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ShareModule } from './module/share.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -16,9 +19,13 @@ import { RegisterComponent } from './register/register.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { FAQComponent } from './FAQ/FAQ.component';
 import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
+import { ProductListComponent } from './product-list/product-list.component';
 import { UserComponent } from './user/user.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
+import { ProductCreateComponent } from './product-create/product-create.component';
+import { ImageCroppedDialogComponent } from './image-cropped-dialog/image-cropped-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -31,17 +38,22 @@ import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
     UserInfoComponent,
     FAQComponent,
     FAQDialogComponent,
+    ProductListComponent,
     BorrowDialogComponent,
+    ProductCreateComponent,
+    ImageCroppedDialogComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FormsModule,
     HttpClientModule,
     FlexLayoutModule,
     AppRoutingModule,
+    NgImageSliderModule,
+    ImageCropperModule,
     ShareModule,
+    NgxPaginationModule,
 
     JwtModule.forRoot({
       config: {

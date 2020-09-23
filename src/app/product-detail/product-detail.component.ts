@@ -1,7 +1,7 @@
 import { BorrowDialogComponent } from './../borrow-dialog/borrow-dialog.component';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { ProductGroup } from '../models/product';
+import { ProductGroup } from '../models/product-group-detail';
 
 import { ApiModel } from '../models/api-model';
 import { MatDialog } from '@angular/material/dialog';

@@ -1,0 +1,29 @@
+$colors: (
+    main: #c0dd6f,
+    danger: red,
+    gray: #757575,
+    blue: #2699fb,
+    powder-blue: #b1dbd9,
+    iris-blue:#00bcd4,
+    frost:#dfeeb7,
+    yello: #fcd947,
+    font: #000000,
+    font-white: #ffffff,
+    background-white: #ffffff,
+);
+
+$theme-colors: (
+  primary: #C0DD6F,
+  danger: #FF0000,
+  white:#FFFFFF,
+  black:#000000,
+);
+
+@each $key, $value in $theme-colors {
+  .text-#{$key} {
+    color: $value;
+  }
+  .background-#{$key} {
+    background: $value;
+  }
+}

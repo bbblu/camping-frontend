@@ -1,0 +1,149 @@
+@import "../color.scss";
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    font-family: Microsoft JhengHei;
+}
+
+.formTitle {
+    color: #125a8c;
+    margin:0.5rem;
+}
+.mat-card {
+    padding: 0;
+}
+.card {
+    background: map-get($colors, main);
+    border: 3px solid map-get($colors, frost);
+    box-sizing: border-box;
+    border-radius: 20px;
+    box-shadow: none;
+    .mat-card-content {
+        padding: 16px;
+    }
+    .mat-card-image:first-child {
+        margin: 0;
+    }
+    .card-image {
+        border-radius: 17px;
+        background: map-get($colors, background-white);
+        box-sizing: border-box;
+        height: 200px;
+        width:100%;
+        display:  flex;
+        align-items: center;
+        justify-content:  center;
+        
+        img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+    }
+    .cost-and-score {
+        text-align: right;
+    }
+    .cost {
+        color: map-get($colors, danger);
+    }
+    .score {
+        color: map-get($colors, font-white);
+        .star {
+            font-size: inherit;
+        }
+    }
+}
+
+.search-form {
+    margin: 2% 0;
+    ::ng-deep {
+        .mat-select-arrow {
+            margin-top: 10px;
+        }
+    }
+    .matPrefix-icon {
+        margin: 0px 8px;
+        color: map-get($colors, gray);
+    }
+    /* mat-form-field  */
+    ::ng-deep mat-form-field.mat-form-field {
+        color: map-get($colors, font);
+        .mat-form-field-wrapper {
+            border: 0px;
+            .mat-form-field-flex {
+                padding: 0;
+                background: map-get($colors, background-white);
+                border: 3px solid map-get($colors, powder-blue);
+                border-radius: 0%;
+                .mat-form-field-infix {
+                    margin: auto 0;
+                    border: 0;
+                }
+                .mat-form-field-suffix {
+                    margin: auto 0;
+                }
+                .matPrefix-icon {
+                    padding: 0.5rem 0;
+                }
+                .mat-select-arrow-wrapper {
+                    transform: translateY(0%);
+                    .mat-select-arrow {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+        .mat-chip.mat-standard-chip {
+            background: map-get($colors, powder-blue);
+            color: map-get($colors, font-white);
+        }
+    }
+    ::ng-deep {
+        .mat-form-field-appearance-fill .mat-form-field-infix {
+            padding: 0.75em 0 0.75em 0.75em;
+        }
+        .mat-form-field .mat-button-wrapper {
+            svg {
+                color: map-get($colors, gray);
+            }
+        }
+        .search {
+            color: map-get($colors, font-white);
+            background: map-get($colors, powder-blue);
+            vertical-align: middle;
+        }
+        @media screen and (min-width: 599px) {
+            .mat-form-field-wrapper {
+                padding: 0;
+            }
+            mat-form-field.demo-chip-list .mat-form-field-wrapper .mat-form-field-flex {
+                border-top: none;
+            }
+        }
+
+        .mat-form-field-underline,
+        .mat-form-field-subscript-wrapper {
+            display: none;
+        }
+    }
+}
+
+::ng-deep .pagination {
+    text-align: center;
+    .ngx-pagination{
+        padding-inline-start:0;
+    }
+   
+}
+
+@media screen and (min-width: 1900px) {
+    ::placeholder {
+        font-size: 24px;
+    }
+    button {
+        font-size: 110%;
+    }
+}
