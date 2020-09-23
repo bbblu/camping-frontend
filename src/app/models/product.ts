@@ -1,4 +1,5 @@
 export interface ProductGroup {
+  id: string;
   name: string;
   city: string;
   price: string;

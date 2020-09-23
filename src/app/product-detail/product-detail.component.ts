@@ -15,9 +15,8 @@ import { HttpService } from '../services/http.service';
 })
 export class ProductDetailComponent implements OnInit {
 
+  productGroupId!: number;
   panelOpenState = false;
-  animal: string = 'cat';
-  name: string = 'name';
 
   productGroup!: ProductGroup;
 
@@ -30,8 +29,8 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.router.paramMap
       .subscribe(param => {
-        const id = +param.get('id')!;
-        this.getProductDetail(id);
+        this.productGroupId = +param.get('id')!;
+        this.getProductDetail(this.productGroupId);
       });
   }
 
@@ -48,7 +47,10 @@ export class ProductDetailComponent implements OnInit {
     const dialogRef = this.dialog.open(BorrowDialogComponent, {
       width: '70%',
       height: '50%',
-      data: this.productGroup
+      data: {
+        ...this.productGroup,
+        id: this.productGroupId,
+      }
     });
 
   }
