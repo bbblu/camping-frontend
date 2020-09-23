@@ -52,24 +52,6 @@ export class ProductCreateComponent implements OnInit {
     thumbImage: 'assets/image/logo.png',
   }];
 
-  products: Product = {
-    title: '標題',
-    borrowStartDate: new Date(),
-    borrowEndDate: new Date(),
-    city: '台北市',
-    price: 2000,
-    bankAccount: '香港3345678',
-    coverImage: new URL('https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AAHqtxV.img?h=630&w=1200&m=6&q=60&o=t&l=f&f=jpg&x=829&y=428'),
-    ProductName: '快搭客廳炊事帳',
-    ProductQuantity: 2,
-    ProductSize: '3m*3m*2.5m(高)',
-    ProductUse: '四人同時往外拉，並往上推，小心不要夾到手。若遇下雨，必須曬乾再收起來',
-    ProductLink: new URL('https://youtu.be/5qeY9f0hrxc'),
-    ProductBrand: '無',
-    Compensation: '損壞至無法使用，原價七折賠償。損壞布面，原價五成賠償。損壞小部分但堪用，原價三成賠償',
-    Remarks: '無'
-  };
-
   openDialog(): void {
     const dialogRef = this.dialog.open(ImageCroppedDialogComponent, {
       width: '70%',

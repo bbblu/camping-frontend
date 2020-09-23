@@ -74,23 +74,23 @@
       </div>
       <!-- 已加入的物品 -->
       <div class="alread-add" formArrayName="productArrays" class="well well-lg">
-        <div *ngFor="let productArrays of productArrays.controls; let i=index" [formGroupName]="i">
+        <div *ngFor="let product of productForm.value.productArrays">
           <mat-accordion>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
-                {{products.ProductName}} : {{products.ProductQuantity}}
+                {{product.name}} : {{product.count}}
               </mat-expansion-panel-header>
               <!-- 內容 -->
               <div fxLayout="row" fxLayoutAlign="space-between">
                 <div fxLayout="column" fxLayoutGap="1%">
-                  <div><i class="material-icons" matPrefix>tour</i>物品名稱: {{gooodName}}</div>
-                  <div><i class="material-icons" matPrefix>tour</i>數量: {{products.ProductQuantity}}</div>
-                  <div><i class="material-icons" matPrefix>tour</i>外觀狀況: {{products.ProductSize}}</div>
-                  <div><i class="material-icons" matPrefix>tour</i>使用方式: {{products.ProductUse}}</div>
-                  <div><i class="material-icons" matPrefix>tour</i>相關連結: <a>{{products.ProductLink}}</a></div>
-                  <div><i class="material-icons" matPrefix>tour</i>品牌: {{products.ProductBrand}}</div>
-                  <div><i class="material-icons" matPrefix>gavel</i>損壞賠償: {{products.Compensation}}</div>
-                  <div><i class="material-icons" matPrefix>tour</i>其他備註: {{products.Remarks}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>物品名稱: {{product.name}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>數量: {{product.count}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>外觀狀況: {{product.productSize}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>使用方式: {{product.useInformation}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>相關連結: <a>{{product.relatedLinkArray}}</a></div>
+                  <div><i class="material-icons" matPrefix>tour</i>品牌: {{product.brand}}</div>
+                  <div><i class="material-icons" matPrefix>gavel</i>損壞賠償: {{product.brokenCompensation}}</div>
+                  <div><i class="material-icons" matPrefix>tour</i>其他備註: {{product.memo}}</div>
                 </div>
                 <div>
                   <div style="width: 200px; min-height: 200px;">
@@ -176,7 +176,8 @@
           <div class="goods-images">
             <button mat-raised-button (click)="openDialog()">選擇圖片</button>
             <div class="image-slider">
-              <ng-image-slider [images]="goodsImages" [imageSize]="{width: '300px', height: '200px', space: 0}"></ng-image-slider>
+              <ng-image-slider [images]="goodsImages" [imageSize]="{width: '300px', height: '200px', space: 0}">
+              </ng-image-slider>
             </div>
           </div>
         </div>
