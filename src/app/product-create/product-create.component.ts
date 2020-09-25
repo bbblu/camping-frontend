@@ -76,7 +76,8 @@ export class ProductCreateComponent implements OnInit {
 
   removeProductArray(i: number): void{
     console.log(i);
-    /* this.groupForm.value.productArrays.removeAt(i); */
+    this.groupForm.value.productArrays.splice(i);
+    console.log(this.groupForm);
   }
 
   onPreview(): void {
