@@ -17,6 +17,7 @@ const routes: Routes = [
 
   { path: 'product', component: ProductListComponent },
   { path: 'product/add' , component: ProductCreateComponent, canActivate: [AuthGuard] },
+  { path: 'product-create' , component: ProductCreateComponent },
   { path: 'product/:id', component: ProductDetailComponent },
 
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
