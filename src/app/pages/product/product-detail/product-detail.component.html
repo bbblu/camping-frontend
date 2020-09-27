@@ -1,1 +1,56 @@
-<p>product-detail works!</p>
+<div class="holder" fxLayout="row">
+  <div class="leftBlock" fxFlex></div>
+  <div class="container" fxFlex="60" fxFlex.lt-sm="80">
+    <div class="productDetail" fxLayout="row" fxLayout.xs="column">
+      <div class="productDetail-img" fxFlex="40" fxFlex.lt-sm="100">
+        <img src="assets/image/4人帳四角睡帳.jpg" class="image" />
+      </div>
+      <div fxFlex="60" fxFlex.lt-sm="100">
+        <h3>{{ productGroup.name }}</h3>
+        <div fxLayout="row" fxLayout.xs="column">
+          <p fxFlex="40" fxFlex.lt-sm="100">
+            <i class="material-icons matPrefix-icon" matPrefix>star</i>
+          </p>
+          <p fxFlex="30" fxFlex.lt-sm="100">{{ productGroup.city }}</p>
+          <p fxFlex="30" fxFlex.lt-sm="100">{{ productGroup.price }}</p>
+        </div>
+        <p>{{ productGroup.borrowDateRange }}</p>
+        <p class="borrow">
+          <button mat-raised-button class="borrow-btn" (click)="openDialog()">
+            我要租
+          </button>
+        </p>
+      </div>
+    </div>
+
+    <div class="expansion-panel">
+      <mat-accordion>
+        <mat-expansion-panel
+          hideToggle
+          *ngFor="let product of productGroup.productArray"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ product.name }}
+            </mat-panel-title>
+            數量:{{ product.count }}
+          </mat-expansion-panel-header>
+          照片:
+          <p *ngFor="let Image of product.imageArray">
+            <img alt="商品圖片" src="{{ Image.url }}" />
+          </p>
+          <p>外觀狀況：{{ product.appearance }}</p>
+          <p>使用方法：{{ product.useInformation }}</p>
+          連結:
+          <p *ngFor="let RelatedLink of product.relatedLinkArray">
+            <a href="{{ RelatedLink.url }}">{{ RelatedLink.url }}</a>
+          </p>
+          <p>品牌：{{ product.brand }}</p>
+          <p>損壞賠償：{{ product.brokenCompensation }}</p>
+          <p>其他備註：{{ product.memo }}</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div class="rightBlock" fxFlex></div>
+</div>
