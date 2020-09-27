@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { BorrowListComponent } from './borrow-list/borrow-list.component';
+
+const routes: Routes = [
+  { path: '', pathMatch: 'full', component: BorrowListComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class BorrowRoutingModule { }
+export class BorrowRoutingModule {}
