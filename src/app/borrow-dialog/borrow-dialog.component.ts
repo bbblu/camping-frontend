@@ -6,7 +6,7 @@ import * as moment from 'moment';
 import { ApiModel } from '../models/api-model';
 import { User } from '../models/user';
 import { ProductGroup } from '../models/product';
-import { Rental } from '../models/rental';
+import { Rental } from '@models/rental/rental';
 
 import { HttpService } from '../services/http.service';
 
