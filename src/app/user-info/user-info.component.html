@@ -14,32 +14,26 @@
         </div>
         <mat-form-field appearance="outline" fxFlex="100">
           <mat-icon class="matPrefix-icon" matPrefix>person</mat-icon>
-          <!-- <mat-label>帳號</mat-label> -->
           <input matInput placeholder="account" [value]="user.account" disabled>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="100">
           <mat-icon class="matPrefix-icon" matPrefix>perm_identity</mat-icon>
-          <!-- <mat-label>姓氏</mat-label> -->
           <input matInput placeholder="account" [value]="user.lastName" disabled>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="100">
           <mat-icon class="matPrefix-icon" matPrefix>perm_identity</mat-icon>
-          <!-- <mat-label>名字</mat-label> -->
           <input matInput placeholder="account" [value]="user.firstName" disabled>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="100">
           <mat-icon class="matPrefix-icon" matPrefix>wc</mat-icon>
-          <!-- <mat-label>性別</mat-label> -->
           <input matInput placeholder="account" [value]="user.gender" disabled>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="100">
           <mat-icon class="matPrefix-icon" matPrefix>cake</mat-icon>
-          <!-- <mat-label>生日</mat-label> -->
           <input matInput placeholder="account" [value]="user.birthday" disabled>
         </mat-form-field>
         <mat-form-field appearance="fill" fxFlex="100">
           <mat-icon class="matPrefix-icon" matPrefix>details</mat-icon>
-          <!-- <mat-label>露營經驗</mat-label> -->
           <mat-select formControlName="experience">
             <mat-option *ngFor="let experience of experiences" [value]="experience.id">
               {{ experience.display }}
@@ -48,20 +42,18 @@
         </mat-form-field>
         <mat-form-field appearance="fill" fxFlex="100">
           <mat-icon class="matPrefix-icon" matPrefix>email</mat-icon>
-          <!-- <mat-label>電子郵件 </mat-label> -->
           <input matInput formControlName="email">
         </mat-form-field>
         <mat-form-field appearance="fill" fxFlex="100">
           <mat-icon class="matPrefix-icon" matPrefix>home</mat-icon>
-          <!-- <mat-label>地址</mat-label> -->
           <input matInput formControlName="address">
         </mat-form-field>
       </div>
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around">
-        <button mat-raised-button type="button" class="edit-btn" (click)="onEditClick()">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
+        <button fxFlex="20" fxFlex.lt-sm="20" mat-raised-button type="button" class="edit-btn" (click)="onEditClick()">
           {{ !isEditable ? '編輯' : '取消' }}
         </button>
-        <button mat-raised-button type="submit" class="edit-btn" *ngIf="isEditable">
+        <button fxFlex="20" fxFlex.lt-sm="20" mat-raised-button type="submit" class="edit-btn" *ngIf="isEditable">
           修改
         </button>
       </div>

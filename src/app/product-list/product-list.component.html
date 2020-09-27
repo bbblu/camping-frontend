@@ -73,7 +73,7 @@
       <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
         <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between" fxLayoutGap="10px"
           fxFlex="100" fxFlexFill>
-          <div fxFlex.gt-xs="30" fxFlex.lt-sm="100"
+          <div fxFlex="30" fxFlex.lt-lg="50" fxFlex.lt-sm="100"
             *ngFor="let productGroup of productGroups | paginate: { itemsPerPage: 10, currentPage: page }">
             <mat-card class="card">
               <div class="card-image">
