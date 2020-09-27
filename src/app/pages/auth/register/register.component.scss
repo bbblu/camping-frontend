@@ -1,0 +1,212 @@
+@import "../../../color.scss";
+
+.container {
+  text-align: center;
+  font-family: Microsoft JhengHei;
+  color: map-get($colors, main);
+  border-style: solid;
+  border-color: map-get($colors, main);
+  border-radius: 20px;
+  margin: 5% 0;
+}
+
+/*icon*/
+
+/* title*/
+.formTitle {
+  margin: 3% 0px;
+
+  p {
+    margin: auto 0;
+  }
+}
+
+.register-form {
+  padding: 0 5%;
+
+  .password_visibility {
+    cursor: pointer;
+  }
+
+  .matPrefix-icon {
+    margin: 0.9rem 0.5rem 0.5rem 0;
+  }
+
+  /*subtitle*/
+  p.subtitle {
+    text-align: left;
+    margin: 15px 25px;
+    color: map-get($colors, gray);
+  }
+
+  /* radio button */
+  .mat-field {
+    padding: 5px 0;
+    border: 2px solid map-get($colors, yello);
+    border-radius: 30px;
+    margin: 0px 10px;
+    color: map-get($colors, gray);
+
+    .radioButton {
+      margin: auto 12px;
+      padding: 0.4rem 0;
+
+      .radio-button-icon {
+        margin-right: 0.5rem;
+        color: map-get($colors, blue);
+      }
+
+      .mat-radio-button ~ .mat-radio-button {
+        margin-left: 8px;
+      }
+
+      .radio-text {
+        font-size: 16px;
+        color: map-get($colors, gray);
+        margin-right: 5px;
+      }
+
+      @media screen and (min-width: 960px) {
+        .radio-text {
+          display: auto;
+        }
+      }
+      @media screen and (min-width: 600px) and (max-width: 960px) {
+        .radio-text {
+          display: none;
+        }
+      }
+      @media screen and (min-width: 400px) and (max-width: 600px) {
+        .radio-text {
+          display: auto;
+        }
+      }
+      @media screen and (max-width: 400px) {
+        .radio-text {
+          display: none;
+        }
+      }
+
+      ::ng-deep {
+        .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+          border-color: map-get($colors, main);
+        }
+
+        .mat-radio-button.mat-accent .mat-radio-inner-circle {
+          background: map-get($colors, main);
+        }
+      }
+    }
+  }
+
+  .mat-form-field-error {
+    text-align: left;
+    box-sizing: border-box;
+    padding: 0 1em;
+    font-size: 75%;
+    margin: 0px 10px;
+
+    .gender-error {
+      margin-top: 0.6666666667em;
+    }
+  }
+
+  /*birthday*/
+  ::ng-deep {
+    .mat-form-field-prefix .mat-icon-button {
+      width: 24px;
+      height: 24px;
+      margin: 0.9rem 0.5rem 0.5rem 0;
+    }
+
+    .mat-form-field .mat-button-wrapper {
+      svg {
+        color: map-get($colors, blue);
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .mat-select-arrow {
+      margin-top: 10px;
+    }
+  }
+}
+
+/* mat-form-field  */
+::ng-deep mat-form-field.mat-form-field {
+  padding: 0 10px;
+  color: map-get($colors, font);
+
+  ::placeholder {
+    font-size: 1rem;
+    color: map-get($colors, gray);
+  }
+
+  .material-icons {
+    font-size: 24px;
+    color: map-get($colors, blue);
+  }
+
+  .mat-form-field-wrapper {
+    .mat-form-field-flex {
+      .mat-form-field-infix {
+        margin: auto 0;
+        padding: 1.4rem 0 1.1rem 0;
+        border: 0;
+      }
+
+      .mat-form-field-outline {
+        border: 2px solid map-get($colors, yello);
+        border-radius: 30pt;
+      }
+
+      .mat-form-field-outline-start,
+      .mat-form-field-outline-end,
+      .mat-form-field-outline-gap {
+        border: 0px;
+      }
+
+      .mat-form-field-suffix {
+        margin: auto 0;
+      }
+    }
+  }
+}
+
+.signUpAndLogin {
+  padding: 1% 20px 10% 20px;
+
+  .register_btn {
+    margin: 2% 0;
+    padding: 8px 0;
+    color: map-get($colors, font-white);
+    border-color: map-get($colors, main);
+    background-color: map-get($colors, main);
+    font-weight: bold;
+    border-style: solid;
+    border-radius: 30px;
+    box-sizing: border-box;
+  }
+
+  .login_btn {
+    margin: 2% 0;
+    padding: 8px 0;
+    color: map-get($colors, main);
+    font-weight: bold;
+    border-style: solid;
+    border-radius: 30px;
+    border-color: map-get($colors, main);
+    background-color: map-get($colors, background-white);
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (min-width: 1900px) {
+  ::placeholder {
+    font-size: 24px;
+  }
+  button {
+    font-size: 110%;
+  }
+}

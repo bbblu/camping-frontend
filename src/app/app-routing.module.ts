@@ -1,33 +1,43 @@
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard } from './guards/auth.guard';
-
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { ProductCreateComponent } from './product-create/product-create.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { UserComponent } from './user/user.component';
-import { FAQComponent } from './FAQ/FAQ.component';
-
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-
-  { path: 'product', component: ProductListComponent },
-  { path: 'product/add' , component: ProductCreateComponent, canActivate: [AuthGuard] },
-  { path: 'product-create' , component: ProductCreateComponent },
-  { path: 'product/:id', component: ProductDetailComponent },
-
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
-  { path: 'faq', component: FAQComponent },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('@pages/auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'product',
+    loadChildren: () =>
+      import('@pages/product/product.module').then((m) => m.ProductModule),
+  },
+  {
+    path: 'rental',
+    loadChildren: () =>
+      import('@pages/rental/rental.module').then((m) => m.RentalModule),
+  },
+  {
+    path: 'borrow',
+    loadChildren: () =>
+      import('@pages/borrow/borrow.module').then((m) => m.BorrowModule),
+  },
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('@pages/user/user.module').then((m) => m.UserModule),
+  },
+  {
+    path: 'faq',
+    loadChildren: () =>
+      import('@pages/faq/faq.module').then((m) => m.FaqModule),
+  },
 
   { path: '', redirectTo: '/product', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
