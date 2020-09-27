@@ -1,4 +1,4 @@
-export interface Type {
+export interface ProductType {
   id: string;
   name: string;
 }
@@ -9,6 +9,6 @@ export interface City {
 }
 
 export interface ProductGroupFilter {
-  type: Type[];
+  type: ProductType[];
   city: City;
 }
