@@ -1,1 +1,38 @@
-<p>image-cropper-dialog works!</p>
+<div>
+  <input
+    type="file"
+    (change)="fileChangeEvent($event)"
+    (click)="changeCurrentIndex(0)"
+  />
+  <input
+    type="file"
+    (change)="fileChangeEvent($event)"
+    (click)="changeCurrentIndex(1)"
+  />
+  <input
+    type="file"
+    (change)="fileChangeEvent($event)"
+    (click)="changeCurrentIndex(2)"
+  />
+
+  <mat-dialog-actions>
+    <button mat-button (click)="onClose()">取消</button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="croppedImages">
+      確定送出
+    </button>
+  </mat-dialog-actions>
+
+  <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="1.5"
+    [resizeToWidth]="300"
+    [resizeToHeight]="200"
+    format="png"
+    [onlyScaleDown]="false"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+  ></image-cropper>
+</div>
