@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -28,44 +28,44 @@ import { ImageCroppedDialogComponent } from './image-cropped-dialog/image-croppe
 
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      TopBarComponent,
-      LoginComponent,
-      RegisterComponent,
+  declarations: [
+    AppComponent,
+    TopBarComponent,
+    LoginComponent,
+    RegisterComponent,
     ProductDetailComponent,
     UserComponent,
-      UserInfoComponent,
-      FAQComponent,
-      FAQDialogComponent,
-      ProductListComponent,
-      BorrowDialogComponent,
-      ProductCreateComponent,
-      ImageCroppedDialogComponent,
-   ],
-   imports: [
-      BrowserModule,
-      BrowserAnimationsModule,
-      ReactiveFormsModule,
-      HttpClientModule,
-      FlexLayoutModule,
-      AppRoutingModule,
-      NgImageSliderModule,
-      ImageCropperModule,
-      ShareModule,
-      NgxPaginationModule,
+    UserInfoComponent,
+    FAQComponent,
+    FAQDialogComponent,
+    ProductListComponent,
+    BorrowDialogComponent,
+    ProductCreateComponent,
+    ImageCroppedDialogComponent,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FlexLayoutModule,
+    AppRoutingModule,
+    NgImageSliderModule,
+    ImageCropperModule,
+    ShareModule,
+    NgxPaginationModule,
 
-      JwtModule.forRoot({
-        config: {
-          tokenGetter: () => {
-            return localStorage.getItem('access_token');
-          },
-          allowedDomains: ['211.75.1.201:50004']
-        }
-      })
-   ], providers: [],
-   bootstrap: [
-      AppComponent
-   ]
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('access_token');
+        },
+        allowedDomains: ['211.75.1.201:50004']
+      }
+    })
+  ], providers: [],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

@@ -1,17 +1,33 @@
-export interface Product {
-  title: string;
-  borrowStartDate: Date;
-  borrowEndDate: Date;
+export interface ProductGroup {
+  id: string;
+  name: string;
   city: string;
-  price: number;
-  bankAccount: string;
-  coverImage: URL;
-  ProductName: string;
-  ProductQuantity: number;
-  ProductSize: string;
-  ProductUse: string;
-  ProductLink: URL;
-  ProductBrand: string;
-  Compensation: string;
-  Remarks: string;
+  price: string;
+  borrowDateRange: string;
+  contactInformation: string;
+  productArray: Array<Product>;
+}
+
+export interface Product {
+  id: number;
+  type: string;
+  name: string;
+  count: number;
+  brand: string;
+  appearance: string;
+  useInformation: string;
+  brokenCompensation: string;
+  memo: string;
+  imageArray: Array<Image>;
+  relatedLinkArray: Array<RelatedLink>;
+}
+
+export interface Image {
+  id: number;
+  url: string;
+}
+
+export interface RelatedLink {
+  id: number;
+  url: string;
 }

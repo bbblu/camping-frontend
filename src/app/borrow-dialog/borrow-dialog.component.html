@@ -1,7 +1,26 @@
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
+<mat-horizontal-stepper #stepper>
   <!-- step 1 -->
-  <mat-step [stepControl]="firstForm">
-    <form [formGroup]="firstForm">
+  <mat-step [stepControl]="borrowForm">
+    <form [formGroup]="borrowForm">
+      <ng-template matStepLabel>填寫租借資料</ng-template>
+      <p>
+        <mat-form-field>
+          <mat-label>選擇日期</mat-label>
+          <mat-date-range-input [rangePicker]="picker" [min]="minDate" [max]="maxDate">
+            <input matStartDate placeholder="租借開始" formControlName="borrowStartDate">
+            <input matEndDate placeholder="租借結束" formControlName="borrowEndDate">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </p>
+      <button mat-button matStepperNext>Next</button>
+    </form>
+  </mat-step>
+
+  <!-- step 2 -->
+  <mat-step [stepControl]="userForm">
+    <form [formGroup]="userForm">
       <ng-template matStepLabel>填寫基本資料</ng-template>
       <mat-form-field>
         <mat-label>姓氏</mat-label>
@@ -31,9 +50,9 @@
     </form>
   </mat-step>
 
-  <!-- step 2 -->
-  <mat-step [stepControl]="secondForm" label="填寫付款資訊">
-    <form [formGroup]="secondForm">
+  <!-- step 3 -->
+  <mat-step [stepControl]="billForm" label="填寫付款資訊">
+    <form [formGroup]="billForm">
       <p>商品名稱：{{data.name}}</p>
       <p>訂單金額：{{data.price}}</p>
       <p>租借期間：{{data.borrowDateRange}}</p>
@@ -102,24 +121,24 @@
       </p>
 
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious>返回</button>
+        <button mat-button matStepperNext>下一步</button>
       </div>
     </form>
   </mat-step>
 
-  <!-- step 3 -->
+  <!-- step 4 -->
   <mat-step>
     <ng-template matStepLabel>完成訂單</ng-template>
     <p>商品名稱：{{data.name}}</p>
     <p>訂單金額：{{data.price}}</p>
     <p>租借期間：{{data.borrowDateRange}}</p>
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button type="submit" (click)="onSubmit()" [disabled]="!firstForm.valid || !secondForm.valid">
-        Submit
+      <button mat-button matStepperPrevious>上一步</button>
+      <button mat-button type="submit" (click)="onSubmit()" [disabled]="!userForm.valid || !billForm.valid">
+        送出訂單
       </button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="stepper.reset()">重填</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

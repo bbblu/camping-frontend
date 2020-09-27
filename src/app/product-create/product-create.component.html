@@ -1,13 +1,13 @@
 <div class="holder" fxLayoutAlign="center">
   <div class="container" fxFlex="50">
-    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
       <!-- 交易資訊表單 -->
       <div class="transaction-information" fxLayout="column" fxLayoutGap="0%" fxFlexFill>
         <div class="input-style">
           <mat-form-field class="product-input" [hideRequiredMarker]="true">
             <i class="material-icons" matPrefix>tour</i>
             <input matInput required type="text" placeholder="標題" formControlName="name">
-            <mat-error *ngIf="productForm.controls['name'].hasError('required')">
+            <mat-error *ngIf="groupForm.controls['name'].hasError('required')">
               此為必填
             </mat-error>
           </mat-form-field>
@@ -33,7 +33,7 @@
                   {{name}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="productForm.controls['city'].hasError('required')">
+              <mat-error *ngIf="groupForm.controls['city'].hasError('required')">
                 此為必填
               </mat-error>
             </mat-form-field>
@@ -43,11 +43,11 @@
               <mat-label>區</mat-label>
               <i class="material-icons" matPrefix>gps_fixed</i>
               <mat-select formControlName="cityAreaName">
-                <mat-option *ngFor="let areaName of city.areaNameArray[productForm.value.city]" [value]="areaName">
+                <mat-option *ngFor="let areaName of city.areaNameArray[groupForm.value.city]" [value]="areaName">
                   {{areaName}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="productForm.controls['cityAreaName'].hasError('required')">
+              <mat-error *ngIf="groupForm.controls['cityAreaName'].hasError('required')">
                 此為必填
               </mat-error>
             </mat-form-field>
@@ -57,7 +57,7 @@
           <mat-form-field class="product-input" [hideRequiredMarker]="true">
             <i class="material-icons" matPrefix>attach_money</i>
             <input matInput required type="number" placeholder="金額 (以天計算)" formControlName="price">
-            <mat-error *ngIf="productForm.controls['price'].hasError('required')">
+            <mat-error *ngIf="groupForm.controls['price'].hasError('required')">
               此為必填
             </mat-error>
           </mat-form-field>
@@ -66,7 +66,7 @@
           <mat-form-field class="product-input" [hideRequiredMarker]="true">
             <i class="material-icons" matPrefix>work_outline</i>
             <input matInput required type="text" placeholder="銀行帳號" formControlName="bankAccount">
-            <mat-error *ngIf="productForm.controls['bankAccount'].hasError('required')">
+            <mat-error *ngIf="groupForm.controls['bankAccount'].hasError('required')">
               此為必填
             </mat-error>
           </mat-form-field>
@@ -74,43 +74,68 @@
       </div>
       <!-- 已加入的物品 -->
       <div class="alread-add" formArrayName="productArrays" class="well well-lg">
-        <div *ngFor="let productArrays of productArrays.controls; let i=index" [formGroupName]="i">
+        <div *ngFor="let product of groupForm.value.productArrays;let i = index">
           <mat-accordion>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
-                {{products.ProductName}} : {{products.ProductQuantity}}
+                {{ product.name }} : {{ product.count }}
               </mat-expansion-panel-header>
               <!-- 內容 -->
               <div fxLayout="row" fxLayoutAlign="space-between">
                 <div fxLayout="column" fxLayoutGap="1%">
-                  <div><i class="material-icons" matPrefix>tour</i>物品名稱: {{gooodName}}</div>
-                  <div><i class="material-icons" matPrefix>tour</i>數量: {{products.ProductQuantity}}</div>
-                  <div><i class="material-icons" matPrefix>tour</i>外觀狀況: {{products.ProductSize}}</div>
-                  <div><i class="material-icons" matPrefix>tour</i>使用方式: {{products.ProductUse}}</div>
-                  <div><i class="material-icons" matPrefix>tour</i>相關連結: <a>{{products.ProductLink}}</a></div>
-                  <div><i class="material-icons" matPrefix>tour</i>品牌: {{products.ProductBrand}}</div>
-                  <div><i class="material-icons" matPrefix>gavel</i>損壞賠償: {{products.Compensation}}</div>
-                  <div><i class="material-icons" matPrefix>tour</i>其他備註: {{products.Remarks}}</div>
+                  <div>
+                    <i class="material-icons" matPrefix>tour</i>
+                    物品名稱: {{ product.name }}
+                  </div>
+                  <div>
+                    <i class="material-icons" matPrefix>tour</i>
+                    數量: {{ product.count }}
+                  </div>
+                  <div>
+                    <i class="material-icons" matPrefix>tour</i>
+                    外觀狀況: {{ product.productSize }}
+                  </div>
+                  <div>
+                    <i class="material-icons" matPrefix>tour</i>
+                    使用方式: {{ product.useInformation }}
+                  </div>
+                  <div>
+                    <i class="material-icons" matPrefix>tour</i>
+                    相關連結: <a>{{ product.relatedLinkArray }}</a>
+                  </div>
+                  <div>
+                    <i class="material-icons" matPrefix>tour</i>
+                    品牌: {{ product.brand }}
+                  </div>
+                  <div>
+                    <i class="material-icons" matPrefix>gavel</i>
+                    損壞賠償: {{ product.brokenCompensation }}
+                  </div>
+                  <div>
+                    <i class="material-icons" matPrefix>tour</i>
+                    其他備註: {{ product.memo }}
+                  </div>
                 </div>
                 <div>
                   <div style="width: 200px; min-height: 200px;">
-                    <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+                    <ng-image-slider [images]="product.imageArray" #nav></ng-image-slider>
                   </div>
                 </div>
               </div>
+              <div fxLayoutAlign="center"><button mat-button type="button" (click)="removeProductArray(i)">刪除</button></div>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
       </div>
       <!-- 添加物品表單 -->
-      <form [formGroup]="goodsForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
         <div class="goods-information" fxLayout="row" fxFlexFill fxLayoutAlign="space-evenly">
           <div class="goods" fxLayout="column" fxLayoutGap="0%">
             <div class="input-style">
               <mat-form-field [hideRequiredMarker]="true">
                 <i class="material-icons" matPrefix>tour</i>
                 <input matInput required type="text" placeholder="物品名稱" formControlName="name">
-                <mat-error *ngIf="goodsForm.controls['name'].hasError('required')">
+                <mat-error *ngIf="productForm.controls['name'].hasError('required')">
                   此為必填
                 </mat-error>
               </mat-form-field>
@@ -120,7 +145,7 @@
               <mat-form-field [hideRequiredMarker]="true">
                 <i class="material-icons" matPrefix>tour</i>
                 <input matInput required type="number" placeholder="數量" formControlName="count">
-                <mat-error *ngIf="goodsForm.controls['count'].hasError('required')">
+                <mat-error *ngIf="productForm.controls['count'].hasError('required')">
                   此為必填
                 </mat-error>
               </mat-form-field>
@@ -130,7 +155,7 @@
               <mat-form-field [hideRequiredMarker]="true">
                 <i class="material-icons" matPrefix>tour</i>
                 <input matInput required type="text" placeholder="外觀狀況" formControlName="productSize">
-                <mat-error *ngIf="goodsForm.controls['productSize'].hasError('required')">
+                <mat-error *ngIf="productForm.controls['productSize'].hasError('required')">
                   此為必填
                 </mat-error>
               </mat-form-field>
@@ -170,19 +195,20 @@
               </mat-form-field>
             </div>
             <div class="add-goods" fxLayout="row" fxLayoutAlign="end">
-              <button mat-button type="button" (click)="doCreateProduct()">添加物品</button>
+              <button mat-button type="button" (click)="pushProductArray()">添加物品</button>
             </div>
           </div>
           <div class="goods-images">
             <button mat-raised-button (click)="openDialog()">選擇圖片</button>
             <div class="image-slider">
-              <ng-image-slider [images]="goodsImages" [imageSize]="{width: '300px', height: '200px', space: 0}"></ng-image-slider>
+              <ng-image-slider [images]="productImages" [imageSize]="{width: '300px', height: '200px', space: 0}">
+              </ng-image-slider>
             </div>
           </div>
         </div>
       </form>
       <div class="sendOut" fxLayout="row" fxLayoutAlign="space-around center">
-        <button mat-button type="button" (click)="thatMeSeeSee()">預覽</button>
+        <button mat-button type="button" (click)="onPreview()">預覽</button>
         <button mat-button type="submit">上架</button>
       </div>
     </form>
