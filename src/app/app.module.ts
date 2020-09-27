@@ -1,71 +1,54 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms'
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { JwtModule } from '@auth0/angular-jwt';
-import { NgImageSliderModule } from 'ng-image-slider';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { JwtModule } from '@auth0/angular-jwt';
+
+import { MaterialModule } from '@modules/material.module';
+
+import { ComponentsModule } from '@components/components.module';
 
 import { AppRoutingModule } from './app-routing.module';
-import { ShareModule } from './module/share.module';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
-import { TopBarComponent } from './top-bar/top-bar.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { UserInfoComponent } from './user-info/user-info.component';
-import { FAQComponent } from './FAQ/FAQ.component';
-import { FAQDialogComponent } from './FAQ-dialog/FAQ-dialog.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { UserComponent } from './user/user.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
-import { ProductCreateComponent } from './product-create/product-create.component';
-import { ImageCroppedDialogComponent } from './image-cropped-dialog/image-cropped-dialog.component';
-
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TopBarComponent,
-    LoginComponent,
-    RegisterComponent,
-    ProductDetailComponent,
-    UserComponent,
-    UserInfoComponent,
-    FAQComponent,
-    FAQDialogComponent,
-    ProductListComponent,
-    BorrowDialogComponent,
-    ProductCreateComponent,
-    ImageCroppedDialogComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    // Angular modules
     BrowserAnimationsModule,
-    ReactiveFormsModule,
+    BrowserModule,
     HttpClientModule,
-    FlexLayoutModule,
-    AppRoutingModule,
-    NgImageSliderModule,
-    ImageCropperModule,
-    ShareModule,
-    NgxPaginationModule,
 
+    // Third party modules
+    FlexLayoutModule,
+    ImageCropperModule,
+    NgImageSliderModule,
+    NgxPaginationModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
           return localStorage.getItem('access_token');
         },
-        allowedDomains: ['211.75.1.201:50004']
-      }
-    })
-  ], providers: [],
-  bootstrap: [
-    AppComponent
-  ]
+        allowedDomains: ['211.75.1.201:50004'],
+      },
+    }),
+
+    // Shared modules
+    MaterialModule,
+
+    // Components modules
+    ComponentsModule,
+
+    // App's modules
+    AppRoutingModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
