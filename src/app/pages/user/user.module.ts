@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@modules/material.module';
 
 import { UserRoutingModule } from './user-routing.module';
@@ -14,7 +16,9 @@ import { ProductModule } from '@pages/product/product.module';
   declarations: [UserInfoComponent, UserComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     UserRoutingModule,
+    FlexLayoutModule,
     MaterialModule,
     BorrowModule,
     ProductModule,
