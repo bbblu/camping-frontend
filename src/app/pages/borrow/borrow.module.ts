@@ -18,5 +18,6 @@ import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
     BorrowRoutingModule,
     MaterialModule,
   ],
+  exports: [BorrowListComponent],
 })
 export class BorrowModule {}

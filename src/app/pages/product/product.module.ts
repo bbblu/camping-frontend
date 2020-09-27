@@ -32,5 +32,6 @@ import { ProductUpdateComponent } from './product-update/product-update.componen
     NgImageSliderModule,
     NgxPaginationModule,
   ],
+  exports: [ProductCreateComponent],
 })
 export class ProductModule {}
