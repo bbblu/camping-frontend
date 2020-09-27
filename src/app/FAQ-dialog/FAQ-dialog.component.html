@@ -1,9 +1,24 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
-<div mat-dialog-content>
-  <p>問題回報</p>
-  <textarea cols="50" rows="10" placeholder="輸入你想要寫的內容..."></textarea>
+<div fxLayout="row" class="faq-dialog-title" fxLayoutAlign="center">
+  <div fxFlex="100"> <i class="material-icons matPrefix-icon" matPrefix>live_help</i>
+    <p>問題回報</p>
+  </div>
+  <!-- <h4 fxFlex="20">Hi {{data.name}}</h4> -->
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">取消</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>送出</button>
-</div> 
+
+
+
+<div class="content">
+  <div fxLayout="row" class="dialog-content">
+    <mat-form-field floatLabel="never" appearance="outline" fxFlex="100">
+      <input matInput required type="text" formControlName="title" placeholder="標題" >
+      <i class="material-icons matPrefix-icon" matPrefix>person</i>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-content fxLayout="row" class="dialog-content">
+    <textarea fxFlex="100" cols="50" rows="10" placeholder="請輸入你想要問的內容..."></textarea>
+  </div>
+  <div mat-dialog-actions class="action-btn" fxLayout="row" fxLayoutAlign="center">
+    <button mat-button (click)="onNoClick()" class="cancel">取消</button>
+    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial class="submit">送出</button>
+  </div>
+</div>
