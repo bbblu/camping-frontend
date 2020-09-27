@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@modules/material.module';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgImageSliderModule } from 'ng-image-slider';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { ProductRoutingModule } from './product-routing.module';
@@ -26,6 +28,8 @@ import { ProductUpdateComponent } from './product-update/product-update.componen
     ProductRoutingModule,
     FlexLayoutModule,
     MaterialModule,
+    ImageCropperModule,
+    NgImageSliderModule,
     NgxPaginationModule,
   ],
 })
