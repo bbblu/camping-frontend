@@ -6,7 +6,7 @@
         <div fxFlex="100">
           <div class="nickName" fxLayout="row">
             <img class="userimg" alt="bblu Logo" src="assets/image/頭貼.png" />
-            <mat-form-field fxFlex="80">
+            <mat-form-field fxFlex="100" fxFlex.lt-sm="calc(100% - 75px)">
               <!-- <mat-label>暱稱</mat-label> -->
               <input
                 matInput
@@ -84,8 +84,8 @@
       </div>
       <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
         <button
-          fxFlex="20"
-          fxFlex.lt-sm="20"
+          fxFlex.lt-sm="100"
+          fxFlex.gt-xs="30"
           mat-raised-button
           type="button"
           class="edit-btn"
@@ -94,8 +94,8 @@
           {{ !isEditable ? "編輯" : "取消" }}
         </button>
         <button
-          fxFlex="20"
-          fxFlex.lt-sm="20"
+          fxFlex.lt-sm="100"
+          fxFlex.gt-xs="30"
           mat-raised-button
           type="submit"
           class="edit-btn"
