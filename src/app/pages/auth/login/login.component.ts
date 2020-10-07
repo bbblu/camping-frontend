@@ -64,6 +64,8 @@ export class LoginComponent implements OnInit {
         const result = response.headers.get('X-Auth-Token') || '';
         if (result) {
           this.authService.setToken(result);
+          this.authService.isAuth = true;
+
           const redirectUrl = this.route.snapshot.queryParams['redirectUrl'];
           if (redirectUrl) {
             this.router
