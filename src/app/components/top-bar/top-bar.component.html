@@ -44,6 +44,10 @@
   </mat-sidenav>
   <mat-sidenav-content fxFlexFill>
     <img class="banner" alt="banner" src="assets/image/banner01.png" />
+    <mat-spinner
+      [diameter]="50"
+      *ngIf="spinnerService.visibility | async"
+    ></mat-spinner>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
