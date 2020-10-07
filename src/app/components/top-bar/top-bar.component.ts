@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs';
+
 import { SpinnerService } from '@services/ui/spinner.service';
 
 @Component({
@@ -8,9 +10,11 @@ import { SpinnerService } from '@services/ui/spinner.service';
   styleUrls: ['./top-bar.component.scss'],
 })
 export class TopBarComponent implements OnInit {
-  showSpinner = false;
+  showSpinner$!: Observable<boolean>;
 
-  constructor(public spinnerService: SpinnerService) {}
+  constructor(private spinnerService: SpinnerService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.showSpinner$ = this.spinnerService.isShow$;
+  }
 }
