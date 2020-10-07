@@ -19,10 +19,28 @@
           <a mat-button class="web-navbar-li" routerLink="/product">商品列表</a>
           <a mat-button class="web-navbar-li" routerLink="/borrow">租借紀錄</a>
           <a mat-button class="web-navbar-li" routerLink="/faq">常見問題</a>
-          <a mat-button class="web-navbar-li admin" routerLink="/user">
+          <a
+            mat-button
+            class="web-navbar-li admin"
+            routerLink="/user"
+            *ngIf="isAuth$ | async"
+          >
             <i class="material-icons">person</i>
             admin
           </a>
+          <a
+            mat-button
+            class="web-navbar-li"
+            routerLink="/auth/logout"
+            *ngIf="isAuth$ | async; else login"
+          >
+            登出
+          </a>
+          <ng-template #login>
+            <a mat-button class="web-navbar-li" routerLink="/auth/login">
+              登入
+            </a>
+          </ng-template>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>
@@ -36,10 +54,20 @@
       <a mat-list-item routerLink="/product">商品列表</a>
       <a mat-list-item routerLink="/borrow">租借紀錄</a>
       <a mat-list-item routerLink="/faq">常見問題</a>
-      <a mat-list-item routerLink="/user">
+      <a mat-list-item routerLink="/user" *ngIf="isAuth$ | async">
         <i class="material-icons">person</i>
         admin
       </a>
+      <a
+        mat-list-item
+        routerLink="/auth/logout"
+        *ngIf="isAuth$ | async; else login"
+      >
+        登出
+      </a>
+      <ng-template #login>
+        <a mat-list-item routerLink="/auth/login"> 登入 </a>
+      </ng-template>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content fxFlexFill>
