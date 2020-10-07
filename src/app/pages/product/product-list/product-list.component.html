@@ -152,6 +152,7 @@
               let productGroup of productGroups
                 | paginate: { itemsPerPage: 10, currentPage: page }
             "
+            [routerLink]="productGroup.id.toString()"
           >
             <mat-card class="card">
               <div class="card-image">
