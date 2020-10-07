@@ -33,12 +33,12 @@
               <mat-date-range-input [rangePicker]="picker" placeholder="日期">
                 <input
                   matStartDate
-                  placeholder="Start date"
+                  placeholder="開始日期"
                   formControlName="borrowStartDate"
                 />
                 <input
                   matEndDate
-                  placeholder="End date"
+                  placeholder="結束日期"
                   formControlName="borrowEndDate"
                 />
               </mat-date-range-input>
@@ -101,7 +101,7 @@
                   <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
                 <input
-                  placeholder="New type..."
+                  placeholder="選擇類型..."
                   #typeInput
                   [matChipInputFor]="chipList"
                   [matAutocomplete]="auto"
