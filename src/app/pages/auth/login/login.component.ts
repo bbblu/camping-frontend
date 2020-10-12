@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
@@ -10,6 +10,8 @@ import { ApiModel } from '@models/api-model';
 import { UserService } from '@services/api/user.service';
 import { AuthService } from '@services/auth.service';
 import { RememberMeService } from '@services/remember-me.service';
+import { AccountService } from '@services/account.service';
+import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +26,10 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private authService: AuthService,
+    private accountService: AccountService,
     private rememberMeService: RememberMeService,
+    private snakeBarService: SnakeBarService,
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
@@ -61,11 +66,21 @@ export class LoginComponent implements OnInit {
         const result = response.headers.get('X-Auth-Token') || '';
         if (result) {
           this.authService.setToken(result);
-          this.router.navigate(['']);
+          this.accountService.account = this.userForm.value.account;
+          this.authService.isAuth = true;
+
+          const redirectUrl = this.route.snapshot.queryParams['redirectUrl'];
+          if (redirectUrl) {
+            this.router
+              .navigateByUrl(redirectUrl)
+              .catch(() => this.router.navigate(['']));
+          } else {
+            this.router.navigate(['']);
+          }
         }
       },
       (err) => {
-        alert(err.error.message);
+        this.snakeBarService.open(err.error.message);
       }
     );
   }

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs';
+
+import { AuthService } from '@services/auth.service';
+import { AccountService } from '@services/account.service';
 import { SpinnerService } from '@services/ui/spinner.service';
 
 @Component({
@@ -8,9 +12,19 @@ import { SpinnerService } from '@services/ui/spinner.service';
   styleUrls: ['./top-bar.component.scss'],
 })
 export class TopBarComponent implements OnInit {
-  showSpinner = false;
+  isAuth$!: Observable<boolean>;
+  account$!: Observable<string>;
+  showSpinner$!: Observable<boolean>;
 
-  constructor(public spinnerService: SpinnerService) {}
+  constructor(
+    private authService: AuthService,
+    private accountService: AccountService,
+    private spinnerService: SpinnerService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isAuth$ = this.authService.isAuth$;
+    this.showSpinner$ = this.spinnerService.isShow$;
+    this.account$ = this.accountService.account$;
+  }
 }
