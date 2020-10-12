@@ -10,6 +10,7 @@ import { ApiModel } from '@models/api-model';
 import { UserService } from '@services/api/user.service';
 import { AuthService } from '@services/auth.service';
 import { RememberMeService } from '@services/remember-me.service';
+import { AccountService } from '@services/account.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 @Component({
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private authService: AuthService,
+    private accountService: AccountService,
     private rememberMeService: RememberMeService,
     private snakeBarService: SnakeBarService,
     private route: ActivatedRoute,
@@ -64,6 +66,7 @@ export class LoginComponent implements OnInit {
         const result = response.headers.get('X-Auth-Token') || '';
         if (result) {
           this.authService.setToken(result);
+          this.accountService.account = this.userForm.value.account;
           this.authService.isAuth = true;
 
           const redirectUrl = this.route.snapshot.queryParams['redirectUrl'];
