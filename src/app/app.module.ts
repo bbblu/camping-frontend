@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -12,6 +12,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { MaterialModule } from '@modules/material.module';
 
 import { ComponentsModule } from '@components/components.module';
+
+import { CustomHttpInterceptor } from '@interceptors/custom-http.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -48,7 +50,13 @@ import { AppComponent } from './app.component';
     // App's modules
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHttpInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

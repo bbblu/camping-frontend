@@ -6,7 +6,7 @@ import { ApiModel } from '@models/api-model';
 import { Experience } from '@models/user/experience.model';
 
 import { UserService } from '@services/api/user.service';
-import { SnakeBarService } from '@services/snake-bar.service';
+import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 @Component({
   selector: 'app-register',

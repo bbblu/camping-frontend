@@ -22,6 +22,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -49,6 +50,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatOptionModule,
     MatCardModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class MaterialModule {}
