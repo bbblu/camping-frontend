@@ -324,13 +324,42 @@
             </div>
           </div>
           <div class="goods-images">
-            <button mat-raised-button (click)="openDialog()">選擇圖片</button>
+            <button
+              mat-raised-button
+              (click)="openProductImageDialog('create')"
+            >
+              新增圖片
+            </button>
             <div class="image-slider">
               <ng-image-slider
+                *ngIf="productImages.length > 0; else emptyImages"
                 [images]="productImages"
                 [imageSize]="{ width: '300px', height: '200px', space: 0 }"
+                (arrowClick)="updateImageIndex($event)"
               >
               </ng-image-slider>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="openProductImageDialog('update')"
+              >
+                編輯
+              </button>
+              <button
+                mat-raised-button
+                color="warn"
+                (click)="deleteProductImage()"
+              >
+                刪除
+              </button>
+              <ng-template #emptyImages>
+                <img
+                  src="assets/image/logo.png"
+                  alt="logo"
+                  width="300px"
+                  height="200px"
+                />
+              </ng-template>
             </div>
           </div>
         </div>

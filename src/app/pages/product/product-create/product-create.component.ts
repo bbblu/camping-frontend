@@ -8,6 +8,7 @@ import {
   ProductType,
 } from '@models/product/product-group-filter.model';
 import { City } from '@models/city/city.model';
+import { Image } from '@models/product/image.model';
 
 import { ProductService } from '@services/api/product.service';
 
@@ -23,15 +24,8 @@ export class ProductCreateComponent implements OnInit {
   productForm!: FormGroup;
   productTypes: ProductType[] = [];
   city!: City;
-
-  croppedImages: string[] = [];
-  // 新增中商品之圖片陣列
-  productImages: Array<object> = [
-    {
-      image: 'assets/image/logo.png',
-      thumbImage: 'assets/image/logo.png',
-    },
-  ];
+  productImages: Image[] = [];
+  imageIndex = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -92,30 +86,52 @@ export class ProductCreateComponent implements OnInit {
 
   onSubmit(): void {}
 
-  openDialog(): void {
+  updateImageIndex(arrow: string) {
+    if (arrow === 'previous') {
+      this.imageIndex -= 1;
+    } else if (arrow === 'next') {
+      this.imageIndex += 1;
+    }
+  }
+
+  openProductImageDialog(action: string): void {
     const dialogRef = this.dialog.open(ImageCropperDialogComponent, {
       width: '70%',
-      data: { croppedImages: this.croppedImages },
+      data: {
+        image:
+          action === 'update' ? this.productImages[this.imageIndex].image : '',
+        action: action,
+      },
     });
 
-    dialogRef.afterClosed().subscribe((images) => {
-      this.croppedImages = images;
-      this.productImages = [];
+    dialogRef.afterClosed().subscribe((data) => {
+      if (!data) {
+        return;
+      }
 
-      for (const image of images) {
-        if (!image) {
-          continue;
-        }
-
+      if (data.action === 'create') {
         this.productImages.push({
-          image,
-          thumbImage: image,
+          image: data.image,
+          thumbImage: data.image,
         });
+      } else {
+        this.productImages[this.imageIndex] = {
+          image: data.image,
+          thumbImage: data.image,
+        };
+        this.productImages = [...this.productImages];
       }
 
       this.productForm.patchValue({
         imageArray: this.productImages,
       });
+
+      this.imageIndex = 0;
     });
+  }
+
+  deleteProductImage(): void {
+    this.productImages.splice(this.imageIndex, 1);
+    this.imageIndex = 0;
   }
 }
