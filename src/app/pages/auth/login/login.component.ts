@@ -9,8 +9,8 @@ import { ApiModel } from '@models/api-model';
 
 import { UserService } from '@services/api/user.service';
 import { AuthService } from '@services/auth.service';
-import { RememberMeService } from '@services/remember-me.service';
 import { AccountService } from '@services/account.service';
+import { RememberMeService } from '@services/remember-me.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 @Component({
@@ -45,21 +45,19 @@ export class LoginComponent implements OnInit {
       ],
     });
 
-    if (this.rememberMeService.checkRememberMe()) {
+    if (this.rememberMeService.isRememberMe) {
       this.userForm.patchValue({
-        account: this.rememberMeService.getAccount(),
+        account: this.accountService.account,
       });
     }
   }
 
   changeRememberMe(e: MatCheckboxChange): void {
-    this.rememberMeService.setRememberMe(e.checked);
+    this.rememberMeService.isRememberMe = e.checked;
   }
 
   onSubmit(): void {
-    if (this.rememberMeService.getRememberMe()) {
-      this.rememberMeService.setAccount(this.userForm.value.account);
-    }
+    this.accountService.account = this.userForm.value.account;
 
     this.userService.login(this.userForm.value).subscribe(
       (response: HttpResponse<ApiModel<object>>) => {
