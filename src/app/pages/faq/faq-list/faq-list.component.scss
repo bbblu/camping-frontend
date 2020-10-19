@@ -1,77 +1,55 @@
 @import "~src/assets/scss/color.scss";
 
 .container {
-  text-align: center;
-  font-family: Microsoft JhengHei;
+  margin-bottom: 70px;
 }
 
 .title {
+  margin: 1rem 20px 1rem 0;
   color: map-get($colors, strong-blue);
-}
-
-.FAQBorder {
-  text-align: center;
-  font-family: Microsoft JhengHei;
-  color: map-get($colors, light-blue);
-  border: 4px solid map-get($colors, powder-blue);
-  border-radius: 20px;
-}
-
-.FAQtext {
-  color: map-get($colors, strong-blue);
-  font-size: 30px;
-  text-align: center;
-  font-weight: bold;
-  padding: 1rem 0;
-}
-
-.feedback {
-  background-color: map-get($colors, strong-blue);
-  color: map-get($colors, font-white);
-  padding: 0px 1.5rem;
-  box-shadow: none;
 }
 
 .feedback-btn {
   margin: 1rem 0;
+  color: map-get($colors, font-white);
+  background-color: map-get($colors, strong-blue);
 }
 
-.mat-form-field + .mat-form-field {
-  margin-left: 8px;
-}
+::ng-deep mat-card.mat-card {
+  padding-bottom: 3%;
+  color: map-get($colors, powder-blue);
+  border-style: solid;
+  border-radius: 20px;
 
-.Expansion-panel {
-  border-radius: 0;
-  margin: 20px auto;
-  padding-bottom: 1em;
-}
-
-.mat-expansion-panel-header {
-  border-radius: 0;
-  border-bottom: 2px solid map-get($colors, powder-blue);
-  padding: 0 0.25rem;
-  margin: 0 0.5rem;
-}
-
-.mat-expansion-panel-header-title {
-  display: flex;
-  flex-grow: 1;
-  color: map-get($colors, gray);
-}
-
-.mat-accordion p {
-  color: map-get($colors, strong-blue);
-}
-
-::ng-deep {
-  .mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  &:not([class*="mat-elevation-z"]) {
     box-shadow: none;
   }
 
-  .mat-expansion-panel {
-    p {
-      text-align: justify;
-    }
+  h3 {
+    margin-top: 1rem;
+    text-align: center;
+    color: map-get($colors, light-blue);
+  }
+}
+
+.mat-expansion-panel {
+  &:not([class*="mat-elevation-z"]) {
+    box-shadow: none;
+  }
+
+  .mat-expansion-panel-header {
+    border-bottom: 2px solid map-get($colors, powder-blue);
+    border-radius: 0;
+  }
+
+  p {
+    color: map-get($colors, strong-blue);
+  }
+}
+
+::ng-deep {
+  .mat-expansion-panel-header-title {
+    color: map-get($colors, gray);
   }
 
   .mat-expansion-panel-spacing {
