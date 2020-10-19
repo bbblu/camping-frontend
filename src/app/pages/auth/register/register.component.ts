@@ -14,7 +14,7 @@ import { SnakeBarService } from '@services/ui/snake-bar.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  registerForm!: FormGroup;
+  form!: FormGroup;
   experiences!: Experience[];
   isPasswordHide = true;
   isConfirmPasswordHide = true;
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.getExperienceList();
 
-    this.registerForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       account: [
         null,
         [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+')],
@@ -69,11 +69,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const birthday = this.registerForm.value.birthday as Date;
+    const birthday = this.form.value.birthday as Date;
     const formatBirthday = Intl.DateTimeFormat('zh-TW').format(birthday);
     this.userService
       .addUser({
-        ...this.registerForm.value,
+        ...this.form.value,
         birthday: formatBirthday,
       })
       .subscribe(
