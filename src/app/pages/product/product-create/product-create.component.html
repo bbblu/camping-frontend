@@ -51,8 +51,9 @@
               <i class="material-icons" matPrefix>gps_fixed</i>
               <mat-select formControlName="city">
                 <mat-option
-                  *ngFor="let name of city.nameArray; let cityIndex = index"
-                  [value]="cityIndex"
+                  *ngFor="let name of cities$ | async; let cityIndex = index"
+                  [value]="name"
+                  (onSelectionChange)="cityIndex$.next(cityIndex)"
                 >
                   {{ name }}
                 </mat-option>
@@ -70,9 +71,7 @@
               <i class="material-icons" matPrefix>gps_fixed</i>
               <mat-select formControlName="cityAreaName">
                 <mat-option
-                  *ngFor="
-                    let areaName of city.areaNameArray[groupForm.value.city]
-                  "
+                  *ngFor="let areaName of areas$ | async"
                   [value]="areaName"
                 >
                   {{ areaName }}

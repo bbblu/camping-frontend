@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { MatDialog } from '@angular/material/dialog';
 
-import { ApiModel } from '@models/api-model';
-import {
-  ProductGroupFilter,
-  ProductType,
-} from '@models/product/product-group-filter.model';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { filter, map, share, takeUntil } from 'rxjs/operators';
+
+import { ProductType } from '@models/product/product-group-filter.model';
 import { City } from '@models/city/city.model';
 import { Image } from '@models/product/image.model';
 
 import { ProductService } from '@services/api/product.service';
+import { CityService } from '@services/api/city.service';
 
 import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/image-cropper-dialog.component';
 
@@ -19,21 +20,28 @@ import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/im
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.scss'],
 })
-export class ProductCreateComponent implements OnInit {
+export class ProductCreateComponent implements OnInit, OnDestroy {
   groupForm!: FormGroup;
+  cities$!: Observable<string[]>;
+  cityIndex$ = new BehaviorSubject<number>(-1);
+  areas$!: Observable<string[]>;
+
   productForm!: FormGroup;
-  productTypes: ProductType[] = [];
-  city!: City;
+  productTypes$!: Observable<ProductType[]>;
   productImages: Image[] = [];
   imageIndex = 0;
+
+  private destroy$ = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
+    private cityService: CityService,
     public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
+    this.getProductTypeData();
     this.getCityData();
 
     this.groupForm = this.formBuilder.group({
@@ -61,13 +69,29 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  getProductTypeData() {
+    this.productTypes$ = this.productService.getProductTypes().pipe(
+      takeUntil(this.destroy$),
+      map((res) => res.data)
+    );
+  }
+
   getCityData(): void {
-    this.productService
-      .getProductFilter()
-      .subscribe((response: ApiModel<ProductGroupFilter>) => {
-        this.productTypes = response.data.type;
-        this.city = response.data.city;
-      });
+    const cityData$: Observable<City> = this.cityService.getCities().pipe(
+      takeUntil(this.destroy$),
+      map((res) => res.data),
+      share()
+    );
+    this.cities$ = cityData$.pipe(map((data) => data.nameArray));
+    this.areas$ = combineLatest(cityData$, this.cityIndex$).pipe(
+      filter(([_, index]) => index >= 0),
+      map(([city, index]) => city.areaNameArray[index])
+    );
   }
 
   pushProductArray(): void {
