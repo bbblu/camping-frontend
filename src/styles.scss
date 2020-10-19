@@ -1,4 +1,9 @@
-html, body {
+/* You can add global styles to this file, and also import other style files */
+
+@import "src/assets/scss/theme.scss";
+
+html,
+body {
   height: 100%;
 }
 
