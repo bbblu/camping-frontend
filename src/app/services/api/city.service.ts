@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ApiModel } from '@models/api-model';
-import { City } from '@models/product/product-group-filter';
+import { City } from '@models/city/city.model';
 
 import { HttpService } from '@services/http.service';
 
@@ -15,7 +15,7 @@ export class CityService {
 
   constructor(private httpService: HttpService) {}
 
-  getCities(): Observable<ApiModel<City[]>> {
-    return this.httpService.get<City[]>(this.baseUrl);
+  getCities(): Observable<ApiModel<City>> {
+    return this.httpService.get<City>(this.baseUrl);
   }
 }

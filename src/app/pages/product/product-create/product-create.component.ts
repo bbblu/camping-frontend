@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
-import { ApiModel } from '@models/api-model';
-import {
-  ProductGroupFilter,
-  ProductType,
-} from '@models/product/product-group-filter.model';
+import { MatDialog } from '@angular/material/dialog';
+import * as moment from 'moment';
+
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { filter, map, share, takeUntil } from 'rxjs/operators';
+
+import { ProductType } from '@models/product/product-group-filter.model';
 import { City } from '@models/city/city.model';
+import { Image } from '@models/product/image.model';
 
 import { ProductService } from '@services/api/product.service';
+import { CityService } from '@services/api/city.service';
+import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/image-cropper-dialog.component';
 
@@ -18,62 +23,81 @@ import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/im
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.scss'],
 })
-export class ProductCreateComponent implements OnInit {
+export class ProductCreateComponent implements OnInit, OnDestroy {
   groupForm!: FormGroup;
-  productForm!: FormGroup;
-  productTypes: ProductType[] = [];
-  city!: City;
+  cities$!: Observable<string[]>;
+  cityIndex$ = new BehaviorSubject<number>(-1);
+  areas$!: Observable<string[]>;
 
-  croppedImages: string[] = [];
-  // 新增中商品之圖片陣列
-  productImages: Array<object> = [
-    {
-      image: 'assets/image/logo.png',
-      thumbImage: 'assets/image/logo.png',
-    },
-  ];
+  productForm!: FormGroup;
+  productTypes$!: Observable<ProductType[]>;
+  productImages: Image[] = [];
+  imageIndex = 0;
+
+  private destroy$ = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
+    private cityService: CityService,
+    private snakeBarService: SnakeBarService,
+    private router: Router,
     public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
+    this.getProductTypeData();
     this.getCityData();
 
     this.groupForm = this.formBuilder.group({
       name: [null, [Validators.required]],
       borrowStartDate: [null, [Validators.required]],
       borrowEndDate: [null, [Validators.required]],
-      city: [null, [Validators.required]],
+      cityName: [null, [Validators.required]],
       cityAreaName: [null, [Validators.required]],
       price: [null, [Validators.required]],
+      coverImage: [null],
       bankAccount: [null, [Validators.required]],
-      coverImage: [null, [Validators.required]],
       productArrays: [[]],
     });
 
     this.productForm = this.formBuilder.group({
       name: [null, [Validators.required]],
+      type: [null, [Validators.required]],
       count: [null, [Validators.required]],
-      productSize: [null, [Validators.required]],
-      useInformation: [null],
-      relatedLinkArray: [null],
-      brand: [null],
-      brokenCompensation: [null],
+      brand: [null, [Validators.required]],
+      appearance: [null, [Validators.required]],
+      useInformation: [null, [Validators.required]],
+      brokenCompensation: [null, [Validators.required]],
+      relatedLink: [null],
       memo: [null],
-      imageArray: [null, [Validators.required]],
+      imageArray: [null],
     });
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  getProductTypeData() {
+    this.productTypes$ = this.productService.getProductTypes().pipe(
+      takeUntil(this.destroy$),
+      map((res) => res.data)
+    );
+  }
+
   getCityData(): void {
-    this.productService
-      .getProductFilter()
-      .subscribe((response: ApiModel<ProductGroupFilter>) => {
-        this.productTypes = response.data.type;
-        this.city = response.data.city;
-      });
+    const cityData$: Observable<City> = this.cityService.getCities().pipe(
+      takeUntil(this.destroy$),
+      map((res) => res.data),
+      share()
+    );
+    this.cities$ = cityData$.pipe(map((data) => data.nameArray));
+    this.areas$ = combineLatest(cityData$, this.cityIndex$).pipe(
+      filter(([_, index]) => index >= 0),
+      map(([city, index]) => city.areaNameArray[index])
+    );
   }
 
   pushProductArray(): void {
@@ -81,41 +105,79 @@ export class ProductCreateComponent implements OnInit {
   }
 
   removeProductArray(i: number): void {
-    console.log(i);
     this.groupForm.value.productArrays.splice(i);
-    console.log(this.groupForm);
   }
 
-  onPreview(): void {
-    console.log(this.groupForm.value);
+  dateFormatter(value: Date): string {
+    const date = new Date(value as Date);
+    return moment(date).format('YYYY/MM/DD hh:mm');
   }
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    this.productService
+      .addProductGroups({
+        ...this.groupForm.value,
+        borrowStartDate: this.dateFormatter(
+          this.groupForm.value.borrowStartDate
+        ),
+        borrowEndDate: this.dateFormatter(this.groupForm.value.borrowEndDate),
+      })
+      .subscribe(
+        (res) => {
+          this.router.navigate(['/borrow']);
+        },
+        (err) => {
+          this.snakeBarService.open(err.error.message);
+        }
+      );
+  }
 
-  openDialog(): void {
+  updateImageIndex(arrow: string) {
+    if (arrow === 'previous') {
+      this.imageIndex -= 1;
+    } else if (arrow === 'next') {
+      this.imageIndex += 1;
+    }
+  }
+
+  openProductImageDialog(action: string): void {
     const dialogRef = this.dialog.open(ImageCropperDialogComponent, {
       width: '70%',
-      data: { croppedImages: this.croppedImages },
+      data: {
+        image:
+          action === 'update' ? this.productImages[this.imageIndex].image : '',
+        action: action,
+      },
     });
 
-    dialogRef.afterClosed().subscribe((images) => {
-      this.croppedImages = images;
-      this.productImages = [];
+    dialogRef.afterClosed().subscribe((data) => {
+      if (!data) {
+        return;
+      }
 
-      for (const image of images) {
-        if (!image) {
-          continue;
-        }
-
+      if (data.action === 'create') {
         this.productImages.push({
-          image,
-          thumbImage: image,
+          image: data.image,
+          thumbImage: data.image,
         });
+      } else {
+        this.productImages[this.imageIndex] = {
+          image: data.image,
+          thumbImage: data.image,
+        };
+        this.productImages = [...this.productImages];
       }
 
       this.productForm.patchValue({
         imageArray: this.productImages,
       });
+
+      this.imageIndex = 0;
     });
+  }
+
+  deleteProductImage(): void {
+    this.productImages.splice(this.imageIndex, 1);
+    this.imageIndex = 0;
   }
 }
