@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { MaterialModule } from '@modules/material.module';
 
 import { BorrowRoutingModule } from './borrow-routing.module';
@@ -16,6 +17,7 @@ import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
     FormsModule,
     ReactiveFormsModule,
     BorrowRoutingModule,
+    FlexLayoutModule,
     MaterialModule,
   ],
   exports: [BorrowListComponent],

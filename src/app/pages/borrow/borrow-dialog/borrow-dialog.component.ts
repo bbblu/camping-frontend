@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
 
 import { ApiModel } from '@models/api-model';
@@ -10,6 +10,7 @@ import { ProductGroup } from '@models/product/product.model';
 
 import { RentalService } from '@services/api/rental.service';
 import { UserService } from '@services/api/user.service';
+import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 @Component({
   selector: 'app-borrow-dialog',
@@ -21,27 +22,20 @@ export class BorrowDialogComponent implements OnInit {
   maxDate!: Date;
 
   borrowForm!: FormGroup;
-  userForm!: FormGroup;
   billForm!: FormGroup;
 
   user!: User;
   rental!: { id: string };
 
   constructor(
-    public dialogRef: MatDialogRef<BorrowDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProductGroup,
     private formBuilder: FormBuilder,
     private rentalService: RentalService,
-    private userService: UserService
+    private userService: UserService,
+    private snakeBarService: SnakeBarService
   ) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   ngOnInit(): void {
-    this.getUserInfo();
-
     this.minDate = new Date(this.data.borrowDateRange.slice(0, 11));
     this.maxDate = new Date(this.data.borrowDateRange.slice(19, 29));
 
@@ -49,21 +43,21 @@ export class BorrowDialogComponent implements OnInit {
       borrowStartDate: [null, Validators.required],
       borrowEndDate: [null, Validators.required],
     });
-    this.userForm = this.formBuilder.group({
-      borrowLastName: [null, Validators.required],
-      borrowFirstName: [null, Validators.required],
-      billCellPhone: [null, Validators.required],
-    });
     this.billForm = this.formBuilder.group({
-      billLastName: [null, Validators.required],
-      billFirstName: [null, Validators.required],
-      cardId: [null, Validators.required],
-      safeCode: [null, Validators.required],
-      expireDate: [null, Validators.required],
+      billLastName: ['test', Validators.required],
+      billFirstName: ['test', Validators.required],
+      billCellPhone: ['0912345678', Validators.required],
+      cardId: ['1234567891234567', Validators.required],
+      safeCode: ['1234', Validators.required],
+      expireYear: [null, Validators.required],
+      expireMonth: [null, Validators.required],
+      billZipCode: ['21314', Validators.required],
       billAddress: [null, Validators.required],
       billCountry: ['台灣', Validators.required],
-      billCity: [null, Validators.required],
+      billCity: ['台北市', Validators.required],
     });
+
+    this.getUserInfo();
   }
 
   intRange(start: number, end: number): number[] {
@@ -76,19 +70,14 @@ export class BorrowDialogComponent implements OnInit {
       (response: ApiModel<User>) => {
         this.user = response.data;
 
-        this.userForm.patchValue({
-          borrowLastName: this.user.lastName,
-          borrowFirstName: this.user.firstName,
-          billEmail: this.user.email,
-        });
         this.billForm.patchValue({
           billLastName: this.user.lastName,
           billFirstName: this.user.firstName,
           billAddress: this.user.address,
         });
       },
-      (error) => {
-        console.log(error.error);
+      (err) => {
+        this.snakeBarService.open(err.error.message);
       }
     );
   }
@@ -101,16 +90,13 @@ export class BorrowDialogComponent implements OnInit {
   onSubmit(): void {
     const data = {
       productGroupId: this.data.id,
-      renterCreditCard: {
-        ...this.userForm.value,
-        ...this.billForm.value,
-      },
-      renterContactInformationId: 1,
       borrowStartDate: this.dateFormatter(
         this.borrowForm.value.borrowStartDate
       ),
       borrowEndDate: this.dateFormatter(this.borrowForm.value.borrowEndDate),
-      campId: 1,
+      renterCreditCard: {
+        ...this.billForm.value,
+      },
     };
 
     this.rentalService.addRental(data).subscribe(
@@ -118,7 +104,7 @@ export class BorrowDialogComponent implements OnInit {
         this.rental = res.data;
       },
       (err) => {
-        console.error(err);
+        this.snakeBarService.open(err.error.message);
       }
     );
   }
