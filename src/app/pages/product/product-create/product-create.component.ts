@@ -48,24 +48,25 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
       name: [null, [Validators.required]],
       borrowStartDate: [null, [Validators.required]],
       borrowEndDate: [null, [Validators.required]],
-      city: [null, [Validators.required]],
+      cityName: [null, [Validators.required]],
       cityAreaName: [null, [Validators.required]],
       price: [null, [Validators.required]],
+      coverImage: [null],
       bankAccount: [null, [Validators.required]],
-      coverImage: [null, [Validators.required]],
       productArrays: [[]],
     });
 
     this.productForm = this.formBuilder.group({
       name: [null, [Validators.required]],
+      type: [null, [Validators.required]],
       count: [null, [Validators.required]],
-      productSize: [null, [Validators.required]],
-      useInformation: [null],
-      relatedLinkArray: [null],
-      brand: [null],
-      brokenCompensation: [null],
+      brand: [null, [Validators.required]],
+      appearance: [null, [Validators.required]],
+      useInformation: [null, [Validators.required]],
+      brokenCompensation: [null, [Validators.required]],
+      relatedLink: [null],
       memo: [null],
-      imageArray: [null, [Validators.required]],
+      imageArray: [null],
     });
   }
 
@@ -99,13 +100,7 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
   }
 
   removeProductArray(i: number): void {
-    console.log(i);
     this.groupForm.value.productArrays.splice(i);
-    console.log(this.groupForm);
-  }
-
-  onPreview(): void {
-    console.log(this.groupForm.value);
   }
 
   onSubmit(): void {}

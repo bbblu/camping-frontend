@@ -49,7 +49,7 @@
             <mat-form-field appearance="fill">
               <mat-label>市</mat-label>
               <i class="material-icons" matPrefix>gps_fixed</i>
-              <mat-select formControlName="city">
+              <mat-select formControlName="cityName">
                 <mat-option
                   *ngFor="let name of cities$ | async; let cityIndex = index"
                   [value]="name"
@@ -59,7 +59,7 @@
                 </mat-option>
               </mat-select>
               <mat-error
-                *ngIf="groupForm.controls['city'].hasError('required')"
+                *ngIf="groupForm.controls['cityName'].hasError('required')"
               >
                 此為必填
               </mat-error>
@@ -141,27 +141,31 @@
                   </div>
                   <div>
                     <i class="material-icons" matPrefix>tour</i>
+                    物品類型: {{ product.type }}
+                  </div>
+                  <div>
+                    <i class="material-icons" matPrefix>tour</i>
                     數量: {{ product.count }}
-                  </div>
-                  <div>
-                    <i class="material-icons" matPrefix>tour</i>
-                    外觀狀況: {{ product.productSize }}
-                  </div>
-                  <div>
-                    <i class="material-icons" matPrefix>tour</i>
-                    使用方式: {{ product.useInformation }}
-                  </div>
-                  <div>
-                    <i class="material-icons" matPrefix>tour</i>
-                    相關連結: <a>{{ product.relatedLinkArray }}</a>
                   </div>
                   <div>
                     <i class="material-icons" matPrefix>tour</i>
                     品牌: {{ product.brand }}
                   </div>
                   <div>
+                    <i class="material-icons" matPrefix>tour</i>
+                    外觀狀況: {{ product.appearance }}
+                  </div>
+                  <div>
+                    <i class="material-icons" matPrefix>tour</i>
+                    使用方式: {{ product.useInformation }}
+                  </div>
+                  <div>
                     <i class="material-icons" matPrefix>gavel</i>
                     損壞賠償: {{ product.brokenCompensation }}
+                  </div>
+                  <div>
+                    <i class="material-icons" matPrefix>tour</i>
+                    相關連結: <a>{{ product.relatedLink }}</a>
                   </div>
                   <div>
                     <i class="material-icons" matPrefix>tour</i>
@@ -220,6 +224,25 @@
             <div class="input-style">
               <mat-form-field [hideRequiredMarker]="true">
                 <i class="material-icons" matPrefix>tour</i>
+                <mat-select formControlName="type" placeholder="產品類型">
+                  <mat-option
+                    *ngFor="let productType of productTypes$ | async"
+                    [value]="productType.id"
+                  >
+                    {{ productType.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="productForm.controls['type'].hasError('required')"
+                >
+                  此為必填
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="input-style">
+              <mat-form-field [hideRequiredMarker]="true">
+                <i class="material-icons" matPrefix>tour</i>
                 <input
                   matInput
                   required
@@ -242,12 +265,30 @@
                   matInput
                   required
                   type="text"
+                  placeholder="品牌"
+                  formControlName="brand"
+                />
+                <mat-error
+                  *ngIf="productForm.controls['brand'].hasError('required')"
+                >
+                  此為必填
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="input-style">
+              <mat-form-field [hideRequiredMarker]="true">
+                <i class="material-icons" matPrefix>tour</i>
+                <input
+                  matInput
+                  required
+                  type="text"
                   placeholder="外觀狀況"
-                  formControlName="productSize"
+                  formControlName="appearance"
                 />
                 <mat-error
                   *ngIf="
-                    productForm.controls['productSize'].hasError('required')
+                    productForm.controls['appearance'].hasError('required')
                   "
                 >
                   此為必填
@@ -265,32 +306,13 @@
                   placeholder="使用方式"
                   formControlName="useInformation"
                 />
-              </mat-form-field>
-            </div>
-
-            <div class="input-style">
-              <mat-form-field [hideRequiredMarker]="true">
-                <i class="material-icons" matPrefix>tour</i>
-                <input
-                  matInput
-                  required
-                  type="url"
-                  placeholder="相關連結"
-                  formControlName="relatedLinkArray"
-                />
-              </mat-form-field>
-            </div>
-
-            <div class="input-style">
-              <mat-form-field [hideRequiredMarker]="true">
-                <i class="material-icons" matPrefix>tour</i>
-                <input
-                  matInput
-                  required
-                  type="text"
-                  placeholder="品牌"
-                  formControlName="brand"
-                />
+                <mat-error
+                  *ngIf="
+                    productForm.controls['useInformation'].hasError('required')
+                  "
+                >
+                  此為必填
+                </mat-error>
               </mat-form-field>
             </div>
 
@@ -303,6 +325,27 @@
                   type="text"
                   placeholder="損壞賠償"
                   formControlName="brokenCompensation"
+                />
+                <mat-error
+                  *ngIf="
+                    productForm.controls['brokenCompensation'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  此為必填
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="input-style">
+              <mat-form-field [hideRequiredMarker]="true">
+                <i class="material-icons" matPrefix>tour</i>
+                <input
+                  matInput
+                  type="url"
+                  placeholder="相關連結"
+                  formControlName="relatedLink"
                 />
               </mat-form-field>
             </div>
@@ -317,7 +360,12 @@
               </mat-form-field>
             </div>
             <div class="add-goods" fxLayout="row" fxLayoutAlign="end">
-              <button mat-button type="button" (click)="pushProductArray()">
+              <button
+                mat-button
+                type="button"
+                (click)="pushProductArray()"
+                [disabled]="!productForm.valid"
+              >
                 添加物品
               </button>
             </div>
@@ -364,8 +412,9 @@
         </div>
       </form>
       <div class="sendOut" fxLayout="row" fxLayoutAlign="space-around center">
-        <button mat-button type="button" (click)="onPreview()">預覽</button>
-        <button mat-button type="submit">上架</button>
+        <button mat-button type="submit" [disabled]="!groupForm.valid">
+          上架
+        </button>
       </div>
     </form>
   </div>
