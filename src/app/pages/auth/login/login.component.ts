@@ -19,7 +19,7 @@ import { SnakeBarService } from '@services/ui/snake-bar.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  userForm!: FormGroup;
+  form!: FormGroup;
   isVisibility = true;
 
   constructor(
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       account: [
         null,
         [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+')],
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     });
 
     if (this.rememberMeService.isRememberMe) {
-      this.userForm.patchValue({
+      this.form.patchValue({
         account: this.accountService.account,
       });
     }
@@ -57,14 +57,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.accountService.account = this.userForm.value.account;
+    this.accountService.account = this.form.value.account;
 
-    this.userService.login(this.userForm.value).subscribe(
+    this.userService.login(this.form.value).subscribe(
       (response: HttpResponse<ApiModel<object>>) => {
         const result = response.headers.get('X-Auth-Token') || '';
         if (result) {
           this.authService.setToken(result);
-          this.accountService.account = this.userForm.value.account;
+          this.accountService.account = this.form.value.account;
           this.authService.isAuth = true;
 
           const redirectUrl = this.route.snapshot.queryParams['redirectUrl'];
