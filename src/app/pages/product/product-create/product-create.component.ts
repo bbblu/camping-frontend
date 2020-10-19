@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
+import * as moment from 'moment';
 
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { filter, map, share, takeUntil } from 'rxjs/operators';
@@ -12,6 +14,7 @@ import { Image } from '@models/product/image.model';
 
 import { ProductService } from '@services/api/product.service';
 import { CityService } from '@services/api/city.service';
+import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/image-cropper-dialog.component';
 
@@ -37,6 +40,8 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private productService: ProductService,
     private cityService: CityService,
+    private snakeBarService: SnakeBarService,
+    private router: Router,
     public dialog: MatDialog
   ) {}
 
@@ -103,7 +108,29 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
     this.groupForm.value.productArrays.splice(i);
   }
 
-  onSubmit(): void {}
+  dateFormatter(value: Date): string {
+    const date = new Date(value as Date);
+    return moment(date).format('YYYY/MM/DD hh:mm');
+  }
+
+  onSubmit(): void {
+    this.productService
+      .addProductGroups({
+        ...this.groupForm.value,
+        borrowStartDate: this.dateFormatter(
+          this.groupForm.value.borrowStartDate
+        ),
+        borrowEndDate: this.dateFormatter(this.groupForm.value.borrowEndDate),
+      })
+      .subscribe(
+        (res) => {
+          this.router.navigate(['/borrow']);
+        },
+        (err) => {
+          this.snakeBarService.open(err.error.message);
+        }
+      );
+  }
 
   updateImageIndex(arrow: string) {
     if (arrow === 'previous') {

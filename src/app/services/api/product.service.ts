@@ -24,7 +24,7 @@ export class ProductService {
     return this.httpService.get<ProductGroup[]>(`${this.baseUrl}?${params}`);
   }
 
-  addProductGroups(id: number, data: object): Observable<ApiModel<string>> {
+  addProductGroups(data: object): Observable<ApiModel<string>> {
     return this.httpService.post<string>(this.baseUrl, data);
   }
 
