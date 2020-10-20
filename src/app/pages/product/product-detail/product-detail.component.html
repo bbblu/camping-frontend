@@ -35,19 +35,114 @@
             </mat-panel-title>
             數量:{{ product.count }}
           </mat-expansion-panel-header>
-          照片:
-          <p *ngFor="let Image of product.imageArray">
-            <img alt="商品圖片" src="{{ Image.url }}" />
-          </p>
-          <p>外觀狀況：{{ product.appearance }}</p>
-          <p>使用方法：{{ product.useInformation }}</p>
-          連結:
-          <p *ngFor="let RelatedLink of product.relatedLinkArray">
-            <a href="{{ RelatedLink.url }}">{{ RelatedLink.url }}</a>
-          </p>
-          <p>品牌：{{ product.brand }}</p>
-          <p>損壞賠償：{{ product.brokenCompensation }}</p>
-          <p>其他備註：{{ product.memo }}</p>
+          <div fxLayout="column" fxLayout.gt-md="row">
+            <div fxFlex="100" fxFlex.lt-lg="50">
+              照片:
+              <p *ngFor="let Image of product.imageArray">
+                <img alt="商品圖片" src="{{ Image.url }}" />
+              </p>
+            </div>
+            <div fxFlex="100" fxFlex.lt-lg="50">
+              <div fxLayout="column">
+                <div fxFlex="100" fxFlex.lt-lg="50">
+                  <span class="icon" style="vertical-align: middle">
+                    <i class="material-icons matPrefix-icon product-detail-icon" matPrefix
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="23"
+                        height="19.681"
+                        viewBox="0 0 23 19.681"
+                      >
+                        <path
+                          id="Subtraction_32"
+                          data-name="Subtraction 32"
+                          d="M8.235,19.681H0L8.656,5.259,6.121,1.111,8.159,0l1.8,2.941L11.745.015l1.8.983-2.4,3.924L20,19.678l-8.235,0V17.457A2.037,2.037,0,0,0,10,15.236a2.035,2.035,0,0,0-1.764,2.222V19.68Z"
+                          fill="#2699fb"
+                        />
+                      </svg> </i
+                  ></span>
+                  <span>外觀狀況：{{ product.appearance }}</span>
+                </div>
+                <div fxFlex="100" fxFlex.lt-lg="50">
+                  <span class="icon" style="vertical-align: middle">
+                    <i class="material-icons matPrefix-icon product-detail-icon" matPrefix
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="23"
+                        height="19.681"
+                        viewBox="0 0 23 19.681"
+                      >
+                        <path
+                          id="Subtraction_32"
+                          data-name="Subtraction 32"
+                          d="M8.235,19.681H0L8.656,5.259,6.121,1.111,8.159,0l1.8,2.941L11.745.015l1.8.983-2.4,3.924L20,19.678l-8.235,0V17.457A2.037,2.037,0,0,0,10,15.236a2.035,2.035,0,0,0-1.764,2.222V19.68Z"
+                          fill="#2699fb"
+                        />
+                      </svg>
+                    </i>
+                  </span>
+                  <span>使用方法：{{ product.useInformation }}</span>
+                </div>
+                <div fxFlex="100" fxFlex.lt-lg="50">
+                  <span class="icon" style="vertical-align: middle"
+                    ><i class="material-icons matPrefix-icon product-detail-icon" matPrefix
+                      >link</i
+                    ></span
+                  >
+                  <span>連結: </span>
+                  <p *ngFor="let RelatedLink of product.relatedLinkArray">
+                    <a href="{{ RelatedLink.url }}">{{ RelatedLink.url }}</a>
+                  </p>
+                </div>
+                <div fxFlex="100" fxFlex.lt-lg="50">
+                  <span class="icon" style="vertical-align: middle">
+                    <i class="material-icons matPrefix-icon product-detail-icon" matPrefix
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="23"
+                        height="19.681"
+                        viewBox="0 0 23 19.681"
+                      >
+                        <path
+                          id="Subtraction_32"
+                          data-name="Subtraction 32"
+                          d="M8.235,19.681H0L8.656,5.259,6.121,1.111,8.159,0l1.8,2.941L11.745.015l1.8.983-2.4,3.924L20,19.678l-8.235,0V17.457A2.037,2.037,0,0,0,10,15.236a2.035,2.035,0,0,0-1.764,2.222V19.68Z"
+                          fill="#2699fb"
+                        />
+                      </svg> </i
+                  ></span>
+                  <span>品牌：{{ product.brand }}</span>
+                </div>
+                <div fxFlex="100" fxFlex.lt-lg="50">
+                  <span class="icon" style="vertical-align: middle"
+                    ><i class="material-icons matPrefix-icon product-detail-icon" matPrefix
+                      >gavel</i
+                    ></span
+                  >
+                  <span>損壞賠償：{{ product.brokenCompensation }}</span>
+                </div>
+                <div fxFlex="100" fxFlex.lt-lg="50">
+                  <span class="icon" style="vertical-align: middle">
+                    <i class="material-icons matPrefix-icon product-detail-icon" matPrefix
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="23"
+                        height="19.681"
+                        viewBox="0 0 23 19.681"
+                      >
+                        <path
+                          id="Subtraction_32"
+                          data-name="Subtraction 32"
+                          d="M8.235,19.681H0L8.656,5.259,6.121,1.111,8.159,0l1.8,2.941L11.745.015l1.8.983-2.4,3.924L20,19.678l-8.235,0V17.457A2.037,2.037,0,0,0,10,15.236a2.035,2.035,0,0,0-1.764,2.222V19.68Z"
+                          fill="#2699fb"
+                        />
+                      </svg> </i
+                  ></span>
+                  <span>其他備註：{{ product.memo }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
