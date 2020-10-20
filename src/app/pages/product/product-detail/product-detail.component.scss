@@ -38,3 +38,10 @@
   width: 90%;
   margin: 20px auto;
 }
+
+.matPrefix-icon{
+  padding-right: 0.5rem;
+}
+.product-detail-icon{
+  color: map-get($colors, blue);
+}
