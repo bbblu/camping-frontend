@@ -1,5 +1,6 @@
-<div class="holder" fxLayoutAlign="center">
-  <div class="container" fxFlex="50">
+<div class="holder" fxLayout="row">
+  <div class="leftBlock" fxFlex></div>
+  <div class="container" fxFlex="60" fxFlex.lt-sm="80">
     <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
       <!-- 交易資訊表單 -->
       <div
@@ -8,48 +9,57 @@
         fxLayoutGap="0%"
         fxFlexFill
       >
-        <div class="input-style">
-          <mat-form-field class="product-input" [hideRequiredMarker]="true">
-            <i class="material-icons" matPrefix>tour</i>
+        <mat-form-field
+          class="product-input"
+          [hideRequiredMarker]="true"
+          floatLabel="never"
+          appearance="outline"
+          fxFlex="100"
+        >
+          <i class="material-icons" matPrefix>tour</i>
+          <input
+            matInput
+            required
+            type="text"
+            placeholder="標題"
+            formControlName="name"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="groupForm.controls['name'].hasError('required')">
+            此為必填
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          floatLabel="never"
+          appearance="fill"
+          class="product-input"
+          fxFlex="100"
+          [hideRequiredMarker]="true"
+        >
+          <mat-date-range-input [rangePicker]="picker">
             <input
-              matInput
-              required
-              type="text"
-              placeholder="標題"
-              formControlName="name"
+              matStartDate
+              formControlName="borrowStartDate"
+              placeholder="開始開放租借"
             />
-            <mat-error *ngIf="groupForm.controls['name'].hasError('required')">
-              此為必填
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="input-style">
-          <mat-form-field class="product-input" [hideRequiredMarker]="true">
-            <mat-date-range-input [rangePicker]="picker">
-              <input
-                matStartDate
-                formControlName="borrowStartDate"
-                placeholder="開始開放租借"
-              />
-              <input
-                matEndDate
-                formControlName="borrowEndDate"
-                placeholder="結束開放租借"
-              />
-            </mat-date-range-input>
-            <mat-datepicker-toggle
-              matPrefix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-date-range-picker #picker> </mat-date-range-picker>
-          </mat-form-field>
-        </div>
+            <input
+              matEndDate
+              formControlName="borrowEndDate"
+              placeholder="結束開放租借"
+            />
+          </mat-date-range-input>
+          <mat-datepicker-toggle
+            matPrefix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker> </mat-date-range-picker>
+        </mat-form-field>
+        <div class="input-style"></div>
         <div class="area" fxLayout="row">
           <div class="field">
-            <mat-form-field appearance="fill">
-              <mat-label>市</mat-label>
+            <mat-form-field appearance="fill" floatLabel="never">
               <i class="material-icons" matPrefix>gps_fixed</i>
-              <mat-select formControlName="city">
+              <mat-select formControlName="cityName" placeholder="市">
                 <mat-option
                   *ngFor="let name of city.nameArray; let cityIndex = index"
                   [value]="cityIndex"
@@ -65,10 +75,9 @@
             </mat-form-field>
           </div>
           <div class="field">
-            <mat-form-field appearance="fill">
-              <mat-label>區</mat-label>
+            <mat-form-field appearance="fill" floatLabel="never">
               <i class="material-icons" matPrefix>gps_fixed</i>
-              <mat-select formControlName="cityAreaName">
+              <mat-select formControlName="cityAreaName" placeholder="區">
                 <mat-option
                   *ngFor="
                     let areaName of city.areaNameArray[groupForm.value.city]
@@ -86,38 +95,38 @@
             </mat-form-field>
           </div>
         </div>
-        <div class="input-style">
-          <mat-form-field class="product-input" [hideRequiredMarker]="true">
-            <i class="material-icons" matPrefix>attach_money</i>
-            <input
-              matInput
-              required
-              type="number"
-              placeholder="金額 (以天計算)"
-              formControlName="price"
-            />
-            <mat-error *ngIf="groupForm.controls['price'].hasError('required')">
-              此為必填
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="input-style">
-          <mat-form-field class="product-input" [hideRequiredMarker]="true">
-            <i class="material-icons" matPrefix>work_outline</i>
-            <input
-              matInput
-              required
-              type="text"
-              placeholder="銀行帳號"
-              formControlName="bankAccount"
-            />
-            <mat-error
-              *ngIf="groupForm.controls['bankAccount'].hasError('required')"
-            >
-              此為必填
-            </mat-error>
-          </mat-form-field>
-        </div>
+        <mat-form-field floatLabel="never" class="product-input" [hideRequiredMarker]="true">
+          <i class="material-icons" matPrefix>attach_money</i>
+          <input
+            matInput
+            required
+            type="number"
+            placeholder="金額 (以天計算)"
+            formControlName="price"
+          />
+          <mat-error *ngIf="groupForm.controls['price'].hasError('required')">
+            此為必填
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          floatLabel="never"
+          class="product-input"
+          [hideRequiredMarker]="true"
+        >
+          <i class="material-icons" matPrefix>work_outline</i>
+          <input
+            matInput
+            required
+            type="text"
+            placeholder="銀行帳號"
+            formControlName="bankAccount"
+          />
+          <mat-error
+            *ngIf="groupForm.controls['bankAccount'].hasError('required')"
+          >
+            此為必填
+          </mat-error>
+        </mat-form-field>
       </div>
       <!-- 已加入的物品 -->
       <div
@@ -341,4 +350,5 @@
       </div>
     </form>
   </div>
+  <div class="rightBlock" fxFlex></div>
 </div>
