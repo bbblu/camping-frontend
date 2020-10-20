@@ -1,16 +1,34 @@
 import { Injectable } from '@angular/core';
 
+import { BehaviorSubject, Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
+
+import { LocalStorageKey } from '@enums/local-storage-key.enum';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RememberMeService {
+  private isRememberMeSubject$ = new BehaviorSubject<boolean>(false);
 
-  IS_REMEMBER_ME = 'rememberMe';
-  ACCOUNT = 'account';
+  constructor() {
+    this.isRememberMeSubject$.next(this.checkRememberMe());
+  }
 
-  constructor() { }
+  set isRememberMe(value: boolean) {
+    this.setRememberMe(value);
+    this.isRememberMeSubject$.next(value);
+  }
 
-  checkRememberMe(): boolean {
+  get isRememberMe(): boolean {
+    return this.isRememberMeSubject$.value;
+  }
+
+  get isRememberMe$(): Observable<boolean> {
+    return this.isRememberMeSubject$.pipe(shareReplay(1));
+  }
+
+  private checkRememberMe(): boolean {
     const isRememberMe = this.getRememberMe();
     if (!isRememberMe || isRememberMe === 'false') {
       return false;
@@ -19,23 +37,12 @@ export class RememberMeService {
     return true;
   }
 
-  setRememberMe(value: boolean): void {
+  private setRememberMe(value: boolean): void {
     const s = value ? 'true' : 'false';
-    localStorage.setItem(this.IS_REMEMBER_ME, s);
+    localStorage.setItem(LocalStorageKey.IS_REMEMBER_ME, s);
   }
 
-  getRememberMe(): string | null {
-    return localStorage.getItem(this.IS_REMEMBER_ME);
+  private getRememberMe(): string | null {
+    return localStorage.getItem(LocalStorageKey.IS_REMEMBER_ME);
   }
-
-  setAccount(value: string): void {
-    if (this.getRememberMe()) {
-      localStorage.setItem(this.ACCOUNT, value);
-    }
-  }
-
-  getAccount(): string | null {
-    return localStorage.getItem(this.ACCOUNT);
-  }
-
 }

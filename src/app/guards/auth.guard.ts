@@ -25,8 +25,10 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.authService.isTokenExpired() || !this.authService.getToken()) {
-      this.router.navigate(['auth', 'login']);
+    if (this.authService.isTokenExpired()) {
+      this.router.navigate(['auth', 'login'], {
+        queryParams: { redirectUrl: state.url },
+      });
       return false;
     }
 

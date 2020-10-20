@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -7,27 +13,31 @@ import {
   MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import * as moment from 'moment';
 
-import { ApiModel } from '@models/api-model';
-import {
-  ProductGroupFilter,
-  ProductType,
-} from '@models/product/product-group-filter.model';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+
 import { ProductGroup } from '@models/product/product-group.model';
+import { ProductType } from '@models/product/product-group-filter.model';
 import { City } from '@models/city/city.model';
 
 import { ProductService } from '@services/api/product.service';
+import { CityService } from '@services/api/city.service';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
+  @ViewChild('typeInput') typeInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete!: MatAutocomplete;
+
   form!: FormGroup;
-  productTypes: ProductType[] = [];
-  city!: City;
-  productGroups: ProductGroup[] = [];
+  productTypes$ = new BehaviorSubject<ProductType[]>([]);
+  city$!: Observable<City>;
+  productGroups$!: Observable<ProductGroup[]>;
 
   chipTypes: ProductType[] = [];
   visible = true;
@@ -38,15 +48,16 @@ export class ProductListComponent implements OnInit {
 
   page = 1;
 
-  @ViewChild('typeInput') typeInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete!: MatAutocomplete;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
-    private productService: ProductService
+    private productService: ProductService,
+    private cityService: CityService
   ) {}
 
   ngOnInit(): void {
+    this.getProductTypeData();
     this.getCityData();
     this.getProductGroupData();
 
@@ -59,28 +70,40 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  getCityData(): void {
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  getProductTypeData() {
     this.productService
-      .getProductFilter()
-      .subscribe((response: ApiModel<ProductGroupFilter>) => {
-        this.productTypes = response.data.type;
-        this.city = response.data.city;
-      });
+      .getProductTypes()
+      .pipe(
+        takeUntil(this.destroy$),
+        map((res) => this.productTypes$.next(res.data))
+      )
+      .subscribe();
+  }
+
+  getCityData(): void {
+    this.city$ = this.cityService.getCities().pipe(
+      takeUntil(this.destroy$),
+      map((res) => res.data)
+    );
   }
 
   getProductGroupData(params: string = ''): void {
-    this.productService
-      .getProductGroups(params)
-      .subscribe((response: ApiModel<ProductGroup[]>) => {
-        this.productGroups = response.data;
-      });
+    this.productGroups$ = this.productService.getProductGroups(params).pipe(
+      takeUntil(this.destroy$),
+      map((res) => res.data)
+    );
   }
 
   addType(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 
-    const findType = this.productTypes.find(
+    const findType = this.productTypes$.value.find(
       (item) => item.name === value.trim()
     );
 
@@ -95,7 +118,7 @@ export class ProductListComponent implements OnInit {
   }
 
   removeType(type: ProductType): void {
-    const index = this.productTypes.indexOf(type);
+    const index = this.productTypes$.value.indexOf(type);
 
     if (index >= 0) {
       this.form.value.typeArray.splice(index, 1);
@@ -104,7 +127,7 @@ export class ProductListComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    const findType = this.productTypes.find(
+    const findType = this.productTypes$.value.find(
       (item) => item.name === event.option.viewValue.trim()
     );
 
@@ -120,13 +143,13 @@ export class ProductListComponent implements OnInit {
     let params = '';
 
     for (let [key, value] of Object.entries(this.form.value)) {
-      if (!value || (Array.isArray(value) && value.length === 0)) {
+      if (!value || (value instanceof Array && value.length === 0)) {
         continue;
       }
 
-      if (key.endsWith('Date')) {
+      if (value instanceof Date) {
         const date = new Date(value as Date);
-        value = Intl.DateTimeFormat('zh-TW').format(date);
+        value = moment(date).format('YYYY/MM/DD');
       }
 
       params += `${key}=${value}&`;

@@ -33,12 +33,12 @@
               <mat-date-range-input [rangePicker]="picker" placeholder="日期">
                 <input
                   matStartDate
-                  placeholder="Start date"
+                  placeholder="開始日期"
                   formControlName="borrowStartDate"
                 />
                 <input
                   matEndDate
-                  placeholder="End date"
+                  placeholder="結束日期"
                   formControlName="borrowEndDate"
                 />
               </mat-date-range-input>
@@ -55,7 +55,11 @@
               fxFlex.lt-sm="100"
             >
               <i class="material-icons matPrefix-icon" matPrefix>location_on</i>
-              <mat-select formControlName="cityAreaName" placeholder="地區">
+              <mat-select
+                formControlName="cityAreaName"
+                placeholder="地區"
+                *ngIf="city$ | async as city; else emptyCity"
+              >
                 <mat-optgroup
                   *ngFor="let cityName of city.nameArray; let cityIndex = index"
                   [label]="cityName"
@@ -68,6 +72,15 @@
                   </mat-option>
                 </mat-optgroup>
               </mat-select>
+
+              <ng-template #emptyCity>
+                <input
+                  matInput
+                  type="text"
+                  placeholder="地區"
+                  formControlName="cityAreaName"
+                />
+              </ng-template>
             </mat-form-field>
             <mat-form-field
               floatLabel="never"
@@ -101,7 +114,7 @@
                   <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
                 <input
-                  placeholder="New type..."
+                  placeholder="選擇類型..."
                   #typeInput
                   [matChipInputFor]="chipList"
                   [matAutocomplete]="auto"
@@ -114,7 +127,10 @@
                 #auto="matAutocomplete"
                 (optionSelected)="selected($event)"
               >
-                <mat-option *ngFor="let type of productTypes" [value]="type.id">
+                <mat-option
+                  *ngFor="let type of productTypes$ | async"
+                  [value]="type.id"
+                >
                   {{ type.name }}
                 </mat-option>
               </mat-autocomplete>
@@ -149,9 +165,10 @@
             fxFlex.lt-lg="50"
             fxFlex.lt-sm="100"
             *ngFor="
-              let productGroup of productGroups
+              let productGroup of (productGroups$ | async) || []
                 | paginate: { itemsPerPage: 10, currentPage: page }
             "
+            [routerLink]="productGroup.id.toString()"
           >
             <mat-card class="card">
               <div class="card-image">
