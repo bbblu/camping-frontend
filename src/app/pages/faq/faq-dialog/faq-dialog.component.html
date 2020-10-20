@@ -16,24 +16,33 @@
         formControlName="title"
         placeholder="標題"
       />
-      <i class="material-icons matPrefix-icon" matPrefix>person</i>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" class="dialog-content">
+    <mat-form-field floatLabel="never" appearance="outline" fxFlex="100">
+      <input
+        matInput
+        required
+        type="text"
+        formControlName="email"
+        placeholder="信箱"
+      />
     </mat-form-field>
   </div>
   <div mat-dialog-content fxLayout="row" class="dialog-content">
-    <textarea
-      fxFlex="100"
-      cols="50"
-      rows="10"
-      placeholder="請輸入你想要問的內容..."
-    ></textarea>
+    <div appearance="outline" fxFlex="100" class="mat-form-field-wrapper">
+      <textarea
+        fxFlex="100"
+        cols="50"
+        rows="10"
+        placeholder="請輸入你想要問的內容..."
+      ></textarea>
+    </div>
   </div>
-  <div
-    mat-dialog-actions
-    class="action-btn"
-    fxLayout="row"
-    fxLayoutAlign="center"
-  >
-    <button mat-button (click)="onNoClick()" class="cancel">取消</button>
-    <button mat-button cdkFocusInitial class="submit">送出</button>
+  <div class="action-btn" fxLayout="row" fxLayoutAlign="center">
+    <button fxFlexOffset="20px" mat-button (click)="onNoClick()" class="cancel">取消</button>
+    <button fxFlexOffset="20px" mat-button cdkFocusInitial class="submit">
+      送出
+    </button>
   </div>
 </div>
