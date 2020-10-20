@@ -1,8 +1,55 @@
-html, body {
+/* You can add global styles to this file, and also import other style files */
+
+@import "src/assets/scss/theme.scss";
+@import "src/assets/scss/color.scss";
+
+html,
+body {
   height: 100%;
 }
 
-body {
+* {
+  padding: 0;
   margin: 0;
   font-family: Arial, "Microsoft JhengHei", sans-serif;
+}
+
+// form field outline to round
+.mat-form-field.mat-form-field-round {
+  ::placeholder {
+    font-size: 16px;
+  }
+
+  .mat-prefix-icon {
+    margin: 0.9rem 0.5rem 0.5rem 0;
+  }
+
+  .mat-form-field-wrapper {
+    .mat-form-field-flex {
+      .mat-form-field-infix {
+        margin: auto 0;
+        padding: 1.4rem 0 1.1rem 0;
+        border: 0;
+      }
+
+      .mat-form-field-outline {
+        border: 2px solid map-get($colors, main);
+        border-radius: 30pt;
+      }
+
+      .mat-form-field-outline-start,
+      .mat-form-field-outline-end,
+      .mat-form-field-outline-gap {
+        border: 0;
+      }
+
+      .mat-form-field-suffix {
+        margin: auto 0;
+      }
+
+      input.mat-input-element {
+        color: map-get($colors, font);
+      }
+    }
+  }
 }

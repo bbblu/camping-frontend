@@ -1,137 +1,71 @@
-@import "../../../color.scss";
+@import "~src/assets/scss/color.scss";
 
 .container {
-  text-align: center;
-  font-family: Microsoft JhengHei;
-  color: map-get($colors, main);
-  border-style: solid;
-  border-color: map-get($colors, main);
-  border-radius: 20px;
   margin: 5% 0;
 }
 
-/* title & image logo */
-.form-title {
-  margin: 5% 0px;
+::ng-deep mat-card.mat-card {
+  color: map-get($colors, main);
+  border-style: solid;
+  border-radius: 20px;
 
-  p {
-    margin: auto 20px;
-    font-size: 25px;
+  &:not([class*="mat-elevation-z"]) {
+    box-shadow: none;
   }
 
+  & > :first-child {
+    margin: 5% 0;
+  }
+}
+
+mat-card-title {
   .logo {
     height: 50px;
     width: 50px;
   }
+
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+    line-height: 50px;
+  }
 }
 
-/* user form */
-.user-form {
-  padding: 0 10%;
+mat-card-content {
+  .user-form {
+    margin: 5% 7%;
 
-  /* 記住我的checkbox */
-  .flex-RememberMe {
-    display: block;
-    font-weight: bold;
-    font-size: 100%;
-    justify-content: space-around;
-    flex-direction: row;
-    padding-bottom: 2%;
-  }
-
-  .rememberCheckbox {
-    padding-left: 15px;
-  }
-
-  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
-    background-color: map-get($colors, main);
-  }
-
-  .password_visibility {
-    cursor: pointer;
-  }
-
-  .matPrefix-icon {
-    margin: 0.9rem 0.5rem 0.5rem 0;
-  }
-
-  /* signup & login button*/
-  .signUpAndLogin {
-    padding: 1% 0px 10% 0px;
-
-    .signup-btn {
-      margin: 2% 0;
-      font-size: 70%;
-      color: map-get($colors, main);
-      font-weight: bold;
-      border-style: solid;
-      border-radius: 20px;
-      border-color: map-get($colors, main);
-      background-color: map-get($colors, background-white);
-      box-sizing: border-box;
+    .password-visibility {
+      cursor: pointer;
     }
 
+    .remember-me-check-box {
+      padding-left: 15px;
+      padding-bottom: 2%;
+    }
+
+    ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+      background-color: map-get($colors, main);
+    }
+
+    .sign-up-btn,
     .login-btn {
       margin: 2% 0;
       font-size: 70%;
-      color: map-get($colors, font-white);
-      border-color: map-get($colors, main);
-      background-color: map-get($colors, main);
       font-weight: bold;
       border-style: solid;
       border-radius: 20px;
-      box-sizing: border-box;
     }
-  }
-}
 
-/* mat-form-field  */
-::ng-deep mat-form-field.mat-form-field {
-  ::placeholder {
-    font-size: 16px;
-  }
+    .login-btn {
+      color: map-get($colors, font-white);
+      background-color: map-get($colors, main);
+      border-color: map-get($colors, main);
 
-  .mat-form-field-wrapper {
-    .mat-form-field-flex {
-      .mat-form-field-infix {
-        margin: auto 0;
-        padding: 1.4rem 0 1.1rem 0;
-        border: 0;
-      }
-
-      .mat-form-field-outline {
-        border: 2px solid map-get($colors, main);
-        border-radius: 30pt;
-      }
-
-      .mat-form-field-outline-start,
-      .mat-form-field-outline-end,
-      .mat-form-field-outline-gap {
-        border: 0px;
-      }
-
-      .mat-form-field-suffix {
-        margin: auto 0;
-      }
-
-      input.mat-input-element {
-        color: map-get($colors, font);
+      &:disabled {
+        background-color: map-get($colors, gray);
+        border-color: map-get($colors, gray);
       }
     }
-  }
-}
-
-/* 螢幕尺寸大於1900 */
-@media screen and (min-width: 1900px) {
-  ::placeholder {
-    font-size: 24px;
-  }
-
-  button {
-    font-size: 110%;
-  }
-
-  .flex-RememberMe {
-    font-size: 110%;
   }
 }

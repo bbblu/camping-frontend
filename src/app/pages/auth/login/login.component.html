@@ -1,92 +1,96 @@
-<div class="holder" fxLayout="row">
+<div class="container" fxLayout="row">
   <div class="leftBlock" fxFlex></div>
-  <div class="container" fxFlex="40" fxFlex.lt-md="60" fxFlex.lt-sm="80">
-    <div class="form-title" fxLayout="row" fxLayoutAlign="center">
-      <img src="assets/image/logo.png" class="logo" />
-      <p>借借露</p>
-    </div>
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
-      <div class="inputStyle" fxLayout="column" fxLayoutGap="0%" fxFlexFill>
-        <mat-form-field floatLabel="never" appearance="outline">
-          <input
-            matInput
-            required
-            type="text"
-            placeholder="帳號"
-            formControlName="account"
-          />
-          <i class="material-icons matPrefix-icon" matPrefix>person</i>
-          <mat-error *ngIf="userForm.controls['account'].hasError('required')">
-            請輸入你的帳號！！！
-          </mat-error>
-          <mat-error *ngIf="userForm.controls['account'].hasError('pattern')">
-            內含非法字元
-          </mat-error>
-        </mat-form-field>
+  <mat-card fxFlex="40" fxFlex.lt-md="60" fxFlex.lt-sm="80">
+    <mat-card-title fxLayout="row" fxLayoutAlign="center">
+      <img class="logo" src="assets/image/logo.png" alt="logo" />
+      <span>借借露</span>
+    </mat-card-title>
 
-        <mat-form-field floatLabel="never" appearance="outline">
-          <input
-            matInput
-            required
-            [type]="isVisibility ? 'password' : 'text'"
-            placeholder="密碼"
-            formControlName="password"
-          />
-          <i class="material-icons matPrefix-icon" matPrefix>lock</i>
-          <i
-            class="material-icons password_visibility"
-            matSuffix
-            (click)="isVisibility = !isVisibility"
-            >{{ isVisibility ? "visibility_off" : "visibility" }}</i
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="user-form">
+        <div fxLayout="column" fxLayoutGap="0%" fxFlexFill>
+          <mat-form-field
+            class="mat-form-field-round"
+            appearance="outline"
+            floatLabel="never"
           >
-          <mat-error *ngIf="userForm.controls['password'].hasError('required')">
-            請輸入你的密碼！！！
-          </mat-error>
-          <mat-error *ngIf="userForm.controls['password'].hasError('pattern')">
-            內含非法字元
-          </mat-error>
-        </mat-form-field>
-      </div>
+            <input
+              matInput
+              type="text"
+              placeholder="帳號"
+              formControlName="account"
+            />
+            <mat-icon matPrefix class="mat-prefix-icon">person</mat-icon>
+            <mat-error *ngIf="form.controls['account'].hasError('required')">
+              請輸入你的帳號！！！
+            </mat-error>
+            <mat-error *ngIf="form.controls['account'].hasError('pattern')">
+              內含非法字元
+            </mat-error>
+          </mat-form-field>
 
-      <div class="flex-RememberMe" fxLayoutGap="10%" fxLayoutAlign="start">
+          <mat-form-field
+            class="mat-form-field-round"
+            floatLabel="never"
+            appearance="outline"
+          >
+            <input
+              matInput
+              [type]="isVisibility ? 'password' : 'text'"
+              placeholder="密碼"
+              formControlName="password"
+            />
+            <mat-icon matPrefix class="mat-prefix-icon">lock</mat-icon>
+            <mat-icon
+              matSuffix
+              class="password-visibility"
+              (click)="isVisibility = !isVisibility"
+            >
+              {{ isVisibility ? "visibility_off" : "visibility" }}
+            </mat-icon>
+            <mat-error *ngIf="form.controls['password'].hasError('required')">
+              請輸入你的密碼！！！
+            </mat-error>
+            <mat-error *ngIf="form.controls['password'].hasError('pattern')">
+              內含非法字元
+            </mat-error>
+          </mat-form-field>
+        </div>
+
         <mat-checkbox
-          class="rememberCheckbox"
+          class="remember-me-check-box"
           (change)="changeRememberMe($event)"
+          fxLayoutGap="10%"
+          fxLayoutAlign="start"
         >
           記住我
         </mat-checkbox>
-      </div>
 
-      <div
-        class="signUpAndLogin"
-        fxLayout="row"
-        fxLayout.xs="column"
-        fxLayoutAlign="space-around"
-      >
-        <button
-          mat-button
-          fxFlex="40"
-          fxFlex.lt-sm="100"
-          type="button"
-          class="signup-btn"
-          id="signup"
-          [routerLink]="['/register']"
-        >
-          註冊
-        </button>
-        <button
-          mat-button
-          fxFlex="40"
-          fxFlex.lt-sm="100"
-          type="submit"
-          class="login-btn"
-          id="login"
-          [disabled]="!userForm.valid"
-        >
-          登入
-        </button>
-      </div>
-    </form>
-  </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around">
+          <button
+            mat-button
+            class="sign-up-btn"
+            type="button"
+            routerLink="/auth/register"
+            fxFlex="40"
+            fxFlex.lt-sm="100"
+          >
+            註冊
+          </button>
+
+          <button
+            mat-button
+            class="login-btn"
+            type="submit"
+            [disabled]="!form.valid"
+            fxFlex="40"
+            fxFlex.lt-sm="100"
+          >
+            登入
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
   <div class="rightBlock" fxFlex></div>
 </div>
