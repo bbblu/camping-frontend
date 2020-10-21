@@ -4,7 +4,7 @@
   margin: 3% 0;
 }
 
-::ng-deep mat-card.mat-card {
+mat-card {
   color: map-get($colors, main);
   border-style: solid;
   border-radius: 20px;
@@ -31,10 +31,22 @@ mat-card-content {
       cursor: pointer;
     }
 
-    span.subtitle {
+    .subtitle {
       text-align: left;
       margin: 15px 25px;
       color: map-get($colors, gray);
+    }
+
+    ::ng-deep mat-radio-button {
+      &.mat-radio-checked {
+        .mat-radio-outer-circle {
+          border-color: map-get($colors, main);
+        }
+
+        .mat-radio-inner-circle {
+          background-color: map-get($colors, main);
+        }
+      }
     }
 
     // gender
@@ -57,16 +69,6 @@ mat-card-content {
       .mat-radio-button ~ .mat-radio-button {
         margin-left: 8px;
       }
-
-      ::ng-deep {
-        .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-          border-color: map-get($colors, main);
-        }
-
-        .mat-radio-button.mat-accent .mat-radio-inner-circle {
-          background: map-get($colors, main);
-        }
-      }
     }
 
     .radio-form-field-error {
@@ -77,20 +79,22 @@ mat-card-content {
     }
 
     // birthday
-    ::ng-deep .mat-form-field-prefix .mat-icon-button {
-      width: 24px;
-      height: 24px;
-      margin: 0.9rem 0.5rem 0.5rem 0;
-      color: map-get($colors, blue);
+    .date-picker-form-field {
+      ::ng-deep .mat-icon-button {
+        width: 24px;
+        height: 24px;
+        color: map-get($colors, blue);
+      }
     }
 
     // experience
-    ::ng-deep .mat-select-arrow {
-      margin-top: 10px;
+    .select-form-field {
+      ::ng-deep .mat-select-arrow {
+        margin-top: 10px;
+      }
     }
 
-    .login-btn,
-    .register-btn {
+    button {
       margin: 2% 0;
       padding: 7px 0;
       font-weight: bold;
@@ -111,7 +115,7 @@ mat-card-content {
   }
 }
 
-::ng-deep .mat-form-field.mat-form-field-round {
+:host ::ng-deep .mat-form-field.mat-form-field-round {
   padding: 0 10px;
 
   .mat-icon {
