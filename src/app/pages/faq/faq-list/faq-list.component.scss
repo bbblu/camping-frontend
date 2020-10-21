@@ -15,7 +15,7 @@
   background-color: map-get($colors, strong-blue);
 }
 
-::ng-deep mat-card.mat-card {
+mat-card {
   padding-bottom: 3%;
   color: map-get($colors, powder-blue);
   border-style: solid;
@@ -42,19 +42,17 @@
     border-radius: 0;
   }
 
-  p {
-    color: map-get($colors, strong-blue);
-  }
-}
-
-::ng-deep {
   .mat-expansion-panel-header-title {
     color: map-get($colors, gray);
   }
 
-  .mat-expansion-panel-spacing {
+  &.mat-expansion-panel-spacing {
     .mat-expansion-panel-header-title {
       color: map-get($colors, danger);
     }
+  }
+
+  p {
+    color: map-get($colors, strong-blue);
   }
 }

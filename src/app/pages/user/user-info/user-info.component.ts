@@ -1,26 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil, tap } from 'rxjs/operators';
 
 import { ApiModel } from '@models/api-model';
 import { User } from '@models/user/user.model';
 import { Experience } from '@models/user/experience.model';
 
 import { UserService } from '@services/api/user.service';
+import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 @Component({
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss'],
 })
-export class UserInfoComponent implements OnInit {
-  user!: User;
-  experiences: Experience[] = [];
+export class UserInfoComponent implements OnInit, OnDestroy {
+  user$!: Observable<User>;
+  experiences$!: Observable<Experience[]>;
   form!: FormGroup;
   isEditable = false;
 
+  private destroy$ = new Subject<void>();
+
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private snakeBarService: SnakeBarService
   ) {}
 
   ngOnInit(): void {
@@ -36,15 +43,16 @@ export class UserInfoComponent implements OnInit {
     this.form.disable();
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   getUserInfo(): void {
-    this.userService.getUser().subscribe(
-      (res: ApiModel<User>) => {
-        this.user = res.data;
-        this.updateFormValue(res.data);
-      },
-      (err) => {
-        console.error(err);
-      }
+    this.user$ = this.userService.getUser().pipe(
+      takeUntil(this.destroy$),
+      map((res) => res.data),
+      tap((data) => this.updateFormValue(data))
     );
   }
 
@@ -58,13 +66,9 @@ export class UserInfoComponent implements OnInit {
   }
 
   getExperienceList(): void {
-    this.userService.getUserExperiences().subscribe(
-      (response: ApiModel<Experience[]>) => {
-        this.experiences = response.data;
-      },
-      (error) => {
-        console.log(error.error);
-      }
+    this.experiences$ = this.userService.getUserExperiences().pipe(
+      takeUntil(this.destroy$),
+      map((res) => res.data)
     );
   }
 
@@ -80,10 +84,10 @@ export class UserInfoComponent implements OnInit {
   onSubmit(): void {
     this.userService.updateUser(this.form.value).subscribe(
       (res: ApiModel<string>) => {
-        console.log(res.message);
+        this.snakeBarService.open(res.message);
       },
       (err) => {
-        console.error(err.error);
+        this.snakeBarService.open(err.error.message);
       }
     );
   }

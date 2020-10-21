@@ -1,144 +1,48 @@
 @import "~src/assets/scss/color.scss";
 
-body::-webkit-scrollbar {
-  display: none;
+::ng-deep .mat-dialog-container {
+  padding: 0;
+  overflow: hidden;
 }
 
-.faq-dialog-title {
-  background: map-get($colors, iris-blue);
-  color: map-get($colors, font-white);
-  text-align: center;
-  padding: 1rem 0;
+.title {
   position: relative;
+  padding: 1rem 0;
+  color: map-get($colors, font-white);
+  background-color: map-get($colors, iris-blue);
 
-  .matPrefix-icon {
-    margin: auto 0;
+  mat-icon {
     font-size: xx-large;
   }
 
-  p {
-    margin: 0;
+  &::after {
+    position: absolute;
+    top: 100%;
+    border-top: solid 1rem map-get($colors, iris-blue);
+    border-left: solid 1rem transparent;
+    border-right: solid 1rem transparent;
+    content: "";
   }
 }
 
-.faq-dialog-title::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  width: 0;
-  height: 0;
-  border-top: solid 1rem map-get($colors, iris-blue);
-  border-left: solid 1rem transparent;
-  border-right: solid 1rem transparent;
+.content {
+  padding: 1rem 1.5rem;
 }
 
-textarea {
-  border: 1px solid map-get($colors, gray);
-  height: 200px;
-  width: -webkit-fill-available;
-  padding: 0.75em;
-}
-
-textarea:focus {
-  outline: none;
-}
-
-::ng-deep {
-  .content {
-    padding: 16px 0 0 0;
-  }
-
-  .mat-dialog-container {
-    color: map-get($colors, font);
-    padding: 0;
-    overflow: hidden;
-
-    .dialog-content {
-      padding: 0.1rem 1.5rem;
-      margin: 0;
-
-      p {
-        margin: 0.25em 0;
-      }
-    }
-  }
-
-  .mat-form-field-infix {
-    border: none;
-  }
-
-  .mat-form-field-subscript-wrapper {
-    display: none;
-  }
-
-  .mat-form-field-appearance-outline .mat-form-field-prefix {
-    top: 0;
-  }
-
-  .mat-form-field-wrapper{
-    padding-bottom: 0.8rem;
-  }
-  /* mat-form-field  */
-  mat-form-field.mat-form-field {
-    color: map-get($colors, font);
-
-    ::placeholder {
-      font-size: 1rem;
-      color: map-get($colors, gray);
-    }
-
-    .material-icons {
-      font-size: 24px;
-      color: map-get($colors, gray);
-    }
-
+:host ::ng-deep {
+  mat-form-field.mat-form-field-round {
     .mat-form-field-wrapper {
       .mat-form-field-flex {
-        .mat-form-field-infix {
-          margin: auto 0;
-          border: 0;
-        }
-
         .mat-form-field-outline {
           border: 1px solid map-get($colors, gray);
-        }
-
-        .mat-form-field-outline-start,
-        .mat-form-field-outline-end,
-        .mat-form-field-outline-gap {
-          border: 0px;
-        }
-
-        .mat-form-field-suffix {
-          margin: auto 0;
+          border-radius: 0;
         }
       }
     }
-  }
-
-  .matPrefix-icon {
-    margin: 0.6rem 0.5rem 0.5rem 0;
-  }
-}
-
-::ng-deep.cdk-global-overlay-wrapper {
-  overflow: hidden;
-
-  .cdk-overlay-pane {
-    padding: 0;
-    height: 80% !important;
   }
 }
 
 .submit {
   background: map-get($colors, iris-blue);
-  color: map-get($colors, font-white);
-}
-
-.cancel {
-  background: map-get($colors, danger);
   color: map-get($colors, font-white);
 }

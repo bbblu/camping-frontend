@@ -21,7 +21,7 @@ export class FaqListComponent implements OnInit {
   openDialog(): void {
     this.dialog.open(FaqDialogComponent, {
       width: '70%',
-      height: '50%',
+      height: '80%',
     });
   }
 }

@@ -4,7 +4,7 @@
   margin: 5% 0;
 }
 
-::ng-deep mat-card.mat-card {
+mat-card {
   color: map-get($colors, main);
   border-style: solid;
   border-radius: 20px;
@@ -24,7 +24,7 @@ mat-card-title {
     width: 50px;
   }
 
-  span {
+  .brand {
     margin-left: 20px;
     font-weight: normal;
     line-height: 50px;
@@ -35,21 +35,20 @@ mat-card-content {
   .user-form {
     margin: 5% 7%;
 
-    .password-visibility {
-      cursor: pointer;
+    ::ng-deep mat-checkbox {
+      &.mat-checkbox-checked {
+        .mat-checkbox-background {
+          background-color: map-get($colors, main);
+        }
+      }
     }
 
-    .remember-me-check-box {
+    .remember-me {
       padding-left: 15px;
       padding-bottom: 2%;
     }
 
-    ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
-      background-color: map-get($colors, main);
-    }
-
-    .sign-up-btn,
-    .login-btn {
+    button {
       margin: 2% 0;
       font-size: 70%;
       font-weight: bold;

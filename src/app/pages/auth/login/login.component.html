@@ -1,14 +1,14 @@
 <div class="container" fxLayout="row">
-  <div class="leftBlock" fxFlex></div>
+  <div class="left-block" fxFlex></div>
   <mat-card fxFlex="40" fxFlex.lt-md="60" fxFlex.lt-sm="80">
     <mat-card-title fxLayout="row" fxLayoutAlign="center">
       <img class="logo" src="assets/image/logo.png" alt="logo" />
-      <span>借借露</span>
+      <span class="brand">借借露</span>
     </mat-card-title>
 
     <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="user-form">
-        <div fxLayout="column" fxLayoutGap="0%" fxFlexFill>
+      <form class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div fxLayout="column" fxFlexFill>
           <mat-form-field
             class="mat-form-field-round"
             appearance="outline"
@@ -20,7 +20,7 @@
               placeholder="帳號"
               formControlName="account"
             />
-            <mat-icon matPrefix class="mat-prefix-icon">person</mat-icon>
+            <mat-icon matPrefix>person</mat-icon>
             <mat-error *ngIf="form.controls['account'].hasError('required')">
               請輸入你的帳號！！！
             </mat-error>
@@ -31,8 +31,8 @@
 
           <mat-form-field
             class="mat-form-field-round"
-            floatLabel="never"
             appearance="outline"
+            floatLabel="never"
           >
             <input
               matInput
@@ -40,12 +40,8 @@
               placeholder="密碼"
               formControlName="password"
             />
-            <mat-icon matPrefix class="mat-prefix-icon">lock</mat-icon>
-            <mat-icon
-              matSuffix
-              class="password-visibility"
-              (click)="isVisibility = !isVisibility"
-            >
+            <mat-icon matPrefix>lock</mat-icon>
+            <mat-icon matSuffix (click)="isVisibility = !isVisibility">
               {{ isVisibility ? "visibility_off" : "visibility" }}
             </mat-icon>
             <mat-error *ngIf="form.controls['password'].hasError('required')">
@@ -58,9 +54,8 @@
         </div>
 
         <mat-checkbox
-          class="remember-me-check-box"
+          class="remember-me"
           (change)="changeRememberMe($event)"
-          fxLayoutGap="10%"
           fxLayoutAlign="start"
         >
           記住我
@@ -69,7 +64,6 @@
         <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around">
           <button
             mat-button
-            class="sign-up-btn"
             type="button"
             routerLink="/auth/register"
             fxFlex="40"
@@ -92,5 +86,5 @@
       </form>
     </mat-card-content>
   </mat-card>
-  <div class="rightBlock" fxFlex></div>
+  <div class="right-block" fxFlex></div>
 </div>
