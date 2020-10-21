@@ -1,110 +1,108 @@
-<div class="holder" fxLayout="row">
-  <div class="leftBlock" fxFlex></div>
-  <div class="container" fxFlex="60" fxFlex.lt-sm="80">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="user">
-      <div fxLayout="column" fxLayoutGap="0%" fxFlexFill>
-        <div fxFlex="100">
-          <div class="nickName" fxLayout="row">
-            <img class="userimg" alt="bblu Logo" src="assets/image/avatar.png" />
-            <mat-form-field fxFlex="100" fxFlex.lt-sm="calc(100% - 75px)">
-              <!-- <mat-label>暱稱</mat-label> -->
-              <input
-                matInput
-                formControlName="nickName"
-                [value]="user.nickName"
-                class="nickName-input"
-              />
-            </mat-form-field>
-          </div>
-        </div>
-        <mat-form-field appearance="outline" fxFlex="100">
-          <mat-icon class="matPrefix-icon" matPrefix>person</mat-icon>
-          <input
-            matInput
-            placeholder="account"
-            [value]="user.account"
-            disabled
-          />
+<div class="container" fxLayout="row">
+  <div class="left-block" fxFlex></div>
+  <mat-card *ngIf="user" fxFlex="60" fxFlex.lt-sm="80">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      fxLayout="column"
+      fxFlexFill
+    >
+      <mat-card-title fxLayout="row">
+        <img class="avatar" alt="avatar" src="assets/image/avatar.svg" />
+        <mat-form-field class="nick-name" fxFlex="100">
+          <input matInput formControlName="nickName" [value]="user.nickName" />
         </mat-form-field>
-        <mat-form-field appearance="outline" fxFlex="100">
-          <mat-icon class="matPrefix-icon" matPrefix>perm_identity</mat-icon>
-          <input
-            matInput
-            placeholder="account"
-            [value]="user.lastName"
-            disabled
-          />
-        </mat-form-field>
-        <mat-form-field appearance="outline" fxFlex="100">
-          <mat-icon class="matPrefix-icon" matPrefix>perm_identity</mat-icon>
-          <input
-            matInput
-            placeholder="account"
-            [value]="user.firstName"
-            disabled
-          />
-        </mat-form-field>
-        <mat-form-field appearance="outline" fxFlex="100">
-          <mat-icon class="matPrefix-icon" matPrefix>wc</mat-icon>
-          <input
-            matInput
-            placeholder="account"
-            [value]="user.gender"
-            disabled
-          />
-        </mat-form-field>
-        <mat-form-field appearance="outline" fxFlex="100">
-          <mat-icon class="matPrefix-icon" matPrefix>cake</mat-icon>
-          <input
-            matInput
-            placeholder="account"
-            [value]="user.birthday"
-            disabled
-          />
-        </mat-form-field>
-        <mat-form-field appearance="fill" fxFlex="100">
-          <mat-icon class="matPrefix-icon" matPrefix>details</mat-icon>
-          <mat-select formControlName="experience">
-            <mat-option
-              *ngFor="let experience of experiences"
-              [value]="experience.id"
-            >
-              {{ experience.display }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill" fxFlex="100">
-          <mat-icon class="matPrefix-icon" matPrefix>email</mat-icon>
-          <input matInput formControlName="email" />
-        </mat-form-field>
-        <mat-form-field appearance="fill" fxFlex="100">
-          <mat-icon class="matPrefix-icon" matPrefix>home</mat-icon>
-          <input matInput formControlName="address" />
-        </mat-form-field>
-      </div>
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
+      </mat-card-title>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>person</mat-icon>
+        <input matInput placeholder="account" [value]="user.account" disabled />
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>perm_identity</mat-icon>
+        <input
+          matInput
+          placeholder="account"
+          [value]="user.lastName"
+          disabled
+        />
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>perm_identity</mat-icon>
+        <input
+          matInput
+          placeholder="account"
+          [value]="user.firstName"
+          disabled
+        />
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>wc</mat-icon>
+        <input matInput placeholder="account" [value]="user.gender" disabled />
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>cake</mat-icon>
+        <input
+          matInput
+          placeholder="account"
+          [value]="user.birthday | date: 'yyyy/MM/dd'"
+          disabled
+        />
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>details</mat-icon>
+        <mat-select formControlName="experience">
+          <mat-option
+            *ngFor="let experience of experiences"
+            [value]="experience.id"
+          >
+            {{ experience.display }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>email</mat-icon>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>home</mat-icon>
+        <input matInput formControlName="address" />
+      </mat-form-field>
+
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutAlign="center"
+        fxLayoutGap="10px"
+      >
         <button
+          fxFlex="30"
           fxFlex.lt-sm="100"
-          fxFlex.gt-xs="30"
-          mat-raised-button
+          mat-button
           type="button"
-          class="edit-btn"
           (click)="onEditClick()"
         >
           {{ !isEditable ? "編輯" : "取消" }}
         </button>
+
         <button
+          fxFlex="30"
           fxFlex.lt-sm="100"
-          fxFlex.gt-xs="30"
-          mat-raised-button
+          mat-button
           type="submit"
-          class="edit-btn"
           *ngIf="isEditable"
         >
           修改
         </button>
       </div>
     </form>
-  </div>
-  <div class="rightBlock" fxFlex></div>
+  </mat-card>
+  <div class="right-block" fxFlex></div>
 </div>

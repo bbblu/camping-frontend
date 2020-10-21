@@ -1,127 +1,76 @@
 @import "~src/assets/scss/color.scss";
 
 .container {
-  text-align: center;
+  margin: 3% 0;
+}
+
+mat-card {
+  padding: 3% 5%;
   color: map-get($colors, main);
   border-style: solid;
-  border-color: map-get($colors, main);
   border-radius: 20px;
-  margin: 5% 0;
-  padding: 3%;
+
+  &:not([class*="mat-elevation-z"]) {
+    box-shadow: none;
+  }
 }
 
-.matPrefix-icon {
-  margin: 0.9rem 0.5rem 0.5rem 0;
+mat-card-title {
+  .avatar {
+    height: 60px;
+    padding: 7px;
+    border: 3px solid map-get($colors, blue);
+    border-radius: 50%;
+  }
+
+  .nick-name {
+    margin-top: 10px;
+    margin-left: 15px;
+    color: map-get($colors, font);
+    font-size: 20px;
+  }
 }
 
-::ng-deep {
-  .nickName {
-    margin: 0 10px;
-    .userimg {
-      width: 60px;
-      border: 3px solid map-get($colors, blue);
-      border-radius: 50%;
-      margin-right: 10px;
-    }
+:host ::ng-deep mat-form-field {
+  .mat-form-field-prefix,
+  .mat-form-field-suffix {
+    margin: 1rem 0.5rem 0.5rem;
+  }
 
-    .nickName-input {
-      color: map-get($colors, font);
-    }
-    mat-form-field.mat-form-field {
-      padding: 0;
-      color: #000000;
-    }
-    .mat-form-field {
-      margin: auto 0;
-    }
+  .mat-form-field-infix {
+    margin: auto 0;
+    padding: 1.4rem 0 1.1rem 0;
+    border: none;
+  }
 
-    .mat-form-field-infix {
-      border: none;
-    }
+  input.mat-input-element {
+    color: map-get($colors, font);
+  }
 
-    .mat-form-field-wrapper {
-      padding: 0;
-    }
-
+  &.mat-form-field-appearance-legacy.mat-form-field-disabled {
     .mat-form-field-underline {
-      display: none;
+      background-color: gray;
+      background-image: none;
+      opacity: 0.5;
     }
-  }
 
-  .mat-form-field-appearance-fill .mat-form-field-flex {
-    border-radius: 4px 4px 0 0;
-    padding: 0 0.75em;
-    background: map-get($colors, background-white);
-  }
+    input.mat-input-element {
+      color: map-get($colors, gray);
+    }
 
-  .mat-form-field-appearance-fill.mat-form-field-disabled .mat-form-field-flex {
-    background: map-get($colors, background-white);
-    border-bottom: 2px solid map-get($colors, gray);
-    padding: 0.75rem 0.75rem 0 0;
-  }
-
-  .mat-form-field-appearance-fill
-    .mat-select-trigger
-    .mat-select-arrow-wrapper {
-    transform: translateY(0%);
-  }
-  mat-form-field.mat-form-field-appearance-outline .mat-form-field-flex{
-    padding: 0 0.75em 0 0;
-  }
-}
-
-/* mat-form-field  */
-::ng-deep mat-form-field.mat-form-field {
-  padding: 0 10px;
-  color: map-get($colors, font);
-
-  ::placeholder {
-    font-size: 1rem;
-    color: map-get($colors, blue);
-  }
-
-  .material-icons {
-    font-size: 24px;
-    color: map-get($colors, blue);
-  }
-
-  .mat-form-field-wrapper {
-    .mat-form-field-flex {
-      .mat-form-field-infix {
-        margin: auto 0;
-        padding: 1.4rem 0 1.1rem 0;
-        border: 0;
+    &.nick-name {
+      .mat-form-field-underline {
+        display: none;
       }
 
-      .mat-form-field-outline {
-        border-bottom: 2px solid map-get($colors, gray);
-      }
-
-      .mat-form-field-outline-start,
-      .mat-form-field-outline-end,
-      .mat-form-field-outline-gap {
-        border: 0px;
-      }
-
-      .mat-form-field-suffix {
-        margin: auto 0;
+      input.mat-input-element {
+        color: map-get($colors, font);
       }
     }
   }
-  .nickName-input.ng-valid {
-    border-bottom: 2px solid map-get($colors, gray);
-    overflow: hidden;
-  }
 }
 
-button.edit-btn {
+button {
   color: map-get($colors, font-white);
   background: map-get($colors, blue);
-  margin-right: 0.5rem;
-}
-
-@media screen and (max-width: 599px) {
-  button.edit-btn {
-    margin: 0.5rem 0;
-  }
 }
