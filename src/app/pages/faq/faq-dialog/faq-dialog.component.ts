@@ -1,9 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
 
-export interface DialogData {
-  name: string;
-}
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-faq-dialog',
@@ -11,10 +8,7 @@ export interface DialogData {
   styleUrls: ['./faq-dialog.component.scss'],
 })
 export class FaqDialogComponent implements OnInit {
-  constructor(
-    public dialogRef: MatDialogRef<FaqDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {}
+  constructor(public dialogRef: MatDialogRef<FaqDialogComponent>) {}
 
   ngOnInit(): void {}
 
