@@ -1,6 +1,6 @@
 <div class="container" fxLayout="row">
   <div class="left-block" fxFlex></div>
-  <mat-card *ngIf="user" fxFlex="60" fxFlex.lt-sm="80">
+  <mat-card *ngIf="user$ | async; let user" fxFlex="60" fxFlex.lt-sm="80">
     <form
       [formGroup]="form"
       (ngSubmit)="onSubmit()"
@@ -58,7 +58,7 @@
         <mat-icon matPrefix>details</mat-icon>
         <mat-select formControlName="experience">
           <mat-option
-            *ngFor="let experience of experiences"
+            *ngFor="let experience of experiences$ | async"
             [value]="experience.id"
           >
             {{ experience.display }}
