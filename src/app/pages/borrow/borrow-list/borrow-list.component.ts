@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Rental } from '@models/rental/rental';
+
+import { BorrowStatus } from '@enums/borrow-status.enum';
+
+import { rental } from '../../../fixtures/rental.fixture';
 
 @Component({
   selector: 'app-borrow-list',
@@ -8,18 +13,73 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class BorrowListComponent implements OnInit {
   isChecked = true;
-  formGroup: FormGroup;
+  rentals: Rental[] = [];
+  selectRental!: Rental;
 
-  constructor(formBuilder: FormBuilder) {
-    this.formGroup = formBuilder.group({
-      enableWifi: '',
-      acceptTerms: ['', Validators.requiredTrue],
-    });
+  constructor() {}
+
+  ngOnInit(): void {
+    this.fakeRentals();
   }
 
-  onFormSubmit(): void {
-    alert(JSON.stringify(this.formGroup.value, null, 2));
+  fakeRentals() {
+    for (const x of Array(10).keys()) {
+      const temp = { ...rental };
+      temp.status = Math.floor(Math.random() * Math.floor(5));
+      this.rentals.push(temp);
+    }
   }
 
-  ngOnInit(): void {}
+  getStatusText(status: BorrowStatus): string {
+    switch (status) {
+      case BorrowStatus.cancel:
+        return '取消';
+      case BorrowStatus.notPickUp:
+        return '未取貨';
+      case BorrowStatus.notReturn:
+        return '未歸還';
+      case BorrowStatus.alreadyReturn:
+        return '已歸還';
+      case BorrowStatus.alreadyCheck:
+        return '已檢查';
+      default:
+        return '未知';
+    }
+  }
+
+  getStatusButton(status: BorrowStatus): string {
+    switch (status) {
+      case BorrowStatus.cancel:
+        return '交易取消';
+      case BorrowStatus.notPickUp:
+        return '取貨完成';
+      case BorrowStatus.notReturn:
+        return '歸還完成';
+      case BorrowStatus.alreadyReturn:
+        return '檢查完成';
+      case BorrowStatus.alreadyCheck:
+        return '給予評價';
+      default:
+        return '未知';
+    }
+  }
+
+  getStatusColor(status: BorrowStatus): string {
+    switch (status) {
+      case BorrowStatus.notPickUp:
+        return '#c0dd6f';
+      case BorrowStatus.notReturn:
+        return '#f291a3';
+      case BorrowStatus.alreadyReturn:
+        return '#72c1f2';
+      case BorrowStatus.alreadyCheck:
+        return '#f2c849';
+      default:
+        return 'lightgray';
+    }
+  }
+
+  updateSelectRental(rental: Rental): void {
+    this.selectRental = rental;
+  }
 }

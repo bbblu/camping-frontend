@@ -1,21 +1,51 @@
-<div class="container">
-  <p>Slide Toggle using a simple NgModel.</p>
-  <mat-slide-toggle [(ngModel)]="isChecked"
-    >Slide Toggle Checked: {{ isChecked }}</mat-slide-toggle
+<div class="container" fxLayout="column" fxLayoutAlign="center">
+  <div
+    class="toggle"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="30px"
   >
+    <span>租借</span>
+    <mat-slide-toggle [(ngModel)]="isChecked"></mat-slide-toggle>
+    <span>出租</span>
+  </div>
 
-  <mat-card class="example-card">
+  <div class="record" fxLayout="row wrap" fxLayoutAlign="space-between">
+    <mat-card
+      *ngFor="let rental of rentals"
+      [style.background-color]="getStatusColor(rental.status)"
+      (click)="updateSelectRental(rental)"
+      fxFlex.gt-xs="32"
+      fxFlex.gt-md="19"
+      fxFlexFill
+    >
+      <mat-card-header fxLayout="column">
+        <mat-card-title>{{ getStatusText(rental.status) }}</mat-card-title>
+        <mat-card-subtitle>{{ rental.borrowRange }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ rental.name }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button [style.color]="getStatusColor(rental.status)">
+          {{ getStatusButton(rental.status) }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <mat-card *ngIf="selectRental as rental">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      <mat-card-title>{{ rental.name }}</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-      <p>rain, the Shiba Inu was originally bred for hunting.</p>
-    </mat-card-content>
     <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+      <button mat-button>取物完成</button>
     </mat-card-actions>
+    <mat-card-content>
+      <p>星等</p>
+      <p>{{ rental.areaName }}</p>
+      <p>{{ rental.seller.nickName }}</p>
+      <p>{{ rental.seller.email }}</p>
+    </mat-card-content>
   </mat-card>
 </div>
