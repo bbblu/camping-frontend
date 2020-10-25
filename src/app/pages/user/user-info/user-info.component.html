@@ -1,6 +1,5 @@
-<div class="container" fxLayout="row">
-  <div class="left-block" fxFlex></div>
-  <mat-card *ngIf="user$ | async; let user" fxFlex="60" fxFlex.lt-sm="80">
+<div class="container" fxLayout="row" fxLayoutAlign="center">
+  <mat-card *ngIf="user$ | async; let user" fxFlex="60" fxFlex.lt-md="80">
     <form
       [formGroup]="form"
       (ngSubmit)="onSubmit()"
@@ -104,5 +103,4 @@
       </div>
     </form>
   </mat-card>
-  <div class="right-block" fxFlex></div>
 </div>
