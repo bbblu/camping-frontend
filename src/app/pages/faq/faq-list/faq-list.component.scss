@@ -6,18 +6,18 @@
 
 .title {
   margin: 1rem 20px 1rem 0;
-  color: map-get($colors, strong-blue);
+  color: map-get($colors, primary2);
 }
 
 .feedback-btn {
   margin: 1rem 0;
   color: map-get($colors, font-white);
-  background-color: map-get($colors, strong-blue);
+  background-color: map-get($colors, primary2);
 }
 
 mat-card {
   padding-bottom: 3%;
-  color: map-get($colors, powder-blue);
+  color: map-get($colors, primary2);
   border-style: solid;
   border-radius: 20px;
 
@@ -28,7 +28,7 @@ mat-card {
   h3 {
     margin-top: 1rem;
     text-align: center;
-    color: map-get($colors, light-blue);
+    color: map-get($colors, disable);
   }
 }
 
@@ -38,21 +38,22 @@ mat-card {
   }
 
   .mat-expansion-panel-header {
-    border-bottom: 2px solid map-get($colors, powder-blue);
+    border-bottom: 2px solid map-get($colors, primary2);
     border-radius: 0;
   }
 
   .mat-expansion-panel-header-title {
-    color: map-get($colors, gray);
+    color: map-get($colors, font);
   }
 
   &.mat-expansion-panel-spacing {
     .mat-expansion-panel-header-title {
-      color: map-get($colors, danger);
+      color: map-get($colors, primary5);
+      font-weight: bold;
     }
   }
 
   p {
-    color: map-get($colors, strong-blue);
+    color: map-get($colors, primary5);
   }
 }

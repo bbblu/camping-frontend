@@ -1,20 +1,17 @@
-<div class="container" fxLayout="row">
-  <div class="left-block" fxFlex></div>
-  <mat-toolbar color="primary" fxFlex.gt-sm="90" fxFlex.lt-md="100">
-    <mat-toolbar-row>
-      <button
-        mat-icon-button
-        (click)="sidenav.toggle()"
-        fxShow="true"
-        fxHide.gt-sm
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
-      <img class="logo" alt="bblu logo" src="assets/image/logo.png" />
-      <a class="brand" href="/">借借露</a>
-      <span class="menu-spacer"></span>
+<div class="container" fxLayout="row" fxLayoutAlign="center">
+  <mat-toolbar color="primary" fxFlex="90" fxFlex.lt-md="100">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row">
+        <button mat-icon-button (click)="sidenav.toggle()" fxHide.gt-sm>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <a class="brand" href="/" fxLayout="row" fxLayoutGap="10px">
+          <img class="logo" alt="bblu logo" src="assets/image/logo.png" />
+          <span>借借露</span>
+        </a>
+      </div>
 
-      <div fxShow="true" fxHide.lt-md>
+      <div fxHide.lt-md>
         <!-- The following menu items will be hidden on both SM and XS screen sizes -->
         <button mat-button class="web-nav-item" routerLink="/product">
           商品列表
@@ -27,7 +24,7 @@
         </button>
         <button
           mat-button
-          class="web-nav-item admin"
+          class="web-nav-item user"
           routerLink="/user"
           *ngIf="isAuth$ | async"
         >
@@ -43,17 +40,16 @@
           登出
         </button>
         <ng-template #login>
-          <button mat-button class="web-navbar-li" routerLink="/auth/login">
+          <button mat-button class="web-nav-item" routerLink="/auth/login">
             登入
           </button>
         </ng-template>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
-  <div class="right-block" fxFlex></div>
 </div>
 
-<mat-sidenav-container fxFlexFill>
+<mat-sidenav-container>
   <mat-sidenav #sidenav>
     <mat-nav-list>
       <a mat-list-item routerLink="/product">商品列表</a>
@@ -76,7 +72,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content fxFlexFill>
+  <mat-sidenav-content>
     <img class="banner" alt="banner" src="assets/image/banner.png" />
     <mat-spinner [diameter]="50" *ngIf="showSpinner$ | async"></mat-spinner>
     <router-outlet></router-outlet>

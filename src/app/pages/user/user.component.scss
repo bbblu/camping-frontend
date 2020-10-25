@@ -1,7 +1,0 @@
-@import "~src/assets/scss/color.scss";
-
-:host ::ng-deep {
-  .mat-tab-group.mat-primary mat-ink-bar.mat-ink-bar {
-    background-color: map-get($colors, blue);
-  }
-}
