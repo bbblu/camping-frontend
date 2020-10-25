@@ -1,7 +1,7 @@
 @import "~src/assets/scss/color.scss";
 
 .container {
-  background-color: map-get($colors, main);
+  background-color: map-get($colors, primary1);
 }
 
 mat-toolbar {
@@ -24,7 +24,7 @@ mat-toolbar {
 
   .web-nav-item {
     &.user {
-      border: 1px solid map-get($colors, background-white);
+      border: 1px solid map-get($colors, bg-white);
     }
 
     button:hover {
@@ -35,7 +35,7 @@ mat-toolbar {
 
 mat-sidenav-container {
   height: calc(100% - 64px);
-  background-color: map-get($colors, background-white);
+  background-color: map-get($colors, bg-white);
 }
 
 .banner {

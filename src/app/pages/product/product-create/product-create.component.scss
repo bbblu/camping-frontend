@@ -2,7 +2,7 @@
 
 .container {
   text-align: center;
-  color: map-get($colors, main);
+  color: map-get($colors, primary1);
   margin: 5% 0;
   padding: 3%;
 }
@@ -17,11 +17,11 @@
     color: map-get($colors, font);
     ::placeholder {
       font-size: 1rem;
-      color: map-get($colors, gray);
+      color: map-get($colors, disable);
     }
     .material-icons {
       font-size: 24px;
-      color: map-get($colors, blue);
+      color: map-get($colors, primary2);
     }
     .mat-form-field-wrapper {
       .mat-form-field-flex {

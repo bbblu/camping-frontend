@@ -2,7 +2,7 @@
 
 .container {
   font-family: Microsoft JhengHei;
-  border: 2px solid map-get($colors, main);
+  border: 2px solid map-get($colors, primary1);
   border-radius: 20px;
   margin: 5% 0;
   padding: 1rem;
@@ -43,5 +43,5 @@
   padding-right: 0.5rem;
 }
 .product-detail-icon{
-  color: map-get($colors, blue);
+  color: map-get($colors, primary2);
 }

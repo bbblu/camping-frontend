@@ -17,7 +17,7 @@
 
 mat-card {
   padding-bottom: 3%;
-  color: map-get($colors, powder-blue);
+  color: map-get($colors, primary2);
   border-style: solid;
   border-radius: 20px;
 
@@ -38,17 +38,17 @@ mat-card {
   }
 
   .mat-expansion-panel-header {
-    border-bottom: 2px solid map-get($colors, powder-blue);
+    border-bottom: 2px solid map-get($colors, primary2);
     border-radius: 0;
   }
 
   .mat-expansion-panel-header-title {
-    color: map-get($colors, gray);
+    color: map-get($colors, disable);
   }
 
   &.mat-expansion-panel-spacing {
     .mat-expansion-panel-header-title {
-      color: map-get($colors, danger);
+      color: map-get($colors, primary5);
     }
   }
 

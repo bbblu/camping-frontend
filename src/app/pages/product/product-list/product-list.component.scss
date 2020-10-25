@@ -20,7 +20,7 @@
 }
 
 .card {
-  background: map-get($colors, main);
+  background: map-get($colors, primary1);
   border: 3px solid map-get($colors, frost);
   box-sizing: border-box;
   border-radius: 20px;
@@ -36,7 +36,7 @@
 
   .card-image {
     border-radius: 17px;
-    background: map-get($colors, background-white);
+    background: map-get($colors, bg-white);
     box-sizing: border-box;
     height: 200px;
     width: 100%;
@@ -55,7 +55,7 @@
   }
 
   .cost {
-    color: map-get($colors, danger);
+    color: map-get($colors, primary5);
   }
 
   .score {
@@ -78,7 +78,7 @@
 
   .matPrefix-icon {
     margin: 0px 8px;
-    color: map-get($colors, gray);
+    color: map-get($colors, disable);
   }
 
   /* mat-form-field  */
@@ -90,8 +90,8 @@
 
       .mat-form-field-flex {
         padding: 0;
-        background: map-get($colors, background-white);
-        border: 3px solid map-get($colors, powder-blue);
+        background: map-get($colors, bg-white);
+        border: 3px solid map-get($colors, primary2);
         border-radius: 0%;
 
         .mat-form-field-infix {
@@ -118,7 +118,7 @@
     }
 
     .mat-chip.mat-standard-chip {
-      background: map-get($colors, powder-blue);
+      background: map-get($colors, primary2);
       color: map-get($colors, font-white);
     }
   }
@@ -130,13 +130,13 @@
 
     .mat-form-field .mat-button-wrapper {
       svg {
-        color: map-get($colors, gray);
+        color: map-get($colors, disable);
       }
     }
 
     .search {
       color: map-get($colors, font-white);
-      background: map-get($colors, powder-blue);
+      background: map-get($colors, primary2);
       vertical-align: middle;
     }
 

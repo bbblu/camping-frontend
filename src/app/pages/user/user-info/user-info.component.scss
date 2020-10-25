@@ -6,7 +6,7 @@
 
 mat-card {
   padding: 3% 5%;
-  color: map-get($colors, main);
+  color: map-get($colors, primary1);
   border-style: solid;
   border-radius: 20px;
 
@@ -19,7 +19,7 @@ mat-card-title {
   .avatar {
     height: 60px;
     padding: 7px;
-    border: 3px solid map-get($colors, blue);
+    border: 3px solid map-get($colors, primary2);
     border-radius: 50%;
   }
 
@@ -55,7 +55,7 @@ mat-card-title {
     }
 
     input.mat-input-element {
-      color: map-get($colors, gray);
+      color: map-get($colors, disable);
     }
 
     &.nick-name {
@@ -72,5 +72,5 @@ mat-card-title {
 
 button {
   color: map-get($colors, font-white);
-  background: map-get($colors, blue);
+  background: map-get($colors, primary2);
 }
