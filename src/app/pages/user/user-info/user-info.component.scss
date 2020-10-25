@@ -70,7 +70,6 @@ mat-card-title {
   }
 }
 
-button {
+.mat-flat-button {
   color: map-get($colors, font-white);
-  background: map-get($colors, primary2);
 }
