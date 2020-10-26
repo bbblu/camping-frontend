@@ -90,6 +90,22 @@
                 appearance="outline"
                 floatLabel="never"
               >
+                <input
+                  matInput
+                  placeholder="手機號碼"
+                  formControlName="cellPhone"
+                />
+                <mat-icon matPrefix>smartphone</mat-icon>
+                <mat-error *ngIf="form.controls['cellPhone'].hasError('required')">
+                  請填寫您的手機號碼
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field
+                class="mat-form-field-round"
+                appearance="outline"
+                floatLabel="never"
+              >
                 <input matInput placeholder="地址" formControlName="address" />
                 <mat-icon matPrefix>room</mat-icon>
                 <mat-error
