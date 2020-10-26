@@ -18,6 +18,8 @@ import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/image-cropper-dialog.component';
 
+import { ProductCreateDialogComponent } from '../product-create-dialog/product-create-dialog.component';
+
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
@@ -179,5 +181,11 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
   deleteProductImage(): void {
     this.productImages.splice(this.imageIndex, 1);
     this.imageIndex = 0;
+  }
+  openDialog(): void {
+    this.dialog.open(ProductCreateDialogComponent, {
+      width: '70%',
+      height: '80%',
+    });
   }
 }

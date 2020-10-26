@@ -1,25 +1,21 @@
-<div class="holder" fxLayout="row">
+<div class="container" fxLayout="row">
   <div class="leftBlock" fxFlex></div>
-  <div class="container" fxFlex="60" fxFlex.lt-sm="80">
-    <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
-      <!-- 交易資訊表單 -->
-      <div
-        class="transaction-information"
+  <mat-card fxFlex="60" fxFlex.lt-sm="80">
+    <!-- <mat-card-title fxLayout="row" fxLayoutAlign="center">
+    </mat-card-title> -->
+    <mat-card-content>
+      <form
+        class="transaction-information-form"
+        [formGroup]="groupForm"
+        (ngSubmit)="onSubmit()"
         fxLayout="column"
-        fxLayoutGap="0%"
         fxFlexFill
       >
-        <mat-form-field
-          class="product-input"
-          [hideRequiredMarker]="true"
-          floatLabel="never"
-          appearance="outline"
-          fxFlex="100"
-        >
-          <i class="material-icons" matPrefix>tour</i>
+        <!-- 交易資訊表單 -->
+        <mat-form-field floatLabel="never" [hideRequiredMarker]="true">
+          <mat-icon matPrefix>tour</mat-icon>
           <input
             matInput
-            required
             type="text"
             placeholder="標題"
             formControlName="name"
@@ -32,9 +28,8 @@
         <mat-form-field
           floatLabel="never"
           appearance="fill"
-          class="product-input"
-          fxFlex="100"
           [hideRequiredMarker]="true"
+          (click)="picker.opened = true"
         >
           <mat-date-range-input [rangePicker]="picker">
             <input
@@ -54,48 +49,64 @@
           ></mat-datepicker-toggle>
           <mat-date-range-picker #picker> </mat-date-range-picker>
         </mat-form-field>
-        <div class="input-style"></div>
-        <div class="area" fxLayout="row">
-          <div class="field">
-            <mat-form-field appearance="fill" floatLabel="never">
-              <i class="material-icons" matPrefix>gps_fixed</i>
-              <mat-select formControlName="cityName" placeholder="市">
-                <mat-option
-                  *ngFor="let name of cities$ | async; let cityIndex = index"
-                  [value]="name"
-                  (onSelectionChange)="cityIndex$.next(cityIndex)"
-                >
-                  {{ name }}
-                </mat-option>
-              </mat-select>
-              <mat-error
-                *ngIf="groupForm.controls['cityName'].hasError('required')"
+
+        <div
+          class="area"
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="10px"
+        >
+          <mat-form-field
+            fxFlex="50"
+            fxFlex.xs="100"
+            appearance="fill"
+            floatLabel="never"
+          >
+            <mat-icon matPrefix>gps_fixed</mat-icon>
+            <mat-select formControlName="cityName" placeholder="市">
+              <mat-option
+                *ngFor="let name of cities$ | async; let cityIndex = index"
+                [value]="name"
+                (onSelectionChange)="cityIndex$.next(cityIndex)"
               >
-                此為必填
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="field">
-            <mat-form-field appearance="fill" floatLabel="never">
-              <i class="material-icons" matPrefix>gps_fixed</i>
-              <mat-select formControlName="cityAreaName" placeholder="區">
-                <mat-option
-                  *ngFor="let areaName of areas$ | async"
-                  [value]="areaName"
-                >
-                  {{ areaName }}
-                </mat-option>
-              </mat-select>
-              <mat-error
-                *ngIf="groupForm.controls['cityAreaName'].hasError('required')"
+                {{ name }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="groupForm.controls['cityName'].hasError('required')"
+            >
+              此為必填
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            fxFlex="50"
+            fxFlex.xs="100"
+            appearance="fill"
+            floatLabel="never"
+          >
+            <mat-icon matPrefix>gps_fixed</mat-icon>
+            <mat-select formControlName="cityAreaName" placeholder="區">
+              <mat-option
+                *ngFor="let areaName of areas$ | async"
+                [value]="areaName"
               >
-                此為必填
-              </mat-error>
-            </mat-form-field>
-          </div>
+                {{ areaName }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="groupForm.controls['cityAreaName'].hasError('required')"
+            >
+              此為必填
+            </mat-error>
+          </mat-form-field>
         </div>
-        <mat-form-field floatLabel="never" class="product-input" [hideRequiredMarker]="true">
-          <i class="material-icons" matPrefix>attach_money</i>
+
+        <mat-form-field
+          floatLabel="never"
+          class="product-input"
+          [hideRequiredMarker]="true"
+        >
+          <mat-icon matPrefix>attach_money</mat-icon>
           <input
             matInput
             required
@@ -112,7 +123,7 @@
           class="product-input"
           [hideRequiredMarker]="true"
         >
-          <i class="material-icons" matPrefix>work_outline</i>
+          <mat-icon matPrefix>work_outline</mat-icon>
           <input
             matInput
             required
@@ -126,306 +137,32 @@
             此為必填
           </mat-error>
         </mat-form-field>
-      </div>
-      <!-- 已加入的物品 -->
-      <div
-        class="alread-add"
-        formArrayName="productArrays"
-        class="well well-lg"
-      >
         <div
-          *ngFor="let product of groupForm.value.productArrays; let i = index"
-        >
-          <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                {{ product.name }} : {{ product.count }}
-              </mat-expansion-panel-header>
-              <!-- 內容 -->
-              <div fxLayout="row" fxLayoutAlign="space-between">
-                <div fxLayout="column" fxLayoutGap="1%">
-                  <div>
-                    <i class="material-icons" matPrefix>tour</i>
-                    物品名稱: {{ product.name }}
-                  </div>
-                  <div>
-                    <i class="material-icons" matPrefix>tour</i>
-                    物品類型: {{ product.type }}
-                  </div>
-                  <div>
-                    <i class="material-icons" matPrefix>tour</i>
-                    數量: {{ product.count }}
-                  </div>
-                  <div>
-                    <i class="material-icons" matPrefix>tour</i>
-                    品牌: {{ product.brand }}
-                  </div>
-                  <div>
-                    <i class="material-icons" matPrefix>tour</i>
-                    外觀狀況: {{ product.appearance }}
-                  </div>
-                  <div>
-                    <i class="material-icons" matPrefix>tour</i>
-                    使用方式: {{ product.useInformation }}
-                  </div>
-                  <div>
-                    <i class="material-icons" matPrefix>gavel</i>
-                    損壞賠償: {{ product.brokenCompensation }}
-                  </div>
-                  <div>
-                    <i class="material-icons" matPrefix>tour</i>
-                    相關連結: <a>{{ product.relatedLink }}</a>
-                  </div>
-                  <div>
-                    <i class="material-icons" matPrefix>tour</i>
-                    其他備註: {{ product.memo }}
-                  </div>
-                </div>
-                <div>
-                  <div style="width: 200px; min-height: 200px">
-                    <ng-image-slider
-                      [images]="product.imageArray"
-                      #nav
-                    ></ng-image-slider>
-                  </div>
-                </div>
-              </div>
-              <div fxLayoutAlign="center">
-                <button
-                  mat-button
-                  type="button"
-                  (click)="removeProductArray(i)"
-                >
-                  刪除
-                </button>
-              </div>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-      </div>
-      <!-- 添加物品表單 -->
-      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-        <div
-          class="goods-information"
+          class="sendOut"
           fxLayout="row"
-          fxFlexFill
-          fxLayoutAlign="space-evenly"
+          fxLayoutAlign="space-around center"
+          fxLayoutGap="10px"
         >
-          <div class="goods" fxLayout="column" fxLayoutGap="0%">
-            <div class="input-style">
-              <mat-form-field [hideRequiredMarker]="true">
-                <i class="material-icons" matPrefix>tour</i>
-                <input
-                  matInput
-                  required
-                  type="text"
-                  placeholder="物品名稱"
-                  formControlName="name"
-                />
-                <mat-error
-                  *ngIf="productForm.controls['name'].hasError('required')"
-                >
-                  此為必填
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div class="input-style">
-              <mat-form-field [hideRequiredMarker]="true">
-                <i class="material-icons" matPrefix>tour</i>
-                <mat-select formControlName="type" placeholder="產品類型">
-                  <mat-option
-                    *ngFor="let productType of productTypes$ | async"
-                    [value]="productType.id"
-                  >
-                    {{ productType.name }}
-                  </mat-option>
-                </mat-select>
-                <mat-error
-                  *ngIf="productForm.controls['type'].hasError('required')"
-                >
-                  此為必填
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div class="input-style">
-              <mat-form-field [hideRequiredMarker]="true">
-                <i class="material-icons" matPrefix>tour</i>
-                <input
-                  matInput
-                  required
-                  type="number"
-                  placeholder="數量"
-                  formControlName="count"
-                />
-                <mat-error
-                  *ngIf="productForm.controls['count'].hasError('required')"
-                >
-                  此為必填
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div class="input-style">
-              <mat-form-field [hideRequiredMarker]="true">
-                <i class="material-icons" matPrefix>tour</i>
-                <input
-                  matInput
-                  required
-                  type="text"
-                  placeholder="品牌"
-                  formControlName="brand"
-                />
-                <mat-error
-                  *ngIf="productForm.controls['brand'].hasError('required')"
-                >
-                  此為必填
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div class="input-style">
-              <mat-form-field [hideRequiredMarker]="true">
-                <i class="material-icons" matPrefix>tour</i>
-                <input
-                  matInput
-                  required
-                  type="text"
-                  placeholder="外觀狀況"
-                  formControlName="appearance"
-                />
-                <mat-error
-                  *ngIf="
-                    productForm.controls['appearance'].hasError('required')
-                  "
-                >
-                  此為必填
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div class="input-style">
-              <mat-form-field [hideRequiredMarker]="true">
-                <i class="material-icons" matPrefix>tour</i>
-                <input
-                  matInput
-                  required
-                  type="text"
-                  placeholder="使用方式"
-                  formControlName="useInformation"
-                />
-                <mat-error
-                  *ngIf="
-                    productForm.controls['useInformation'].hasError('required')
-                  "
-                >
-                  此為必填
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div class="input-style">
-              <mat-form-field [hideRequiredMarker]="true">
-                <i class="material-icons" matPrefix>gavel</i>
-                <input
-                  matInput
-                  required
-                  type="text"
-                  placeholder="損壞賠償"
-                  formControlName="brokenCompensation"
-                />
-                <mat-error
-                  *ngIf="
-                    productForm.controls['brokenCompensation'].hasError(
-                      'required'
-                    )
-                  "
-                >
-                  此為必填
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div class="input-style">
-              <mat-form-field [hideRequiredMarker]="true">
-                <i class="material-icons" matPrefix>tour</i>
-                <input
-                  matInput
-                  type="url"
-                  placeholder="相關連結"
-                  formControlName="relatedLink"
-                />
-              </mat-form-field>
-            </div>
-
-            <div class="textarea-style">
-              <mat-form-field floatLabel="never">
-                <textarea
-                  matInput
-                  placeholder="備註..."
-                  formControlName="memo"
-                ></textarea>
-              </mat-form-field>
-            </div>
-            <div class="add-goods" fxLayout="row" fxLayoutAlign="end">
-              <button
-                mat-button
-                type="button"
-                (click)="pushProductArray()"
-                [disabled]="!productForm.valid"
-              >
-                添加物品
-              </button>
-            </div>
-          </div>
-          <div class="goods-images">
-            <button
-              mat-raised-button
-              (click)="openProductImageDialog('create')"
-            >
-              新增圖片
-            </button>
-            <div class="image-slider">
-              <ng-image-slider
-                *ngIf="productImages.length > 0; else emptyImages"
-                [images]="productImages"
-                [imageSize]="{ width: '300px', height: '200px', space: 0 }"
-                (arrowClick)="updateImageIndex($event)"
-              >
-              </ng-image-slider>
-              <button
-                mat-raised-button
-                color="primary"
-                (click)="openProductImageDialog('update')"
-              >
-                編輯
-              </button>
-              <button
-                mat-raised-button
-                color="warn"
-                (click)="deleteProductImage()"
-              >
-                刪除
-              </button>
-              <ng-template #emptyImages>
-                <img
-                  src="assets/image/logo.png"
-                  alt="logo"
-                  width="300px"
-                  height="200px"
-                />
-              </ng-template>
-            </div>
-          </div>
+          <button
+            fxFlex="30"
+            fxFlex.lt-sm="100"
+            mat-button
+            (click)="openDialog()"
+          >
+            新增物品
+          </button>
+          <button
+            fxFlex="30"
+            fxFlex.lt-sm="100"
+            mat-button
+            type="submit"
+            [disabled]="!groupForm.valid"
+          >
+            上架
+          </button>
         </div>
       </form>
-      <div class="sendOut" fxLayout="row" fxLayoutAlign="space-around center">
-        <button mat-button type="submit" [disabled]="!groupForm.valid">
-          上架
-        </button>
-      </div>
-    </form>
-  </div>
+    </mat-card-content>
+  </mat-card>
   <div class="rightBlock" fxFlex></div>
 </div>

@@ -1,64 +1,80 @@
 @import "~src/assets/scss/color.scss";
 
 .container {
-  text-align: center;
+  margin: 3% 0;
+}
+
+mat-card {
+  padding: 3% 5%;
   color: map-get($colors, main);
-  margin: 5% 0;
-  padding: 3%;
+  border-style: solid;
+  border-radius: 20px;
+
+  &:not([class*="mat-elevation-z"]) {
+    box-shadow: none;
+  }
 }
 
 /* mat-form-field  */
-.transaction-information ::ng-deep{
-  mat-form-field.mat-form-field-appearance-fill .mat-form-field-flex{
-    padding:0 0.5rem 0 0;
-  }
-  mat-form-field.mat-form-field {
-    // padding: 0 10px;
-    color: map-get($colors, font);
-    ::placeholder {
-      font-size: 1rem;
-      color: map-get($colors, gray);
-    }
-    .material-icons {
-      font-size: 24px;
-      color: map-get($colors, blue);
-    }
-    .mat-form-field-wrapper {
-      .mat-form-field-flex {
-        .mat-form-field-infix {
-          margin: auto 0;
-          padding: 0.5rem 0;
-          border: 0;
-        }
-
-        .mat-form-field-outline-start,
-        .mat-form-field-outline-end,
-        .mat-form-field-outline-gap {
-          border: 0px;
-        }
-
-        .mat-form-field-suffix {
-          margin: auto 0;
-        }
+.transaction-information-form{
+  ::ng-deep.mat-form-field-invalid{
+    .mat-form-field-prefix{
+      mat-icon{
+        color: map-get($colors, danger);
+      }
+      .mat-datepicker-toggle-default-icon{
+        color: map-get($colors, danger);
       }
     }
   }
-  .mat-form-field-prefix button.mat-icon-button span.mat-button-wrapper svg{
-    margin: 0 0.5rem 0 0;
+  ::ng-deep mat-form-field.mat-form-field {
+    color: map-get($colors, font);
+    padding-bottom: 1rem;
+    mat-icon{
+      color: map-get($colors, blue);
+      margin-right: 11px;
+    }
+    .mat-form-field-wrapper {
+      border: 0px;
+      .mat-form-field-flex {
+        padding: 0;
+        background: map-get($colors, background-white);  
+        .mat-form-field-infix {
+          margin: auto 0;
+          border: 0;
+        }
+  
+        .mat-form-field-suffix {
+          margin: auto 0;
+        }
+  
+        .matPrefix-icon {
+          padding: 0.5rem 0;
+        }
+  
+        .mat-select-arrow-wrapper {
+          transform: translateY(0%);
+  
+          .mat-select-arrow {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+    .mat-chip.mat-standard-chip {
+      background: map-get($colors, powder-blue);
+      color: map-get($colors, font-white);
+    }
+    .mat-datepicker-toggle-default-icon{
+      color: map-get($colors, blue);
+      margin: 0 !important;
+      padding: 0.25em 0 0.75em 0;
+    }
   }
 }
 
 
-.goods-information {
-  border: solid yellow 1px;
-  padding: 2%;
-}
-
-.mat-expansion-panel:not([class*="mat-elevation-z"]) {
-  box-shadow: none;
-  border: solid yellow 1px;
-}
-.image-slider {
-  width: 300px;
-  height: 200px;
+.sendOut button {
+  background: map-get($colors, blue);
+  color: map-get($colors, font-white);
 }
