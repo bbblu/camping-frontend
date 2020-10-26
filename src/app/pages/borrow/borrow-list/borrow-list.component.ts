@@ -28,6 +28,8 @@ export class BorrowListComponent implements OnInit {
       temp.status = Math.floor(Math.random() * Math.floor(5));
       this.rentals.push(temp);
     }
+
+    this.selectRental = this.rentals[0];
   }
 
   getStatusText(status: BorrowStatus): string {
@@ -81,5 +83,15 @@ export class BorrowListComponent implements OnInit {
 
   updateSelectRental(rental: Rental): void {
     this.selectRental = rental;
+  }
+
+  imageToSliderObject(images: string[]): object[] {
+    return images.map((image) => {
+      return {
+        image: image,
+        thumbImage: image,
+        alt: 'detail image',
+      };
+    });
   }
 }

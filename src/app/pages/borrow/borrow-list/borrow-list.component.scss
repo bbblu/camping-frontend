@@ -69,3 +69,63 @@
     background-color: map-get($colors, bg-white);
   }
 }
+
+.detail {
+  &.mat-card {
+    background-color: unquote(map-get($colors, primary4) + "8f");
+
+    &:not([class*="mat-elevation-z"]) {
+      box-shadow: none;
+    }
+  }
+
+  mat-card-title:before {
+    position: absolute;
+    top: 53px;
+    left: 23px;
+    height: 10px;
+    width: 10px;
+    content: "";
+    background: map-get($colors, primary1);
+    border-radius: 50%;
+  }
+
+  mat-card-title {
+    padding-left: 15px;
+    padding-right: 30px;
+    border-bottom: 3px solid map-get($colors, primary1);
+  }
+
+  mat-card-actions {
+    button {
+      color: map-get($colors, font-white);
+    }
+  }
+
+  mat-card-content {
+    margin: 0 50px;
+
+    .material-icons {
+      margin-right: 10px;
+      color: map-get($colors, primary5);
+
+      &.user {
+        padding: 10px;
+        border: 2px solid map-get($colors, primary5);
+        border-radius: 50%;
+        font-size: 30px;
+        color: map-get($colors, font-white);
+        background-color: unquote(map-get($colors, primary5) + "8f");
+      }
+    }
+
+    .contact {
+      padding-left: 15px;
+
+      span {
+        color: gray;
+        font-size: 12px;
+      }
+    }
+  }
+}
