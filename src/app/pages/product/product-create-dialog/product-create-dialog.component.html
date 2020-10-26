@@ -1,0 +1,146 @@
+<!-- 添加物品表單 -->
+<form fxLayout="column" fxFlexFill>
+  <div
+    class="goods-information"
+    fxLayout="row"
+    fxFlexFill
+    fxLayoutAlign="space-evenly"
+  >
+    <div class="goods" fxLayout="column" fxLayoutGap="0%">
+      <div class="input-style">
+        <mat-form-field [hideRequiredMarker]="true">
+          <i class="material-icons" matPrefix>tour</i>
+          <input
+            matInput
+            required
+            type="text"
+            placeholder="物品名稱"
+            formControlName="name"
+          />
+          <mat-error> 此為必填 </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="input-style">
+        <mat-form-field [hideRequiredMarker]="true">
+          <i class="material-icons" matPrefix>tour</i>
+          <mat-select formControlName="type" placeholder="產品類型">
+            <mat-option> </mat-option>
+          </mat-select>
+          <mat-error> 此為必填 </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="input-style">
+        <mat-form-field [hideRequiredMarker]="true">
+          <i class="material-icons" matPrefix>tour</i>
+          <input
+            matInput
+            required
+            type="number"
+            placeholder="數量"
+            formControlName="count"
+          />
+          <mat-error> 此為必填 </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="input-style">
+        <mat-form-field [hideRequiredMarker]="true">
+          <i class="material-icons" matPrefix>tour</i>
+          <input
+            matInput
+            required
+            type="text"
+            placeholder="品牌"
+            formControlName="brand"
+          />
+          <mat-error> 此為必填 </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="input-style">
+        <mat-form-field [hideRequiredMarker]="true">
+          <i class="material-icons" matPrefix>tour</i>
+          <input
+            matInput
+            required
+            type="text"
+            placeholder="外觀狀況"
+            formControlName="appearance"
+          />
+          <mat-error> 此為必填 </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="input-style">
+        <mat-form-field [hideRequiredMarker]="true">
+          <i class="material-icons" matPrefix>tour</i>
+          <input
+            matInput
+            required
+            type="text"
+            placeholder="使用方式"
+            formControlName="useInformation"
+          />
+          <mat-error> 此為必填 </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="input-style">
+        <mat-form-field [hideRequiredMarker]="true">
+          <i class="material-icons" matPrefix>gavel</i>
+          <input
+            matInput
+            required
+            type="text"
+            placeholder="損壞賠償"
+            formControlName="brokenCompensation"
+          />
+          <mat-error> 此為必填 </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="input-style">
+        <mat-form-field [hideRequiredMarker]="true">
+          <i class="material-icons" matPrefix>tour</i>
+          <input
+            matInput
+            type="url"
+            placeholder="相關連結"
+            formControlName="relatedLink"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="textarea-style">
+        <mat-form-field floatLabel="never">
+          <textarea
+            matInput
+            placeholder="備註..."
+            formControlName="memo"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="add-goods" fxLayout="row" fxLayoutAlign="end">
+        <button mat-button type="button">添加物品</button>
+      </div>
+    </div>
+    <div class="goods-images">
+      <button mat-raised-button>新增圖片</button>
+      <div class="image-slider">
+        <ng-image-slider> </ng-image-slider>
+        <button mat-raised-button color="primary">編輯</button>
+        <button mat-raised-button color="warn">刪除</button>
+        <ng-template #emptyImages>
+          <img
+            src="assets/image/logo.png"
+            alt="logo"
+            width="300px"
+            height="200px"
+          />
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</form>
