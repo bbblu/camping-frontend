@@ -1,23 +1,21 @@
 @import "~src/assets/scss/color.scss";
 
-.container {
-  margin: 3% 0;
-}
-
-mat-card {
-  padding: 3% 5%;
-  color: map-get($colors, main);
-  border-style: solid;
-  border-radius: 20px;
-
-  &:not([class*="mat-elevation-z"]) {
-    box-shadow: none;
-  }
-}
-
-/* mat-form-field  */
-.transaction-information-form{
-  ::ng-deep.mat-form-field-invalid{
+// :host ::ng-deep mat-form-field {
+//     .mat-form-field-prefix,
+//     .mat-form-field-suffix {
+//     //   margin: 1rem 0.5rem 0.5rem;
+//     }
+  
+//     .mat-form-field-infix {
+//         // padding: 1rem 0;
+//         border: none;
+//     }
+  
+//     input.mat-input-element {
+//       color: map-get($colors, font);
+//     }
+//   }
+::ng-deep.mat-form-field-invalid{
     .mat-form-field-prefix{
       mat-icon{
         color: map-get($colors, danger);
@@ -61,20 +59,13 @@ mat-card {
         }
       }
     }
-    .mat-chip.mat-standard-chip {
-      background: map-get($colors, powder-blue);
-      color: map-get($colors, font-white);
-    }
-    .mat-datepicker-toggle-default-icon{
-      color: map-get($colors, blue);
-      margin: 0 !important;
-      padding: 0.25em 0 0.75em 0;
-    }
   }
-}
-
-
-.sendOut button {
-  background: map-get($colors, blue);
-  color: map-get($colors, font-white);
-}
+  
+  button {
+    color: map-get($colors, font-white);
+    background: map-get($colors, blue);
+  }
+  .mat-primary{
+    color: map-get($colors, font-white);
+  }
+  

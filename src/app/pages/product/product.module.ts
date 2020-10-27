@@ -14,6 +14,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductUpdateComponent } from './product-update/product-update.component';
+import { ProductCreateDialogComponent } from './product-create-dialog/product-create-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ProductUpdateComponent } from './product-update/product-update.componen
     ProductDetailComponent,
     ProductCreateComponent,
     ProductUpdateComponent,
+    ProductCreateDialogComponent,
   ],
   imports: [
     CommonModule,
