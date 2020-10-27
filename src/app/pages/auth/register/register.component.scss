@@ -5,7 +5,7 @@
 }
 
 mat-card {
-  color: map-get($colors, main);
+  color: map-get($colors, primary1);
   border-style: solid;
   border-radius: 20px;
 
@@ -34,17 +34,17 @@ mat-card-content {
     .subtitle {
       text-align: left;
       margin: 15px 25px;
-      color: map-get($colors, gray);
+      color: map-get($colors, disable);
     }
 
     ::ng-deep mat-radio-button {
       &.mat-radio-checked {
         .mat-radio-outer-circle {
-          border-color: map-get($colors, main);
+          border-color: map-get($colors, primary1);
         }
 
         .mat-radio-inner-circle {
-          background-color: map-get($colors, main);
+          background-color: map-get($colors, primary1);
         }
       }
     }
@@ -53,13 +53,13 @@ mat-card-content {
     .radio-form-field {
       margin: 0 10px;
       padding: 1rem 12px;
-      color: map-get($colors, gray);
-      border: 2px solid map-get($colors, yellow);
+      color: map-get($colors, disable);
+      border: 2px solid map-get($colors, primary4);
       border-radius: 50px;
 
       .mat-icon {
         margin-right: 0.5rem;
-        color: map-get($colors, blue);
+        color: map-get($colors, primary2);
       }
 
       label {
@@ -83,7 +83,7 @@ mat-card-content {
       ::ng-deep .mat-icon-button {
         width: 24px;
         height: 24px;
-        color: map-get($colors, blue);
+        color: map-get($colors, primary2);
       }
     }
 
@@ -104,12 +104,12 @@ mat-card-content {
 
     .register-btn {
       color: map-get($colors, font-white);
-      background-color: map-get($colors, main);
-      border-color: map-get($colors, main);
+      background-color: map-get($colors, primary1);
+      border-color: map-get($colors, primary1);
 
       &:disabled {
-        background-color: map-get($colors, gray);
-        border-color: map-get($colors, gray);
+        background-color: map-get($colors, disable);
+        border-color: map-get($colors, disable);
       }
     }
   }
@@ -119,13 +119,13 @@ mat-card-content {
   padding: 0 10px;
 
   .mat-icon {
-    color: map-get($colors, blue);
+    color: map-get($colors, primary2);
   }
 
   .mat-form-field-wrapper {
     .mat-form-field-flex {
       .mat-form-field-outline {
-        border: 2px solid map-get($colors, yellow);
+        border: 2px solid map-get($colors, primary4);
       }
     }
   }

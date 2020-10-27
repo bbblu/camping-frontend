@@ -1,7 +1,7 @@
 @import "~src/assets/scss/color.scss";
 
 .container {
-  background-color: map-get($colors, main);
+  background-color: map-get($colors, primary1);
 }
 
 mat-toolbar {
@@ -9,24 +9,24 @@ mat-toolbar {
   mat-icon,
   a,
   button {
-    color: white;
-  }
-
-  .logo {
-    width: 40px;
+    color: map-get($colors, font-white);
   }
 
   .brand {
-    margin-left: 10px;
+    line-height: 40px;
     font-weight: bold;
     text-decoration: none;
-  }
 
-  .menu-spacer {
-    flex: 1 1 auto;
+    .logo {
+      width: 40px;
+    }
   }
 
   .web-nav-item {
+    &.user {
+      border: 1px solid map-get($colors, bg-white);
+    }
+
     button:hover {
       background-color: rgba(0, 0, 0, 0.1);
     }
@@ -34,13 +34,13 @@ mat-toolbar {
 }
 
 mat-sidenav-container {
-  background-color: white;
+  height: calc(100% - 64px);
+  background-color: map-get($colors, bg-white);
 }
 
 .banner {
   width: 100%;
   max-height: 280px;
-  margin-bottom: 20px;
 }
 
 mat-spinner {
