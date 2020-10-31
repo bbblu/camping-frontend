@@ -1,47 +1,55 @@
 @import "~src/assets/scss/color.scss";
 
 .container {
-  font-family: Microsoft JhengHei;
-  border: 2px solid map-get($colors, primary1);
+  margin: 3% 0;
+}
+
+mat-icon {
+  margin-right: 10px;
+  color: map-get($colors, primary4);
+}
+
+mat-card {
+  padding: 3% 5%;
+  color: map-get($colors, primary4);
+  border-style: solid;
   border-radius: 20px;
-  margin: 5% 0;
-  padding: 1rem;
-}
 
-.productDetail {
-  margin-bottom: 30px;
-
-  .productDetail-img {
-    text-align: center;
-    padding: 1rem;
+  &:not([class*="mat-elevation-z"]) {
+    box-shadow: none;
   }
 }
 
-.borrow {
-  text-align: right;
-
-  .borrow-btn {
-    background: map-get($colors, iris-blue);
+mat-card-actions {
+  button {
     color: map-get($colors, font-white);
+    background-color: map-get($colors, primary4);
   }
 }
 
-.image {
-  width: 100%;
-  // height: 200px;
-  border-radius: 23px;
-  margin: 0 auto;
+mat-card-content {
+  p.memo {
+    padding-left: 2.2rem;
+  }
 }
 
-.expansion-panel {
-  border-radius: 0;
-  width: 90%;
-  margin: 20px auto;
-}
+mat-expansion-panel {
+  &:not([class*="mat-elevation-z"]) {
+    box-shadow: none;
+  }
 
-.matPrefix-icon{
-  padding-right: 0.5rem;
-}
-.product-detail-icon{
-  color: map-get($colors, primary2);
+  &.mat-expansion-panel:first-of-type,
+  .mat-expansion-panel:last-of-type {
+    border: 1px solid map-get($colors, primary4);
+    border-radius: 0;
+  }
+
+  mat-expansion-panel-header {
+    border-bottom: 1px solid map-get($colors, primary4);
+    border-radius: 0;
+  }
+
+  .product-detail {
+    padding-top: 16px;
+  }
 }
