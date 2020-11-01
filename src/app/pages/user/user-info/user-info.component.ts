@@ -26,7 +26,7 @@ export class UserInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getExperienceList();
+    this.getExperiences();
     this.getUserInfo();
 
     this.form = this.formBuilder.group({
@@ -65,7 +65,7 @@ export class UserInfoComponent implements OnInit {
     });
   }
 
-  getExperienceList(): void {
+  getExperiences(): void {
     this.userService.getUserExperiences().subscribe(
       (res) => {
         if (!res.result) {

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import * as moment from 'moment';
+
 import { ApiModel } from '@models/api-model';
 import { Experience } from '@models/user/experience.model';
 
@@ -27,7 +29,7 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getExperienceList();
+    this.getExperiences();
 
     this.form = this.formBuilder.group({
       account: [
@@ -39,8 +41,8 @@ export class RegisterComponent implements OnInit {
         [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+')],
       ],
       confirmPassword: [null, { validator: this.checkPassword }],
-      cellPhone: [null, [Validators.required]],
       email: [null, [Validators.required]],
+      cellPhone: [null, [Validators.required]],
       address: [null, [Validators.required]],
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
@@ -58,20 +60,25 @@ export class RegisterComponent implements OnInit {
     return password === confirmPassword ? null : { notSame: true };
   }
 
-  getExperienceList(): void {
+  getExperiences(): void {
     this.userService.getUserExperiences().subscribe(
-      (response: ApiModel<Experience[]>) => {
-        this.experiences = response.data;
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.experiences = res.data;
       },
-      (error) => {
-        console.log(error.error);
+      (err) => {
+        this.snakeBarService.open(err.error.message);
       }
     );
   }
 
   onSubmit(): void {
     const birthday = this.form.value.birthday as Date;
-    const formatBirthday = Intl.DateTimeFormat('zh-TW').format(birthday);
+    const formatBirthday = moment(birthday).format('YYYY/MM/DD');
+
     this.userService
       .addUser({
         ...this.form.value,
@@ -84,7 +91,7 @@ export class RegisterComponent implements OnInit {
             return;
           }
 
-          this.router.navigate(['']);
+          this.router.navigate(['auth', 'login']);
         },
         (err) => {
           this.snakeBarService.open(err.error.message);

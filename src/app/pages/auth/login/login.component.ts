@@ -60,8 +60,8 @@ export class LoginComponent implements OnInit {
     this.accountService.account = this.form.value.account;
 
     this.userService.login(this.form.value).subscribe(
-      (response: HttpResponse<ApiModel<object>>) => {
-        const result = response.headers.get('X-Auth-Token') || '';
+      (res: HttpResponse<ApiModel<object>>) => {
+        const result = res.headers.get('X-Auth-Token') || '';
         if (result) {
           this.authService.setToken(result);
           this.accountService.account = this.form.value.account;
