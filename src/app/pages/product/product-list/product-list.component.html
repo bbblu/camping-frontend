@@ -47,7 +47,7 @@
             <mat-select
               placeholder="地區"
               formControlName="cityAreaName"
-              *ngIf="city$ | async as city; else emptyCity"
+              *ngIf="city; else emptyCity"
             >
               <mat-optgroup
                 *ngFor="let cityName of city.nameArray; let cityIndex = index"
@@ -115,10 +115,7 @@
             #auto="matAutocomplete"
             (optionSelected)="selected($event)"
           >
-            <mat-option
-              *ngFor="let type of productTypes$ | async"
-              [value]="type.id"
-            >
+            <mat-option *ngFor="let type of productTypes" [value]="type.id">
               {{ type.name }}
             </mat-option>
           </mat-autocomplete>
@@ -142,7 +139,7 @@
       <div
         fxFlex.gt-xs="32"
         *ngFor="
-          let productGroup of (productGroups$ | async) || []
+          let productGroup of productGroups
             | paginate: { itemsPerPage: 10, currentPage: page }
         "
         [routerLink]="productGroup.id.toString()"
