@@ -1,8 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
-import { Observable, Subject } from 'rxjs';
-import { map, takeUntil, tap } from 'rxjs/operators';
 
 import { ApiModel } from '@models/api-model';
 import { User } from '@models/user/user.model';
@@ -16,13 +13,11 @@ import { SnakeBarService } from '@services/ui/snake-bar.service';
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss'],
 })
-export class UserInfoComponent implements OnInit, OnDestroy {
-  user$!: Observable<User>;
-  experiences$!: Observable<Experience[]>;
+export class UserInfoComponent implements OnInit {
+  user!: User;
+  experiences: Experience[] = [];
   form!: FormGroup;
   isEditable = false;
-
-  private destroy$ = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,21 +33,25 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       nickName: [null],
       experience: [null],
       email: [null],
+      cellPhone: [null],
       address: [null],
     });
     this.form.disable();
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   getUserInfo(): void {
-    this.user$ = this.userService.getUser().pipe(
-      takeUntil(this.destroy$),
-      map((res) => res.data),
-      tap((data) => this.updateFormValue(data))
+    this.userService.getUser().subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.user = res.data;
+        this.updateFormValue(this.user);
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
     );
   }
 
@@ -61,14 +60,23 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       nickName: data.nickName,
       experience: data.experience.toString(),
       email: data.email,
+      cellPhone: data.cellPhone,
       address: data.address,
     });
   }
 
   getExperienceList(): void {
-    this.experiences$ = this.userService.getUserExperiences().pipe(
-      takeUntil(this.destroy$),
-      map((res) => res.data)
+    this.userService.getUserExperiences().subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.experiences = res.data;
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
     );
   }
 
