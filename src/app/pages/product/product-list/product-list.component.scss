@@ -5,61 +5,6 @@ $font-white: map-get($colors, white);
 $font-red: red;
 $bg-white: map-get($colors, white);
 
-.container {
-  margin: 3% 0;
-}
-
-.search-form {
-  ::ng-deep {
-    mat-form-field.mat-form-field-round {
-      .mat-form-field-wrapper {
-        margin: 0;
-        padding: 0;
-
-        .mat-form-field-flex {
-          .mat-form-field-outline {
-            border: 3px solid $primary-color;
-            border-radius: 0;
-          }
-
-          .mat-form-field-infix {
-            margin: 0;
-          }
-        }
-      }
-    }
-  }
-
-  .date-picker-form-field {
-    ::ng-deep {
-      .mat-icon-button {
-        width: 24px;
-        height: 24px;
-      }
-
-      .mat-form-field-infix {
-        padding-bottom: 1.175rem;
-      }
-    }
-  }
-
-  .select-form-field {
-    ::ng-deep .mat-select-arrow {
-      margin-top: 5px;
-    }
-  }
-
-  .search-btn {
-    color: $font-white;
-    background-color: $primary-color;
-    border-radius: 0;
-  }
-}
-
-.title {
-  color: $primary-color;
-}
-
 .product {
   .mat-card-image {
     border-radius: 20px;

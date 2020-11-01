@@ -3,12 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '@guards/auth.guard';
 
-import { ProductListComponent } from './product-list/product-list.component';
+import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: ProductListComponent },
+  { path: '', pathMatch: 'full', component: ProductFilterComponent },
   { path: 'add', component: ProductCreateComponent, canActivate: [AuthGuard] },
   { path: ':id', component: ProductDetailComponent },
 ];
