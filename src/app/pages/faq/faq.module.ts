@@ -8,10 +8,10 @@ import { MaterialModule } from '@modules/material.module';
 import { FaqRoutingModule } from './faq-routing.module';
 
 import { FaqListComponent } from './faq-list/faq-list.component';
-import { FaqDialogComponent } from './faq-dialog/faq-dialog.component';
+import { FaqCreateDialogComponent } from './faq-create-dialog/faq-create-dialog.component';
 
 @NgModule({
-  declarations: [FaqListComponent, FaqDialogComponent],
+  declarations: [FaqListComponent, FaqCreateDialogComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

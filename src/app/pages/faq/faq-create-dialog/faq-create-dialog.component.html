@@ -8,7 +8,13 @@
   <span>問題回報</span>
 </div>
 
-<div class="content" fxLayout="column" fxFlexFill>
+<form
+  class="content"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  fxLayout="column"
+  fxFlexFill
+>
   <mat-form-field
     class="mat-form-field-round"
     appearance="outline"
@@ -53,4 +59,4 @@
       送出
     </button>
   </div>
-</div>
+</form>
