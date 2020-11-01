@@ -16,6 +16,8 @@ import { ProductCreateComponent } from './product-create/product-create.componen
 import { ProductUpdateComponent } from './product-update/product-update.component';
 import { ProductCreateDialogComponent } from './product-create-dialog/product-create-dialog.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
+import { ProductFormComponent } from './product-form/product-form.component';
+import { ProductFormDialogComponent } from './product-form-dialog/product-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { ProductFilterComponent } from './product-filter/product-filter.componen
     ProductUpdateComponent,
     ProductCreateDialogComponent,
     ProductFilterComponent,
+    ProductFormComponent,
+    ProductFormDialogComponent,
   ],
   imports: [
     CommonModule,
