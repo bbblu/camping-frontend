@@ -1,12 +1,19 @@
 @import "~src/assets/scss/color.scss";
 
+$primary-color: map-get($colors, primary1);
+$accent-color: map-get($colors, primary2);
+$font-black: map-get($colors, black);
+$font-white: map-get($colors, white);
+$bg-black: map-get($colors, black);
+$disabled-color: map-get($colors, lightgray);
+
 .container {
   margin: 3% 0;
 }
 
 mat-card {
   padding: 3% 5%;
-  color: map-get($colors, primary1);
+  color: $primary-color;
   border-style: solid;
   border-radius: 20px;
 
@@ -19,14 +26,14 @@ mat-card-title {
   .avatar {
     height: 60px;
     padding: 7px;
-    border: 3px solid map-get($colors, primary2);
+    border: 3px solid $accent-color;
     border-radius: 50%;
   }
 
   .nick-name {
     margin-top: 10px;
     margin-left: 15px;
-    color: map-get($colors, font);
+    color: $font-black;
     font-size: 20px;
   }
 }
@@ -44,7 +51,7 @@ mat-card-title {
   }
 
   input.mat-input-element {
-    color: map-get($colors, font);
+    color: $bg-black;
   }
 
   &.mat-form-field-appearance-legacy.mat-form-field-disabled {
@@ -55,7 +62,7 @@ mat-card-title {
     }
 
     input.mat-input-element {
-      color: map-get($colors, disable);
+      color: $disabled-color;
     }
 
     &.nick-name {
@@ -64,12 +71,12 @@ mat-card-title {
       }
 
       input.mat-input-element {
-        color: map-get($colors, font);
+        color: $bg-black;
       }
     }
   }
 }
 
 .mat-flat-button {
-  color: map-get($colors, font-white);
+  color: $font-white;
 }

@@ -1,23 +1,29 @@
 @import "~src/assets/scss/color.scss";
 
+$primary-color: map-get($colors, primary2);
+$accent-color: map-get($colors, primary5);
+$font-black: map-get($colors, black);
+$font-white: map-get($colors, white);
+$font-gray: map-get($colors, lightgray);
+
 .container {
   margin-bottom: 70px;
 }
 
 .title {
   margin: 1rem 20px 1rem 0;
-  color: map-get($colors, primary2);
+  color: $primary-color;
 }
 
 .feedback-btn {
   margin: 1rem 0;
-  color: map-get($colors, font-white);
-  background-color: map-get($colors, primary2);
+  color: $font-white;
+  background-color: $primary-color;
 }
 
 mat-card {
   padding-bottom: 3%;
-  color: map-get($colors, primary2);
+  color: $primary-color;
   border-style: solid;
   border-radius: 20px;
 
@@ -28,7 +34,7 @@ mat-card {
   h3 {
     margin-top: 1rem;
     text-align: center;
-    color: map-get($colors, disable);
+    color: $font-gray;
   }
 }
 
@@ -38,22 +44,22 @@ mat-card {
   }
 
   .mat-expansion-panel-header {
-    border-bottom: 2px solid map-get($colors, primary2);
+    border-bottom: 2px solid $primary-color;
     border-radius: 0;
   }
 
   .mat-expansion-panel-header-title {
-    color: map-get($colors, font);
+    color: $font-black;
   }
 
   &.mat-expansion-panel-spacing {
     .mat-expansion-panel-header-title {
-      color: map-get($colors, primary5);
+      color: $accent-color;
       font-weight: bold;
     }
   }
 
   p {
-    color: map-get($colors, primary5);
+    color: $accent-color;
   }
 }
