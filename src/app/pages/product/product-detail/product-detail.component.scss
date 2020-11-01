@@ -1,17 +1,20 @@
 @import "~src/assets/scss/color.scss";
 
+$primary-color: map-get($colors, primary4);
+$font-white: map-get($colors, white);
+
 .container {
   margin: 3% 0;
 }
 
 mat-icon {
   margin-right: 10px;
-  color: map-get($colors, primary4);
+  color: $primary-color;
 }
 
 mat-card {
   padding: 3% 5%;
-  color: map-get($colors, primary4);
+  color: $primary-color;
   border-style: solid;
   border-radius: 20px;
 
@@ -22,8 +25,8 @@ mat-card {
 
 mat-card-actions {
   button {
-    color: map-get($colors, font-white);
-    background-color: map-get($colors, primary4);
+    color: $font-white;
+    background-color: $primary-color;
   }
 }
 
@@ -40,12 +43,12 @@ mat-expansion-panel {
 
   &.mat-expansion-panel:first-of-type,
   .mat-expansion-panel:last-of-type {
-    border: 1px solid map-get($colors, primary4);
+    border: 1px solid $primary-color;
     border-radius: 0;
   }
 
   mat-expansion-panel-header {
-    border-bottom: 1px solid map-get($colors, primary4);
+    border-bottom: 1px solid $primary-color;
     border-radius: 0;
   }
 
