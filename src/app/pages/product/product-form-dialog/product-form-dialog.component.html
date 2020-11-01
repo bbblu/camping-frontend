@@ -1,1 +1,150 @@
-<p>product-form-dialog works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
+    <div fxLayout="column" fxFlex="60" fxFlex.lt-sm="100" fxLayoutGap="10px">
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>tour</mat-icon>
+        <input
+          matInput
+          type="text"
+          placeholder="物品名稱"
+          formControlName="name"
+        />
+        <mat-error>此為必填</mat-error>
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>tour</mat-icon>
+        <mat-select placeholder="產品類型" formControlName="type">
+          <mat-option
+            *ngFor="let productType of productTypes"
+            [value]="productType.id"
+          >
+            {{ productType.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error>此為必填</mat-error>
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>tour</mat-icon>
+        <input
+          matInput
+          type="number"
+          placeholder="數量"
+          formControlName="count"
+        />
+        <mat-error>此為必填</mat-error>
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>tour</mat-icon>
+        <input
+          matInput
+          type="text"
+          placeholder="品牌"
+          formControlName="brand"
+        />
+        <mat-error>此為必填</mat-error>
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>tour</mat-icon>
+        <input
+          matInput
+          type="text"
+          placeholder="外觀狀況"
+          formControlName="appearance"
+        />
+        <mat-error>此為必填</mat-error>
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>tour</mat-icon>
+        <input
+          matInput
+          type="text"
+          placeholder="使用方式"
+          formControlName="useInformation"
+        />
+        <mat-error>此為必填</mat-error>
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>gavel</mat-icon>
+        <input
+          matInput
+          type="text"
+          placeholder="損壞賠償"
+          formControlName="brokenCompensation"
+        />
+        <mat-error>此為必填</mat-error>
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>tour</mat-icon>
+        <input
+          matInput
+          type="url"
+          placeholder="相關連結"
+          formControlName="relatedLink"
+        />
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <textarea
+          matInput
+          placeholder="備註..."
+          formControlName="memo"
+        ></textarea>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="column" fxFlex="40" fxFlex.lt-sm="100" fxLayoutGap="20px">
+      <div class="slider">
+        <ng-image-slider
+          *ngIf="productImages.length > 0; else emptyImages"
+          [images]="productImages"
+          [imageSize]="{ width: '300px', height: '200px', space: 0 }"
+          (arrowClick)="updateImageIndex($event)"
+        >
+        </ng-image-slider>
+        <ng-template #emptyImages>
+          <img class="empty-image" src="assets/image/logo.png" alt="logo" />
+        </ng-template>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+        <button
+          mat-flat-button
+          type="button"
+          color="primary"
+          (click)="openImageDialog('create')"
+        >
+          新增
+        </button>
+        <button
+          mat-flat-button
+          type="button"
+          color="accent"
+          (click)="openImageDialog('update')"
+        >
+          編輯
+        </button>
+        <button
+          mat-flat-button
+          type="button"
+          color="warn"
+          (click)="deleteProductImage()"
+        >
+          刪除
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center">
+    <button mat-flat-button class="submit-btn" type="submit" color="accent">
+      添加物品
+    </button>
+  </div>
+</form>

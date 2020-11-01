@@ -12,9 +12,6 @@ import { ProductRoutingModule } from './product-routing.module';
 
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { ProductCreateComponent } from './product-create/product-create.component';
-import { ProductUpdateComponent } from './product-update/product-update.component';
-import { ProductCreateDialogComponent } from './product-create-dialog/product-create-dialog.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductFormDialogComponent } from './product-form-dialog/product-form-dialog.component';
@@ -23,9 +20,6 @@ import { ProductFormDialogComponent } from './product-form-dialog/product-form-d
   declarations: [
     ProductListComponent,
     ProductDetailComponent,
-    ProductCreateComponent,
-    ProductUpdateComponent,
-    ProductCreateDialogComponent,
     ProductFilterComponent,
     ProductFormComponent,
     ProductFormDialogComponent,
@@ -40,6 +34,6 @@ import { ProductFormDialogComponent } from './product-form-dialog/product-form-d
     NgImageSliderModule,
     NgxPaginationModule,
   ],
-  exports: [ProductCreateComponent],
+  exports: [],
 })
 export class ProductModule {}
