@@ -13,74 +13,52 @@
   <div class="record" fxLayout="row wrap" fxLayoutAlign="space-between">
     <mat-card
       *ngFor="let rental of rentals"
-      [style.background-color]="getStatusColor(rental.status)"
+      [style.color]="getStatusColor(rental.status)"
       (click)="updateSelectRental(rental)"
-      fxFlex.gt-xs="32"
-      fxFlex.gt-md="19"
-      fxFlexFill
+      fxFlex="32"
+      fxFlex.lt-md="48"
+      fxFlex.lt-sm="100"
     >
+      <img mat-card-image [src]="rental.coverImage" alt="product cover" />
+
       <mat-card-header fxLayout="column">
-        <mat-card-title>{{ getStatusText(rental.status) }}</mat-card-title>
+        <mat-card-title>
+          <span
+            class="status"
+            [style.background-color]="getStatusColor(rental.status)"
+          >
+            {{ getStatusText(rental.status) }}
+          </span>
+          <p>{{ rental.name }}</p>
+        </mat-card-title>
         <mat-card-subtitle>{{ rental.borrowRange }}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content>
-        <p>{{ rental.name }}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-flat-button [style.color]="getStatusColor(rental.status)">
-          {{ getStatusButton(rental.status) }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
 
-  <mat-card class="detail" *ngIf="selectRental as rental">
-    <mat-card-header
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      fxLayoutGap="0"
-    >
-      <mat-card-title>{{ rental.name }}</mat-card-title>
-      <mat-card-actions>
-        <button mat-flat-button color="primary" mat-button>取物完成</button>
-        <button mat-flat-button color="warn">交易糾紛</button>
-      </mat-card-actions>
-    </mat-card-header>
-
-    <mat-card-content fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="25px">
-      <div fxLayout="column" fxFlex="50" fxFlex.lt-md="100" fxLayoutGap="10px">
-        <div fxLayout="row" fxLayoutAlign="space-between">
-          <span>星等</span>
-          <span>{{ rental.areaName }}</span>
-          <span>{{ rental.price }}</span>
-        </div>
+      <mat-card-content fxLayout="column" fxLayoutGap="5px">
         <div fxLayout="row" fxLayoutAlign="start center">
           <i class="material-icons user">person</i>
           <span>{{ rental.seller.nickName }}</span>
         </div>
         <div class="contact" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>phone_in_talk</mat-icon>
-          <span>手機</span>
+          <a href="tel:手機">手機</a>
         </div>
         <div class="contact" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>email</mat-icon>
-          <span>{{ rental.seller.email }}</span>
+          <a href="mailto:{{ rental.seller.email }}">{{
+            rental.seller.email
+          }}</a>
         </div>
-        <img [src]="rental.coverImage" alt="product cover" />
-      </div>
+      </mat-card-content>
 
-      <mat-accordion fxLayout="column" fxFlex="50" fxFlex.lt-md="100">
-        <mat-expansion-panel *ngFor="let detail of rental.detailArray">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{ detail.name }} : {{ detail.count }}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <ng-image-slider
-            [images]="imageToSliderObject(detail.imageArray)"
-          ></ng-image-slider>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </mat-card-content>
-  </mat-card>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="space-around">
+        <button
+          mat-flat-button
+          [style.background-color]="getStatusColor(rental.status)"
+        >
+          {{ getStatusButton(rental.status) }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
