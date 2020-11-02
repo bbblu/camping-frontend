@@ -2,10 +2,13 @@ export interface ProductGroup {
   id: string;
   name: string;
   city: string;
+  coverImage: string;
   price: string;
-  borrowDateRange: string;
-  contactInformation: string;
-  productArray: Array<Product>;
+  borrowStartDate: string;
+  borrowEndDate: string;
+  contact: string;
+  comment: number;
+  productArray: Product[];
 }
 
 export interface Product {
@@ -18,16 +21,10 @@ export interface Product {
   useInformation: string;
   brokenCompensation: string;
   memo: string;
-  imageArray: Array<Image>;
-  relatedLinkArray: Array<RelatedLink>;
+  imageArray: Image[];
 }
 
 export interface Image {
-  id: number;
-  url: string;
-}
-
-export interface RelatedLink {
   id: number;
   url: string;
 }

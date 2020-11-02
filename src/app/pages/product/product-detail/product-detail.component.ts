@@ -45,7 +45,7 @@ export class ProductDetailComponent implements OnInit {
 
   openDialog(): void {
     this.dialog.open(BorrowDialogComponent, {
-      width: '70%',
+      width: '80%',
       height: '80%',
       data: {
         ...this.productGroup,
