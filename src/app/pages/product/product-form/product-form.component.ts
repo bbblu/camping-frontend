@@ -11,7 +11,7 @@ import { CityService } from '@services/api/city.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/product-form-dialog.component';
-import { Product } from '@models/product/product.model';
+import { Link, Product } from '@models/product/product-group-detail.model';
 
 @Component({
   selector: 'app-product-form',
@@ -24,6 +24,7 @@ export class ProductFormComponent implements OnInit {
   cityIndex = 0;
   areas: string[] = [];
 
+  products: Product[] = [];
   productTypes: ProductType[] = [];
 
   constructor(
@@ -94,6 +95,16 @@ export class ProductFormComponent implements OnInit {
     this.form.value.productArrays.splice(index);
   }
 
+  imageToSliderObject(images: Link[]): object[] {
+    return images.map((image) => {
+      return {
+        image: image.url,
+        thumbImage: image.url,
+        alt: 'detail image',
+      };
+    });
+  }
+
   dateFormatter(value: Date): string {
     const date = new Date(value as Date);
     return moment(date).format('YYYY/MM/DD hh:mm');
@@ -131,6 +142,7 @@ export class ProductFormComponent implements OnInit {
       }
 
       this.addProducts(data);
+      this.products = this.form.value.productArrays;
     });
   }
 }

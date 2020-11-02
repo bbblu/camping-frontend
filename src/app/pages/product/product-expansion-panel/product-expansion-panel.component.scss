@@ -1,0 +1,29 @@
+@import "~src/assets/scss/color.scss";
+
+$primary-color: map-get($colors, primary4);
+
+mat-icon {
+  margin-right: 10px;
+  color: $primary-color;
+}
+
+mat-expansion-panel {
+  &:not([class*="mat-elevation-z"]) {
+    box-shadow: none;
+  }
+
+  &.mat-expansion-panel:first-of-type,
+  .mat-expansion-panel:last-of-type {
+    border: 1px solid $primary-color;
+    border-radius: 0;
+  }
+
+  mat-expansion-panel-header {
+    border-bottom: 1px solid $primary-color;
+    border-radius: 0;
+  }
+
+  .product-detail {
+    padding-top: 16px;
+  }
+}

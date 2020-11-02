@@ -1,12 +1,10 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 
 import { MatDialog } from '@angular/material/dialog';
-import { MatIconRegistry } from '@angular/material/icon';
 
 import { ApiModel } from '@models/api-model';
-import { Link, ProductGroup } from '@models/product/product-group-detail.model';
+import { ProductGroup } from '@models/product/product-group-detail.model';
 
 import { ProductService } from '@services/api/product.service';
 
@@ -24,15 +22,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private router: ActivatedRoute,
-    public dialog: MatDialog,
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
-  ) {
-    iconRegistry.addSvgIcon(
-      'tent',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/image/tent.svg')
-    );
-  }
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.router.paramMap.subscribe((param) => {
@@ -50,16 +41,6 @@ export class ProductDetailComponent implements OnInit {
         console.log(error.error);
       }
     );
-  }
-
-  imageToSliderObject(images: Link[]): object[] {
-    return images.map((image) => {
-      return {
-        image: image.url,
-        thumbImage: image.url,
-        alt: 'detail image',
-      };
-    });
   }
 
   openDialog(): void {
