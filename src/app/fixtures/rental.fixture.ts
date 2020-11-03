@@ -7,7 +7,7 @@ export const rental: Rental = {
   borrowStartDate: '2020/12/10',
   borrowEndDate: '2020/12/13',
   name: '4人帳四角睡帳客廳帳 桌椅 營燈 廚具',
-  coverImage: 'https://www.ntub.edu.tw/var/file/0/1000/img/1595/logo.png',
+  coverImage: 'https://i.imgur.com/Px1JXJW.jpg',
   areaName: '中和區',
   price: '$ 3,990',
   seller: {
@@ -27,7 +27,7 @@ export const rental: Rental = {
         '四人同時向外拉，並往上推，小心不要夾到手。若遇下雨，必須曬乾再收起來。',
       brokenCompensation:
         '損壞致無法使用，原價七成賠償。\n損壞布面，原價五成賠償\n損壞小部分但堪用，原價三成賠償。',
-      imageArray: ['https://www.ntub.edu.tw/var/file/0/1000/img/1595/logo.png'],
+      imageArray: ['https://i.imgur.com/Px1JXJW.jpg'],
       relatedLinkArray: ['https://www.ntub.edu.tw'],
     },
   ],

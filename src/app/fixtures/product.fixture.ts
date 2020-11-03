@@ -4,7 +4,7 @@ export const products: ProductGroup[] = [
   {
     id: 1,
     name: '便宜帳篷、桌椅三件套',
-    coverImage: 'https://www.ntub.edu.tw/var/file/0/1000/img/1595/logo.png',
+    coverImage: 'https://i.imgur.com/Px1JXJW.jpg',
     price: 0,
     borrowStartDate: '2020/08/14 00:00',
     borrowEndDate: '2020/08/21 19:30',
@@ -16,7 +16,7 @@ export const products: ProductGroup[] = [
   {
     id: 1,
     name: '便宜帳篷、桌椅三件套',
-    coverImage: 'https://www.ntub.edu.tw/var/file/0/1000/img/1595/logo.png',
+    coverImage: 'https://i.imgur.com/Px1JXJW.jpg',
     price: 0,
     borrowStartDate: '2020/08/14 00:00',
     borrowEndDate: '2020/08/21 19:30',
@@ -28,7 +28,7 @@ export const products: ProductGroup[] = [
   {
     id: 1,
     name: '便宜帳篷、桌椅三件套',
-    coverImage: 'https://www.ntub.edu.tw/var/file/0/1000/img/1595/logo.png',
+    coverImage: 'https://i.imgur.com/Px1JXJW.jpg',
     price: 0,
     borrowStartDate: '2020/08/14 00:00',
     borrowEndDate: '2020/08/21 19:30',
