@@ -1,5 +1,9 @@
 @import "~src/assets/scss/color.scss";
 
+$primary-color: map-get($colors, primary2);
+$font-white: map-get($colors, white);
+$field-color: map-get($colors, lightgray);
+
 ::ng-deep .mat-dialog-container {
   padding: 0;
   overflow: hidden;
@@ -8,8 +12,8 @@
 .title {
   position: relative;
   padding: 1rem 0;
-  color: map-get($colors, font-white);
-  background-color: map-get($colors, iris-blue);
+  color: $font-white;
+  background-color: $primary-color;
 
   mat-icon {
     font-size: xx-large;
@@ -18,7 +22,7 @@
   &::after {
     position: absolute;
     top: 100%;
-    border-top: solid 1rem map-get($colors, iris-blue);
+    border-top: solid 1rem $primary-color;
     border-left: solid 1rem transparent;
     border-right: solid 1rem transparent;
     content: "";
@@ -34,7 +38,7 @@
     .mat-form-field-wrapper {
       .mat-form-field-flex {
         .mat-form-field-outline {
-          border: 1px solid map-get($colors, gray);
+          border: 1px solid $field-color;
           border-radius: 0;
         }
       }
@@ -43,6 +47,5 @@
 }
 
 .submit {
-  background: map-get($colors, iris-blue);
-  color: map-get($colors, font-white);
+  color: $font-white;
 }

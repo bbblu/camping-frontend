@@ -1,11 +1,16 @@
 @import "~src/assets/scss/color.scss";
 
+$primary-color: map-get($colors, primary1);
+$font-white: map-get($colors, white);
+$button-color: map-get($colors, primary1);
+$disabled-color: map-get($colors, lightgray);
+
 .container {
   margin: 5% 0;
 }
 
 mat-card {
-  color: map-get($colors, main);
+  color: $primary-color;
   border-style: solid;
   border-radius: 20px;
 
@@ -38,7 +43,7 @@ mat-card-content {
     ::ng-deep mat-checkbox {
       &.mat-checkbox-checked {
         .mat-checkbox-background {
-          background-color: map-get($colors, main);
+          background-color: $primary-color;
         }
       }
     }
@@ -57,13 +62,13 @@ mat-card-content {
     }
 
     .login-btn {
-      color: map-get($colors, font-white);
-      background-color: map-get($colors, main);
-      border-color: map-get($colors, main);
+      color: $font-white;
+      background-color: $button-color;
+      border-color: $button-color;
 
       &:disabled {
-        background-color: map-get($colors, gray);
-        border-color: map-get($colors, gray);
+        background-color: $disabled-color;
+        border-color: $disabled-color;
       }
     }
   }

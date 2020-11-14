@@ -9,7 +9,7 @@ mat-form-field.mat-form-field-round {
   .mat-form-field-wrapper {
     .mat-form-field-flex {
       .mat-form-field-outline {
-        border: 2px solid map-get($colors, main);
+        border: 2px solid map-get($colors, primary1);
         border-radius: 30px;
       }
 
@@ -32,7 +32,7 @@ mat-form-field.mat-form-field-round {
       }
 
       input.mat-input-element {
-        color: map-get($colors, font);
+        color: map-get($colors, black);
       }
     }
   }

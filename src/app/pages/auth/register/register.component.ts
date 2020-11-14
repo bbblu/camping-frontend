@@ -39,6 +39,7 @@ export class RegisterComponent implements OnInit {
         [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+')],
       ],
       confirmPassword: [null, { validator: this.checkPassword }],
+      cellPhone: [null, [Validators.required]],
       email: [null, [Validators.required]],
       address: [null, [Validators.required]],
       firstName: [null, [Validators.required]],

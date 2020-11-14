@@ -1,5 +1,4 @@
-<div class="container" fxLayout="row">
-  <div class="left-block" fxFlex></div>
+<div class="container" fxLayout="row" fxLayoutAlign="center">
   <mat-card fxFlex="80">
     <mat-card-title>借借露註冊</mat-card-title>
 
@@ -83,6 +82,22 @@
                 <mat-icon matPrefix>email</mat-icon>
                 <mat-error *ngIf="form.controls['email'].hasError('required')">
                   請填寫您的電子郵件
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field
+                class="mat-form-field-round"
+                appearance="outline"
+                floatLabel="never"
+              >
+                <input
+                  matInput
+                  placeholder="手機號碼"
+                  formControlName="cellPhone"
+                />
+                <mat-icon matPrefix>smartphone</mat-icon>
+                <mat-error *ngIf="form.controls['cellPhone'].hasError('required')">
+                  請填寫您的手機號碼
                 </mat-error>
               </mat-form-field>
 
@@ -237,5 +252,4 @@
       </form>
     </mat-card-content>
   </mat-card>
-  <div class="rightBlock" fxFlex></div>
 </div>

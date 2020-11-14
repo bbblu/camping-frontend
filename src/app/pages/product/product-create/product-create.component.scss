@@ -1,18 +1,10 @@
 @import "~src/assets/scss/color.scss";
 
 .container {
-  margin: 3% 0;
-}
-
-mat-card {
-  padding: 3% 5%;
-  color: map-get($colors, main);
-  border-style: solid;
-  border-radius: 20px;
-
-  &:not([class*="mat-elevation-z"]) {
-    box-shadow: none;
-  }
+  text-align: center;
+  color: map-get($colors, primary1);
+  margin: 5% 0;
+  padding: 3%;
 }
 
 /* mat-form-field  */
@@ -29,10 +21,13 @@ mat-card {
   }
   ::ng-deep mat-form-field.mat-form-field {
     color: map-get($colors, font);
-    padding-bottom: 1rem;
-    mat-icon{
-      color: map-get($colors, blue);
-      margin-right: 11px;
+    ::placeholder {
+      font-size: 1rem;
+      color: map-get($colors, disable);
+    }
+    .material-icons {
+      font-size: 24px;
+      color: map-get($colors, primary2);
     }
     .mat-form-field-wrapper {
       border: 0px;

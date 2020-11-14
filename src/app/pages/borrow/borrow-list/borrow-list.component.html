@@ -1,21 +1,86 @@
-<div class="container">
-  <p>Slide Toggle using a simple NgModel.</p>
-  <mat-slide-toggle [(ngModel)]="isChecked"
-    >Slide Toggle Checked: {{ isChecked }}</mat-slide-toggle
+<div class="container" fxLayout="column" fxLayoutAlign="center">
+  <div
+    class="toggle"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="30px"
   >
+    <span>租借</span>
+    <mat-slide-toggle [(ngModel)]="isChecked"></mat-slide-toggle>
+    <span>出租</span>
+  </div>
 
-  <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  <div class="record" fxLayout="row wrap" fxLayoutAlign="space-between">
+    <mat-card
+      *ngFor="let rental of rentals"
+      [style.background-color]="getStatusColor(rental.status)"
+      (click)="updateSelectRental(rental)"
+      fxFlex.gt-xs="32"
+      fxFlex.gt-md="19"
+      fxFlexFill
+    >
+      <mat-card-header fxLayout="column">
+        <mat-card-title>{{ getStatusText(rental.status) }}</mat-card-title>
+        <mat-card-subtitle>{{ rental.borrowRange }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ rental.name }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button [style.color]="getStatusColor(rental.status)">
+          {{ getStatusButton(rental.status) }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <mat-card class="detail" *ngIf="selectRental as rental">
+    <mat-card-header
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="0"
+    >
+      <mat-card-title>{{ rental.name }}</mat-card-title>
+      <mat-card-actions>
+        <button mat-flat-button color="primary" mat-button>取物完成</button>
+        <button mat-flat-button color="warn">交易糾紛</button>
+      </mat-card-actions>
     </mat-card-header>
-    <mat-card-content>
-      <p>rain, the Shiba Inu was originally bred for hunting.</p>
+
+    <mat-card-content fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="25px">
+      <div fxLayout="column" fxFlex="50" fxFlex.lt-md="100" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>星等</span>
+          <span>{{ rental.areaName }}</span>
+          <span>{{ rental.price }}</span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <i class="material-icons user">person</i>
+          <span>{{ rental.seller.nickName }}</span>
+        </div>
+        <div class="contact" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>phone_in_talk</mat-icon>
+          <span>手機</span>
+        </div>
+        <div class="contact" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>email</mat-icon>
+          <span>{{ rental.seller.email }}</span>
+        </div>
+        <img [src]="rental.coverImage" alt="product cover" />
+      </div>
+
+      <mat-accordion fxLayout="column" fxFlex="50" fxFlex.lt-md="100">
+        <mat-expansion-panel *ngFor="let detail of rental.detailArray">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ detail.name }} : {{ detail.count }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ng-image-slider
+            [images]="imageToSliderObject(detail.imageArray)"
+          ></ng-image-slider>
+        </mat-expansion-panel>
+      </mat-accordion>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
   </mat-card>
 </div>
