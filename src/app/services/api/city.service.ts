@@ -15,7 +15,7 @@ export class CityService {
 
   constructor(private httpService: HttpService) {}
 
-  getCities(): Observable<ApiModel<City>> {
+  getCity(): Observable<ApiModel<City>> {
     return this.httpService.get<City>(this.baseUrl);
   }
 }
