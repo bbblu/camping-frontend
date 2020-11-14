@@ -7,11 +7,6 @@ $font-white: map-get($colors, white);
   margin: 3% 0;
 }
 
-mat-icon {
-  margin-right: 10px;
-  color: $primary-color;
-}
-
 mat-card {
   padding: 3% 5%;
   color: $primary-color;
@@ -33,26 +28,5 @@ mat-card-actions {
 mat-card-content {
   p.memo {
     padding-left: 2.2rem;
-  }
-}
-
-mat-expansion-panel {
-  &:not([class*="mat-elevation-z"]) {
-    box-shadow: none;
-  }
-
-  &.mat-expansion-panel:first-of-type,
-  .mat-expansion-panel:last-of-type {
-    border: 1px solid $primary-color;
-    border-radius: 0;
-  }
-
-  mat-expansion-panel-header {
-    border-bottom: 1px solid $primary-color;
-    border-radius: 0;
-  }
-
-  .product-detail {
-    padding-top: 16px;
   }
 }

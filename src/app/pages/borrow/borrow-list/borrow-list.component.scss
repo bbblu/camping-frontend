@@ -1,5 +1,11 @@
 @import "~src/assets/scss/color.scss";
 
+$primary-color: map-get($colors, primary5);
+$light-primary-color: unquote($primary-color + "8f");
+$font-black: map-get($colors, black);
+$font-white: map-get($colors, white);
+$font-gray: map-get($colors, gray);
+
 .container {
   margin: 3% 10%;
 }
@@ -14,11 +20,13 @@
     .mat-slide-toggle-bar {
       width: $toggle-height * 2;
       height: $toggle-height;
+      background-color: $light-primary-color;
     }
 
     .mat-slide-toggle-thumb {
       width: $toggle-height * 1.5;
       height: $toggle-height * 1.5;
+      background-color: $primary-color;
     }
 
     .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb-container {
@@ -37,95 +45,53 @@
 .record {
   mat-card {
     margin-bottom: 15px;
-    padding: 50px 0;
-    color: map-get($colors, font-white);
-    text-align: center;
-    border-radius: 0;
+    border-style: solid;
+    border-radius: 20px;
+    color: $primary-color;
 
     &:not([class*="mat-elevation-z"]) {
       box-shadow: none;
     }
   }
 
-  ::ng-deep .mat-card-header-text {
-    margin: 0;
-  }
-
   mat-card-title {
-    text-align: center;
-  }
+    color: $font-black;
 
-  mat-card-subtitle {
-    padding: 8px 0;
-    color: map-get($colors, font-white);
-    background-color: darkgray;
+    .status {
+      padding: 5px 15px;
+      border-radius: 20px;
+      color: $font-white;
+    }
   }
 
   mat-card-content {
     padding: 0 16px;
-  }
-
-  .mat-flat-button {
-    background-color: map-get($colors, bg-white);
-  }
-}
-
-.detail {
-  &.mat-card {
-    background-color: unquote(map-get($colors, primary4) + "8f");
-
-    &:not([class*="mat-elevation-z"]) {
-      box-shadow: none;
-    }
-  }
-
-  mat-card-title:before {
-    position: absolute;
-    top: 53px;
-    left: 23px;
-    height: 10px;
-    width: 10px;
-    content: "";
-    background: map-get($colors, primary1);
-    border-radius: 50%;
-  }
-
-  mat-card-title {
-    padding-left: 15px;
-    padding-right: 30px;
-    border-bottom: 3px solid map-get($colors, primary1);
-  }
-
-  mat-card-actions {
-    button {
-      color: map-get($colors, font-white);
-    }
-  }
-
-  mat-card-content {
-    margin: 0 50px;
+    color: $font-black;
 
     .material-icons {
       margin-right: 10px;
-      color: map-get($colors, primary5);
+      color: $primary-color;
 
       &.user {
         padding: 10px;
-        border: 2px solid map-get($colors, primary5);
+        border: 2px solid $primary-color;
         border-radius: 50%;
         font-size: 30px;
-        color: map-get($colors, font-white);
-        background-color: unquote(map-get($colors, primary5) + "8f");
+        color: $font-white;
+        background-color: $light-primary-color;
       }
     }
 
     .contact {
       padding-left: 15px;
 
-      span {
-        color: gray;
-        font-size: 12px;
+      a {
+        color: $font-gray;
       }
     }
+  }
+
+  .mat-flat-button {
+    color: $font-white;
   }
 }

@@ -1,7 +1,9 @@
 export enum BorrowStatus {
-  cancel = 0,
+  alreadyCancel = 0,
   notPickUp = 1,
-  notReturn = 2,
-  alreadyReturn = 3,
-  alreadyCheck = 4,
+  checkBorrow = 2,
+  notReturn = 3,
+  checkRental = 4,
+  notComment = 5,
+  alreadyComment = 6,
 }

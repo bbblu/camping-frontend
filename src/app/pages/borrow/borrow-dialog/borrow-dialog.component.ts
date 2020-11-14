@@ -36,25 +36,25 @@ export class BorrowDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.minDate = new Date(this.data.borrowDateRange.slice(0, 11));
-    this.maxDate = new Date(this.data.borrowDateRange.slice(19, 29));
+    this.minDate = new Date(this.data.borrowStartDate);
+    this.maxDate = new Date(this.data.borrowEndDate);
 
     this.borrowForm = this.formBuilder.group({
       borrowStartDate: [null, Validators.required],
       borrowEndDate: [null, Validators.required],
     });
     this.billForm = this.formBuilder.group({
-      billLastName: ['test', Validators.required],
-      billFirstName: ['test', Validators.required],
-      billCellPhone: ['0912345678', Validators.required],
-      cardId: ['1234567891234567', Validators.required],
-      safeCode: ['1234', Validators.required],
+      billLastName: [null, Validators.required],
+      billFirstName: [null, Validators.required],
+      billCellPhone: [null, Validators.required],
+      cardId: [null, Validators.required],
+      safeCode: [null, Validators.required],
       expireYear: [null, Validators.required],
       expireMonth: [null, Validators.required],
-      billZipCode: ['21314', Validators.required],
+      billZipCode: [null, Validators.required],
       billAddress: [null, Validators.required],
-      billCountry: ['台灣', Validators.required],
-      billCity: ['台北市', Validators.required],
+      billCountry: [null, Validators.required],
+      billCity: [null, Validators.required],
     });
 
     this.getUserInfo();
@@ -67,19 +67,27 @@ export class BorrowDialogComponent implements OnInit {
 
   getUserInfo(): void {
     this.userService.getUser().subscribe(
-      (response: ApiModel<User>) => {
-        this.user = response.data;
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
 
-        this.billForm.patchValue({
-          billLastName: this.user.lastName,
-          billFirstName: this.user.firstName,
-          billAddress: this.user.address,
-        });
+        this.user = res.data;
+        this.updateFormValue(this.user);
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
       }
     );
+  }
+
+  updateFormValue(data: User): void {
+    this.billForm.patchValue({
+      billLastName: data.lastName,
+      billFirstName: data.firstName,
+      billCellPhone: data.cellPhone,
+      billAddress: data.address,
+    });
   }
 
   dateFormatter(value: Date): string {
@@ -101,7 +109,7 @@ export class BorrowDialogComponent implements OnInit {
 
     this.rentalService.addRental(data).subscribe(
       (res: ApiModel<{ id: string }>) => {
-        this.rental = res.data;
+        this.snakeBarService.open(res.message);
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
