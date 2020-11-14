@@ -2,7 +2,7 @@
 
 $primary-color: map-get($colors, primary4);
 $font-white: map-get($colors, white);
-$font-red: red;
+$font-red: map-get($colors, red);
 $bg-white: map-get($colors, white);
 
 .product {

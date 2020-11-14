@@ -1,20 +1,38 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center">
   <mat-card fxFlex="60" fxFlex.lt-md="80">
     <div fxLayoutGap="25px">
-      <img fxFlex="50" [src]="productGroup.coverImage" alt="product cover" />
+      <img fxFlex="50" alt="product cover" [src]="productGroup.coverImage" />
       <div fxFlex="50">
         <mat-card-title>{{ productGroup.name }}</mat-card-title>
         <mat-card-subtitle fxLayout="column" fxLayoutGap="10px">
           <div
             fxLayout="row"
             fxLayout.lt-sm="column"
-            fxLayoutAlign="start center"
+            fxLayoutAlign="space-between center"
             fxLayoutAlign.lt-sm="start"
             fxLayoutGap="10px"
           >
-            <mat-icon>star</mat-icon>
+            <div
+              class="stars"
+              *ngIf="productGroup.comment as comment; else emptyComment"
+            >
+              <span *ngFor="let i of starFill(comment)">
+                <mat-icon>star</mat-icon>
+              </span>
+              <mat-icon *ngIf="starHalf(comment)">star_half</mat-icon>
+              <span *ngFor="let i of starEmpty(comment)">
+                <mat-icon>star_outline</mat-icon>
+              </span>
+            </div>
+            <ng-template #emptyComment>
+              <div class="stars" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon>star_outline</mat-icon>
+                <span>尚未評分</span>
+              </div>
+            </ng-template>
+
             <span>{{ productGroup.city }}</span>
-            <span>{{ productGroup.price }}</span>
+            <span class="price">{{ productGroup.price }}/天</span>
           </div>
           <span>
             {{ productGroup.borrowStartDate }} ~

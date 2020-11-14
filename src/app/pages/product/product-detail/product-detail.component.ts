@@ -43,6 +43,20 @@ export class ProductDetailComponent implements OnInit {
     );
   }
 
+  starFill(comment: number): number[] {
+    const fill = Math.floor(comment);
+    return [...Array(fill).keys()];
+  }
+
+  starHalf(comment: number): boolean {
+    return comment % 1 > 0;
+  }
+
+  starEmpty(comment: number): number[] {
+    const empty = Math.floor(5 - comment);
+    return [...Array(empty).keys()];
+  }
+
   openDialog(): void {
     this.dialog.open(BorrowDialogComponent, {
       width: '80%',
