@@ -29,6 +29,7 @@ $bg-white: map-get($colors, white);
   mat-card-subtitle {
     .price {
       color: $font-red;
+      font-weight: bold;
     }
 
     .comment {
