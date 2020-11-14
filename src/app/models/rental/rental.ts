@@ -2,19 +2,24 @@ export interface Rental {
   id: number;
   status: number;
   borrowRange: string;
-  borrowStartDate: string;
-  borrowEndDate: string;
+  borrowStartDate: Date;
+  borrowEndDate: Date;
   name: string;
   coverImage: string;
   areaName: string;
   price: string;
   seller: Seller;
   contact: string;
-  rentalDate: string;
-  detailArray: DetailArray[];
+  rentalDate: Date;
+  detailArray: Detail[];
 }
 
-export interface DetailArray {
+export interface Seller {
+  nickName: string;
+  email: string;
+}
+
+export interface Detail {
   status: number;
   type: string;
   name: string;
@@ -24,9 +29,4 @@ export interface DetailArray {
   brokenCompensation: string;
   imageArray: string[];
   relatedLinkArray: string[];
-}
-
-export interface Seller {
-  nickName: string;
-  email: string;
 }

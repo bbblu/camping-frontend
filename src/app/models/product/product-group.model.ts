@@ -3,9 +3,10 @@ export interface ProductGroup {
   name: string;
   coverImage: string;
   price: number;
-  borrowStartDate: string;
-  borrowEndDate: string;
+  borrowStartDate: Date;
+  borrowEndDate: Date;
   city: string;
+  createAccount: string;
   userName: string;
   productTypeArray: number;
   comment: number;
