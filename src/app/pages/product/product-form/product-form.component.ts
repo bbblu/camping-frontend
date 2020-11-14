@@ -11,7 +11,7 @@ import { CityService } from '@services/api/city.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/product-form-dialog.component';
-import { Link, Product } from '@models/product/product-group-detail.model';
+import { Image, Product } from '@models/product/product-group-detail.model';
 
 @Component({
   selector: 'app-product-form',
@@ -68,7 +68,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   getCities(): void {
-    this.cityService.getCities().subscribe(
+    this.cityService.getCity().subscribe(
       (res) => {
         if (!res.result) {
           this.snakeBarService.open(res.message);
@@ -95,7 +95,7 @@ export class ProductFormComponent implements OnInit {
     this.form.value.productArrays.splice(index);
   }
 
-  imageToSliderObject(images: Link[]): object[] {
+  imageToSliderObject(images: Image[]): object[] {
     return images.map((image) => {
       return {
         image: image.url,
@@ -112,7 +112,7 @@ export class ProductFormComponent implements OnInit {
 
   onSubmit(): void {
     this.productService
-      .addProductGroups({
+      .addProductGroup({
         ...this.form.value,
         borrowStartDate: this.dateFormatter(this.form.value.borrowStartDate),
         borrowEndDate: this.dateFormatter(this.form.value.borrowEndDate),
