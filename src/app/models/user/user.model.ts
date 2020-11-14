@@ -1,12 +1,12 @@
 export interface User {
   account: string;
-  password: string;
-  experience: string;
-  lastName: string;
   firstName: string;
+  lastName: string;
   nickName: string;
   gender: string;
+  birthday: string;
+  experience: number;
+  cellPhone: string;
   email: string;
   address: string;
-  birthday: Date;
 }

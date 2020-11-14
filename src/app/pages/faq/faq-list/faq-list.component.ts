@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 
-import { FaqDialogComponent } from '../faq-dialog/faq-dialog.component';
+import { FaqCreateDialogComponent } from '../faq-create-dialog/faq-create-dialog.component';
 
 import { faqs } from '../../../fixtures/faq.fixture';
 
@@ -14,14 +14,13 @@ import { faqs } from '../../../fixtures/faq.fixture';
 export class FaqListComponent implements OnInit {
   faqs = faqs;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   openDialog(): void {
-    this.dialog.open(FaqDialogComponent, {
+    this.dialog.open(FaqCreateDialogComponent, {
       width: '70%',
-      height: '80%',
     });
   }
 }

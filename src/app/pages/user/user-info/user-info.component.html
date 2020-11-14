@@ -1,5 +1,5 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center">
-  <mat-card *ngIf="user$ | async; let user" fxFlex="60" fxFlex.lt-md="80">
+  <mat-card *ngIf="user" fxFlex="60" fxFlex.lt-md="80">
     <form
       [formGroup]="form"
       (ngSubmit)="onSubmit()"
@@ -15,39 +15,29 @@
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>person</mat-icon>
-        <input matInput placeholder="account" [value]="user.account" disabled />
+        <input matInput placeholder="帳號" [value]="user.account" disabled />
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>perm_identity</mat-icon>
-        <input
-          matInput
-          placeholder="account"
-          [value]="user.lastName"
-          disabled
-        />
+        <input matInput placeholder="姓氏" [value]="user.lastName" disabled />
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>perm_identity</mat-icon>
-        <input
-          matInput
-          placeholder="account"
-          [value]="user.firstName"
-          disabled
-        />
+        <input matInput placeholder="名字" [value]="user.firstName" disabled />
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>wc</mat-icon>
-        <input matInput placeholder="account" [value]="user.gender" disabled />
+        <input matInput placeholder="性別" [value]="user.gender" disabled />
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>cake</mat-icon>
         <input
           matInput
-          placeholder="account"
+          placeholder="生日"
           [value]="user.birthday | date: 'yyyy/MM/dd'"
           disabled
         />
@@ -57,7 +47,7 @@
         <mat-icon matPrefix>details</mat-icon>
         <mat-select formControlName="experience">
           <mat-option
-            *ngFor="let experience of experiences$ | async"
+            *ngFor="let experience of experiences"
             [value]="experience.id"
           >
             {{ experience.display }}
@@ -67,12 +57,17 @@
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>email</mat-icon>
-        <input matInput formControlName="email" />
+        <input matInput placeholder="電子郵件" formControlName="email" />
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
-        <mat-icon matPrefix>home</mat-icon>
-        <input matInput formControlName="address" />
+        <mat-icon matPrefix>smartphone</mat-icon>
+        <input matInput placeholder="手機號碼" formControlName="cellPhone" />
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>room</mat-icon>
+        <input matInput placeholder="地址" formControlName="address" />
       </mat-form-field>
 
       <div

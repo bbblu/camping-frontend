@@ -24,7 +24,7 @@ export class TopBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuth$ = this.authService.isAuth$;
-    this.showSpinner$ = this.spinnerService.isShow$;
     this.account$ = this.accountService.account$;
+    this.showSpinner$ = this.spinnerService.isShow$;
   }
 }

@@ -96,7 +96,9 @@
                   formControlName="cellPhone"
                 />
                 <mat-icon matPrefix>smartphone</mat-icon>
-                <mat-error *ngIf="form.controls['cellPhone'].hasError('required')">
+                <mat-error
+                  *ngIf="form.controls['cellPhone'].hasError('required')"
+                >
                   請填寫您的手機號碼
                 </mat-error>
               </mat-form-field>
@@ -214,7 +216,7 @@
               appearance="outline"
               floatLabel="never"
             >
-              <mat-icon matPrefix>face</mat-icon>
+              <mat-icon matPrefix>details</mat-icon>
               <mat-select formControlName="experience" placeholder="經驗">
                 <mat-option
                   *ngFor="let experience of experiences"
