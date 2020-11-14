@@ -1,14 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ProductType } from '@models/product/product-group-filter.model';
-import { Image } from '@models/product/image.model';
-import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/image-cropper-dialog.component';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
   MatDialogRef,
 } from '@angular/material/dialog';
+
+import { ProductType } from '@models/product/product-group-filter.model';
+import { Image } from '@models/product/image.model';
+import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/image-cropper-dialog.component';
 
 export interface DialogData {
   productTypes: ProductType[];
