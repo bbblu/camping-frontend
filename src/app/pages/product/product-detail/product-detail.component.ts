@@ -1,5 +1,5 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 import { ProductGroupDetail } from '@models/product/product-group-detail.model';
@@ -21,12 +21,13 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private snakeBarService: SnakeBarService,
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.router.paramMap.subscribe((param) => {
+    this.route.paramMap.subscribe((param) => {
       this.productGroupId = +param.get('id')!;
       this.getProductDetail(this.productGroupId);
     });
@@ -59,6 +60,14 @@ export class ProductDetailComponent implements OnInit {
   starEmpty(comment: number): number[] {
     const empty = Math.floor(5 - comment);
     return [...Array(empty).keys()];
+  }
+
+  toUserProduct() {
+    this.router.navigate(['user', 'admin', 'product'], {
+      queryParams: {
+        nickName: this.productGroup.productOwnerName,
+      },
+    });
   }
 
   openDialog(): void {

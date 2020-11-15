@@ -25,7 +25,12 @@
               </span>
             </div>
             <ng-template #emptyComment>
-              <div class="stars" fxLayout="row" fxLayoutAlign="start center">
+              <div
+                class="stars"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+                fxLayoutGap="5px"
+              >
                 <mat-icon>star_outline</mat-icon>
                 <span>尚未評分</span>
               </div>
@@ -34,10 +39,23 @@
             <span>{{ productGroup.city }}</span>
             <span class="price">{{ productGroup.price }}/天</span>
           </div>
+
           <span>
             {{ productGroup.borrowStartDate }} ~
             {{ productGroup.borrowEndDate }}
           </span>
+
+          <div
+            class="owner"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            fxLayoutGap="5px"
+          >
+            <mat-icon>account_circle</mat-icon>
+            <a (click)="toUserProduct()">
+              {{ productGroup.productOwnerName }}
+            </a>
+          </div>
         </mat-card-subtitle>
         <mat-card-actions fxLayoutAlign="end">
           <button mat-flat-button (click)="openDialog()">我要租</button>

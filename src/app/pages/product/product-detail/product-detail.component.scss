@@ -5,6 +5,10 @@ $font-white: map-get($colors, white);
 $font-yellow: map-get($colors, primary4);
 $font-red: map-get($colors, red);
 
+mat-icon {
+  color: $font-yellow;
+}
+
 .container {
   margin: 3% 0;
 }
@@ -21,12 +25,6 @@ mat-card {
 }
 
 mat-card-subtitle {
-  .stars {
-    mat-icon {
-      color: $font-yellow;
-    }
-  }
-
   .price {
     color: $font-red;
   }
