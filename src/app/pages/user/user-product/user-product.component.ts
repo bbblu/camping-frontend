@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { ProductGroup } from '@models/product/product-group.model';
 import { User } from '@models/user/user.model';
@@ -15,6 +15,8 @@ import { products } from '../../../fixtures/product-group.fixture';
   styleUrls: ['./user-product.component.scss'],
 })
 export class UserProductComponent implements OnInit {
+  @Input() isEdit = true;
+
   productGroups: ProductGroup[] = [];
   user!: User;
 

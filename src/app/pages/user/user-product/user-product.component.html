@@ -1,11 +1,21 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center">
   <div fxLayout="column" fxFlex="80" fxLayoutGap="20px">
     <mat-card *ngIf="user">
-      <mat-card-title fxLayout="row" fxLayoutAlign="start center">
-        <img class="seller" alt="seller" src="assets/image/seller.svg" />
-        <span class="nick-name">{{ user.nickName }} 的商品</span>
+      <mat-card-title fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <img class="seller" alt="seller" src="assets/image/seller.svg" />
+          <span class="nick-name">{{ user.nickName }} 的商品</span>
+        </div>
+
+        <button mat-flat-button color="primary" routerLink="/product/add" fxLayoutAlign="end">
+          新增商品
+        </button>
       </mat-card-title>
     </mat-card>
-    <app-product-list [productGroups]="productGroups"></app-product-list>
+
+    <app-product-list
+      [productGroups]="productGroups"
+      [isEdit]="isEdit"
+    ></app-product-list>
   </div>
 </div>

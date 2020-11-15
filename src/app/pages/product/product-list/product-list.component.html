@@ -26,6 +26,16 @@
           <span>{{ productGroup.city }}</span>
         </mat-card-subtitle>
       </mat-card-content>
+
+      <mat-card-actions
+        *ngIf="isEdit"
+        fxLayout="row"
+        fxLayoutAlign="end"
+        fxLayoutGap="10px"
+      >
+        <button mat-flat-button color="accent">編輯</button>
+        <button mat-flat-button color="warn">刪除</button>
+      </mat-card-actions>
     </mat-card>
   </div>
 </div>

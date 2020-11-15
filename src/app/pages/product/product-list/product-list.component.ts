@@ -9,6 +9,7 @@ import { ProductGroup } from '@models/product/product-group.model';
 })
 export class ProductListComponent implements OnInit {
   @Input() productGroups: ProductGroup[] = [];
+  @Input() isEdit = false;
 
   page = 1;
 

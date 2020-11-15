@@ -42,6 +42,12 @@ $bg-white: map-get($colors, white);
       }
     }
   }
+
+  mat-card-actions {
+    .mat-flat-button {
+      color: $font-white;
+    }
+  }
 }
 
 .pagination {
