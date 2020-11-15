@@ -2,11 +2,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
-
-import { ApiModel } from '@models/api-model';
 import { ProductGroupDetail } from '@models/product/product-group-detail.model';
 
 import { ProductService } from '@services/api/product.service';
+import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 import { BorrowDialogComponent } from '@pages/borrow/borrow-dialog/borrow-dialog.component';
 
@@ -21,6 +20,7 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private snakeBarService: SnakeBarService,
     private router: ActivatedRoute,
     private dialog: MatDialog
   ) {}
@@ -34,11 +34,15 @@ export class ProductDetailComponent implements OnInit {
 
   getProductDetail(id: number): void {
     this.productService.getProductGroup(id).subscribe(
-      (response: ApiModel<ProductGroupDetail>) => {
-        this.productGroup = response.data;
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.productGroup = res.data;
       },
-      (error) => {
-        console.log(error.error);
+      (err) => {
+        this.snakeBarService.open(err.error.message);
       }
     );
   }
