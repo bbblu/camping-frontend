@@ -10,6 +10,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { UserProductComponent } from './user-product/user-product.component';
+import { ProductModule } from '../product/product.module';
 
 @NgModule({
   declarations: [UserComponent, UserInfoComponent, UserProductComponent],
@@ -19,6 +20,7 @@ import { UserProductComponent } from './user-product/user-product.component';
     UserRoutingModule,
     FlexLayoutModule,
     MaterialModule,
+    ProductModule,
   ],
 })
 export class UserModule {}
