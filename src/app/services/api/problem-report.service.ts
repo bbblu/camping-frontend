@@ -11,7 +11,7 @@ import { HttpService } from '@services/http.service';
   providedIn: 'root',
 })
 export class ProblemReportService {
-  baseUrl = '/rental';
+  baseUrl = '/problem-report';
 
   constructor(private httpService: HttpService) {}
 
