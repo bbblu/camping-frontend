@@ -7,10 +7,11 @@ import { MaterialModule } from '@modules/material.module';
 
 import { UserRoutingModule } from './user-routing.module';
 
+import { UserComponent } from './user.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 
 @NgModule({
-  declarations: [UserInfoComponent],
+  declarations: [UserComponent, UserInfoComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
