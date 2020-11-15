@@ -5,7 +5,6 @@
       let productGroup of productGroups
         | paginate: { itemsPerPage: 10, currentPage: page }
     "
-    [routerLink]="productGroup.id.toString()"
   >
     <mat-card>
       <img mat-card-image alt="product-image" [src]="productGroup.coverImage" />
@@ -27,14 +26,32 @@
         </mat-card-subtitle>
       </mat-card-content>
 
-      <mat-card-actions
-        *ngIf="isEdit"
-        fxLayout="row"
-        fxLayoutAlign="end"
-        fxLayoutGap="10px"
-      >
-        <button mat-flat-button color="accent">編輯</button>
-        <button mat-flat-button color="warn">刪除</button>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
+        <button
+          mat-flat-button
+          *ngIf="isEdit"
+          type="button"
+          color="accent"
+          (click)="toProductEdit(productGroup.id)"
+        >
+          編輯
+        </button>
+        <button
+          mat-flat-button
+          *ngIf="isEdit"
+          type="button"
+          color="warn"
+          (click)="deleteProductGroup(productGroup.id)"
+        >
+          刪除
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="toProductDetail(productGroup.id)"
+        >
+          詳細資料
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
