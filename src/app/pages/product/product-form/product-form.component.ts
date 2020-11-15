@@ -16,6 +16,7 @@ import {
   ProductGroupDetail,
 } from '@models/product/product-group-detail.model';
 
+import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/image-cropper-dialog.component';
 import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/product-form-dialog.component';
 
 @Component({
@@ -28,6 +29,7 @@ export class ProductFormComponent implements OnInit {
   cities: string[] = [];
   cityIndex = 0;
   areas: string[] = [];
+  coverImage: string = '';
   isEdit = false;
 
   productGroup!: ProductGroupDetail;
@@ -187,6 +189,34 @@ export class ProductFormComponent implements OnInit {
 
       this.addProducts(data);
       this.products = this.form.value.productArray;
+    });
+  }
+
+  openImageDialog(isEdit: boolean): void {
+    const dialogRef = this.dialog.open(ImageCropperDialogComponent, {
+      width: '70%',
+      data: {
+        image: isEdit ? this.coverImage : '',
+        isEdit: isEdit,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (!data) {
+        return;
+      }
+
+      this.coverImage = data.image;
+      this.form.patchValue({
+        coverImage: this.coverImage,
+      });
+    });
+  }
+
+  deleteProductImage(): void {
+    this.coverImage = '';
+    this.form.patchValue({
+      coverImage: this.coverImage,
     });
   }
 }
