@@ -108,12 +108,12 @@
               [matAutocomplete]="auto"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="addType($event)"
+              (matChipInputTokenEnd)="inputChip($event)"
             />
           </mat-chip-list>
           <mat-autocomplete
             #auto="matAutocomplete"
-            (optionSelected)="selected($event)"
+            (optionSelected)="selectAutoComplete($event)"
           >
             <mat-option *ngFor="let type of productTypes" [value]="type.id">
               {{ type.name }}

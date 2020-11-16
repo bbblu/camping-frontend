@@ -107,26 +107,17 @@ export class ProductFilterComponent implements OnInit {
     );
   }
 
-  addType(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    const findType = this.productTypes.find(
-      (item) => item.name === value.trim()
-    );
+  addType(value: string): void {
+    const findType = this.productTypes.find((item) => item.name === value);
 
     if (findType) {
       this.form.value.typeArray.push(findType.id);
       this.chipTypes.push(findType);
     }
-
-    if (input) {
-      input.value = '';
-    }
   }
 
   removeType(type: ProductType): void {
-    const index = this.productTypes.indexOf(type);
+    const index = this.chipTypes.indexOf(type);
 
     if (index >= 0) {
       this.form.value.typeArray.splice(index, 1);
@@ -134,15 +125,17 @@ export class ProductFilterComponent implements OnInit {
     }
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
-    const findType = this.productTypes.find(
-      (item) => item.name === event.option.viewValue.trim()
-    );
+  inputChip(event: MatChipInputEvent): void {
+    this.addType(event.value.trim());
 
-    if (findType) {
-      this.form.value.typeArray.push(findType.id);
-      this.chipTypes.push(findType);
+    const input = event.input;
+    if (input) {
+      input.value = '';
     }
+  }
+
+  selectAutoComplete(event: MatAutocompleteSelectedEvent): void {
+    this.addType(event.option.viewValue.trim());
 
     this.typeInput.nativeElement.value = '';
   }

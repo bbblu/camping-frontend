@@ -8,22 +8,22 @@
     [routerLink]="productGroup.id.toString()"
   >
     <mat-card>
-      <img mat-card-image [src]="productGroup.coverImage" alt="商品圖片" />
+      <img mat-card-image alt="product-image" [src]="productGroup.coverImage" />
       <mat-card-content>
-        <mat-card-title fxFlex="60"> 戶外野營折疊全自動帳篷 </mat-card-title>
+        <mat-card-title fxFlex="60">{{ productGroup.name }}</mat-card-title>
         <mat-card-subtitle
           fxLayout="column"
           fxLayoutAlign="center end"
           fxFlex="40"
         >
-          <span>{{ productGroup.city }}</span>
           <div fxLayout="row" fxLayoutGap="10px">
+            <span class="price">$ {{ productGroup.price }}/天</span>
             <div class="comment">
               <mat-icon>star_rate</mat-icon>
-              <span>5</span>
+              <span>{{ productGroup.comment }}</span>
             </div>
-            <span class="price">$ {{ productGroup.price }}</span>
           </div>
+          <span>{{ productGroup.city }}</span>
         </mat-card-subtitle>
       </mat-card-content>
     </mat-card>
