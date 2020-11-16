@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
@@ -9,9 +10,14 @@ import { ProductType } from '@models/product/product-group-filter.model';
 import { ProductService } from '@services/api/product.service';
 import { CityService } from '@services/api/city.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
+import {
+  Image,
+  Product,
+  ProductGroupDetail,
+} from '@models/product/product-group-detail.model';
 
+import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/image-cropper-dialog.component';
 import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/product-form-dialog.component';
-import { Image, Product } from '@models/product/product-group-detail.model';
 
 @Component({
   selector: 'app-product-form',
@@ -23,7 +29,10 @@ export class ProductFormComponent implements OnInit {
   cities: string[] = [];
   cityIndex = 0;
   areas: string[] = [];
+  coverImage: string = '';
+  isEdit = false;
 
+  productGroup!: ProductGroupDetail;
   products: Product[] = [];
   productTypes: ProductType[] = [];
 
@@ -32,6 +41,7 @@ export class ProductFormComponent implements OnInit {
     private productService: ProductService,
     private cityService: CityService,
     private snakeBarService: SnakeBarService,
+    private route: ActivatedRoute,
     public dialog: MatDialog
   ) {}
 
@@ -48,7 +58,43 @@ export class ProductFormComponent implements OnInit {
       price: [null, [Validators.required]],
       coverImage: [null],
       bankAccount: [null, [Validators.required]],
-      productArrays: [[]],
+      productArray: [[]],
+    });
+
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (id) {
+      this.isEdit = true;
+      this.getProductDetail(id);
+    }
+  }
+
+  getProductDetail(id: number): void {
+    this.productService.getProductGroup(id).subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.productGroup = res.data;
+        this.updateFormValue(this.productGroup);
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
+  }
+
+  updateFormValue(data: ProductGroupDetail): void {
+    this.form.patchValue({
+      name: data.name,
+      borrowStartDate: data.borrowStartDate,
+      borrowEndDate: data.borrowEndDate,
+      cityName: data.city,
+      cityAreaName: data.city,
+      price: data.price,
+      coverImage: data.coverImage,
+      bankAccount: '',
+      productArray: data.productArray,
     });
   }
 
@@ -88,11 +134,11 @@ export class ProductFormComponent implements OnInit {
   }
 
   addProducts(product: Product): void {
-    this.form.value.productArrays.push(product);
+    this.form.value.productArray.push(product);
   }
 
   removeProducts(index: number): void {
-    this.form.value.productArrays.splice(index);
+    this.form.value.productArray.splice(index);
   }
 
   imageToSliderObject(images: Image[]): object[] {
@@ -142,7 +188,35 @@ export class ProductFormComponent implements OnInit {
       }
 
       this.addProducts(data);
-      this.products = this.form.value.productArrays;
+      this.products = this.form.value.productArray;
+    });
+  }
+
+  openImageDialog(isEdit: boolean): void {
+    const dialogRef = this.dialog.open(ImageCropperDialogComponent, {
+      width: '70%',
+      data: {
+        image: isEdit ? this.coverImage : '',
+        isEdit: isEdit,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (!data) {
+        return;
+      }
+
+      this.coverImage = data.image;
+      this.form.patchValue({
+        coverImage: this.coverImage,
+      });
+    });
+  }
+
+  deleteProductImage(): void {
+    this.coverImage = '';
+    this.form.patchValue({
+      coverImage: this.coverImage,
     });
   }
 }

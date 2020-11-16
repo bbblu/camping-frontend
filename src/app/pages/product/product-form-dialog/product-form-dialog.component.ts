@@ -58,13 +58,12 @@ export class ProductFormDialogComponent implements OnInit {
     }
   }
 
-  openImageDialog(action: string): void {
+  openImageDialog(isEdit: boolean): void {
     const dialogRef = this.dialog.open(ImageCropperDialogComponent, {
       width: '70%',
       data: {
-        image:
-          action === 'update' ? this.productImages[this.imageIndex].image : '',
-        action: action,
+        image: isEdit ? this.productImages[this.imageIndex].image : '',
+        isEdit: isEdit,
       },
     });
 
@@ -73,17 +72,17 @@ export class ProductFormDialogComponent implements OnInit {
         return;
       }
 
-      if (data.action === 'create') {
-        this.productImages.push({
-          image: data.image,
-          thumbImage: data.image,
-        });
-      } else {
+      if (data.isEdit) {
         this.productImages[this.imageIndex] = {
           image: data.image,
           thumbImage: data.image,
         };
         this.productImages = [...this.productImages];
+      } else {
+        this.productImages.push({
+          image: data.image,
+          thumbImage: data.image,
+        });
       }
 
       this.form.patchValue({

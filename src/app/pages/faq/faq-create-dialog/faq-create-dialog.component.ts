@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialogRef } from '@angular/material/dialog';
 
+import { ProblemReportService } from '@services/api/problem-report.service';
 import { UserService } from '@services/api/user.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
@@ -17,6 +18,7 @@ export class FaqCreateDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<FaqCreateDialogComponent>,
     private formBuilder: FormBuilder,
+    private problemReportService: ProblemReportService,
     private userService: UserService,
     private snakeBarService: SnakeBarService
   ) {}
@@ -27,8 +29,8 @@ export class FaqCreateDialogComponent implements OnInit {
     this.form = this.formBuilder.group({
       title: [null, Validators.required],
       type: [null, Validators.required],
-      email: [null, Validators.required],
-      content: [null, Validators.required],
+      reporterEmail: [null, Validators.required],
+      reportContent: [null, Validators.required],
     });
   }
 
@@ -40,7 +42,7 @@ export class FaqCreateDialogComponent implements OnInit {
         }
 
         this.form.patchValue({
-          email: res.data.email,
+          reporterEmail: res.data.email,
         });
       },
       (err) => {
@@ -49,7 +51,16 @@ export class FaqCreateDialogComponent implements OnInit {
     );
   }
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    this.problemReportService.addProblemReport(this.form.value).subscribe(
+      (res) => {
+        this.snakeBarService.open(res.message);
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

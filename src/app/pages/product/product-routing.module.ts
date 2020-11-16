@@ -10,6 +10,7 @@ import { ProductFormComponent } from './product-form/product-form.component';
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: ProductFilterComponent },
   { path: 'add', component: ProductFormComponent, canActivate: [AuthGuard] },
+  { path: 'edit/:id', component: ProductFormComponent, canActivate: [AuthGuard] },
   { path: ':id', component: ProductDetailComponent },
 ];
 

@@ -8,6 +8,34 @@
       fxFlexFill
       fxLayoutGap="10px"
     >
+      <img class="cover" alt="cover" [src]="coverImage" />
+      <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+        <button
+          mat-flat-button
+          type="button"
+          color="primary"
+          (click)="openImageDialog(false)"
+        >
+          新增
+        </button>
+        <button
+          mat-flat-button
+          type="button"
+          color="accent"
+          (click)="openImageDialog(true)"
+        >
+          編輯
+        </button>
+        <button
+          mat-flat-button
+          type="button"
+          color="warn"
+          (click)="deleteProductImage()"
+        >
+          刪除
+        </button>
+      </div>
+
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>tour</mat-icon>
         <input matInput type="text" placeholder="標題" formControlName="name" />

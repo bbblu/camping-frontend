@@ -6,7 +6,7 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 export interface DialogData {
   image: string;
-  action: string;
+  isEdit: boolean;
 }
 
 @Component({
@@ -52,7 +52,7 @@ export class ImageCropperDialogComponent implements OnInit {
   onSubmit(): void {
     this.dialogRef.close({
       image: this.croppedImage,
-      action: this.data.action,
+      isEdit: this.data.isEdit,
     });
   }
 }
