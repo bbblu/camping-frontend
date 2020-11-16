@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '@guards/auth.guard';
 
-import { UserInfoComponent } from './user-info/user-info.component';
+import { UserComponent } from './user.component';
 
 const routes: Routes = [
-  { path: '', component: UserInfoComponent, canActivate: [AuthGuard] },
+  { path: '', component: UserComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
