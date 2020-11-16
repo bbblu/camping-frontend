@@ -11,12 +11,14 @@ import { BorrowRoutingModule } from './borrow-routing.module';
 import { BorrowListComponent } from './borrow-list/borrow-list.component';
 import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
 import { BorrowActionDialogComponent } from './borrow-action-dialog/borrow-action-dialog.component';
+import { BorrowCommentDialogComponent } from './borrow-comment-dialog/borrow-comment-dialog.component';
 
 @NgModule({
   declarations: [
     BorrowListComponent,
     BorrowDialogComponent,
     BorrowActionDialogComponent,
+    BorrowCommentDialogComponent,
   ],
   imports: [
     CommonModule,
