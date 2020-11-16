@@ -13,6 +13,7 @@ import { SnakeBarService } from '@services/ui/snake-bar.service';
 import { BorrowActionDialogComponent } from '@pages/borrow/borrow-action-dialog/borrow-action-dialog.component';
 
 import { rental } from '../../../fixtures/rental.fixture';
+import { BorrowCommentDialogComponent } from "@pages/borrow/borrow-comment-dialog/borrow-comment-dialog.component";
 
 class StatusButton {
   text: string;
@@ -173,7 +174,7 @@ export class BorrowListComponent implements OnInit {
     switch (text) {
       case '評價租方':
       case '評價借方':
-        return null;
+        return this.openCommentDialog(text);
       default:
         return this.openActionDialog(text);
     }
@@ -186,6 +187,16 @@ export class BorrowListComponent implements OnInit {
         title: title,
         rentalId: rental.id,
         isCancel: !title.startsWith('同意'),
+      },
+    });
+  }
+
+  openCommentDialog(title: string): void {
+    this.dialog.open(BorrowCommentDialogComponent, {
+      width: '50%',
+      data: {
+        title: title,
+        productGroupId: rental.id,
       },
     });
   }
