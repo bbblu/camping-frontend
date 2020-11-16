@@ -1,12 +1,13 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center">
   <div
     class="toggle"
+    (click)="updateRentals()"
     fxLayout="row"
     fxLayoutAlign="center center"
     fxLayoutGap="30px"
   >
-    <span>租借</span>
-    <mat-slide-toggle [(ngModel)]="isChecked"></mat-slide-toggle>
+    <span>借用</span>
+    <mat-slide-toggle [(ngModel)]="isRental"></mat-slide-toggle>
     <span>出租</span>
   </div>
 
@@ -14,7 +15,6 @@
     <mat-card
       *ngFor="let rental of rentals"
       [style.color]="getStatusColor(rental.status)"
-      (click)="updateSelectRental(rental)"
       fxFlex="32"
       fxFlex.lt-md="48"
       fxFlex.lt-sm="100"
@@ -45,19 +45,23 @@
         </div>
         <div class="contact" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>email</mat-icon>
-          <a href="mailto:{{ rental.seller.email }}">{{
-            rental.seller.email
-          }}</a>
+          <a href="mailto:{{ rental.seller.email }}">
+            {{ rental.seller.email }}
+          </a>
         </div>
       </mat-card-content>
 
       <mat-card-actions fxLayout="row" fxLayoutAlign="space-around">
-        <button
-          mat-flat-button
-          [style.background-color]="getStatusColor(rental.status)"
-        >
-          {{ getStatusButton(rental.status) }}
-        </button>
+        <div *ngFor="let button of getStatusButton(rental.status)">
+          <button
+            mat-flat-button
+            [style.background-color]="button.color"
+            [disabled]="button.disable"
+            (click)="clickStatusButton(button.text)"
+          >
+            {{ button.text }}
+          </button>
+        </div>
       </mat-card-actions>
     </mat-card>
   </div>

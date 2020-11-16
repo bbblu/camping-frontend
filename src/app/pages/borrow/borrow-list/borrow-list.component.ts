@@ -1,10 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
+
 import { Rental } from '@models/rental/rental';
 
 import { BorrowStatus } from '@enums/borrow-status.enum';
+import { Color } from '@enums/color.enum';
+
+import { RentalService } from '@services/api/rental.service';
+import { SnakeBarService } from '@services/ui/snake-bar.service';
+
+import { BorrowActionDialogComponent } from '@pages/borrow/borrow-action-dialog/borrow-action-dialog.component';
 
 import { rental } from '../../../fixtures/rental.fixture';
+import { BorrowCommentDialogComponent } from "@pages/borrow/borrow-comment-dialog/borrow-comment-dialog.component";
+
+class StatusButton {
+  text: string;
+  color: Color;
+  disable: boolean;
+
+  constructor(text: string, color: Color, disable: boolean = false) {
+    this.text = text;
+    this.color = color;
+    this.disable = disable;
+  }
+}
 
 @Component({
   selector: 'app-borrow-list',
@@ -12,63 +33,87 @@ import { rental } from '../../../fixtures/rental.fixture';
   styleUrls: ['./borrow-list.component.scss'],
 })
 export class BorrowListComponent implements OnInit {
-  isChecked = true;
+  isRental = false;
   rentals: Rental[] = [];
-  selectRental!: Rental;
 
-  constructor() {}
+  constructor(
+    private rentalService: RentalService,
+    private snakeBarService: SnakeBarService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.fakeRentals();
+    this.updateRentals();
+  }
+
+  getBorrows(): void {
+    this.rentalService.getBorrows().subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.rentals = res.data;
+        this.fakeRentals();
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
+  }
+
+  getRentals(): void {
+    this.rentalService.getRentals().subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.rentals = res.data;
+        this.fakeRentals();
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
   }
 
   fakeRentals() {
     for (const x of Array(10).keys()) {
       const temp = { ...rental };
-      temp.status = Math.floor(Math.random() * Math.floor(7));
+      temp.status = x;
       this.rentals.push(temp);
     }
+  }
 
-    this.selectRental = this.rentals[0];
+  updateRentals(): void {
+    if (this.isRental) {
+      this.getRentals();
+    } else {
+      this.getBorrows();
+    }
   }
 
   getStatusText(status: BorrowStatus): string {
     switch (status) {
-      case BorrowStatus.alreadyCancel:
+      case BorrowStatus.applyCancel:
+        return '申請取消';
+      case BorrowStatus.cancel:
         return '已取消';
+      case BorrowStatus.beReturned:
+        return '被退貨';
+      case BorrowStatus.beClaim:
+        return '被求償';
+      case BorrowStatus.notPlaced:
+        return '未寄放';
       case BorrowStatus.notPickUp:
         return '未取貨';
-      case BorrowStatus.checkBorrow:
-        return '檢查中';
       case BorrowStatus.notReturn:
         return '未歸還';
-      case BorrowStatus.checkRental:
-        return '檢查中';
+      case BorrowStatus.notRetrieve:
+        return '未取回';
       case BorrowStatus.notComment:
         return '未評價';
-      case BorrowStatus.alreadyComment:
-        return '已評價';
-      default:
-        return '未知';
-    }
-  }
-
-  getStatusButton(status: BorrowStatus): string {
-    switch (status) {
-      case BorrowStatus.alreadyCancel:
-        return '已取消';
-      case BorrowStatus.notPickUp:
-        return '取貨完成';
-      case BorrowStatus.checkBorrow:
-        return '檢查完成';
-      case BorrowStatus.notReturn:
-        return '主動回報';
-      case BorrowStatus.checkRental:
-        return '等待檢查';
-      case BorrowStatus.notComment:
-        return '評價';
-      case BorrowStatus.alreadyComment:
-        return '已評價';
       default:
         return '未知';
     }
@@ -76,22 +121,84 @@ export class BorrowListComponent implements OnInit {
 
   getStatusColor(status: BorrowStatus): string {
     switch (status) {
+      case BorrowStatus.applyCancel:
+        return Color.primary5;
+      case BorrowStatus.notPlaced:
       case BorrowStatus.notPickUp:
-        return '#c0dd6f';
-      case BorrowStatus.checkBorrow:
-      case BorrowStatus.checkRental:
-        return '#72c1f2';
+        return Color.primary1;
       case BorrowStatus.notReturn:
-        return '#f291a3';
+      case BorrowStatus.notRetrieve:
+        return Color.primary2;
       case BorrowStatus.notComment:
-        return '#f2c849';
+        return Color.primary4;
       default:
-        return 'lightgray';
+        return Color.lightgray;
     }
   }
 
-  updateSelectRental(rental: Rental): void {
-    this.selectRental = rental;
+  getStatusButton(status: BorrowStatus): StatusButton[] {
+    return this.isRental
+      ? this.getRentalButton(status)
+      : this.getBorrowButton(status);
+  }
+
+  getBorrowButton(status: BorrowStatus): StatusButton[] {
+    switch (status) {
+      case BorrowStatus.notPlaced:
+        return [new StatusButton('取消訂單', Color.red)];
+      case BorrowStatus.notComment:
+        return [new StatusButton('評價租方', Color.primary4)];
+      default:
+        return [new StatusButton('無可執行動作', Color.lightgray, true)];
+    }
+  }
+
+  getRentalButton(status: BorrowStatus): StatusButton[] {
+    switch (status) {
+      case BorrowStatus.applyCancel:
+        return [
+          new StatusButton('同意取消', Color.primary1),
+          new StatusButton('拒絕取消', Color.red),
+        ];
+      case BorrowStatus.notPlaced:
+      case BorrowStatus.notPickUp:
+        return [new StatusButton('拒絕交易', Color.red)];
+      case BorrowStatus.notComment:
+        return [new StatusButton('評價借方', Color.primary4)];
+      default:
+        return [new StatusButton('無可執行動作', Color.lightgray, true)];
+    }
+  }
+
+  clickStatusButton(text: string): void | null {
+    switch (text) {
+      case '評價租方':
+      case '評價借方':
+        return this.openCommentDialog(text);
+      default:
+        return this.openActionDialog(text);
+    }
+  }
+
+  openActionDialog(title: string): void {
+    this.dialog.open(BorrowActionDialogComponent, {
+      width: '70%',
+      data: {
+        title: title,
+        rentalId: rental.id,
+        isCancel: !title.startsWith('同意'),
+      },
+    });
+  }
+
+  openCommentDialog(title: string): void {
+    this.dialog.open(BorrowCommentDialogComponent, {
+      width: '50%',
+      data: {
+        title: title,
+        productGroupId: rental.id,
+      },
+    });
   }
 
   imageToSliderObject(images: string[]): object[] {

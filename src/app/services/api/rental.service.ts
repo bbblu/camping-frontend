@@ -15,8 +15,8 @@ export class RentalService {
 
   constructor(private httpService: HttpService) {}
 
-  getRentals(): Observable<ApiModel<Rental>> {
-    return this.httpService.get<Rental>(this.baseUrl);
+  getRentals(): Observable<ApiModel<Rental[]>> {
+    return this.httpService.get<Rental[]>(this.baseUrl);
   }
 
   addRental(data: object): Observable<ApiModel<{ id: number }>> {
@@ -29,8 +29,8 @@ export class RentalService {
     );
   }
 
-  getBorrows(): Observable<ApiModel<Rental>> {
-    return this.httpService.get<Rental>(`${this.baseUrl}/borrow`);
+  getBorrows(): Observable<ApiModel<Rental[]>> {
+    return this.httpService.get<Rental[]>(`${this.baseUrl}/borrow`);
   }
 
   cancelRental(id: number, data: object): Observable<ApiModel<string>> {
