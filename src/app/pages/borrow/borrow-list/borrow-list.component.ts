@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
+
 import { Rental } from '@models/rental/rental';
 
 import { BorrowStatus } from '@enums/borrow-status.enum';
@@ -7,6 +9,8 @@ import { Color } from '@enums/color.enum';
 
 import { RentalService } from '@services/api/rental.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
+
+import { BorrowActionDialogComponent } from '@pages/borrow/borrow-action-dialog/borrow-action-dialog.component';
 
 import { rental } from '../../../fixtures/rental.fixture';
 
@@ -33,7 +37,8 @@ export class BorrowListComponent implements OnInit {
 
   constructor(
     private rentalService: RentalService,
-    private snakeBarService: SnakeBarService
+    private snakeBarService: SnakeBarService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -162,6 +167,27 @@ export class BorrowListComponent implements OnInit {
       default:
         return [new StatusButton('無可執行動作', Color.lightgray, true)];
     }
+  }
+
+  clickStatusButton(text: string): void | null {
+    switch (text) {
+      case '評價租方':
+      case '評價借方':
+        return null;
+      default:
+        return this.openActionDialog(text);
+    }
+  }
+
+  openActionDialog(title: string): void {
+    this.dialog.open(BorrowActionDialogComponent, {
+      width: '70%',
+      data: {
+        title: title,
+        rentalId: rental.id,
+        isCancel: !title.startsWith('同意'),
+      },
+    });
   }
 
   imageToSliderObject(images: string[]): object[] {

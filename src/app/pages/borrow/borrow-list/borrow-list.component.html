@@ -57,6 +57,7 @@
             mat-flat-button
             [style.background-color]="button.color"
             [disabled]="button.disable"
+            (click)="clickStatusButton(button.text)"
           >
             {{ button.text }}
           </button>
