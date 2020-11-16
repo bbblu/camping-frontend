@@ -10,9 +10,14 @@ import { BorrowRoutingModule } from './borrow-routing.module';
 
 import { BorrowListComponent } from './borrow-list/borrow-list.component';
 import { BorrowDialogComponent } from './borrow-dialog/borrow-dialog.component';
+import { BorrowActionDialogComponent } from './borrow-action-dialog/borrow-action-dialog.component';
 
 @NgModule({
-  declarations: [BorrowListComponent, BorrowDialogComponent],
+  declarations: [
+    BorrowListComponent,
+    BorrowDialogComponent,
+    BorrowActionDialogComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
