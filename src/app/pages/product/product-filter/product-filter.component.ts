@@ -17,7 +17,7 @@ import { ProductService } from '@services/api/product.service';
 import { CityService } from '@services/api/city.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
-import { products } from '../../../fixtures/product.fixture';
+import { products } from '../../../fixtures/product-group.fixture';
 
 @Component({
   selector: 'app-product-filter',
@@ -77,7 +77,7 @@ export class ProductFilterComponent implements OnInit {
   }
 
   getCities(): void {
-    this.cityService.getCities().subscribe(
+    this.cityService.getCity().subscribe(
       (res) => {
         if (!res.result) {
           this.snakeBarService.open(res.message);

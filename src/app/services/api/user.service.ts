@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
@@ -7,7 +8,6 @@ import { User } from '@models/user/user.model';
 import { Experience } from '@models/user/experience.model';
 
 import { HttpService } from '@services/http.service';
-import { HttpResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +32,10 @@ export class UserService {
 
   updateUser(data: object): Observable<ApiModel<string>> {
     return this.httpService.patch<string>(this.baseUrl, data);
+  }
+
+  updateUserPassword(data: object): Observable<ApiModel<string>> {
+    return this.httpService.patch<string>(`${this.baseUrl}/password`, data);
   }
 
   getUserExperiences(): Observable<ApiModel<Experience[]>> {

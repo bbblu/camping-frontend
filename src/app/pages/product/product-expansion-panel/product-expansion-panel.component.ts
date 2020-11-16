@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { MatIconRegistry } from '@angular/material/icon';
 
-import { Link, Product } from '@models/product/product-group-detail.model';
+import { Image, Product } from '@models/product/product-group-detail.model';
 
 @Component({
   selector: 'app-product-expansion-panel',
@@ -25,7 +25,7 @@ export class ProductExpansionPanelComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  imageToSliderObject(images: Link[]): object[] {
+  imageToSliderObject(images: Image[]): object[] {
     if (!images) {
       return [];
     }

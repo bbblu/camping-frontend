@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { ApiModel } from '@models/api-model';
-import { ProductGroup } from '@models/product/product-group-detail.model';
+import { ProductGroupDetail } from '@models/product/product-group-detail.model';
 
 import { ProductService } from '@services/api/product.service';
 
@@ -17,7 +17,7 @@ import { BorrowDialogComponent } from '@pages/borrow/borrow-dialog/borrow-dialog
 })
 export class ProductDetailComponent implements OnInit {
   productGroupId!: number;
-  productGroup!: ProductGroup;
+  productGroup!: ProductGroupDetail;
 
   constructor(
     private productService: ProductService,
@@ -34,7 +34,7 @@ export class ProductDetailComponent implements OnInit {
 
   getProductDetail(id: number): void {
     this.productService.getProductGroup(id).subscribe(
-      (response: ApiModel<ProductGroup>) => {
+      (response: ApiModel<ProductGroupDetail>) => {
         this.productGroup = response.data;
       },
       (error) => {

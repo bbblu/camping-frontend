@@ -1,30 +1,28 @@
-export interface ProductGroup {
-  id: string;
+export interface ProductGroupCreate {
   name: string;
-  city: string;
   coverImage: string;
-  price: string;
-  borrowStartDate: string;
-  borrowEndDate: string;
-  contact: string;
-  comment: number;
+  cityName: string;
+  cityAreaName: string;
+  price: number;
+  borrowStartDate: Date;
+  borrowEndDate: Date;
+  bankAccount: string;
   productArray: Product[];
 }
 
 export interface Product {
-  id: number;
-  type: string;
+  type: number;
   name: string;
   count: number;
   brand: string;
   appearance: string;
   useInformation: string;
   brokenCompensation: string;
+  relatedLink: string;
   memo: string;
   imageArray: Image[];
 }
 
 export interface Image {
-  id: number;
   url: string;
 }

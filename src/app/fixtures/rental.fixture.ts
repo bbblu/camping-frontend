@@ -4,8 +4,8 @@ export const rental: Rental = {
   id: 1,
   status: 4,
   borrowRange: '2020/12/10-12/13',
-  borrowStartDate: '2020/12/10',
-  borrowEndDate: '2020/12/13',
+  borrowStartDate: new Date('2020/12/10'),
+  borrowEndDate: new Date('2020/12/13'),
   name: '4人帳四角睡帳客廳帳 桌椅 營燈 廚具',
   coverImage: 'https://i.imgur.com/Px1JXJW.jpg',
   areaName: '中和區',
@@ -15,7 +15,7 @@ export const rental: Rental = {
     email: '10646007@ntub.edu.tw',
   },
   contact: 'LineId : 1234',
-  rentalDate: '2020/08/28 15:03',
+  rentalDate: new Date('2020/08/28 15:03'),
   detailArray: [
     {
       status: 2,

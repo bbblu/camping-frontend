@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { ApiModel } from '@models/api-model';
 import { ProductGroup } from '@models/product/product-group.model';
-import { ProductGroup as ProductGroupDetail } from '@models/product/product-group-detail.model';
+import { ProductGroupDetail } from '@models/product/product-group-detail.model';
 import {
   ProductGroupFilter,
   ProductType,
@@ -24,12 +24,20 @@ export class ProductService {
     return this.httpService.get<ProductGroup[]>(`${this.baseUrl}?${params}`);
   }
 
-  addProductGroups(data: object): Observable<ApiModel<string>> {
-    return this.httpService.post<string>(this.baseUrl, data);
+  getProductGroupsByUser(
+    account: string
+  ): Observable<ApiModel<ProductGroup[]>> {
+    return this.httpService.get<ProductGroup[]>(
+      `${this.baseUrl}/user/${account}`
+    );
   }
 
   getProductGroup(id: number): Observable<ApiModel<ProductGroupDetail>> {
     return this.httpService.get<ProductGroupDetail>(`${this.baseUrl}/${id}`);
+  }
+
+  addProductGroup(data: object): Observable<ApiModel<string>> {
+    return this.httpService.post<string>(this.baseUrl, data);
   }
 
   updateProductGroup(id: number, data: object): Observable<ApiModel<string>> {
@@ -40,11 +48,15 @@ export class ProductService {
     return this.httpService.delete<string>(`${this.baseUrl}/${id}`);
   }
 
-  updateProducts(
-    groupId: number,
+  addProductGroupComment(
+    id: number,
     data: object
-  ): Observable<ApiModel<ProductGroupDetail>> {
-    return this.httpService.patch<ProductGroupDetail>(
+  ): Observable<ApiModel<string>> {
+    return this.httpService.post<string>(`${this.baseUrl}/${id}/comment`, data);
+  }
+
+  updateProducts(groupId: number, data: object): Observable<ApiModel<string>> {
+    return this.httpService.patch<string>(
       `${this.baseUrl}/${groupId}/product`,
       data
     );
@@ -54,8 +66,8 @@ export class ProductService {
     groupId: number,
     productId: number,
     data: object
-  ): Observable<ApiModel<ProductGroupDetail>> {
-    return this.httpService.patch<ProductGroupDetail>(
+  ): Observable<ApiModel<string>> {
+    return this.httpService.patch<string>(
       `${this.baseUrl}/${groupId}/product/${productId}`,
       data
     );

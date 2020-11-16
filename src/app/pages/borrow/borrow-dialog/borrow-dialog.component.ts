@@ -6,7 +6,7 @@ import * as moment from 'moment';
 
 import { ApiModel } from '@models/api-model';
 import { User } from '@models/user/user.model';
-import { ProductGroup } from '@models/product/product.model';
+import { ProductGroupDetail } from '@models/product/product-group-detail.model';
 
 import { RentalService } from '@services/api/rental.service';
 import { UserService } from '@services/api/user.service';
@@ -28,7 +28,7 @@ export class BorrowDialogComponent implements OnInit {
   rental!: { id: string };
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ProductGroup,
+    @Inject(MAT_DIALOG_DATA) public data: ProductGroupDetail,
     private formBuilder: FormBuilder,
     private rentalService: RentalService,
     private userService: UserService,
@@ -108,7 +108,7 @@ export class BorrowDialogComponent implements OnInit {
     };
 
     this.rentalService.addRental(data).subscribe(
-      (res: ApiModel<{ id: string }>) => {
+      (res: ApiModel<{ id: number }>) => {
         this.snakeBarService.open(res.message);
       },
       (err) => {
