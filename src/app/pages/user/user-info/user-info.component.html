@@ -79,6 +79,17 @@
         <button
           mat-flat-button
           type="button"
+          color="accent"
+          *ngIf="!isEditable"
+          (click)="openDialog()"
+          fxFlex="30"
+          fxFlex.lt-sm="100"
+        >
+          修改密碼
+        </button>
+        <button
+          mat-flat-button
+          type="button"
           [color]="!isEditable ? 'accent' : 'warn'"
           (click)="onEditClick()"
           fxFlex="30"
@@ -86,7 +97,6 @@
         >
           {{ !isEditable ? "編輯" : "取消" }}
         </button>
-
         <button
           mat-flat-button
           type="submit"

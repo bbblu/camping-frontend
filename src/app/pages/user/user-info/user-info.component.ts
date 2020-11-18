@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { MatDialog } from '@angular/material/dialog';
+
 import { ApiModel } from '@models/api-model';
 import { User } from '@models/user/user.model';
 import { Experience } from '@models/user/experience.model';
 
 import { UserService } from '@services/api/user.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
+import { ChangePasswordDialogComponent } from '@pages/user/change-password-dialog/change-password-dialog.component';
 
 @Component({
   selector: 'app-user-info',
@@ -22,7 +25,8 @@ export class UserInfoComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private snakeBarService: SnakeBarService
+    private snakeBarService: SnakeBarService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -98,5 +102,15 @@ export class UserInfoComponent implements OnInit {
         this.snakeBarService.open(err.error.message);
       }
     );
+  }
+
+  openDialog(): void {
+    let dialogWidth = '50%';
+    if (window.screen.width <= 960) {
+      dialogWidth = '100%';
+    }
+    this.dialog.open(ChangePasswordDialogComponent, {
+      width: dialogWidth,
+    });
   }
 }
