@@ -47,15 +47,12 @@
             <mat-select
               placeholder="地區"
               formControlName="cityAreaName"
-              *ngIf="city; else emptyCity"
+              *ngIf="cities; else emptyCity"
             >
-              <mat-optgroup
-                *ngFor="let cityName of city.nameArray; let cityIndex = index"
-                [label]="cityName"
-              >
+              <mat-optgroup *ngFor="let cityName of cities" [label]="cityName">
                 <mat-option
-                  *ngFor="let areaName of city.areaNameArray[cityIndex]"
-                  [value]="areaName"
+                  *ngFor="let areaName of getAreas(cityName)"
+                  [value]="getAreaId(cityName, areaName)"
                 >
                   {{ areaName }}
                 </mat-option>
