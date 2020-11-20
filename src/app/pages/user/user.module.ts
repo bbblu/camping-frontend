@@ -7,14 +7,17 @@ import { MaterialModule } from '@modules/material.module';
 
 import { UserRoutingModule } from './user-routing.module';
 
-import { UserComponent } from './user.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { UserProductComponent } from './user-product/user-product.component';
 import { ProductModule } from '../product/product.module';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 
 @NgModule({
-  declarations: [UserComponent, UserInfoComponent, UserProductComponent, ChangePasswordDialogComponent],
+  declarations: [
+    UserInfoComponent,
+    UserProductComponent,
+    ChangePasswordDialogComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
