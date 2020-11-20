@@ -51,13 +51,13 @@ export class BorrowActionDialogComponent implements OnInit {
         action = this.rentalService.agreeCancelRental(this.data.rentalId);
         break;
       case '拒絕取消':
-        action = this.rentalService.deniedCancelRental(this.data.rentalId, {
+        action = this.rentalService.denyCancelRental(this.data.rentalId, {
           ...this.form.value,
           cancelDetail: this.form.value.reason,
         });
         break;
       case '拒絕交易':
-        action = this.rentalService.deniedRental(this.data.rentalId, {
+        action = this.rentalService.denyRental(this.data.rentalId, {
           ...this.form.value,
           cancelDetail: this.form.value.reason,
         });

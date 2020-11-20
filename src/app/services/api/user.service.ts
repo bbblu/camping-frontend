@@ -38,6 +38,20 @@ export class UserService {
     return this.httpService.patch<string>(`${this.baseUrl}/password`, data);
   }
 
+  enableUser(account: string): Observable<ApiModel<string>> {
+    return this.httpService.patch<string>(
+      `${this.baseUrl}/${account}/enable`,
+      {}
+    );
+  }
+
+  disableUser(account: string): Observable<ApiModel<string>> {
+    return this.httpService.patch<string>(
+      `${this.baseUrl}/${account}/disable`,
+      {}
+    );
+  }
+
   getUserExperiences(): Observable<ApiModel<Experience[]>> {
     return this.httpService.get<Experience[]>(`${this.baseUrl}/experience`);
   }

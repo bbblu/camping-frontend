@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ApiModel } from '@models/api-model';
 import { ProductGroup } from '@models/product/product-group.model';
 import { ProductGroupDetail } from '@models/product/product-group-detail.model';
+import { ProductGroupEdit } from '@models/product/product-group-edit.model';
 import {
   ProductGroupFilter,
   ProductType,
@@ -34,6 +35,12 @@ export class ProductService {
 
   getProductGroup(id: number): Observable<ApiModel<ProductGroupDetail>> {
     return this.httpService.get<ProductGroupDetail>(`${this.baseUrl}/${id}`);
+  }
+
+  getProductGroupForEdit(id: number): Observable<ApiModel<ProductGroupEdit>> {
+    return this.httpService.get<ProductGroupEdit>(
+      `${this.baseUrl}/update/${id}`
+    );
   }
 
   addProductGroup(data: object): Observable<ApiModel<string>> {
