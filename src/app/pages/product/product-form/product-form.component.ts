@@ -27,7 +27,6 @@ import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/p
 export class ProductFormComponent implements OnInit {
   form!: FormGroup;
   cities: string[] = [];
-  cityIndex = 0;
   areas: string[] = [];
   coverImage: string = '';
   isEdit = false;
@@ -120,8 +119,8 @@ export class ProductFormComponent implements OnInit {
           this.snakeBarService.open(res.message);
         }
 
-        this.cities = res.data.nameArray;
-        this.areas = res.data.areaNameArray[this.cityIndex];
+        this.cityService.cities = res.data;
+        this.cities = this.cityService.cityNames;
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
@@ -129,8 +128,9 @@ export class ProductFormComponent implements OnInit {
     );
   }
 
-  updateCityIndex(index: number) {
-    this.cityIndex = index;
+  updateAreas(cityName: string): void {
+    this.cityService.selectCity = cityName;
+    this.areas = this.cityService.areaNames;
   }
 
   addProducts(product: Product): void {

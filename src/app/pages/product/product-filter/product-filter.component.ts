@@ -11,7 +11,6 @@ import * as moment from 'moment';
 
 import { ProductGroup } from '@models/product/product-group.model';
 import { ProductType } from '@models/product/product-group-filter.model';
-import { City } from '@models/city/city.model';
 
 import { ProductService } from '@services/api/product.service';
 import { CityService } from '@services/api/city.service';
@@ -30,7 +29,8 @@ export class ProductFilterComponent implements OnInit {
 
   form!: FormGroup;
   productTypes: ProductType[] = [];
-  city!: City;
+  cities: string[] = [];
+  areas: string[] = [];
   productGroups: ProductGroup[] = [];
 
   chipTypes: ProductType[] = [];
@@ -83,12 +83,24 @@ export class ProductFilterComponent implements OnInit {
           this.snakeBarService.open(res.message);
         }
 
-        this.city = res.data;
+        this.cityService.cities = res.data;
+        this.cities = this.cityService.cityNames;
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
       }
     );
+  }
+
+  getAreas(cityName: string): string[] {
+    this.cityService.selectCity = cityName;
+    return this.cityService.areaNames;
+  }
+
+  getAreaId(cityName: string, areaName: string): number | null {
+    this.cityService.selectCity = cityName;
+    this.cityService.selectArea = areaName;
+    return this.cityService.areaId;
   }
 
   getProductGroups(params: string = ''): void {

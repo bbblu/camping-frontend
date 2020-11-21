@@ -1,9 +1,9 @@
-export interface ProductGroupDetail {
+export interface ProductGroupEdit {
   id: number;
   name: string;
   coverImage: string;
   city: string;
-  price: string;
+  price: number;
   borrowStartDate: Date;
   borrowEndDate: Date;
   productOwnerAccount: string;
@@ -11,6 +11,7 @@ export interface ProductGroupDetail {
   contact: string;
   comment: number;
   productArray: Product[];
+  bankAccount: string;
 }
 
 export interface Product {

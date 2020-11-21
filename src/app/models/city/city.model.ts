@@ -1,4 +1,5 @@
 export interface City {
-  nameArray: string[];
-  areaNameArray: string[][];
+  id: number;
+  name: string;
+  areaName: string;
 }

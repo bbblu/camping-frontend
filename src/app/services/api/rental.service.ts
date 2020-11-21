@@ -44,26 +44,40 @@ export class RentalService {
     );
   }
 
-  deniedCancelRental(id: number, data: object): Observable<ApiModel<string>> {
+  denyCancelRental(id: number, data: object): Observable<ApiModel<string>> {
     return this.httpService.patch<string>(
       `${this.baseUrl}/${id}/cancel/denied`,
       data
     );
   }
 
-  deniedRental(id: number, data: object): Observable<ApiModel<string>> {
+  denyRental(id: number, data: object): Observable<ApiModel<string>> {
     return this.httpService.patch<string>(`${this.baseUrl}/${id}/denied`, data);
   }
 
-  returnedRental(id: number, data: object): Observable<ApiModel<string>> {
+  payRental(id: number, data: object): Observable<ApiModel<string>> {
+    return this.httpService.patch<string>(
+      `${this.baseUrl}/${id}/payment`,
+      data
+    );
+  }
+
+  returnRental(id: number, data: object): Observable<ApiModel<string>> {
     return this.httpService.patch<string>(
       `${this.baseUrl}/${id}/returned`,
       data
     );
   }
 
-  claimReturn(id: number, data: object): Observable<ApiModel<string>> {
+  claimRental(id: number, data: object): Observable<ApiModel<string>> {
     return this.httpService.patch<string>(`${this.baseUrl}/${id}/claim`, data);
+  }
+
+  addRentalComment(id: number, data: object): Observable<ApiModel<string>> {
+    return this.httpService.post<string>(
+      `${this.baseUrl}/${id}/rental/{id}/comment`,
+      data
+    );
   }
 
   updateRentalStatus(id: number): Observable<ApiModel<string>> {
@@ -71,5 +85,9 @@ export class RentalService {
       `${this.baseUrl}/${id}/status/next`,
       {}
     );
+  }
+
+  addRentalCheck(id: number, data: object): Observable<ApiModel<string>> {
+    return this.httpService.post<string>(`${this.baseUrl}/${id}/check`, data);
   }
 }
