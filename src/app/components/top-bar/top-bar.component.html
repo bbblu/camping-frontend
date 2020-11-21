@@ -25,28 +25,30 @@
         <button
           mat-button
           class="web-nav-item user"
-          routerLink="/user"
-          *ngIf="isAuth$ | async"
+          *ngIf="isAuth$ | async; else login"
+          [matMenuTriggerFor]="userMenu"
         >
           <mat-icon>person</mat-icon>
           {{ account$ | async }}
-        </button>
-        <button mat-button class="web-nav-item">
-          <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
-        </button>
-        <button
-          mat-button
-          class="web-nav-item"
-          routerLink="/auth/logout"
-          *ngIf="isAuth$ | async; else login"
-        >
-          登出
         </button>
         <ng-template #login>
           <button mat-button class="web-nav-item" routerLink="/auth/login">
             登入
           </button>
         </ng-template>
+        <button
+          mat-icon-button
+          class="web-nav-item"
+          [matMenuTriggerFor]="notificationMenu"
+        >
+          <mat-icon
+            [matBadge]="notReadCount.toString()"
+            matBadgeColor="warn"
+            [matBadgeHidden]="notReadCount <= 0"
+          >
+            notifications
+          </mat-icon>
+        </button>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -58,24 +60,27 @@
       <a mat-list-item routerLink="/product">商品列表</a>
       <a mat-list-item routerLink="/borrow">租借紀錄</a>
       <a mat-list-item routerLink="/faq">常見問題</a>
-      <a mat-list-item routerLink="/user" *ngIf="isAuth$ | async">
-        <mat-icon>person</mat-icon>
-        {{ account$ | async }}
-      </a>
-      <a mat-list-item class="web-nav-item">
-        <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
-        通知
-      </a>
       <a
         mat-list-item
-        routerLink="/auth/logout"
         *ngIf="isAuth$ | async; else login"
+        [matMenuTriggerFor]="userMenu"
       >
-        登出
+        <mat-icon>person</mat-icon>
+        {{ account$ | async }}
       </a>
       <ng-template #login>
         <a mat-list-item routerLink="/auth/login">登入</a>
       </ng-template>
+      <a mat-list-item [matMenuTriggerFor]="notificationMenu">
+        <mat-icon
+          [matBadge]="notReadCount.toString()"
+          matBadgeColor="warn"
+          [matBadgeHidden]="notReadCount <= 0"
+        >
+          notifications
+        </mat-icon>
+        通知
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -85,3 +90,26 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item routerLink="/user">
+    <span>個人資訊</span>
+  </button>
+  <button mat-menu-item routerLink="/user/product">
+    <span>我的商品</span>
+  </button>
+  <button mat-menu-item routerLink="/auth/logout">
+    <span>登出</span>
+  </button>
+</mat-menu>
+
+<mat-menu #notificationMenu="matMenu">
+  <div *ngIf="notifications.length > 0; else emptyNotification">
+    <button mat-menu-item *ngFor="let notification of notifications">
+      <span>{{ notification.content }}</span>
+    </button>
+  </div>
+  <ng-template #emptyNotification>
+    <div mat-menu-item>沒有通知</div>
+  </ng-template>
+</mat-menu>
