@@ -13,11 +13,11 @@ import { UserService } from '@services/api/user.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 @Component({
-  selector: 'app-borrow-dialog',
-  templateUrl: './borrow-dialog.component.html',
-  styleUrls: ['./borrow-dialog.component.scss'],
+  selector: 'app-borrow-create-dialog',
+  templateUrl: './borrow-create-dialog.component.html',
+  styleUrls: ['./borrow-create-dialog.component.scss'],
 })
-export class BorrowDialogComponent implements OnInit {
+export class BorrowCreateDialogComponent implements OnInit {
   minDate!: Date;
   maxDate!: Date;
 
