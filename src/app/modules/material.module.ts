@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -56,5 +56,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatStepperModule,
     MatToolbarModule,
   ],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'zh-TW' }],
 })
 export class MaterialModule {}
