@@ -44,6 +44,8 @@ $bg-white: map-get($colors, white);
   }
 
   mat-card-actions {
+    padding: 0;
+
     .mat-flat-button {
       color: $font-white;
     }

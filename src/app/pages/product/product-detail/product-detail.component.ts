@@ -7,7 +7,7 @@ import { ProductGroupDetail } from '@models/product/product-group-detail.model';
 import { ProductService } from '@services/api/product.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
-import { BorrowDialogComponent } from '@pages/borrow/borrow-dialog/borrow-dialog.component';
+import { BorrowCreateDialogComponent } from '@pages/borrow/borrow-create-dialog/borrow-create-dialog.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -71,7 +71,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.dialog.open(BorrowDialogComponent, {
+    this.dialog.open(BorrowCreateDialogComponent, {
       width: '80%',
       height: '80%',
       data: {

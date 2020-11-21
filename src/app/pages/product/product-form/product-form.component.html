@@ -129,7 +129,12 @@
         [products]="products"
       ></app-product-expansion-panel>
 
-      <div fxLayout="row" fxLayoutAlign="space-around">
+      <div
+        fxLayout="row"
+        fxLayout.lt-sm="column"
+        fxLayoutAlign="space-around"
+        fxLayoutGap.lt-sm="10px"
+      >
         <button
           mat-flat-button
           type="button"

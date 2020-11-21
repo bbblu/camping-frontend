@@ -22,7 +22,11 @@
       <img mat-card-image [src]="rental.coverImage" alt="product cover" />
 
       <mat-card-header fxLayout="column">
-        <mat-card-title>
+        <mat-card-title
+          fxLayout="column"
+          fxLayoutAlign="center start"
+          fxLayoutGap="10px"
+        >
           <span
             class="status"
             [style.background-color]="getStatusColor(rental.status)"

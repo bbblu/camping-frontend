@@ -13,9 +13,10 @@
         <mat-card-subtitle
           fxLayout="column"
           fxLayoutAlign="center end"
+          fxLayoutAlign.lt-md="center start"
           fxFlex="40"
         >
-          <div fxLayout="row" fxLayoutGap="10px">
+          <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap.gt-md="10px">
             <span class="price">$ {{ productGroup.price }}/天</span>
             <div class="comment">
               <mat-icon>star_rate</mat-icon>

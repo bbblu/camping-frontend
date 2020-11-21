@@ -7,7 +7,7 @@ $font-white: map-get($colors, white);
 $font-gray: map-get($colors, gray);
 
 .container {
-  margin: 3% 10%;
+  margin: 0 10%;
 }
 
 .toggle {
@@ -89,6 +89,10 @@ $font-gray: map-get($colors, gray);
         color: $font-gray;
       }
     }
+  }
+
+  mat-card-actions {
+    padding: 0;
   }
 
   .mat-flat-button {
