@@ -39,6 +39,7 @@
         <button
           mat-icon-button
           class="web-nav-item"
+          *ngIf="isAuth$ | async"
           [matMenuTriggerFor]="notificationMenu"
         >
           <mat-icon
@@ -71,7 +72,11 @@
       <ng-template #login>
         <a mat-list-item routerLink="/auth/login">登入</a>
       </ng-template>
-      <a mat-list-item [matMenuTriggerFor]="notificationMenu">
+      <a
+        mat-list-item
+        *ngIf="isAuth$ | async"
+        [matMenuTriggerFor]="notificationMenu"
+      >
         <mat-icon
           [matBadge]="notReadCount.toString()"
           matBadgeColor="warn"
