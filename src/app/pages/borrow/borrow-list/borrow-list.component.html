@@ -40,27 +40,42 @@
           </span>
           <p>{{ rental.name }}</p>
         </mat-card-title>
-        <mat-card-subtitle>{{ rental.borrowRange }}</mat-card-subtitle>
+        <mat-card-subtitle>
+          {{ rental.borrowRange }}
+          <div fxLayout="row" fxLayoutAlign="end">
+            <button
+              mat-flat-button
+              color="primary"
+              type="button"
+              routerLink="/product/16"
+            >
+              商品資訊
+            </button>
+          </div>
+        </mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content fxLayout="column" fxLayoutGap="5px">
+        <mat-divider [inset]="true"></mat-divider>
         <div fxLayout="row" fxLayoutAlign="start center">
           <i class="material-icons user">person</i>
-          <span>{{ rental.seller.nickName }}</span>
+          <span>{{ rental.user.nickName }}</span>
         </div>
         <div class="contact" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>phone_in_talk</mat-icon>
-          <a href="tel:手機">手機</a>
+          <a href="tel:{{ rental.user.cellPhone }}">
+            {{ rental.user.cellPhone }}
+          </a>
         </div>
         <div class="contact" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>email</mat-icon>
-          <a href="mailto:{{ rental.seller.email }}">
-            {{ rental.seller.email }}
+          <a href="mailto:{{ rental.user.email }}">
+            {{ rental.user.email }}
           </a>
         </div>
       </mat-card-content>
 
-      <mat-card-actions fxLayout="row" fxLayoutAlign="space-around">
+      <mat-card-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
         <div *ngFor="let button of getStatusButton(rental.status)">
           <button
             mat-flat-button

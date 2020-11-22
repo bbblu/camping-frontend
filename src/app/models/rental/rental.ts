@@ -8,15 +8,16 @@ export interface Rental {
   coverImage: string;
   areaName: string;
   price: string;
-  seller: Seller;
+  user: User;
   contact: string;
   rentalDate: Date;
   detailArray: Detail[];
 }
 
-export interface Seller {
+export interface User {
   nickName: string;
   email: string;
+  cellPhone: string;
 }
 
 export interface Detail {

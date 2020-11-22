@@ -10,9 +10,10 @@ export const rental: Rental = {
   coverImage: 'https://i.imgur.com/Px1JXJW.jpg',
   areaName: '中和區',
   price: '$ 3,990',
-  seller: {
+  user: {
     nickName: '煞氣a小明',
     email: '10646007@ntub.edu.tw',
+    cellPhone: '0912345678',
   },
   contact: 'LineId : 1234',
   rentalDate: new Date('2020/08/28 15:03'),
