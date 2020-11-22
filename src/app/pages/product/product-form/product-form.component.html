@@ -131,6 +131,9 @@
 
       <app-product-expansion-panel
         [products]="products"
+        [isEdit]="true"
+        (editProduct)="editProduct($event)"
+        (deleteProduct)="deleteProduct($event)"
       ></app-product-expansion-panel>
 
       <div

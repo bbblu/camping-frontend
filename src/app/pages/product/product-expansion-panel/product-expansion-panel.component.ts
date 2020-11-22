@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { MatIconRegistry } from '@angular/material/icon';
@@ -12,6 +12,13 @@ import { Image, Product } from '@models/product/product-group-detail.model';
 })
 export class ProductExpansionPanelComponent implements OnInit {
   @Input() products: Product[] = [];
+  @Input() isEdit = false;
+  @Output() editProduct = new EventEmitter<{
+    index: number;
+    product: Product;
+  }>();
+  @Output() deleteProduct = new EventEmitter<number>();
+  isClickButton = false;
 
   constructor(
     private iconRegistry: MatIconRegistry,
@@ -37,5 +44,15 @@ export class ProductExpansionPanelComponent implements OnInit {
         alt: 'detail image',
       };
     });
+  }
+
+  clickEdit(index: number, product: Product): void {
+    this.isClickButton = true;
+    this.editProduct.emit({ index: index, product: product });
+  }
+
+  clickDelete(index: number): void {
+    this.isClickButton = true;
+    this.deleteProduct.emit(index);
   }
 }

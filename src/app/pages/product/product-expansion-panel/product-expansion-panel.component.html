@@ -1,11 +1,32 @@
 <mat-accordion>
   <mat-expansion-panel
-    *ngFor="let product of products; first as isFirst"
+    *ngFor="let product of products; first as isFirst; index as index"
     [expanded]="isFirst"
+    [disabled]="isClickButton"
+    (click)="isClickButton = false"
   >
     <mat-expansion-panel-header>
-      <mat-panel-title>
+      <mat-panel-title fxLayout="row" fxLayoutAlign="space-between center">
         {{ product.name }} x {{ product.count }}
+
+        <div *ngIf="isEdit" fxLayout="row" fxLayoutGap="10px">
+          <button
+            mat-flat-button
+            type="button"
+            color="accent"
+            (click)="clickEdit(index, product)"
+          >
+            編輯
+          </button>
+          <button
+            mat-flat-button
+            type="button"
+            color="warn"
+            (click)="clickDelete(index)"
+          >
+            刪除
+          </button>
+        </div>
       </mat-panel-title>
     </mat-expansion-panel-header>
 

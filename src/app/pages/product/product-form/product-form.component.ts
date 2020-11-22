@@ -204,6 +204,16 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
+  editProduct(value: { index: number; product: Product }): void {
+    this.products[value.index] = value.product;
+    this.form.value.productArray = this.products;
+  }
+
+  deleteProduct(index: number): void {
+    this.products.splice(index);
+    this.form.value.productArray = this.products;
+  }
+
   dateFormatter(value: Date): string {
     const date = new Date(value as Date);
     return moment(date).format('YYYY/MM/DD');

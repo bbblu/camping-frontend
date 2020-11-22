@@ -1,6 +1,7 @@
 @import "~src/assets/scss/color.scss";
 
 $primary-color: map-get($colors, primary4);
+$font-white: map-get($colors, white);
 
 mat-icon {
   margin-right: 10px;
@@ -27,4 +28,8 @@ mat-expansion-panel {
   .product-detail {
     padding-top: 16px;
   }
+}
+
+.mat-flat-button {
+  color: $font-white;
 }
