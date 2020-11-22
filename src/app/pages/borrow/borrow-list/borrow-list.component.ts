@@ -11,9 +11,9 @@ import { RentalService } from '@services/api/rental.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 import { BorrowActionDialogComponent } from '@pages/borrow/borrow-action-dialog/borrow-action-dialog.component';
+import { BorrowCommentDialogComponent } from '@pages/borrow/borrow-comment-dialog/borrow-comment-dialog.component';
 
 import { rental } from '../../../fixtures/rental.fixture';
-import { BorrowCommentDialogComponent } from "@pages/borrow/borrow-comment-dialog/borrow-comment-dialog.component";
 
 class StatusButton {
   text: string;
@@ -96,24 +96,28 @@ export class BorrowListComponent implements OnInit {
 
   getStatusText(status: BorrowStatus): string {
     switch (status) {
-      case BorrowStatus.applyCancel:
-        return '申請取消';
-      case BorrowStatus.cancel:
+      case BorrowStatus.notAgree:
+        return '未同意';
+      case BorrowStatus.notPay:
+        return '未付款';
+      case BorrowStatus.alreadyCancel:
         return '已取消';
-      case BorrowStatus.beReturned:
-        return '被退貨';
-      case BorrowStatus.beClaim:
-        return '被求償';
-      case BorrowStatus.notPlaced:
+      case BorrowStatus.notPlace:
         return '未寄放';
       case BorrowStatus.notPickUp:
-        return '未取貨';
+        return '未領取';
+      case BorrowStatus.alreadyTerminate:
+        return '已終止';
       case BorrowStatus.notReturn:
         return '未歸還';
+      case BorrowStatus.notCompensate:
+        return '未賠償';
       case BorrowStatus.notRetrieve:
         return '未取回';
       case BorrowStatus.notComment:
         return '未評價';
+      case BorrowStatus.alreadyComment:
+        return '已評價';
       default:
         return '未知';
     }
@@ -121,9 +125,11 @@ export class BorrowListComponent implements OnInit {
 
   getStatusColor(status: BorrowStatus): string {
     switch (status) {
-      case BorrowStatus.applyCancel:
+      case BorrowStatus.notAgree:
+      case BorrowStatus.notPay:
+      case BorrowStatus.notCompensate:
         return Color.primary5;
-      case BorrowStatus.notPlaced:
+      case BorrowStatus.notPlace:
       case BorrowStatus.notPickUp:
         return Color.primary1;
       case BorrowStatus.notReturn:
@@ -144,8 +150,19 @@ export class BorrowListComponent implements OnInit {
 
   getBorrowButton(status: BorrowStatus): StatusButton[] {
     switch (status) {
-      case BorrowStatus.notPlaced:
-        return [new StatusButton('取消訂單', Color.red)];
+      case BorrowStatus.notAgree:
+        return [new StatusButton('取消交易', Color.red)];
+      case BorrowStatus.notPay:
+        return [
+          new StatusButton('取消交易', Color.red),
+          new StatusButton('付款', Color.primary2),
+        ];
+      case BorrowStatus.notPlace:
+        return [new StatusButton('取消交易', Color.red)];
+      case BorrowStatus.notPickUp:
+        return [new StatusButton('扣除手續費終止交易', Color.red)];
+      case BorrowStatus.notCompensate:
+        return [new StatusButton('付款', Color.primary2)];
       case BorrowStatus.notComment:
         return [new StatusButton('評價租方', Color.primary4)];
       default:
@@ -155,14 +172,15 @@ export class BorrowListComponent implements OnInit {
 
   getRentalButton(status: BorrowStatus): StatusButton[] {
     switch (status) {
-      case BorrowStatus.applyCancel:
+      case BorrowStatus.notAgree:
         return [
-          new StatusButton('同意取消', Color.primary1),
-          new StatusButton('拒絕取消', Color.red),
+          new StatusButton('拒絕', Color.red),
+          new StatusButton('同意', Color.primary2),
         ];
-      case BorrowStatus.notPlaced:
+      case BorrowStatus.notPay:
+      case BorrowStatus.notPlace:
       case BorrowStatus.notPickUp:
-        return [new StatusButton('拒絕交易', Color.red)];
+        return [new StatusButton('取消交易', Color.red)];
       case BorrowStatus.notComment:
         return [new StatusButton('評價借方', Color.primary4)];
       default:
