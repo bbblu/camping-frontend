@@ -2,6 +2,7 @@
 
 $primary-color: map-get($colors, primary1);
 $font-white: map-get($colors, white);
+$font-red: map-get($colors, red);
 $bg-white: map-get($colors, white);
 
 .container {
@@ -35,6 +36,10 @@ mat-toolbar {
       background-color: rgba(0, 0, 0, 0.1);
     }
   }
+}
+
+.logout-btn {
+  color: $font-red;
 }
 
 mat-sidenav-container {
