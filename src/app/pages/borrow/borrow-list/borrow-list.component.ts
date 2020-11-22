@@ -11,6 +11,7 @@ import { RentalService } from '@services/api/rental.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 import { BorrowActionDialogComponent } from '@pages/borrow/borrow-action-dialog/borrow-action-dialog.component';
+import { BorrowPaymentDialogComponent } from '@pages/borrow/borrow-payment-dialog/borrow-payment-dialog.component';
 import { BorrowCommentDialogComponent } from '@pages/borrow/borrow-comment-dialog/borrow-comment-dialog.component';
 
 import { rental } from '../../../fixtures/rental.fixture';
@@ -190,6 +191,8 @@ export class BorrowListComponent implements OnInit {
 
   clickStatusButton(text: string): void | null {
     switch (text) {
+      case '付款':
+        return this.openPaymentDialog();
       case '評價租方':
       case '評價借方':
         return this.openCommentDialog(text);
@@ -205,6 +208,15 @@ export class BorrowListComponent implements OnInit {
         title: title,
         rentalId: rental.id,
         isCancel: !title.startsWith('同意'),
+      },
+    });
+  }
+
+  openPaymentDialog(): void {
+    this.dialog.open(BorrowPaymentDialogComponent, {
+      width: '70%',
+      data: {
+        rental: rental,
       },
     });
   }
