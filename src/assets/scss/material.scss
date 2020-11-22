@@ -1,5 +1,9 @@
 @import "src/assets/scss/color.scss";
 
+input.mat-input-element {
+  color: map-get($colors, black);
+}
+
 // form field outline to round
 mat-form-field.mat-form-field-round {
   ::placeholder {
@@ -29,10 +33,6 @@ mat-form-field.mat-form-field-round {
         margin: auto 0;
         padding: 1.4rem 0 1.1rem 0;
         border: none;
-      }
-
-      input.mat-input-element {
-        color: map-get($colors, black);
       }
     }
   }
