@@ -12,7 +12,8 @@ mat-expansion-panel {
     box-shadow: none;
   }
 
-  &.mat-expansion-panel:first-of-type,
+  &.mat-expansion-panel,
+  .mat-expansion-panel:first-of-type,
   .mat-expansion-panel:last-of-type {
     border: 1px solid $primary-color;
     border-radius: 0;
