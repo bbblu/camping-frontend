@@ -1,9 +1,9 @@
 @import "~src/assets/scss/color.scss";
 
-$primary-color: map-get($colors, primary4);
-$font-white: map-get($colors, white);
+$primary-color: map-get($colors, primary5);
 $icon-color: map-get($colors, primary2);
-$field-color: map-get($colors, lightgray);
+$font-white: map-get($colors, white);
+$font-gray: map-get($colors, lightgray);
 
 ::ng-deep .mat-dialog-container {
   padding: 0;
@@ -32,30 +32,22 @@ $field-color: map-get($colors, lightgray);
 
 .content {
   padding: 1rem 1.5rem;
+
+  .subtitle {
+    margin-bottom: 10px;
+    color: $font-gray;
+  }
 }
 
-:host ::ng-deep {
-  mat-form-field.mat-form-field-round {
-    .mat-form-field-wrapper {
-      mat-icon,
-      .mat-icon-button {
-        color: $icon-color;
-      }
+:host ::ng-deep mat-form-field {
+  mat-icon {
+    margin-right: 10px;
+    color: $icon-color;
+  }
 
-      .mat-form-field-flex {
-        .mat-form-field-outline {
-          border: 1px solid $field-color;
-          border-radius: 0;
-        }
-      }
-    }
-
-    mat-datepicker-toggle {
-      .mat-icon-button {
-        width: 24px !important;
-        height: 24px !important;
-      }
-    }
+  .mat-form-field-infix {
+    margin: auto 0;
+    border: none;
   }
 }
 

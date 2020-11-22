@@ -1,166 +1,75 @@
-<mat-vertical-stepper #stepper>
-  <!-- step 1 -->
-  <mat-step [stepControl]="borrowForm" label="填寫租借資料">
-    <form
-      [formGroup]="borrowForm"
-      fxLayout="column"
-      fxLayoutAlign="start start"
+<div
+  class="title"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutGap="10px"
+>
+  <mat-icon>receipt_long</mat-icon>
+  <span>租借商品</span>
+</div>
+
+<form
+  class="content"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  fxLayout="column"
+  fxFlexFill
+>
+  <mat-form-field
+    class="mat-form-field-round"
+    appearance="outline"
+    floatLabel="never"
+  >
+    <mat-icon matPrefix>tour</mat-icon>
+    <input matInput type="text" [value]="data.name" disabled />
+  </mat-form-field>
+
+  <mat-form-field
+    class="mat-form-field-round"
+    appearance="outline"
+    floatLabel="never"
+  >
+    <mat-icon matPrefix>attach_money</mat-icon>
+    <input matInput type="text" [value]="data.price" disabled />
+  </mat-form-field>
+
+  <mat-form-field class="mat-form-field-round" appearance="outline">
+    <mat-date-range-input
+      [rangePicker]="picker"
+      [min]="minDate"
+      [max]="maxDate"
     >
-      <mat-form-field>
-        <mat-label>選擇日期</mat-label>
-        <mat-date-range-input
-          [rangePicker]="picker"
-          [min]="minDate"
-          [max]="maxDate"
-        >
-          <input
-            matStartDate
-            placeholder="租借開始"
-            formControlName="borrowStartDate"
-          />
-          <input
-            matEndDate
-            placeholder="租借結束"
-            formControlName="borrowEndDate"
-          />
-        </mat-date-range-input>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-      </mat-form-field>
+      <input
+        matStartDate
+        placeholder="租借開始"
+        formControlName="borrowStartDate"
+      />
+      <input
+        matEndDate
+        placeholder="租借結束"
+        formControlName="borrowEndDate"
+      />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
 
-      <button mat-flat-button matStepperNext type="button" color="accent">
-        下一步
-      </button>
-    </form>
-  </mat-step>
-
-  <!-- step 2 -->
-  <mat-step [stepControl]="billForm" label="填寫付款資訊">
-    <form [formGroup]="billForm" fxLayout="column" fxLayoutAlign="start start">
-      <div fxLayout="row" fxLayoutGap="10px">
-        <mat-form-field>
-          <mat-label>姓氏</mat-label>
-          <input type="text" matInput formControlName="billLastName" required />
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>名字</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="billFirstName"
-            required
-          />
-        </mat-form-field>
-      </div>
-
-      <mat-form-field>
-        <mat-label>手機號碼</mat-label>
-        <input matInput type="text" formControlName="billCellPhone" required />
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>信用卡號</mat-label>
-        <input matInput type="text" formControlName="cardId" required />
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>安全碼 (卡片背面三碼)</mat-label>
-        <input matInput type="text" formControlName="safeCode" required />
-      </mat-form-field>
-
-      <div fxLayout="row" fxLayoutGap="10px">
-        <mat-form-field>
-          <mat-label>有效年份</mat-label>
-          <mat-select formControlName="expireYear">
-            <mat-option>{{ "-- 填寫年 --" }}</mat-option>
-            <mat-option *ngFor="let year of intRange(20, 26)" [value]="year">
-              {{ year }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>有效月份</mat-label>
-          <mat-select formControlName="expireMonth">
-            <mat-option>{{ "-- 填寫月 --" }}</mat-option>
-            <mat-option *ngFor="let month of intRange(1, 12)" [value]="month">
-              {{ month }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <div fxLayout="row" fxLayoutGap="10px">
-        <mat-form-field>
-          <mat-label>郵遞區號</mat-label>
-          <input matInput type="text" formControlName="billZipCode" required />
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>地址</mat-label>
-          <input matInput type="text" formControlName="billAddress" required />
-        </mat-form-field>
-      </div>
-
-      <div fxLayout="row" fxLayoutGap="10px">
-        <mat-form-field>
-          <mat-label>國家</mat-label>
-          <input matInput type="text" formControlName="billCountry" required />
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>城市</mat-label>
-          <mat-select formControlName="billCity">
-            <mat-option>{{ "--填寫城市 --" }}</mat-option>
-            <mat-option value="台北市">台北市</mat-option>
-            <mat-option value="新北市">新北市</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <div fxLayout="row" fxLayoutGap="10px">
-        <button mat-flat-button matStepperPrevious type="button" color="accent">
-          上一步
-        </button>
-        <button mat-flat-button matStepperNext type="button" color="accent">
-          下一步
-        </button>
-      </div>
-    </form>
-  </mat-step>
-
-  <!-- step 3 -->
-  <mat-step label="完成訂單">
-    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
-      <span>商品名稱：{{ data.name }}</span>
-      <span>訂單金額：{{ data.price }}</span>
-      <span>
-        租借期間：{{ data.borrowStartDate }} ~ {{ data.borrowEndDate }}
-      </span>
-
-      <div fxLayout="row" fxLayoutGap="10px">
-        <button mat-flat-button type="button" matStepperPrevious color="accent">
-          上一步
-        </button>
-        <button
-          mat-flat-button
-          type="submit"
-          color="accent"
-          (click)="onSubmit()"
-          [disabled]="!borrowForm.valid || !billForm.valid"
-        >
-          送出訂單
-        </button>
-        <button
-          mat-flat-button
-          type="button"
-          color="warn"
-          (click)="stepper.reset()"
-        >
-          重填
-        </button>
-      </div>
-    </div>
-  </mat-step>
-</mat-vertical-stepper>
+  <div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxFlexAlign.gt-xs="center"
+    fxLayoutGap="10px"
+  >
+    <button mat-flat-button type="button" color="warn" (click)="onNoClick()">
+      取消
+    </button>
+    <button
+      mat-flat-button
+      type="submit"
+      color="accent"
+      [disabled]="!form.valid"
+    >
+      送出
+    </button>
+  </div>
+</form>

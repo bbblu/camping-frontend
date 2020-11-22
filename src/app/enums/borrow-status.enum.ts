@@ -1,11 +1,13 @@
 export enum BorrowStatus {
-  applyCancel, // 申請取消
-  cancel, // 已取消
-  beReturned, // 被退貨
-  beClaim, // 被求償
-  notPlaced, // 未寄放
-  notPickUp, // 未取貨
+  notAgree, // 未同意
+  notPay, // 未付款
+  alreadyCancel, // 已取消
+  notPlace, // 未寄放
+  notPickUp, // 未領取
+  alreadyTerminate, // 已終止
   notReturn, // 未歸還
+  notCompensate, // 未賠償
   notRetrieve, // 未取回
   notComment, // 未評價
+  alreadyComment, // 已評價
 }
