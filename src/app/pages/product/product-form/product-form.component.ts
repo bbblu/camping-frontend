@@ -10,7 +10,6 @@ import * as moment from 'moment';
 import { ApiModel } from '@models/api-model';
 import { Image, Product } from '@models/product/product-group-detail.model';
 import { ProductGroupEdit } from '@models/product/product-group-edit.model';
-import { ProductType } from '@models/product/product-group-filter.model';
 
 import { ProductService } from '@services/api/product.service';
 import { CityService } from '@services/api/city.service';
@@ -33,7 +32,6 @@ export class ProductFormComponent implements OnInit {
 
   productId!: number;
   products: Product[] = [];
-  productTypes: ProductType[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,7 +43,6 @@ export class ProductFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProductTypes();
     this.getCities();
 
     this.form = this.formBuilder.group({
@@ -104,21 +101,6 @@ export class ProductFormComponent implements OnInit {
 
     this.products = data.productArray;
     this.updateAreas();
-  }
-
-  getProductTypes() {
-    this.productService.getProductTypes().subscribe(
-      (res) => {
-        if (!res.result) {
-          this.snakeBarService.open(res.message);
-        }
-
-        this.productTypes = res.data;
-      },
-      (err) => {
-        this.snakeBarService.open(err.error.message);
-      }
-    );
   }
 
   getCities(): void {
@@ -189,9 +171,6 @@ export class ProductFormComponent implements OnInit {
     const dialogRef = this.dialog.open(ProductFormDialogComponent, {
       width: '80%',
       height: '80%',
-      data: {
-        productTypes: this.productTypes,
-      },
     });
 
     dialogRef.afterClosed().subscribe((data) => {

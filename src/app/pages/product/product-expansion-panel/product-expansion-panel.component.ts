@@ -2,8 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { MatIconRegistry } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Image, Product } from '@models/product/product-group-detail.model';
+
+import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/product-form-dialog.component';
 
 @Component({
   selector: 'app-product-expansion-panel',
@@ -22,7 +25,8 @@ export class ProductExpansionPanelComponent implements OnInit {
 
   constructor(
     private iconRegistry: MatIconRegistry,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private dialog: MatDialog
   ) {
     iconRegistry.addSvgIcon(
       'tent',
@@ -46,9 +50,23 @@ export class ProductExpansionPanelComponent implements OnInit {
     });
   }
 
-  clickEdit(index: number, product: Product): void {
+  clickEdit(index: number): void {
     this.isClickButton = true;
-    this.editProduct.emit({ index: index, product: product });
+
+    const dialogRef = this.dialog.open(ProductFormDialogComponent, {
+      width: '80%',
+      height: '80%',
+      data: {
+        product: this.products[index],
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (!data) {
+        return;
+      }
+      this.editProduct.emit({ index: index, product: data });
+    });
   }
 
   clickDelete(index: number): void {
