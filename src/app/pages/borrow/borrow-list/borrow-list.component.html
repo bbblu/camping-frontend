@@ -6,12 +6,17 @@
     fxLayoutAlign="center center"
     fxLayoutGap="30px"
   >
-    <span>借用</span>
+    <h2>借用</h2>
     <mat-slide-toggle [(ngModel)]="isRental"></mat-slide-toggle>
-    <span>出租</span>
+    <h2>出租</h2>
   </div>
 
-  <div class="record" fxLayout="row wrap" fxLayoutAlign="space-between">
+  <div
+    class="record"
+    *ngIf="rentals.length > 0; else emptyRentals"
+    fxLayout="row wrap"
+    fxLayoutAlign="space-between"
+  >
     <mat-card
       *ngFor="let rental of rentals"
       [style.color]="getStatusColor(rental.status)"
@@ -69,4 +74,10 @@
       </mat-card-actions>
     </mat-card>
   </div>
+
+  <ng-template #emptyRentals>
+    <div class="empty-rentals" fxLayout="row" fxLayoutAlign="center">
+      <h1>沒有任何{{ isRental ? "出租" : "借用" }}紀錄</h1>
+    </div>
+  </ng-template>
 </div>
