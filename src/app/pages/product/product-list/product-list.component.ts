@@ -30,7 +30,7 @@ export class ProductListComponent implements OnInit {
   }
 
   toProductEdit(id: number): void {
-    this.router.navigate(['product', 'edit', id]);
+    this.router.navigate(['product', id, 'edit']);
   }
 
   deleteProductGroup(id: number) {

@@ -2,19 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
+import { Observable } from 'rxjs';
+
 import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
 
-import { ProductType } from '@models/product/product-group-filter.model';
+import { ApiModel } from '@models/api-model';
+import { Image, Product } from '@models/product/product-group-detail.model';
+import { ProductGroupEdit } from '@models/product/product-group-edit.model';
 
 import { ProductService } from '@services/api/product.service';
 import { CityService } from '@services/api/city.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
-import {
-  Image,
-  Product,
-  ProductGroupDetail,
-} from '@models/product/product-group-detail.model';
 
 import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/image-cropper-dialog.component';
 import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/product-form-dialog.component';
@@ -31,9 +30,8 @@ export class ProductFormComponent implements OnInit {
   coverImage: string = '';
   isEdit = false;
 
-  productGroup!: ProductGroupDetail;
+  productId!: number;
   products: Product[] = [];
-  productTypes: ProductType[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,13 +43,13 @@ export class ProductFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProductTypes();
     this.getCities();
 
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
       borrowStartDate: [null, [Validators.required]],
       borrowEndDate: [null, [Validators.required]],
+      cityId: [null, [Validators.required]],
       cityName: [null, [Validators.required]],
       cityAreaName: [null, [Validators.required]],
       price: [null, [Validators.required]],
@@ -60,22 +58,21 @@ export class ProductFormComponent implements OnInit {
       productArray: [[]],
     });
 
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id) {
+    this.productId = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.productId) {
       this.isEdit = true;
-      this.getProductDetail(id);
+      this.getProductEdit(this.productId);
     }
   }
 
-  getProductDetail(id: number): void {
-    this.productService.getProductGroup(id).subscribe(
+  getProductEdit(id: number): void {
+    this.productService.getProductGroupForEdit(id).subscribe(
       (res) => {
         if (!res.result) {
           this.snakeBarService.open(res.message);
         }
 
-        this.productGroup = res.data;
-        this.updateFormValue(this.productGroup);
+        this.updateFormValue(res.data);
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
@@ -83,33 +80,27 @@ export class ProductFormComponent implements OnInit {
     );
   }
 
-  updateFormValue(data: ProductGroupDetail): void {
+  updateFormValue(data: ProductGroupEdit): void {
+    data.city = '台北市 中正區';
+    const city = data.city.split(' ');
+    this.cityService.selectCity = city[0];
+    this.cityService.selectArea = city[1];
+
     this.form.patchValue({
       name: data.name,
-      borrowStartDate: data.borrowStartDate,
-      borrowEndDate: data.borrowEndDate,
-      cityName: data.city,
-      cityAreaName: data.city,
+      borrowStartDate: new Date(data.borrowStartDate),
+      borrowEndDate: new Date(data.borrowEndDate),
+      cityId: this.cityService.areaId,
+      cityName: city[0],
+      cityAreaName: city[1],
       price: data.price,
       coverImage: data.coverImage,
-      bankAccount: '',
+      bankAccount: data.bankAccount,
       productArray: data.productArray,
     });
-  }
 
-  getProductTypes() {
-    this.productService.getProductTypes().subscribe(
-      (res) => {
-        if (!res.result) {
-          this.snakeBarService.open(res.message);
-        }
-
-        this.productTypes = res.data;
-      },
-      (err) => {
-        this.snakeBarService.open(err.error.message);
-      }
-    );
+    this.products = data.productArray;
+    this.updateAreas();
   }
 
   getCities(): void {
@@ -128,17 +119,14 @@ export class ProductFormComponent implements OnInit {
     );
   }
 
-  updateAreas(cityName: string): void {
-    this.cityService.selectCity = cityName;
+  updateAreas(): void {
+    this.cityService.selectCity = this.form.value.cityName;
     this.areas = this.cityService.areaNames;
   }
 
-  addProducts(product: Product): void {
-    this.form.value.productArray.push(product);
-  }
-
-  removeProducts(index: number): void {
-    this.form.value.productArray.splice(index);
+  updateAreaId(): void {
+    this.cityService.selectArea = this.form.value.cityAreaName;
+    this.form.value.cityId = this.cityService.areaId;
   }
 
   imageToSliderObject(images: Image[]): object[] {
@@ -151,48 +139,7 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
-  dateFormatter(value: Date): string {
-    const date = new Date(value as Date);
-    return moment(date).format('YYYY/MM/DD hh:mm');
-  }
-
-  onSubmit(): void {
-    this.productService
-      .addProductGroup({
-        ...this.form.value,
-        borrowStartDate: this.dateFormatter(this.form.value.borrowStartDate),
-        borrowEndDate: this.dateFormatter(this.form.value.borrowEndDate),
-      })
-      .subscribe(
-        (res) => {
-          this.snakeBarService.open(res.message);
-        },
-        (err) => {
-          this.snakeBarService.open(err.error.message);
-        }
-      );
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ProductFormDialogComponent, {
-      width: '80%',
-      height: '80%',
-      data: {
-        productTypes: this.productTypes,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((data) => {
-      if (!data) {
-        return;
-      }
-
-      this.addProducts(data);
-      this.products = this.form.value.productArray;
-    });
-  }
-
-  openImageDialog(isEdit: boolean): void {
+  openCoverImageDialog(isEdit: boolean): void {
     const dialogRef = this.dialog.open(ImageCropperDialogComponent, {
       width: '70%',
       data: {
@@ -213,10 +160,63 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
-  deleteProductImage(): void {
+  deleteCoverImage(): void {
     this.coverImage = '';
     this.form.patchValue({
       coverImage: this.coverImage,
     });
+  }
+
+  openProductDialog(): void {
+    const dialogRef = this.dialog.open(ProductFormDialogComponent, {
+      width: '80%',
+      height: '80%',
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (!data) {
+        return;
+      }
+
+      this.form.value.productArray.push(data);
+      this.products = this.form.value.productArray;
+    });
+  }
+
+  editProduct(value: { index: number; product: Product }): void {
+    this.products[value.index] = value.product;
+    this.form.value.productArray = this.products;
+  }
+
+  deleteProduct(index: number): void {
+    this.products.splice(index);
+    this.form.value.productArray = this.products;
+  }
+
+  dateFormatter(value: Date): string {
+    const date = new Date(value as Date);
+    return moment(date).format('YYYY/MM/DD');
+  }
+
+  onSubmit(): void {
+    let action!: Observable<ApiModel<string>>;
+    const data = {
+      ...this.form.value,
+      borrowStartDate: this.dateFormatter(this.form.value.borrowStartDate),
+      borrowEndDate: this.dateFormatter(this.form.value.borrowEndDate),
+    };
+
+    action = this.isEdit
+      ? this.productService.updateProductGroup(this.productId, data)
+      : this.productService.addProductGroup(data);
+
+    action.subscribe(
+      (res) => {
+        this.snakeBarService.open(res.message);
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
   }
 }

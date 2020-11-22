@@ -14,7 +14,7 @@
           mat-flat-button
           type="button"
           color="primary"
-          (click)="openImageDialog(false)"
+          (click)="openCoverImageDialog(false)"
         >
           新增
         </button>
@@ -22,7 +22,7 @@
           mat-flat-button
           type="button"
           color="accent"
-          (click)="openImageDialog(true)"
+          (click)="openCoverImageDialog(true)"
         >
           編輯
         </button>
@@ -30,7 +30,7 @@
           mat-flat-button
           type="button"
           color="warn"
-          (click)="deleteProductImage()"
+          (click)="deleteCoverImage()"
         >
           刪除
         </button>
@@ -77,7 +77,7 @@
             <mat-option
               *ngFor="let name of cities"
               [value]="name"
-              (onSelectionChange)="updateAreas(name)"
+              (click)="updateAreas()"
             >
               {{ name }}
             </mat-option>
@@ -89,7 +89,11 @@
         <mat-form-field floatLabel="never" fxFlex="50" fxFlex.lt-sm="100">
           <mat-icon matPrefix>gps_fixed</mat-icon>
           <mat-select formControlName="cityAreaName" placeholder="區">
-            <mat-option *ngFor="let areaName of areas" [value]="areaName">
+            <mat-option
+              *ngFor="let areaName of areas"
+              [value]="areaName"
+              (click)="updateAreaId()"
+            >
               {{ areaName }}
             </mat-option>
           </mat-select>
@@ -127,6 +131,9 @@
 
       <app-product-expansion-panel
         [products]="products"
+        [isEdit]="true"
+        (editProduct)="editProduct($event)"
+        (deleteProduct)="deleteProduct($event)"
       ></app-product-expansion-panel>
 
       <div
@@ -138,8 +145,8 @@
         <button
           mat-flat-button
           type="button"
-          color="accent"
-          (click)="openDialog()"
+          color="primary"
+          (click)="openProductDialog()"
           fxFlex="30"
           fxFlex.lt-sm="100"
         >

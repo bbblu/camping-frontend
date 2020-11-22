@@ -36,8 +36,6 @@ import { ProductExpansionPanelComponent } from './product-expansion-panel/produc
     NgImageSliderModule,
     NgxPaginationModule,
   ],
-    exports: [
-        ProductListComponent
-    ],
+  exports: [ProductListComponent],
 })
 export class ProductModule {}

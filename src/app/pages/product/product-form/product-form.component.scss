@@ -29,6 +29,10 @@ mat-card {
     margin: auto 0;
     border: none;
   }
+
+  .mat-date-range-input-inner {
+    color: map-get($colors, black);
+  }
 }
 
 .date-picker-form-field {
@@ -47,6 +51,10 @@ mat-card {
   width: 300px;
   height: 200px;
   margin: 0 auto;
+}
+
+app-product-expansion-panel {
+  padding-bottom: 30px;
 }
 
 .mat-flat-button {

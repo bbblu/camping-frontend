@@ -8,11 +8,16 @@ import {
 } from '@angular/material/dialog';
 
 import { ProductType } from '@models/product/product-group-filter.model';
+import { Product } from '@models/product/product-group-edit.model';
 import { Image } from '@models/product/image.model';
+
+import { ProductService } from '@services/api/product.service';
+import { SnakeBarService } from '@services/ui/snake-bar.service';
+
 import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/image-cropper-dialog.component';
 
 export interface DialogData {
-  productTypes: ProductType[];
+  product: Product;
 }
 
 @Component({
@@ -28,13 +33,15 @@ export class ProductFormDialogComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private productService: ProductService,
+    private snakeBarService: SnakeBarService,
     private dialogRef: MatDialogRef<ImageCropperDialogComponent>,
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) private data: DialogData
   ) {}
 
   ngOnInit(): void {
-    this.productTypes = this.data.productTypes;
+    this.getProductTypes();
 
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
@@ -48,6 +55,37 @@ export class ProductFormDialogComponent implements OnInit {
       memo: [null],
       imageArray: [null],
     });
+
+    if (this.data) {
+      this.updateFormValue(this.data.product);
+    }
+  }
+
+  getProductTypes(): void {
+    this.productService.getProductTypes().subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.productTypes = res.data;
+        this.updateFormType();
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
+  }
+
+  updateFormValue(data: Product) {
+    this.form.patchValue(data);
+  }
+
+  updateFormType(): void {
+    const productType = this.productTypes.find(
+      (type) => type.name === this.form.value.type
+    );
+    this.form.patchValue({ type: productType?.id });
   }
 
   updateImageIndex(arrow: string) {
