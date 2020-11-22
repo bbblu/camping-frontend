@@ -1,15 +1,60 @@
 @import "~src/assets/scss/color.scss";
 
-$primary-color: map-get($colors, primary5);
+$primary-color: map-get($colors, primary4);
 $font-white: map-get($colors, white);
+$icon-color: map-get($colors, primary2);
+$field-color: map-get($colors, lightgray);
+
+::ng-deep .mat-dialog-container {
+  padding: 0;
+  overflow: hidden;
+}
+
+.title {
+  position: relative;
+  padding: 1rem 0;
+  color: $font-white;
+  background-color: $primary-color;
+
+  mat-icon {
+    font-size: xx-large;
+  }
+
+  &::after {
+    position: absolute;
+    top: 100%;
+    border-top: solid 1rem $primary-color;
+    border-left: solid 1rem transparent;
+    border-right: solid 1rem transparent;
+    content: "";
+  }
+}
+
+.content {
+  padding: 1rem 1.5rem;
+}
 
 :host ::ng-deep {
-  .mat-step-header {
-    .mat-step-icon-selected,
-    .mat-step-icon-state-edit,
-    .mat-step-icon-state-done {
-      color: $font-white;
-      background-color: $primary-color;
+  mat-form-field.mat-form-field-round {
+    .mat-form-field-wrapper {
+      mat-icon,
+      .mat-icon-button {
+        color: $icon-color;
+      }
+
+      .mat-form-field-flex {
+        .mat-form-field-outline {
+          border: 1px solid $field-color;
+          border-radius: 0;
+        }
+      }
+    }
+
+    mat-datepicker-toggle {
+      .mat-icon-button {
+        width: 24px !important;
+        height: 24px !important;
+      }
     }
   }
 }
