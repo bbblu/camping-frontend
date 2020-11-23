@@ -60,15 +60,11 @@ export class ProductDetailComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogWidth = '50%';
-    if (window.screen.width <= 960) {
-      dialogWidth = '100%';
-    }
     this.dialog.open(BorrowCreateDialogComponent, {
-      width: dialogWidth,
+      width: window.screen.width <= 960 ? '100%' : '50%',
       data: {
-        ...this.productGroup,
-        id: this.productGroupId,
+        productGroupId: this.productGroupId,
+        productGroup: this.productGroup,
       },
     });
   }

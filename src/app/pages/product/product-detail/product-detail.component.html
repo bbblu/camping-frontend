@@ -1,7 +1,12 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center">
   <mat-card fxFlex="60" fxFlex.lt-md="80">
     <div fxLayoutGap="25px">
-      <img fxFlex="50" alt="product cover" [src]="productGroup.coverImage" />
+      <img
+        mat-card-image
+        fxFlex="50"
+        alt="product cover"
+        [src]="productGroup.coverImage"
+      />
       <div fxFlex="50">
         <mat-card-title>{{ productGroup.name }}</mat-card-title>
         <mat-card-subtitle fxLayout="column" fxLayoutGap="10px">
@@ -38,7 +43,9 @@
           </div>
         </mat-card-subtitle>
         <mat-card-actions fxLayoutAlign="end">
-          <button mat-flat-button (click)="openDialog()">我要租</button>
+          <button mat-flat-button type="button" (click)="openDialog()">
+            我要租
+          </button>
         </mat-card-actions>
       </div>
     </div>
