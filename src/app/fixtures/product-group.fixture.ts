@@ -9,9 +9,8 @@ export const products: ProductGroup[] = [
     borrowStartDate: new Date('2020/08/14 00:00'),
     borrowEndDate: new Date('2020/08/21 19:30'),
     city: '台北市 中正區',
-    createAccount: 'admin',
     userName: 'admin(管理員)',
-    productTypeArray: 1,
+    productTypeArray: ['1'],
     comment: 3.8,
   },
   {
@@ -22,9 +21,8 @@ export const products: ProductGroup[] = [
     borrowStartDate: new Date('2020/08/14 00:00'),
     borrowEndDate: new Date('2020/08/21 19:30'),
     city: '台北市 中正區',
-    createAccount: 'admin',
     userName: 'admin(管理員)',
-    productTypeArray: 1,
+    productTypeArray: ['1'],
     comment: 3.8,
   },
   {
@@ -35,9 +33,8 @@ export const products: ProductGroup[] = [
     borrowStartDate: new Date('2020/08/14 00:00'),
     borrowEndDate: new Date('2020/08/21 19:30'),
     city: '台北市 中正區',
-    createAccount: 'admin',
     userName: 'admin(管理員)',
-    productTypeArray: 1,
+    productTypeArray: ['1'],
     comment: 3.8,
   },
 ];

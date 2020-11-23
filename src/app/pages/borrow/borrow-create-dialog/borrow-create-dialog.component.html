@@ -21,7 +21,7 @@
     floatLabel="never"
   >
     <mat-icon matPrefix>tour</mat-icon>
-    <input matInput type="text" [value]="data.name" disabled />
+    <input matInput type="text" [value]="data.productGroup.name" disabled />
   </mat-form-field>
 
   <mat-form-field
@@ -30,7 +30,12 @@
     floatLabel="never"
   >
     <mat-icon matPrefix>attach_money</mat-icon>
-    <input matInput type="text" [value]="data.price" disabled />
+    <input
+      matInput
+      type="text"
+      [value]="'$' + data.productGroup.price"
+      disabled
+    />
   </mat-form-field>
 
   <mat-form-field class="mat-form-field-round" appearance="outline">

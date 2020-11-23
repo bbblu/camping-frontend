@@ -11,6 +11,11 @@ import { ProductGroupDetail } from '@models/product/product-group-detail.model';
 import { RentalService } from '@services/api/rental.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
+interface BorrowCreateDialogData {
+  productGroupId: number;
+  productGroup: ProductGroupDetail;
+}
+
 @Component({
   selector: 'app-borrow-create-dialog',
   templateUrl: './borrow-create-dialog.component.html',
@@ -23,7 +28,7 @@ export class BorrowCreateDialogComponent implements OnInit {
   form!: FormGroup;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ProductGroupDetail,
+    @Inject(MAT_DIALOG_DATA) public data: BorrowCreateDialogData,
     private formBuilder: FormBuilder,
     private rentalService: RentalService,
     private snakeBarService: SnakeBarService,
@@ -32,8 +37,8 @@ export class BorrowCreateDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.minDate = new Date(this.data.borrowStartDate);
-    this.maxDate = new Date(this.data.borrowEndDate);
+    this.minDate = new Date(this.data.productGroup.borrowStartDate);
+    this.maxDate = new Date(this.data.productGroup.borrowEndDate);
 
     this.form = this.formBuilder.group({
       borrowStartDate: [null, Validators.required],
@@ -53,7 +58,7 @@ export class BorrowCreateDialogComponent implements OnInit {
 
   onSubmit(): void {
     const data = {
-      productGroupId: this.data.id,
+      productGroupId: this.data.productGroupId,
       borrowStartDate: this.dateFormatter(this.form.value.borrowStartDate),
       borrowEndDate: this.dateFormatter(this.form.value.borrowEndDate),
     };

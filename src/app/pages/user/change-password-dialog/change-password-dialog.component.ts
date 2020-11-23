@@ -29,7 +29,7 @@ export class ChangePasswordDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.userService.updateUserPassword(this.form.value).subscribe(
+    this.userService.updatePassword(this.form.value).subscribe(
       (res) => {
         this.snakeBarService.open(res.message);
       },
