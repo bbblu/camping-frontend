@@ -8,45 +8,16 @@
   <span>{{ data.title }}</span>
 </div>
 
-<form
-  class="content"
-  [formGroup]="form"
-  (ngSubmit)="onSubmit()"
-  fxLayout="column"
-  fxFlexFill
+<div
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxFlexAlign.gt-xs="center"
+  fxLayoutGap="10px"
 >
-  <mat-form-field
-    *ngIf="data.isCancel"
-    class="mat-form-field-round"
-    appearance="outline"
-    floatLabel="never"
-  >
-    <textarea
-      matInput
-      cols="50"
-      rows="10"
-      placeholder="請輸入原因..."
-      formControlName="reason"
-    ></textarea>
-  </mat-form-field>
-
-  <div
-    fxLayout="row"
-    fxLayout.xs="column"
-    fxFlexAlign.gt-xs="center"
-    fxLayoutGap="10px"
-  >
-    <button mat-flat-button type="button" color="warn" (click)="onNoClick()">
-      取消
-    </button>
-    <button
-      mat-flat-button
-      class="submit"
-      type="submit"
-      color="accent"
-      [disabled]="!form.valid"
-    >
-      送出
-    </button>
-  </div>
-</form>
+  <button mat-flat-button type="button" color="warn" (click)="onNoClick()">
+    取消
+  </button>
+  <button mat-flat-button type="submit" color="accent" (click)="onSubmit()">
+    送出
+  </button>
+</div>

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 
@@ -7,8 +7,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { ApiModel } from '@models/api-model';
 
+import { RentalStatusService } from '@services/api/rental-status.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
-import { RentalService } from '@services/api/rental.service';
 
 interface BorrowActionDialogData {
   title: string;
@@ -26,41 +26,27 @@ export class BorrowActionDialogComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private rentalService: RentalService,
+    private rentalStatusService: RentalStatusService,
     private snakeBarService: SnakeBarService,
     private dialogRef: MatDialogRef<BorrowActionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: BorrowActionDialogData
   ) {}
 
-  ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      reason: [null, this.data.isCancel ? Validators.required : null],
-    });
-  }
+  ngOnInit(): void {}
 
   onSubmit(): void {
+    console.log(this.data);
+
     let action!: Observable<ApiModel<string>>;
     switch (this.data.title) {
-      case '取消訂單':
-        action = this.rentalService.cancelRental(this.data.rentalId, {
-          ...this.form.value,
-          deniedDetail: this.form.value.reason,
-        });
+      case '取消交易':
+        action = this.rentalStatusService.cancelRental(this.data.rentalId);
         break;
-      case '同意取消':
-        action = this.rentalService.agreeCancelRental(this.data.rentalId);
+      case '同意出借':
+        action = this.rentalStatusService.agreeRental(this.data.rentalId);
         break;
-      case '拒絕取消':
-        action = this.rentalService.denyCancelRental(this.data.rentalId, {
-          ...this.form.value,
-          cancelDetail: this.form.value.reason,
-        });
-        break;
-      case '拒絕交易':
-        action = this.rentalService.denyRental(this.data.rentalId, {
-          ...this.form.value,
-          cancelDetail: this.form.value.reason,
-        });
+      case '拒絕出借':
+        action = this.rentalStatusService.denyRental(this.data.rentalId);
         break;
     }
 

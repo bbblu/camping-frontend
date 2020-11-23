@@ -41,7 +41,7 @@
           <p>{{ rental.name }}</p>
         </mat-card-title>
         <mat-card-subtitle>
-          {{ rental.borrowRange }}
+          {{ rental.borrowStartDate }} ~ {{ rental.borrowEndDate }}
           <div fxLayout="row" fxLayoutAlign="end">
             <button
               mat-flat-button
@@ -81,7 +81,7 @@
             mat-flat-button
             [style.background-color]="button.color"
             [disabled]="button.disable"
-            (click)="clickStatusButton(button.text)"
+            (click)="clickStatusButton(button.text, rental)"
           >
             {{ button.text }}
           </button>

@@ -97,22 +97,24 @@ export class BorrowListComponent implements OnInit {
 
   getStatusText(status: BorrowStatus): string {
     switch (status) {
+      case BorrowStatus.alreadyCancel:
+        return '已取消';
+      case BorrowStatus.alreadyReturn:
+        return '已退貨';
+      case BorrowStatus.alreadyTerminate:
+        return '已終止';
+      case BorrowStatus.alreadyRetrieve:
+        return '已取回';
       case BorrowStatus.notAgree:
         return '未同意';
       case BorrowStatus.notPay:
         return '未付款';
-      case BorrowStatus.alreadyCancel:
-        return '已取消';
       case BorrowStatus.notPlace:
         return '未寄放';
       case BorrowStatus.notPickUp:
         return '未領取';
-      case BorrowStatus.alreadyTerminate:
-        return '已終止';
       case BorrowStatus.notReturn:
         return '未歸還';
-      case BorrowStatus.notCompensate:
-        return '未賠償';
       case BorrowStatus.notRetrieve:
         return '未取回';
       case BorrowStatus.notComment:
@@ -128,7 +130,6 @@ export class BorrowListComponent implements OnInit {
     switch (status) {
       case BorrowStatus.notAgree:
       case BorrowStatus.notPay:
-      case BorrowStatus.notCompensate:
         return Color.primary5;
       case BorrowStatus.notPlace:
       case BorrowStatus.notPickUp:
@@ -162,8 +163,6 @@ export class BorrowListComponent implements OnInit {
         return [new StatusButton('取消交易', Color.red)];
       case BorrowStatus.notPickUp:
         return [new StatusButton('扣除手續費終止交易', Color.red)];
-      case BorrowStatus.notCompensate:
-        return [new StatusButton('付款', Color.primary2)];
       case BorrowStatus.notComment:
         return [new StatusButton('評價租方', Color.primary4)];
       default:
@@ -175,8 +174,8 @@ export class BorrowListComponent implements OnInit {
     switch (status) {
       case BorrowStatus.notAgree:
         return [
-          new StatusButton('拒絕', Color.red),
-          new StatusButton('同意', Color.primary2),
+          new StatusButton('拒絕出租', Color.red),
+          new StatusButton('同意出租', Color.primary2),
         ];
       case BorrowStatus.notPay:
       case BorrowStatus.notPlace:
@@ -189,19 +188,19 @@ export class BorrowListComponent implements OnInit {
     }
   }
 
-  clickStatusButton(text: string): void | null {
+  clickStatusButton(text: string, rental: Rental): void | null {
     switch (text) {
       case '付款':
-        return this.openPaymentDialog();
+        return this.openPaymentDialog(rental);
       case '評價租方':
       case '評價借方':
-        return this.openCommentDialog(text);
+        return this.openCommentDialog(text, rental);
       default:
-        return this.openActionDialog(text);
+        return this.openActionDialog(text, rental);
     }
   }
 
-  openActionDialog(title: string): void {
+  openActionDialog(title: string, rental: Rental): void {
     this.dialog.open(BorrowActionDialogComponent, {
       width: '70%',
       data: {
@@ -212,16 +211,16 @@ export class BorrowListComponent implements OnInit {
     });
   }
 
-  openPaymentDialog(): void {
+  openPaymentDialog(rental: Rental): void {
     this.dialog.open(BorrowPaymentDialogComponent, {
       width: '70%',
       data: {
-        rental: rental,
+        rental: rental.id,
       },
     });
   }
 
-  openCommentDialog(title: string): void {
+  openCommentDialog(title: string, rental: Rental): void {
     this.dialog.open(BorrowCommentDialogComponent, {
       width: '50%',
       data: {
