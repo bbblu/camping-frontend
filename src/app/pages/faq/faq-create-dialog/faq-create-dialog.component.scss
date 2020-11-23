@@ -9,15 +9,8 @@ $field-color: map-get($colors, lightgray);
   overflow: hidden;
 }
 
-.title {
-  position: relative;
-  padding: 1rem 0;
-  color: $font-white;
+.dialog-title {
   background-color: $primary-color;
-
-  mat-icon {
-    font-size: xx-large;
-  }
 
   &::after {
     position: absolute;
@@ -27,10 +20,6 @@ $field-color: map-get($colors, lightgray);
     border-right: solid 1rem transparent;
     content: "";
   }
-}
-
-.content {
-  padding: 1rem 1.5rem;
 }
 
 :host ::ng-deep {
@@ -44,8 +33,4 @@ $field-color: map-get($colors, lightgray);
       }
     }
   }
-}
-
-.submit {
-  color: $font-white;
 }
