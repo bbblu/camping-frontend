@@ -1,7 +1,11 @@
 @import "src/assets/scss/color.scss";
 
+$primary-color: map-get($colors, primary1);
+$font-black: map-get($colors, black);
+$font-white: map-get($colors, white);
+
 input.mat-input-element {
-  color: map-get($colors, black);
+  color: $font-black;
 }
 
 // form field outline to round
@@ -13,7 +17,7 @@ mat-form-field.mat-form-field-round {
   .mat-form-field-wrapper {
     .mat-form-field-flex {
       .mat-form-field-outline {
-        border: 2px solid map-get($colors, primary1);
+        border: 2px solid $primary-color;
         border-radius: 30px;
       }
 
@@ -42,6 +46,31 @@ mat-form-field.mat-form-field-round {
   &.mat-primary,
   &.mat-accent,
   &.mat-warn {
-    color: map-get($colors, white);
+    color: $font-white;
   }
+}
+
+// mat-dialog
+.dialog-title {
+  position: relative;
+  padding: 1rem 0;
+  color: $font-white;
+  background-color: $primary-color;
+
+  mat-icon {
+    font-size: xx-large;
+  }
+
+  &::after {
+    position: absolute;
+    top: 100%;
+    border-top: solid 1rem $primary-color;
+    border-left: solid 1rem transparent;
+    border-right: solid 1rem transparent;
+    content: "";
+  }
+}
+
+.dialog-content {
+  padding: 1rem 1.5rem;
 }

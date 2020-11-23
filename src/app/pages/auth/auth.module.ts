@@ -10,6 +10,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
+import { ForgetPasswordDialogComponent } from './forget-password-dialog/forget-password-dialog.component';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ChangePasswordDialogComponent } from './change-password-dialog/change-p
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
+    ForgetPasswordDialogComponent,
     ChangePasswordDialogComponent,
   ],
   imports: [
