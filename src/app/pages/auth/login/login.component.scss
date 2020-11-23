@@ -30,7 +30,6 @@ mat-card-title {
   }
 
   .brand {
-    margin-left: 20px;
     font-weight: normal;
     line-height: 50px;
   }
@@ -48,9 +47,8 @@ mat-card-content {
       }
     }
 
-    .remember-me {
-      padding-left: 15px;
-      padding-bottom: 2%;
+    a {
+      text-decoration: underline;
     }
 
     button {

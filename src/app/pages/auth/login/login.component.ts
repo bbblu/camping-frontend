@@ -4,6 +4,7 @@ import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ApiModel } from '@models/api-model';
 
@@ -12,6 +13,8 @@ import { AuthService } from '@services/auth.service';
 import { AccountService } from '@services/account.service';
 import { RememberMeService } from '@services/remember-me.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
+
+import { ForgetPasswordDialogComponent } from '@pages/auth/forget-password-dialog/forget-password-dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +33,8 @@ export class LoginComponent implements OnInit {
     private rememberMeService: RememberMeService,
     private snakeBarService: SnakeBarService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -81,5 +85,11 @@ export class LoginComponent implements OnInit {
         this.snakeBarService.open(err.error.message);
       }
     );
+  }
+
+  openDialog(): void {
+    this.dialog.open(ForgetPasswordDialogComponent, {
+      width: window.screen.width <= 960 ? '100%' : '50%',
+    });
   }
 }
