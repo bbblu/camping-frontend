@@ -9,7 +9,7 @@ import {
 
 import { ProductType } from '@models/product/product-group-filter.model';
 import { Product } from '@models/product/product-group-edit.model';
-import { Image } from '@models/product/image.model';
+import { SliderImage } from '@models/product/slider-image.model';
 
 import { ProductService } from '@services/api/product.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
@@ -28,7 +28,7 @@ export interface DialogData {
 export class ProductFormDialogComponent implements OnInit {
   form!: FormGroup;
   productTypes: ProductType[] = [];
-  productImages: Image[] = [];
+  productImages: SliderImage[] = [];
   imageIndex = 0;
 
   constructor(
