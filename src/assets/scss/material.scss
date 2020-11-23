@@ -37,3 +37,11 @@ mat-form-field.mat-form-field-round {
     }
   }
 }
+
+.mat-flat-button {
+  &.mat-primary,
+  &.mat-accent,
+  &.mat-warn {
+    color: map-get($colors, white);
+  }
+}
