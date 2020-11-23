@@ -14,8 +14,6 @@ import { BorrowActionDialogComponent } from '@pages/borrow/borrow-action-dialog/
 import { BorrowPaymentDialogComponent } from '@pages/borrow/borrow-payment-dialog/borrow-payment-dialog.component';
 import { BorrowCommentDialogComponent } from '@pages/borrow/borrow-comment-dialog/borrow-comment-dialog.component';
 
-import { rental } from '../../../fixtures/rental.fixture';
-
 class StatusButton {
   text: string;
   color: Color;
@@ -55,7 +53,6 @@ export class BorrowListComponent implements OnInit {
         }
 
         this.rentals = res.data;
-        this.fakeRentals();
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
@@ -71,20 +68,11 @@ export class BorrowListComponent implements OnInit {
         }
 
         this.rentals = res.data;
-        this.fakeRentals();
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
       }
     );
-  }
-
-  fakeRentals() {
-    for (const x of Array(10).keys()) {
-      const temp = { ...rental };
-      temp.status = x;
-      this.rentals.push(temp);
-    }
   }
 
   updateRentals(): void {

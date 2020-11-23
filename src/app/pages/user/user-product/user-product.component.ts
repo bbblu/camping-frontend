@@ -7,8 +7,6 @@ import { UserService } from '@services/api/user.service';
 import { ProductService } from '@services/api/product.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
-import { products } from '../../../fixtures/product-group.fixture';
-
 @Component({
   selector: 'app-user-product',
   templateUrl: './user-product.component.html',
@@ -64,8 +62,7 @@ export class UserProductComponent implements OnInit {
           this.snakeBarService.open(res.message);
         }
 
-        // this.productGroups = res.data;
-        this.productGroups = products;
+        this.productGroups = res.data;
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
