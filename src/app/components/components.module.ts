@@ -8,9 +8,10 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { ImageCropperDialogComponent } from './image-cropper-dialog/image-cropper-dialog.component';
+import { StarComponent } from './star/star.component';
 
 @NgModule({
-  declarations: [TopBarComponent, ImageCropperDialogComponent],
+  declarations: [TopBarComponent, ImageCropperDialogComponent, StarComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -18,6 +19,6 @@ import { ImageCropperDialogComponent } from './image-cropper-dialog/image-croppe
     MaterialModule,
     ImageCropperModule,
   ],
-  exports: [TopBarComponent, ImageCropperDialogComponent],
+  exports: [TopBarComponent, ImageCropperDialogComponent, StarComponent],
 })
 export class ComponentsModule {}

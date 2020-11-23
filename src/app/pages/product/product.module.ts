@@ -8,6 +8,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import { ComponentsModule } from '@components/components.module';
 import { ProductRoutingModule } from './product-routing.module';
 
 import { ProductListComponent } from './product-list/product-list.component';
@@ -35,6 +36,7 @@ import { ProductExpansionPanelComponent } from './product-expansion-panel/produc
     ImageCropperModule,
     NgImageSliderModule,
     NgxPaginationModule,
+    ComponentsModule,
   ],
   exports: [ProductListComponent],
 })
