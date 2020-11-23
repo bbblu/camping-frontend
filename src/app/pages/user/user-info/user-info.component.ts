@@ -9,7 +9,8 @@ import { Experience } from '@models/user/experience.model';
 
 import { UserService } from '@services/api/user.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
-import { ChangePasswordDialogComponent } from '@pages/user/change-password-dialog/change-password-dialog.component';
+
+import { ChangePasswordDialogComponent } from '@pages/auth/change-password-dialog/change-password-dialog.component';
 
 @Component({
   selector: 'app-user-info',
@@ -105,12 +106,8 @@ export class UserInfoComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogWidth = '50%';
-    if (window.screen.width <= 960) {
-      dialogWidth = '100%';
-    }
     this.dialog.open(ChangePasswordDialogComponent, {
-      width: dialogWidth,
+      width: window.screen.width <= 960 ? '100%' : '50%',
     });
   }
 }
