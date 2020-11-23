@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { ApiModel } from '@models/api-model';
 import { User } from '@models/user/user.model';
+import { CommentAndBadRecord } from '@models/user/comment-and-bad-record.model';
 import { Experience } from '@models/user/experience.model';
 
 import { HttpService } from '@services/http.service';
@@ -34,8 +35,34 @@ export class UserService {
     return this.httpService.patch<string>(this.baseUrl, data);
   }
 
-  updateUserPassword(data: object): Observable<ApiModel<string>> {
+  getUserCommentAndBadRecord(
+    account: string
+  ): Observable<ApiModel<CommentAndBadRecord>> {
+    return this.httpService.get<User>(
+      `${this.baseUrl}/${account}/comment-and-bad-record`
+    );
+  }
+
+  updatePassword(data: object): Observable<ApiModel<string>> {
     return this.httpService.patch<string>(`${this.baseUrl}/password`, data);
+  }
+
+  forgetPassword(data: object): Observable<ApiModel<string>> {
+    return this.httpService.post<string>(
+      `${this.baseUrl}/forget-password`,
+      data
+    );
+  }
+
+  forgetPasswordChange(data: object): Observable<ApiModel<string>> {
+    return this.httpService.patch<string>(
+      `${this.baseUrl}/forgot-password/change`,
+      {}
+    );
+  }
+
+  userCompensate(data: object): Observable<ApiModel<string>> {
+    return this.httpService.patch<string>(`${this.baseUrl}/compensate`, data);
   }
 
   enableUser(account: string): Observable<ApiModel<string>> {

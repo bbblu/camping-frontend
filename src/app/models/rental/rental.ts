@@ -1,15 +1,14 @@
 export interface Rental {
   id: number;
   status: number;
-  borrowRange: string;
+  productGroupId: number;
   borrowStartDate: Date;
   borrowEndDate: Date;
   name: string;
   coverImage: string;
   areaName: string;
-  price: string;
+  price: number;
   user: User;
-  contact: string;
   rentalDate: Date;
   detailArray: Detail[];
 }
@@ -28,6 +27,6 @@ export interface Detail {
   brand: string;
   useInformation: string;
   brokenCompensation: string;
+  relatedLink: string;
   imageArray: string[];
-  relatedLinkArray: string[];
 }
