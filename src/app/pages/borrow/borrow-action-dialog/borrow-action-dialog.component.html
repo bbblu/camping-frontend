@@ -8,6 +8,22 @@
   <span>{{ data.title }}</span>
 </div>
 
+<form *ngIf="data.title === '扣除手續費終止交易'" [formGroup]="form">
+  <mat-form-field
+    class="mat-form-field-round"
+    appearance="outline"
+    floatLabel="never"
+  >
+    <mat-icon matPrefix>contact_support</mat-icon>
+    <input
+      matInput
+      type="text"
+      placeholder="標題"
+      formControlName="reportTitle"
+    />
+  </mat-form-field>
+</form>
+
 <div class="dialog-content">
   <mat-dialog-actions align="center">
     <button mat-flat-button mat-dialog-close type="button" color="warn">

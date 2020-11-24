@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 
@@ -32,11 +32,13 @@ export class BorrowActionDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: BorrowActionDialogData
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      description: [null, Validators.required],
+    });
+  }
 
   onSubmit(): void {
-    console.log(this.data);
-
     let action!: Observable<ApiModel<string>>;
     switch (this.data.title) {
       case '取消交易':
@@ -47,6 +49,12 @@ export class BorrowActionDialogComponent implements OnInit {
         break;
       case '拒絕出租':
         action = this.rentalStatusService.denyRental(this.data.rentalId);
+        break;
+      case '扣除手續費終止交易':
+        action = this.rentalStatusService.terminalRental(
+          this.data.rentalId,
+          this.form.value
+        );
         break;
     }
 

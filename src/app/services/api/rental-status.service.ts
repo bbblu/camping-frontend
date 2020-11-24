@@ -35,6 +35,13 @@ export class RentalStatusService {
     );
   }
 
+  terminalRental(id: number, data: object): Observable<ApiModel<string>> {
+    return this.httpService.patch<string>(
+      `${this.baseUrl}/${id}/status/terminate`,
+      data
+    );
+  }
+
   payRental(id: number, data: object): Observable<ApiModel<string>> {
     return this.httpService.patch<string>(
       `${this.baseUrl}/${id}/status/payment`,
