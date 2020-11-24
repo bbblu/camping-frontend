@@ -20,6 +20,8 @@ mat-card {
 }
 
 mat-card-title {
+  color: $font-black;
+
   .seller {
     height: 60px;
     padding: 7px;
@@ -27,8 +29,8 @@ mat-card-title {
     border-radius: 50%;
   }
 
-  .nick-name {
-    padding-left: 20px;
-    color: $font-black;
+  .bad-record {
+    font-size: 15px;
+    font-weight: normal;
   }
 }
