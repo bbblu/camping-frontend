@@ -184,7 +184,7 @@ export class BorrowListComponent implements OnInit {
     }
   }
 
-  clickStatusButton(text: string, rental: Rental): void | null {
+  clickStatusButton(text: string, rental: Rental): void {
     switch (text) {
       case '付款':
         return this.openPaymentDialog(rental);
@@ -211,7 +211,7 @@ export class BorrowListComponent implements OnInit {
     this.dialog.open(BorrowPaymentDialogComponent, {
       width: window.screen.width <= 960 ? '100%' : '50%',
       data: {
-        rental: rental.id,
+        rentalId: rental.id,
       },
     });
   }

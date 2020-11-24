@@ -12,7 +12,7 @@ import { RentalStatusService } from '@services/api/rental-status.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 interface BorrowPaymentDialog {
-  rental: Rental;
+  rentalId: number;
 }
 
 @Component({
@@ -83,7 +83,7 @@ export class BorrowPaymentDialogComponent implements OnInit {
 
   onSubmit(): void {
     this.rentalStatusService
-      .payRental(this.data.rental.id, this.form.value)
+      .payRental(this.data.rentalId, this.form.value)
       .subscribe(
         (res: ApiModel<string>) => {
           this.snakeBarService.open(res.message);
