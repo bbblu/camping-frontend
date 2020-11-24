@@ -14,7 +14,13 @@
           [src]="productGroup.coverImage"
         />
         <mat-card-content>
-          <mat-card-title fxFlex="60">{{ productGroup.name }}</mat-card-title>
+          <mat-card-title fxLayout="column" fxFlex="60" fxLayoutGap="5px">
+            <span>{{ productGroup.name }}</span>
+            <div class="date">
+              {{ productGroup.borrowStartDate | date: "yyyy-MM-dd" }} ~
+              {{ productGroup.borrowEndDate | date: "yyyy-MM-dd" }}
+            </div>
+          </mat-card-title>
           <mat-card-subtitle
             fxLayout="column"
             fxLayoutAlign="center end"
