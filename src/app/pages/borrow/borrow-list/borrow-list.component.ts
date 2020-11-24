@@ -190,7 +190,7 @@ export class BorrowListComponent implements OnInit {
 
   openActionDialog(title: string, rental: Rental): void {
     this.dialog.open(BorrowActionDialogComponent, {
-      width: '70%',
+      width: window.screen.width <= 960 ? '100%' : '50%',
       data: {
         title: title,
         rentalId: rental.id,
@@ -201,7 +201,7 @@ export class BorrowListComponent implements OnInit {
 
   openPaymentDialog(rental: Rental): void {
     this.dialog.open(BorrowPaymentDialogComponent, {
-      width: '70%',
+      width: window.screen.width <= 960 ? '100%' : '50%',
       data: {
         rental: rental.id,
       },
@@ -210,7 +210,7 @@ export class BorrowListComponent implements OnInit {
 
   openCommentDialog(title: string, rental: Rental): void {
     this.dialog.open(BorrowCommentDialogComponent, {
-      width: '50%',
+      width: window.screen.width <= 960 ? '100%' : '50%',
       data: {
         title: title,
         productGroupId: rental.id,

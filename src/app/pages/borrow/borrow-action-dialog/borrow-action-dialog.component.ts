@@ -42,10 +42,10 @@ export class BorrowActionDialogComponent implements OnInit {
       case '取消交易':
         action = this.rentalStatusService.cancelRental(this.data.rentalId);
         break;
-      case '同意出借':
+      case '同意出租':
         action = this.rentalStatusService.agreeRental(this.data.rentalId);
         break;
-      case '拒絕出借':
+      case '拒絕出租':
         action = this.rentalStatusService.denyRental(this.data.rentalId);
         break;
     }
