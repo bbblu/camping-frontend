@@ -41,9 +41,24 @@ export class BorrowCreateDialogComponent implements OnInit {
     this.maxDate = new Date(this.data.productGroup.borrowEndDate);
 
     this.form = this.formBuilder.group({
-      borrowStartDate: [null, Validators.required],
-      borrowEndDate: [null, Validators.required],
+      borrowStartDate: [
+        this.data.productGroup.borrowStartDate,
+        Validators.required,
+      ],
+      borrowEndDate: [
+        this.data.productGroup.borrowEndDate,
+        Validators.required,
+      ],
     });
+  }
+
+  calculateRentalPrice(): number {
+    const startDate = new Date(this.form.value.borrowStartDate);
+    const endDate = new Date(this.form.value.borrowEndDate);
+    const oneDay = 1000 * 60 * 60 * 24;
+    const days = (endDate.getTime() - startDate.getTime()) / oneDay + 1;
+
+    return this.data.productGroup.price * days;
   }
 
   intRange(start: number, end: number): number[] {

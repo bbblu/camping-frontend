@@ -33,7 +33,7 @@
     <input
       matInput
       type="text"
-      [value]="'$' + data.productGroup.price"
+      [value]="'$' + calculateRentalPrice()"
       disabled
     />
   </mat-form-field>
