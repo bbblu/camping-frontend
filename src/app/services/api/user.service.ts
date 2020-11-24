@@ -38,7 +38,7 @@ export class UserService {
   getUserCommentAndBadRecord(
     account: string
   ): Observable<ApiModel<CommentAndBadRecord>> {
-    return this.httpService.get<User>(
+    return this.httpService.get<CommentAndBadRecord>(
       `${this.baseUrl}/${account}/comment-and-bad-record`
     );
   }

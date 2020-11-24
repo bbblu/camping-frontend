@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { ApiModel } from '@models/api-model';
 import { User } from '@models/user/user.model';
+import { BadRecord } from '@models/user/comment-and-bad-record.model';
 import { Experience } from '@models/user/experience.model';
 
 import { UserService } from '@services/api/user.service';
@@ -19,6 +20,7 @@ import { ChangePasswordDialogComponent } from '@pages/auth/change-password-dialo
 })
 export class UserInfoComponent implements OnInit {
   user!: User;
+  badRecords: BadRecord[] = [];
   experiences: Experience[] = [];
   form!: FormGroup;
   isEditable = false;
@@ -53,6 +55,7 @@ export class UserInfoComponent implements OnInit {
 
         this.user = res.data;
         this.updateFormValue(this.user);
+        this.getUserCommentAndBadRecord();
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
@@ -68,6 +71,21 @@ export class UserInfoComponent implements OnInit {
       cellPhone: data.cellPhone,
       address: data.address,
     });
+  }
+
+  getUserCommentAndBadRecord(): void {
+    this.userService.getUserCommentAndBadRecord(this.user.account).subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.badRecords = res.data.badRecordArray;
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
   }
 
   getExperiences(): void {

@@ -16,7 +16,19 @@
               [value]="user.nickName"
             />
           </mat-form-field>
-          <app-star [comment]="user.comment"></app-star>
+          <div
+            class="bad-record"
+            fxLayout="row"
+            fxLayout.lt-sm="column"
+            fxLayoutAlign="start center"
+            fxLayoutAlign.lt-sm="center"
+            fxLayoutGap="10px"
+          >
+            <app-star [comment]="user.comment"></app-star>
+            <span *ngFor="let badRecord of badRecords">
+              {{ badRecord.typeName }}: {{ badRecord.count }}
+            </span>
+          </div>
         </div>
       </mat-card-title>
 
