@@ -221,7 +221,7 @@ export class BorrowListComponent implements OnInit {
       width: window.screen.width <= 960 ? '100%' : '50%',
       data: {
         title: title,
-        productGroupId: rental.id,
+        rentalId: rental.id,
       },
     });
   }
