@@ -49,7 +49,7 @@ export class UserService {
 
   forgetPassword(data: object): Observable<ApiModel<string>> {
     return this.httpService.post<string>(
-      `${this.baseUrl}/forget-password`,
+      `${this.baseUrl}/forgot-password`,
       data
     );
   }
