@@ -127,16 +127,6 @@ export class ProductFormComponent implements OnInit {
     this.form.value.cityId = this.cityService.areaId;
   }
 
-  imageToSliderObject(images: Image[]): object[] {
-    return images.map((image) => {
-      return {
-        image: image.url,
-        thumbImage: image.url,
-        alt: 'detail image',
-      };
-    });
-  }
-
   openCoverImageDialog(isEdit: boolean): void {
     const dialogRef = this.dialog.open(ImageCropperDialogComponent, {
       width: '70%',

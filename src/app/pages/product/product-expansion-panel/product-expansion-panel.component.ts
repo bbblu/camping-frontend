@@ -5,6 +5,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Image, Product } from '@models/product/product-group-detail.model';
+import { SliderImage } from '@models/product/slider-image.model';
 
 import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/product-form-dialog.component';
 
@@ -41,13 +42,7 @@ export class ProductExpansionPanelComponent implements OnInit {
       return [];
     }
 
-    return images.map((image) => {
-      return {
-        image: image.url,
-        thumbImage: image.url,
-        alt: 'detail image',
-      };
-    });
+    return images.map((image) => new SliderImage(image.url));
   }
 
   clickEdit(index: number): void {
