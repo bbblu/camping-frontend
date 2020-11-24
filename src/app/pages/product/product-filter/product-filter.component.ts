@@ -53,7 +53,7 @@ export class ProductFilterComponent implements OnInit {
     this.form = this.formBuilder.group({
       borrowStartDate: [null],
       borrowEndDate: [null],
-      cityAreaName: [null],
+      cityId: [null],
       typeArray: [[]],
       priceRange: [null],
     });

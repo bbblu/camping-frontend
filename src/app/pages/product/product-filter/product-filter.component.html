@@ -46,7 +46,7 @@
             <mat-icon matPrefix>location_on</mat-icon>
             <mat-select
               placeholder="地區"
-              formControlName="cityAreaName"
+              formControlName="cityId"
               *ngIf="cities; else emptyCity"
             >
               <mat-optgroup *ngFor="let cityName of cities" [label]="cityName">
