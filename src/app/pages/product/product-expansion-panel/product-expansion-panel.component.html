@@ -6,8 +6,11 @@
     (click)="isClickButton = false"
   >
     <mat-expansion-panel-header>
-      <mat-panel-title fxLayout="row" fxLayoutAlign="space-between center">
-        {{ product.name }} x {{ product.count }}
+      <mat-panel-title fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <div class="type">{{ product.type }}</div>
+          <span>{{ product.name }} x {{ product.count }}</span>
+        </div>
 
         <div *ngIf="isEdit" fxLayout="row" fxLayoutGap="10px">
           <button
