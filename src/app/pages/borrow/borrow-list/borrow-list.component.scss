@@ -83,6 +83,10 @@ $font-gray: map-get($colors, gray);
       }
     }
 
+    .nick-name {
+      text-decoration: underline;
+    }
+
     .contact {
       padding-left: 15px;
 

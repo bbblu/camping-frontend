@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 
-import { Rental } from '@models/rental/rental';
+import { Rental, User } from '@models/rental/rental';
 
 import { BorrowStatus } from '@enums/borrow-status.enum';
 import { Color } from '@enums/color.enum';
@@ -38,7 +39,8 @@ export class BorrowListComponent implements OnInit {
   constructor(
     private rentalService: RentalService,
     private snakeBarService: SnakeBarService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -81,6 +83,12 @@ export class BorrowListComponent implements OnInit {
     } else {
       this.getBorrows();
     }
+  }
+
+  toUserProduct(user: User): void {
+    this.router.navigate(['user', user.account, 'product'], {
+      queryParams: { nickName: user.account },
+    });
   }
 
   getStatusText(status: BorrowStatus): string {

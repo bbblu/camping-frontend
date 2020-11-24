@@ -14,6 +14,7 @@ export interface Rental {
 }
 
 export interface User {
+  account: string;
   nickName: string;
   email: string;
   cellPhone: string;

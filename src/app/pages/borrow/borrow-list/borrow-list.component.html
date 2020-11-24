@@ -59,7 +59,9 @@
         <mat-divider [inset]="true"></mat-divider>
         <div fxLayout="row" fxLayoutAlign="start center">
           <i class="material-icons user">person</i>
-          <span>{{ rental.user.nickName }}</span>
+          <a class="nick-name" (click)="toUserProduct(rental.user)">
+            {{ rental.user.nickName }}
+          </a>
         </div>
         <div class="contact" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>phone_in_talk</mat-icon>
