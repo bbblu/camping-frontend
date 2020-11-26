@@ -9,5 +9,6 @@ export interface User {
   cellPhone: string;
   email: string;
   address: string;
-  comment: number;
+  comment: number | null;
+  notCompensate: null;
 }

@@ -1,3 +1,5 @@
+import { ProductImage } from '../product/product-image.model';
+
 export interface Rental {
   id: number;
   status: number;
@@ -5,22 +7,15 @@ export interface Rental {
   borrowStartDate: Date;
   borrowEndDate: Date;
   name: string;
-  coverImage: string;
+  coverImage: string | null;
   areaName: string;
   price: number;
-  user: User;
   rentalDate: Date;
-  detailArray: Detail[];
+  detailArray: RentalDetail[];
+  user: User;
 }
 
-export interface User {
-  account: string;
-  nickName: string;
-  email: string;
-  cellPhone: string;
-}
-
-export interface Detail {
+export interface RentalDetail {
   status: number;
   type: string;
   name: string;
@@ -28,6 +23,13 @@ export interface Detail {
   brand: string;
   useInformation: string;
   brokenCompensation: string;
-  relatedLink: string;
-  imageArray: string[];
+  relatedLink: string | null;
+  imageArray: ProductImage[] | null;
+}
+
+export interface User {
+  account: string;
+  nickName: string;
+  email: string;
+  cellPhone: string;
 }

@@ -3,13 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ApiModel } from '@models/api-model';
-import { ProductGroup } from '@models/product/product-group.model';
-import { ProductGroupDetail } from '@models/product/product-group-detail.model';
-import { ProductGroupEdit } from '@models/product/product-group-edit.model';
 import {
-  ProductGroupFilter,
-  ProductType,
-} from '@models/product/product-group-filter.model';
+  ProductGroup,
+  ProductGroupDetail,
+} from '@models/product/product-group.model';
+import { ProductType } from '@models/product/product-type.model';
+import { ProductGroupFilter } from '@models/product/product-group-filter.model';
 
 import { HttpService } from '@services/http.service';
 
@@ -37,8 +36,8 @@ export class ProductService {
     return this.httpService.get<ProductGroupDetail>(`${this.baseUrl}/${id}`);
   }
 
-  getProductGroupForEdit(id: number): Observable<ApiModel<ProductGroupEdit>> {
-    return this.httpService.get<ProductGroupEdit>(
+  getProductGroupForEdit(id: number): Observable<ApiModel<ProductGroupDetail>> {
+    return this.httpService.get<ProductGroupDetail>(
       `${this.baseUrl}/update/${id}`
     );
   }
