@@ -110,8 +110,19 @@
 
 <mat-menu #notificationMenu="matMenu">
   <div *ngIf="notifications.length > 0; else emptyNotification">
-    <button mat-menu-item *ngFor="let notification of notifications">
-      <span>{{ notification.content }}</span>
+    <button
+      mat-menu-item
+      *ngFor="let notification of notifications; index as index"
+    >
+      <span
+        matBadge="0"
+        matBadgeColor="warn"
+        [matBadgeHidden]="index > notReadCount - 1"
+        matBadgePosition="before"
+        matBadgeSize="small"
+      >
+        {{ notification.content }}
+      </span>
     </button>
   </div>
   <ng-template #emptyNotification>

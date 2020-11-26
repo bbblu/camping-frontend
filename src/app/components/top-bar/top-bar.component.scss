@@ -47,6 +47,14 @@ mat-sidenav-container {
   background-color: $bg-white;
 }
 
+::ng-deep .mat-menu-panel {
+  max-width: 100% !important;
+
+  .mat-badge-content {
+    color: transparent;
+  }
+}
+
 .banner {
   width: 100%;
   max-height: 280px;
