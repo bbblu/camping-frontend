@@ -10,7 +10,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import * as moment from 'moment';
 
 import { ProductGroup } from '@models/product/product-group.model';
-import { ProductType } from '@models/product/product-group-filter.model';
+import { ProductType } from '@models/product/product-type.model';
 
 import { ProductService } from '@services/api/product.service';
 import { CityService } from '@services/api/city.service';

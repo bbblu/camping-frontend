@@ -7,8 +7,9 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 
-import { ProductType } from '@models/product/product-group-filter.model';
-import { Image, Product } from '@models/product/product-group-edit.model';
+import { ProductType } from '@models/product/product-type.model';
+import { Product } from '@models/product/product.model';
+import { ProductImage } from '@models/product/product-image.model';
 import { SliderImage } from '@models/product/slider-image.model';
 
 import { ProductService } from '@services/api/product.service';
@@ -91,7 +92,11 @@ export class ProductFormDialogComponent implements OnInit {
     this.form.patchValue({ type: productType?.id });
   }
 
-  imageToSliderObject(images: Image[]): SliderImage[] {
+  imageToSliderObject(images: ProductImage[] | null): SliderImage[] {
+    if (!images) {
+      return [];
+    }
+
     return images.map((image) => new SliderImage(image.url));
   }
 

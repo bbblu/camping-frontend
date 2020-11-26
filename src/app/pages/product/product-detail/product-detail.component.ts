@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
-import { ProductGroupDetail } from '@models/product/product-group-detail.model';
+import { ProductGroupDetail } from '@models/product/product-group.model';
 
 import { ProductService } from '@services/api/product.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';

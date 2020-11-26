@@ -8,8 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
 
 import { ApiModel } from '@models/api-model';
-import { Image, Product } from '@models/product/product-group-detail.model';
-import { ProductGroupEdit } from '@models/product/product-group-edit.model';
+import { ProductGroupDetail } from '@models/product/product-group.model';
+import { Product } from '@models/product/product.model';
 
 import { ProductService } from '@services/api/product.service';
 import { CityService } from '@services/api/city.service';
@@ -80,7 +80,7 @@ export class ProductFormComponent implements OnInit {
     );
   }
 
-  updateFormValue(data: ProductGroupEdit): void {
+  updateFormValue(data: ProductGroupDetail): void {
     this.cityService.selectCity = data.city.name;
     this.cityService.selectArea = data.city.areaName;
 

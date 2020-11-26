@@ -4,8 +4,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 
-import { ProductType } from '@models/product/product-group-filter.model';
-import { Image, Product } from '@models/product/product-group-detail.model';
+import { Product } from '@models/product/product.model';
+import { ProductType } from '@models/product/product-type.model';
+import { ProductImage } from '@models/product/product-image.model';
 import { SliderImage } from '@models/product/slider-image.model';
 
 import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/product-form-dialog.component';
@@ -45,7 +46,7 @@ export class ProductExpansionPanelComponent implements OnInit {
     this.getProductTypes();
   }
 
-  imageToSliderObject(images: Image[]): object[] {
+  imageToSliderObject(images: ProductImage[] | null): SliderImage[] {
     if (!images) {
       return [];
     }

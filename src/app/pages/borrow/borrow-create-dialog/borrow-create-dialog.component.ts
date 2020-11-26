@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
 
 import { ApiModel } from '@models/api-model';
-import { ProductGroupDetail } from '@models/product/product-group-detail.model';
+import { ProductGroupDetail } from '@models/product/product-group.model';
 
 import { RentalService } from '@services/api/rental.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';

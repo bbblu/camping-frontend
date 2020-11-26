@@ -1,4 +1,4 @@
-import { ProductGroupDetail } from '@models/product/product-group-detail.model';
+import { ProductGroupDetail } from '@models/product/product-group.model';
 
 export const productGroup: ProductGroupDetail = {
   name: '[限時特價] 便宜帳篷、桌椅三件套',
