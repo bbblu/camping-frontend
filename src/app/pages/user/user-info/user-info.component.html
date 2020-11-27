@@ -12,10 +12,12 @@
           <mat-form-field class="nick-name" fxFlex="100">
             <input
               matInput
+              type="text"
               formControlName="nickName"
               [value]="user.nickName"
             />
           </mat-form-field>
+
           <div
             class="bad-record"
             fxLayout="row"
@@ -24,6 +26,13 @@
             fxLayoutAlign.lt-sm="center"
             fxLayoutGap="10px"
           >
+            <span
+              class="not-compensate"
+              *ngIf="user.notCompensate"
+              routerLink="/borrow"
+            >
+              未賠償
+            </span>
             <app-star [comment]="user.comment"></app-star>
             <span *ngFor="let badRecord of badRecords">
               {{ badRecord.typeName }}: {{ badRecord.count }}
@@ -34,30 +43,55 @@
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>person</mat-icon>
-        <input matInput placeholder="帳號" [value]="user.account" disabled />
+        <input
+          matInput
+          type="text"
+          placeholder="帳號"
+          [value]="user.account"
+          disabled
+        />
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>perm_identity</mat-icon>
-        <input matInput placeholder="姓氏" [value]="user.lastName" disabled />
+        <input
+          matInput
+          type="text"
+          placeholder="姓氏"
+          [value]="user.lastName"
+          disabled
+        />
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>perm_identity</mat-icon>
-        <input matInput placeholder="名字" [value]="user.firstName" disabled />
+        <input
+          matInput
+          type="text"
+          placeholder="名字"
+          [value]="user.firstName"
+          disabled
+        />
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>wc</mat-icon>
-        <input matInput placeholder="性別" [value]="user.gender" disabled />
+        <input
+          matInput
+          type="text"
+          placeholder="性別"
+          [value]="user.gender"
+          disabled
+        />
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>cake</mat-icon>
         <input
           matInput
+          type="text"
           placeholder="生日"
-          [value]="user.birthday | date: 'yyyy/MM/dd'"
+          [value]="user.birthday"
           disabled
         />
       </mat-form-field>
@@ -76,22 +110,43 @@
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>work_outline</mat-icon>
-        <input matInput placeholder="銀行帳號" [value]="user.bankAccount" disabled />
+        <input
+          matInput
+          type="text"
+          placeholder="銀行帳號"
+          [value]="user.bankAccount"
+          disabled
+        />
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>email</mat-icon>
-        <input matInput placeholder="電子郵件" formControlName="email" />
+        <input
+          matInput
+          type="email"
+          placeholder="電子郵件"
+          formControlName="email"
+        />
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>smartphone</mat-icon>
-        <input matInput placeholder="手機號碼" formControlName="cellPhone" />
+        <input
+          matInput
+          type="tel"
+          placeholder="手機號碼"
+          formControlName="cellPhone"
+        />
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
         <mat-icon matPrefix>room</mat-icon>
-        <input matInput placeholder="地址" formControlName="address" />
+        <input
+          matInput
+          type="text"
+          placeholder="地址"
+          formControlName="address"
+        />
       </mat-form-field>
 
       <mat-card-actions
