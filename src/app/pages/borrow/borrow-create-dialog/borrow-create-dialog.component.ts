@@ -22,24 +22,20 @@ interface BorrowCreateDialogData {
   styleUrls: ['./borrow-create-dialog.component.scss'],
 })
 export class BorrowCreateDialogComponent implements OnInit {
+  form!: FormGroup;
   minDate!: Date;
   maxDate!: Date;
 
-  form!: FormGroup;
-
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: BorrowCreateDialogData,
+    private dialogRef: MatDialogRef<BorrowCreateDialogComponent>,
     private formBuilder: FormBuilder,
     private rentalService: RentalService,
     private snakeBarService: SnakeBarService,
-    private router: Router,
-    private dialogRef: MatDialogRef<BorrowCreateDialogComponent>
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.minDate = new Date(this.data.productGroup.borrowStartDate);
-    this.maxDate = new Date(this.data.productGroup.borrowEndDate);
-
     this.form = this.formBuilder.group({
       borrowStartDate: [
         this.data.productGroup.borrowStartDate,
@@ -50,13 +46,26 @@ export class BorrowCreateDialogComponent implements OnInit {
         Validators.required,
       ],
     });
+
+    this.getDateLimit();
+  }
+
+  getDateLimit(): void {
+    const today = moment();
+    const limitMinDate = moment(today).add(7, 'days').toDate();
+    this.minDate = new Date(this.data.productGroup.borrowStartDate);
+    this.minDate =
+      this.minDate.getTime() < limitMinDate.getTime()
+        ? limitMinDate
+        : this.minDate;
+    this.maxDate = new Date(this.data.productGroup.borrowEndDate);
   }
 
   calculateRentalPrice(): number {
-    const startDate = new Date(this.form.value.borrowStartDate);
-    const endDate = new Date(this.form.value.borrowEndDate);
-    const oneDay = 1000 * 60 * 60 * 24;
-    const days = (endDate.getTime() - startDate.getTime()) / oneDay + 1;
+    const startDate = moment(this.form.value.borrowStartDate);
+    const endDate = moment(this.form.value.borrowEndDate);
+    const duration = moment.duration(endDate.diff(startDate));
+    const days = duration.asDays() + 1;
 
     return this.data.productGroup.price * days;
   }
@@ -66,16 +75,16 @@ export class BorrowCreateDialogComponent implements OnInit {
     return range.slice(start, end + 1);
   }
 
-  dateFormatter(value: Date): string {
+  dateFormat(value: Date): string {
     const date = new Date(value as Date);
-    return moment(date).format('YYYY/MM/DD hh:mm');
+    return moment(date).format('YYYY/MM/DD');
   }
 
   onSubmit(): void {
     const data = {
       productGroupId: this.data.productGroupId,
-      borrowStartDate: this.dateFormatter(this.form.value.borrowStartDate),
-      borrowEndDate: this.dateFormatter(this.form.value.borrowEndDate),
+      borrowStartDate: this.dateFormat(this.form.value.borrowStartDate),
+      borrowEndDate: this.dateFormat(this.form.value.borrowEndDate),
     };
 
     this.rentalService.addRental(data).subscribe(
@@ -91,9 +100,5 @@ export class BorrowCreateDialogComponent implements OnInit {
         this.snakeBarService.open(err.error.message);
       }
     );
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 }
