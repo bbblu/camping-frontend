@@ -51,7 +51,7 @@ export class TopBarComponent implements OnInit {
           this.snakeBarService.open(res.message);
         }
 
-        this.notifications = res.data;
+        this.notifications = res.data.reverse();
       },
       (err) => {
         this.snakeBarService.open(err.error.message);

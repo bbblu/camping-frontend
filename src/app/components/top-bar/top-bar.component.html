@@ -6,7 +6,7 @@
           <mat-icon>menu</mat-icon>
         </button>
         <a class="brand" href="/" fxLayout="row" fxLayoutGap="10px">
-          <img class="logo" alt="bblu logo" src="assets/image/logo.png" />
+          <img class="logo" alt="logo" src="assets/image/logo.png" />
           <span>借借露</span>
         </a>
       </div>
@@ -103,7 +103,7 @@
   <button mat-menu-item routerLink="/user/product">
     <span>我的商品</span>
   </button>
-  <button mat-menu-item class="logout-btn" routerLink="/auth/logout">
+  <button mat-menu-item class="logout" routerLink="/auth/logout">
     <span>登出</span>
   </button>
 </mat-menu>
@@ -121,6 +121,7 @@
         matBadgePosition="before"
         matBadgeSize="small"
       >
+        {{ notification.sendDate }}
         {{ notification.content }}
       </span>
     </button>

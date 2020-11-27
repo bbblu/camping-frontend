@@ -1,4 +1,4 @@
-<div *ngIf="comment as comment; else emptyComment">
+<div *ngIf="comment; else emptyComment">
   <span *ngFor="let i of starFill(comment)">
     <mat-icon>star</mat-icon>
   </span>
