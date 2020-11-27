@@ -1,7 +1,7 @@
 import { ProductImage } from './product-image.model';
 
 export interface Product {
-  id: number;
+  id?: number;
   type: string;
   name: string;
   count: number;

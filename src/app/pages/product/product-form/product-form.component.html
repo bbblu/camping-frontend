@@ -11,7 +11,11 @@
       <img
         class="cover"
         alt="cover"
-        [src]="coverImage ? coverImage : '/assets/image/empty-image.jpg'"
+        [src]="
+          form.value.coverImage
+            ? form.value.coverImage
+            : '/assets/image/empty-image.jpg'
+        "
       />
       <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
         <button

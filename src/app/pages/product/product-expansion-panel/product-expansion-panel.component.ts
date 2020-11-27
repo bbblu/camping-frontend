@@ -4,8 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Product } from '@models/product/product.model';
-import { ProductType } from '@models/product/product-type.model';
+import { Product, ProductEdit } from '@models/product/product.model';
 import { ProductImage } from '@models/product/product-image.model';
 import { SliderImage } from '@models/product/slider-image.model';
 
@@ -23,10 +22,9 @@ export class ProductExpansionPanelComponent implements OnInit {
   @Input() isEdit = false;
   @Output() editProduct = new EventEmitter<{
     index: number;
-    product: Product;
+    product: ProductEdit;
   }>();
   @Output() deleteProduct = new EventEmitter<number>();
-  productTypes: ProductType[] = [];
   isClickButton = false;
 
   constructor(
@@ -42,9 +40,7 @@ export class ProductExpansionPanelComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-    this.getProductTypes();
-  }
+  ngOnInit(): void {}
 
   imageToSliderObject(images: ProductImage[] | null): SliderImage[] {
     if (!images) {
@@ -52,29 +48,6 @@ export class ProductExpansionPanelComponent implements OnInit {
     }
 
     return images.map((image) => new SliderImage(image.url));
-  }
-
-  getProductTypes(): void {
-    this.productService.getProductTypes().subscribe(
-      (res) => {
-        if (!res.result) {
-          this.snakeBarService.open(res.message);
-        }
-
-        this.productTypes = res.data;
-      },
-      (err) => {
-        this.snakeBarService.open(err.error.message);
-      }
-    );
-  }
-
-  getProductType(product: Product): string {
-    if (this.isEdit) {
-      return this.productTypes.find((type) => type.id === product.type)!.name;
-    } else {
-      return product.type;
-    }
   }
 
   clickEdit(index: number): void {
@@ -92,6 +65,7 @@ export class ProductExpansionPanelComponent implements OnInit {
       if (!data) {
         return;
       }
+
       this.editProduct.emit({ index: index, product: data });
     });
   }
