@@ -196,6 +196,10 @@ export class BorrowListComponent implements OnInit {
     }
   }
 
+  trackByIndex(index: number, obj: StatusButton) {
+    return index;
+  }
+
   openActionDialog(title: string, rental: Rental): void {
     this.dialog.open(BorrowActionDialogComponent, {
       width: window.screen.width <= 960 ? '100%' : '50%',

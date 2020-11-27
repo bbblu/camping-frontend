@@ -86,16 +86,18 @@
       </mat-card-content>
 
       <mat-card-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
-        <div *ngFor="let button of getStatusButton(rental.status)">
-          <button
-            mat-flat-button
-            [style.background-color]="button.color"
-            [disabled]="button.disable"
-            (click)="clickStatusButton(button.text, rental)"
-          >
-            {{ button.text }}
-          </button>
-        </div>
+        <button
+          mat-flat-button
+          *ngFor="
+            let button of getStatusButton(rental.status);
+            trackBy: trackByIndex
+          "
+          [style.background-color]="button.color"
+          [disabled]="button.disable"
+          (click)="clickStatusButton(button.text, rental)"
+        >
+          {{ button.text }}
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
