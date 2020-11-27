@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialogRef } from '@angular/material/dialog';
 
+import { User } from '@models/user/user.model';
+
 import { ProblemReportService } from '@services/api/problem-report.service';
 import { UserService } from '@services/api/user.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
@@ -24,14 +26,14 @@ export class FaqCreateDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUserInfo();
-
     this.form = this.formBuilder.group({
       reportTitle: [null, Validators.required],
       type: [null, Validators.required],
       reporterEmail: [null, Validators.required],
       reportContent: [null, Validators.required],
     });
+
+    this.getUserInfo();
   }
 
   getUserInfo(): void {
@@ -41,14 +43,18 @@ export class FaqCreateDialogComponent implements OnInit {
           this.snakeBarService.open(res.message);
         }
 
-        this.form.patchValue({
-          reporterEmail: res.data.email,
-        });
+        this.updateFormValue(res.data);
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
       }
     );
+  }
+
+  updateFormValue(user: User): void {
+    this.form.patchValue({
+      reporterEmail: user.email,
+    });
   }
 
   onSubmit(): void {
