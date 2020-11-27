@@ -8,7 +8,11 @@
       fxFlexFill
       fxLayoutGap="10px"
     >
-      <img class="cover" alt="cover" [src]="coverImage" />
+      <img
+        class="cover"
+        alt="cover"
+        [src]="coverImage ? coverImage : '/assets/image/empty-image.jpg'"
+      />
       <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
         <button
           mat-flat-button

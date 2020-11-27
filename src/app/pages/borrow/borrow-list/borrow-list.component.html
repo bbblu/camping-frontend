@@ -24,7 +24,13 @@
       fxFlex.lt-md="48"
       fxFlex.lt-sm="100"
     >
-      <img mat-card-image [src]="rental.coverImage" alt="product cover" />
+      <img
+        mat-card-image
+        [src]="
+          rental.coverImage ? rental.coverImage : '/assets/image/empty-image'
+        "
+        alt="product cover"
+      />
 
       <mat-card-header fxLayout="column">
         <mat-card-title

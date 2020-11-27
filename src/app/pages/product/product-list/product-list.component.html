@@ -11,7 +11,11 @@
         <img
           mat-card-image
           alt="product-image"
-          [src]="productGroup.coverImage"
+          [src]="
+            productGroup.coverImage
+              ? productGroup.coverImage
+              : '/assets/image/empty-image.jpg'
+          "
         />
         <mat-card-content>
           <mat-card-title fxLayout="column" fxFlex="60" fxLayoutGap="5px">
