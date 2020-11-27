@@ -83,6 +83,7 @@ export class BorrowCreateDialogComponent implements OnInit {
         this.snakeBarService.open(res.message);
 
         if (res.result) {
+          this.dialogRef.close();
           this.router.navigate(['borrow']);
         }
       },

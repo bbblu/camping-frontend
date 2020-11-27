@@ -33,6 +33,10 @@ export class ForgetPasswordDialogComponent implements OnInit {
     this.userService.forgetPassword(this.form.value).subscribe(
       (res) => {
         this.snakeBarService.open(res.message);
+
+        if (res.result) {
+          this.dialogRef.close();
+        }
       },
       (err) => {
         this.snakeBarService.open(err.error.message);

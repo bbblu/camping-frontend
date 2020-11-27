@@ -39,6 +39,10 @@ export class BorrowCommentDialogComponent implements OnInit {
       .subscribe(
         (res) => {
           this.snakeBarService.open(res.message);
+
+          if (res.result) {
+            this.dialogRef.close();
+          }
         },
         (err) => {
           this.snakeBarService.open(err.error.message);

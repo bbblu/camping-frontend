@@ -116,6 +116,7 @@ export class UserInfoComponent implements OnInit {
     this.userService.updateUser(this.form.value).subscribe(
       (res: ApiModel<string>) => {
         this.snakeBarService.open(res.message);
+        this.isEditable = false;
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
