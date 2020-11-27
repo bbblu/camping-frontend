@@ -7,5 +7,5 @@ export interface ProblemReport {
   reportDate: Date;
   handler: string;
   handleDate: Date;
-  handleResult: null;
+  handleResult: string | null;
 }
