@@ -49,7 +49,7 @@ export class ProductFormComponent implements OnInit {
       name: [null, [Validators.required]],
       borrowStartDate: [null, [Validators.required]],
       borrowEndDate: [null, [Validators.required]],
-      cityId: [null, [Validators.required]],
+      cityId: [null],
       cityName: [null, [Validators.required]],
       cityAreaName: [null, [Validators.required]],
       price: [null, [Validators.required]],
