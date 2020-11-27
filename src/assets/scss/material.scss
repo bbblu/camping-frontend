@@ -43,6 +43,8 @@ mat-form-field.mat-form-field-round {
 }
 
 .mat-flat-button {
+  color: $font-white;
+
   &.mat-primary,
   &.mat-accent,
   &.mat-warn {

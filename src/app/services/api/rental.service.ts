@@ -42,8 +42,6 @@ export class RentalService {
   }
 
   getRentalStatusTypes(): Observable<ApiModel<RentalStatusType[]>> {
-    return this.httpService.get<RentalStatusType[]>(
-      `${this.baseUrl}/rental/status`
-    );
+    return this.httpService.get<RentalStatusType[]>(`${this.baseUrl}/status`);
   }
 }
