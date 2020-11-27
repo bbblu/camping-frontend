@@ -11,16 +11,14 @@
               appearance="outline"
               floatLabel="never"
             >
+              <mat-icon matPrefix>person</mat-icon>
               <input
                 matInput
                 type="text"
                 placeholder="帳號"
                 formControlName="account"
               />
-              <mat-icon matPrefix>person</mat-icon>
-              <mat-error *ngIf="form.controls['account'].hasError('required')">
-                請輸入您的帳號
-              </mat-error>
+              <mat-error>此欄位為必填</mat-error>
             </mat-form-field>
 
             <mat-form-field
@@ -28,19 +26,17 @@
               appearance="outline"
               floatLabel="never"
             >
+              <mat-icon matPrefix>lock</mat-icon>
               <input
                 matInput
-                [type]="isPasswordHide ? 'password' : 'text'"
+                [type]="isHide ? 'password' : 'text'"
                 placeholder="密碼"
                 formControlName="password"
               />
-              <mat-icon matPrefix>lock</mat-icon>
-              <mat-icon matSuffix (click)="isPasswordHide = !isPasswordHide">
-                {{ isPasswordHide ? "visibility_off" : "visibility" }}
+              <mat-icon matSuffix (click)="isHide = !isHide">
+                {{ isHide ? "visibility" : "visibility_off" }}
               </mat-icon>
-              <mat-error *ngIf="form.controls['password'].hasError('required')">
-                請輸入您的密碼
-              </mat-error>
+              <mat-error>此欄位為必填</mat-error>
             </mat-form-field>
 
             <mat-form-field
@@ -48,22 +44,17 @@
               appearance="outline"
               floatLabel="never"
             >
+              <mat-icon matPrefix>lock</mat-icon>
               <input
                 matInput
-                [type]="isConfirmPasswordHide ? 'password' : 'text'"
+                [type]="isHide ? 'password' : 'text'"
                 placeholder="確認密碼"
                 formControlName="confirmPassword"
               />
-              <mat-icon matPrefix>lock</mat-icon>
-              <mat-icon
-                matSuffix
-                (click)="isConfirmPasswordHide = !isConfirmPasswordHide"
-              >
-                {{ isConfirmPasswordHide ? "visibility_off" : "visibility" }}
+              <mat-icon matSuffix (click)="isHide = !isHide">
+                {{ isHide ? "visibility" : "visibility_off" }}
               </mat-icon>
-              <mat-error *ngIf="form.controls['confirmPassword']">
-                請再次輸入您的密碼
-              </mat-error>
+              <mat-error>此欄位為必填</mat-error>
             </mat-form-field>
 
             <!-- 聯絡方式 -->
@@ -74,15 +65,14 @@
                 appearance="outline"
                 floatLabel="never"
               >
+                <mat-icon matPrefix>email</mat-icon>
                 <input
                   matInput
+                  type="email"
                   placeholder="電子郵件"
                   formControlName="email"
                 />
-                <mat-icon matPrefix>email</mat-icon>
-                <mat-error *ngIf="form.controls['email'].hasError('required')">
-                  請填寫您的電子郵件
-                </mat-error>
+                <mat-error>此欄位為必填</mat-error>
               </mat-form-field>
 
               <mat-form-field
@@ -90,17 +80,14 @@
                 appearance="outline"
                 floatLabel="never"
               >
+                <mat-icon matPrefix>smartphone</mat-icon>
                 <input
                   matInput
+                  type="tel"
                   placeholder="手機號碼"
                   formControlName="cellPhone"
                 />
-                <mat-icon matPrefix>smartphone</mat-icon>
-                <mat-error
-                  *ngIf="form.controls['cellPhone'].hasError('required')"
-                >
-                  請填寫您的手機號碼
-                </mat-error>
+                <mat-error>此欄位為必填</mat-error>
               </mat-form-field>
 
               <mat-form-field
@@ -108,13 +95,14 @@
                 appearance="outline"
                 floatLabel="never"
               >
-                <input matInput placeholder="地址" formControlName="address" />
                 <mat-icon matPrefix>room</mat-icon>
-                <mat-error
-                  *ngIf="form.controls['address'].hasError('required')"
-                >
-                  請填寫您的地址
-                </mat-error>
+                <input
+                  matInput
+                  type="text"
+                  placeholder="地址"
+                  formControlName="address"
+                />
+                <mat-error>此欄位為必填</mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -126,16 +114,14 @@
               appearance="outline"
               floatLabel="never"
             >
+              <mat-icon matPrefix>person</mat-icon>
               <input
                 matInput
                 type="text"
                 placeholder="姓氏"
                 formControlName="lastName"
               />
-              <mat-icon matPrefix>person</mat-icon>
-              <mat-error *ngIf="form.controls['lastName'].hasError('required')">
-                請輸入您的姓氏
-              </mat-error>
+              <mat-error>此欄位為必填</mat-error>
             </mat-form-field>
 
             <mat-form-field
@@ -143,18 +129,14 @@
               floatLabel="never"
               appearance="outline"
             >
+              <mat-icon matPrefix>person</mat-icon>
               <input
                 matInput
                 type="text"
                 placeholder="名字"
                 formControlName="firstName"
               />
-              <mat-icon matPrefix>person</mat-icon>
-              <mat-error
-                *ngIf="form.controls['firstName'].hasError('required')"
-              >
-                請輸入您的名字
-              </mat-error>
+              <mat-error>此欄位為必填</mat-error>
             </mat-form-field>
 
             <mat-form-field
@@ -162,16 +144,14 @@
               floatLabel="never"
               appearance="outline"
             >
+              <mat-icon matPrefix>sentiment_very_satisfied</mat-icon>
               <input
                 matInput
                 type="text"
                 placeholder="暱稱"
                 formControlName="nickName"
               />
-              <mat-icon matPrefix>sentiment_very_satisfied</mat-icon>
-              <mat-error *ngIf="form.controls['nickName'].hasError('required')">
-                請輸入您的暱稱
-              </mat-error>
+              <mat-error>此欄位為必填</mat-error>
             </mat-form-field>
 
             <div class="radio-form-field" fxLayoutAlign="left">
@@ -184,9 +164,7 @@
               </mat-radio-group>
             </div>
             <div class="radio-form-field-error">
-              <mat-error *ngIf="form.controls['gender'].hasError('required')">
-                請選擇您的性別
-              </mat-error>
+              <mat-error>此欄位為必填</mat-error>
             </div>
 
             <mat-form-field
@@ -206,9 +184,7 @@
                 [for]="picker"
               ></mat-datepicker-toggle>
               <mat-datepicker #picker disabled="false"></mat-datepicker>
-              <mat-error *ngIf="form.controls['birthday'].hasError('required')">
-                請選擇您的生日
-              </mat-error>
+              <mat-error>此欄位為必填</mat-error>
             </mat-form-field>
 
             <mat-form-field
@@ -225,6 +201,7 @@
                   {{ experience.display }}
                 </mat-option>
               </mat-select>
+              <mat-error>此欄位為必填</mat-error>
             </mat-form-field>
 
             <mat-form-field
@@ -232,18 +209,14 @@
               floatLabel="never"
               appearance="outline"
             >
+              <mat-icon matPrefix>work_outline</mat-icon>
               <input
                 matInput
                 type="text"
                 placeholder="銀行帳號"
                 formControlName="bankAccount"
               />
-              <mat-icon matPrefix>work_outline</mat-icon>
-              <mat-error
-                *ngIf="form.controls['bankAccount'].hasError('required')"
-              >
-                請輸入您的暱稱
-              </mat-error>
+              <mat-error>此欄位為必填</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -256,12 +229,12 @@
             fxFlex="40"
             fxFlex.lt-sm="100"
           >
-            已有帳號，登入
+            已有帳號，直接登入
           </button>
 
           <button
             mat-button
-            class="register-btn"
+            class="register"
             type="submit"
             [disabled]="!form.valid"
             fxFlex="40"

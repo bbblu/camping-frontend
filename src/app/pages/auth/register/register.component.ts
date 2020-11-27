@@ -18,8 +18,7 @@ import { SnakeBarService } from '@services/ui/snake-bar.service';
 export class RegisterComponent implements OnInit {
   form!: FormGroup;
   experiences!: Experience[];
-  isPasswordHide = true;
-  isConfirmPasswordHide = true;
+  isHide = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,18 +28,10 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getExperiences();
-
     this.form = this.formBuilder.group({
-      account: [
-        null,
-        [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+')],
-      ],
-      password: [
-        null,
-        [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+')],
-      ],
-      confirmPassword: [null, { validator: this.checkPassword }],
+      account: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      confirmPassword: [null, [Validators.required]],
       email: [null, [Validators.required]],
       cellPhone: [null, [Validators.required]],
       address: [null, [Validators.required]],
@@ -52,13 +43,8 @@ export class RegisterComponent implements OnInit {
       experience: [null, [Validators.required]],
       bankAccount: [null, [Validators.required]],
     });
-  }
 
-  checkPassword(group: FormGroup): object | null {
-    const password = group.get('password')!.value;
-    const confirmPassword = group.get('confirmPassword')!.value;
-
-    return password === confirmPassword ? null : { notSame: true };
+    this.getExperiences();
   }
 
   getExperiences(): void {
@@ -87,12 +73,11 @@ export class RegisterComponent implements OnInit {
       })
       .subscribe(
         (res: ApiModel<string>) => {
-          if (!res.result) {
-            this.snakeBarService.open(res.message);
-            return;
-          }
+          this.snakeBarService.open(res.message);
 
-          this.router.navigate(['auth', 'login']);
+          if (res.result) {
+            this.router.navigate(['auth', 'login']);
+          }
         },
         (err) => {
           this.snakeBarService.open(err.error.message);
