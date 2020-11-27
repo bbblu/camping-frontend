@@ -10,16 +10,16 @@ import { BorrowRoutingModule } from './borrow-routing.module';
 
 import { BorrowListComponent } from './borrow-list/borrow-list.component';
 import { BorrowCreateDialogComponent } from './borrow-create-dialog/borrow-create-dialog.component';
+import { BorrowTerminalDialogComponent } from './borrow-terminal-dialog/borrow-terminal-dialog.component';
 import { BorrowPaymentDialogComponent } from './borrow-payment-dialog/borrow-payment-dialog.component';
-import { BorrowActionDialogComponent } from './borrow-action-dialog/borrow-action-dialog.component';
 import { BorrowCommentDialogComponent } from './borrow-comment-dialog/borrow-comment-dialog.component';
 
 @NgModule({
   declarations: [
     BorrowListComponent,
     BorrowCreateDialogComponent,
+    BorrowTerminalDialogComponent,
     BorrowPaymentDialogComponent,
-    BorrowActionDialogComponent,
     BorrowCommentDialogComponent,
   ],
   imports: [
@@ -31,6 +31,6 @@ import { BorrowCommentDialogComponent } from './borrow-comment-dialog/borrow-com
     MaterialModule,
     NgImageSliderModule,
   ],
-  exports: [BorrowListComponent],
+  exports: [],
 })
 export class BorrowModule {}

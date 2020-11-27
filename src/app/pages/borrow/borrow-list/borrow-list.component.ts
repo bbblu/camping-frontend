@@ -11,7 +11,7 @@ import { Color } from '@enums/color.enum';
 import { RentalService } from '@services/api/rental.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
-import { BorrowActionDialogComponent } from '@pages/borrow/borrow-action-dialog/borrow-action-dialog.component';
+import { BorrowTerminalDialogComponent } from '@pages/borrow/borrow-terminal-dialog/borrow-terminal-dialog.component';
 import { BorrowPaymentDialogComponent } from '@pages/borrow/borrow-payment-dialog/borrow-payment-dialog.component';
 import { BorrowCommentDialogComponent } from '@pages/borrow/borrow-comment-dialog/borrow-comment-dialog.component';
 
@@ -201,7 +201,7 @@ export class BorrowListComponent implements OnInit {
   }
 
   openActionDialog(title: string, rental: Rental): void {
-    this.dialog.open(BorrowActionDialogComponent, {
+    this.dialog.open(BorrowTerminalDialogComponent, {
       width: window.screen.width <= 960 ? '100%' : '50%',
       data: {
         title: title,
