@@ -120,19 +120,6 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field floatLabel="never">
-        <mat-icon matPrefix>work_outline</mat-icon>
-        <input
-          matInput
-          type="text"
-          placeholder="銀行帳號"
-          formControlName="bankAccount"
-        />
-        <mat-error *ngIf="form.controls['bankAccount'].hasError('required')">
-          此為必填
-        </mat-error>
-      </mat-form-field>
-
       <app-product-expansion-panel
         [products]="products"
         [isEdit]="true"

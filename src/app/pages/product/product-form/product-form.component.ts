@@ -54,7 +54,6 @@ export class ProductFormComponent implements OnInit {
       cityAreaName: [null, [Validators.required]],
       price: [null, [Validators.required]],
       coverImage: [null],
-      bankAccount: [null, [Validators.required]],
       productArray: [[]],
     });
 
