@@ -1,13 +1,15 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center">
   <div
     class="toggle"
-    (click)="updateRentals()"
     fxLayout="row"
     fxLayoutAlign="center center"
     fxLayoutGap="30px"
   >
     <h2>借用</h2>
-    <mat-slide-toggle [(ngModel)]="isRental"></mat-slide-toggle>
+    <mat-slide-toggle
+      [(ngModel)]="isRental"
+      (change)="updateRentals($event.checked)"
+    ></mat-slide-toggle>
     <h2>出租</h2>
   </div>
 
