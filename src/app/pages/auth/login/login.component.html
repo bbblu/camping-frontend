@@ -1,7 +1,11 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center">
   <mat-card fxFlex="40" fxFlex.lt-md="60" fxFlex.lt-sm="80">
-    <mat-card-title fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
-      <img class="logo" src="assets/image/logo.png" alt="logo" />
+    <mat-card-title
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      fxLayoutGap="20px"
+    >
+      <img class="logo" alt="logo" src="assets/image/logo.png" />
       <span class="brand">借借露</span>
     </mat-card-title>
 
@@ -13,19 +17,14 @@
             appearance="outline"
             floatLabel="never"
           >
+            <mat-icon matPrefix>person</mat-icon>
             <input
               matInput
               type="text"
               placeholder="帳號"
               formControlName="account"
             />
-            <mat-icon matPrefix>person</mat-icon>
-            <mat-error *ngIf="form.controls['account'].hasError('required')">
-              請輸入你的帳號！！！
-            </mat-error>
-            <mat-error *ngIf="form.controls['account'].hasError('pattern')">
-              內含非法字元
-            </mat-error>
+            <mat-error>請輸入你的帳號！！！</mat-error>
           </mat-form-field>
 
           <mat-form-field
@@ -33,22 +32,17 @@
             appearance="outline"
             floatLabel="never"
           >
+            <mat-icon matPrefix>lock</mat-icon>
             <input
               matInput
-              [type]="isVisibility ? 'password' : 'text'"
+              [type]="isHide ? 'password' : 'text'"
               placeholder="密碼"
               formControlName="password"
             />
-            <mat-icon matPrefix>lock</mat-icon>
-            <mat-icon matSuffix (click)="isVisibility = !isVisibility">
-              {{ isVisibility ? "visibility_off" : "visibility" }}
+            <mat-icon matSuffix (click)="isHide = !isHide">
+              {{ isHide ? "visibility" : "visibility_off" }}
             </mat-icon>
-            <mat-error *ngIf="form.controls['password'].hasError('required')">
-              請輸入你的密碼！！！
-            </mat-error>
-            <mat-error *ngIf="form.controls['password'].hasError('pattern')">
-              內含非法字元
-            </mat-error>
+            <mat-error>請輸入你的密碼！！！</mat-error>
           </mat-form-field>
         </div>
 
@@ -56,7 +50,7 @@
           <mat-checkbox (change)="changeRememberMe($event)">
             記住我
           </mat-checkbox>
-          <a (click)="openDialog()">忘記密碼</a>
+          <a class="forget-password" (click)="openDialog()">忘記密碼</a>
         </div>
 
         <mat-card-actions
@@ -76,7 +70,7 @@
 
           <button
             mat-button
-            class="login-btn"
+            class="login"
             type="submit"
             [disabled]="!form.valid"
             fxFlex="40"
