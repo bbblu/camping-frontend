@@ -11,6 +11,7 @@ import * as moment from 'moment';
 
 import { ProductGroup } from '@models/product/product-group.model';
 import { ProductType } from '@models/product/product-type.model';
+import { City } from '@models/city/city.model';
 
 import { ProductService } from '@services/api/product.service';
 import { CityService } from '@services/api/city.service';
@@ -28,7 +29,6 @@ export class ProductFilterComponent implements OnInit {
   form!: FormGroup;
   productTypes: ProductType[] = [];
   cities: string[] = [];
-  areas: string[] = [];
   productGroups: ProductGroup[] = [];
 
   chipTypes: ProductType[] = [];
@@ -90,15 +90,9 @@ export class ProductFilterComponent implements OnInit {
     );
   }
 
-  getAreas(cityName: string): string[] {
+  getAreas(cityName: string): City[] {
     this.cityService.selectCity = cityName;
-    return this.cityService.areaNames;
-  }
-
-  getAreaId(cityName: string, areaName: string): number | null {
-    this.cityService.selectCity = cityName;
-    this.cityService.selectArea = areaName;
-    return this.cityService.areaId;
+    return this.cityService.areas;
   }
 
   getProductGroups(params: string = ''): void {

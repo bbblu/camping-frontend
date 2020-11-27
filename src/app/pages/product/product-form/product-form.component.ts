@@ -11,6 +11,7 @@ import { ApiModel } from '@models/api-model';
 import { ProductGroupDetail } from '@models/product/product-group.model';
 import { Product, ProductEdit } from '@models/product/product.model';
 import { ProductType } from '@models/product/product-type.model';
+import { City } from '@models/city/city.model';
 
 import { ProductService } from '@services/api/product.service';
 import { CityService } from '@services/api/city.service';
@@ -27,7 +28,7 @@ import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/p
 export class ProductFormComponent implements OnInit {
   form!: FormGroup;
   cities: string[] = [];
-  areas: string[] = [];
+  areas: City[] = [];
   coverImage: string = '';
   isEdit = false;
 
@@ -49,9 +50,8 @@ export class ProductFormComponent implements OnInit {
       name: [null, [Validators.required]],
       borrowStartDate: [null, [Validators.required]],
       borrowEndDate: [null, [Validators.required]],
-      cityId: [null],
       cityName: [null, [Validators.required]],
-      cityAreaName: [null, [Validators.required]],
+      cityId: [null, [Validators.required]],
       price: [null, [Validators.required]],
       coverImage: [null],
       productArray: [[]],
@@ -97,13 +97,13 @@ export class ProductFormComponent implements OnInit {
   }
 
   updateFormValue(data: ProductGroupDetail): void {
+    console.log(data);
     this.form.patchValue({
       name: data.name,
       borrowStartDate: new Date(data.borrowStartDate),
       borrowEndDate: new Date(data.borrowEndDate),
-      cityId: this.cityService.areaId,
       cityName: data.city.name,
-      cityAreaName: data.city.areaName,
+      cityId: data.city.id,
       price: data.price,
       coverImage: data.coverImage,
       bankAccount: data.bankAccount,
@@ -112,7 +112,6 @@ export class ProductFormComponent implements OnInit {
       ),
     });
     this.updateAreas();
-    this.updateAreaId();
 
     this.products = data.productArray;
   }
@@ -149,12 +148,7 @@ export class ProductFormComponent implements OnInit {
 
   updateAreas(): void {
     this.cityService.selectCity = this.form.value.cityName;
-    this.areas = this.cityService.areaNames;
-  }
-
-  updateAreaId(): void {
-    this.cityService.selectArea = this.form.value.cityAreaName;
-    this.form.value.cityId = this.cityService.areaId;
+    this.areas = this.cityService.areas;
   }
 
   openCoverImageDialog(isEdit: boolean): void {

@@ -13,9 +13,8 @@ import { HttpService } from '@services/http.service';
 export class CityService {
   baseUrl = '/city';
 
-  private _selectCity: string = '';
-  private _selectArea: string = '';
   private _cities: City[] = [];
+  private _selectCity: string = '';
 
   constructor(private httpService: HttpService) {}
 
@@ -27,31 +26,13 @@ export class CityService {
     this._selectCity = value;
   }
 
-  set selectArea(value: string) {
-    this._selectArea = value;
-  }
-
   get cityNames(): string[] {
     const names = this._cities.map((city) => city.name);
     return [...new Set(names)];
   }
 
-  get areaNames(): string[] {
-    const names = this._cities
-      .filter((city) => city.name === this._selectCity)
-      .map((city) => city.areaName);
-    return [...new Set(names)];
-  }
-
-  get areaId(): number | null {
-    const area = this._cities
-      .filter(
-        (city) =>
-          city.name === this._selectCity && city.areaName === this._selectArea
-      )
-      .shift();
-
-    return area ? area.id : null;
+  get areas(): City[] {
+    return this._cities.filter((city) => city.name === this._selectCity);
   }
 
   getCity(): Observable<ApiModel<City[]>> {

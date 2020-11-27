@@ -96,16 +96,12 @@
         </mat-form-field>
         <mat-form-field floatLabel="never" fxFlex="50" fxFlex.lt-sm="100">
           <mat-icon matPrefix>gps_fixed</mat-icon>
-          <mat-select formControlName="cityAreaName" placeholder="區">
-            <mat-option
-              *ngFor="let areaName of areas"
-              [value]="areaName"
-              (click)="updateAreaId()"
-            >
-              {{ areaName }}
+          <mat-select formControlName="cityId" placeholder="區">
+            <mat-option *ngFor="let area of areas" [value]="area.id">
+              {{ area.areaName }}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="form.controls['cityAreaName'].hasError('required')">
+          <mat-error *ngIf="form.controls['cityId'].hasError('required')">
             此為必填
           </mat-error>
         </mat-form-field>

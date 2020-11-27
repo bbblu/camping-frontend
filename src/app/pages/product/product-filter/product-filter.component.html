@@ -51,10 +51,10 @@
             >
               <mat-optgroup *ngFor="let cityName of cities" [label]="cityName">
                 <mat-option
-                  *ngFor="let areaName of getAreas(cityName)"
-                  [value]="getAreaId(cityName, areaName)"
+                  *ngFor="let area of getAreas(cityName)"
+                  [value]="area.id"
                 >
-                  {{ areaName }}
+                  {{ area.areaName }}
                 </mat-option>
               </mat-optgroup>
             </mat-select>
