@@ -29,7 +29,9 @@
       <img
         mat-card-image
         [src]="
-          rental.coverImage ? rental.coverImage : '/assets/image/empty-image'
+          rental.coverImage
+            ? rental.coverImage
+            : '/assets/image/empty-image.jpg'
         "
         alt="product cover"
       />
@@ -48,8 +50,9 @@
           </span>
           <p>{{ rental.name }}</p>
         </mat-card-title>
-        <mat-card-subtitle>
-          {{ rental.borrowStartDate }} ~ {{ rental.borrowEndDate }}
+        <mat-card-subtitle fxLayout="column" fxLayoutGap="5px">
+          <span>{{ rental.borrowStartDate }} ~ {{ rental.borrowEndDate }}</span>
+          <span class="price">$ {{ rental.price }}</span>
           <div fxLayout="row" fxLayoutAlign="end">
             <button
               mat-flat-button
