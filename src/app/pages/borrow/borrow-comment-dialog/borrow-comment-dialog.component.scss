@@ -1,38 +1,38 @@
 @import "~src/assets/scss/color.scss";
+@import "~src/assets/scss/mat-dialog.scss";
 
 $primary-color: map-get($colors, primary4);
 $font-white: map-get($colors, white);
-$field-color: map-get($colors, lightgray);
 
-::ng-deep .mat-dialog-container {
-  padding: 0;
-  overflow: hidden;
-}
-
-.title {
-  position: relative;
-  padding: 1rem 0;
-  color: $font-white;
+.mat-dialog-title {
   background-color: $primary-color;
 
-  mat-icon {
-    font-size: xx-large;
-  }
-
   &::after {
-    position: absolute;
-    top: 100%;
     border-top: solid 1rem $primary-color;
-    border-left: solid 1rem transparent;
-    border-right: solid 1rem transparent;
-    content: "";
   }
 }
 
-.content {
-  padding: 2rem;
-}
+mat-slider {
+  margin: 30px 10% 0;
 
-.submit {
-  color: $font-white;
+  ::ng-deep {
+    .mat-slider-thumb-label-text {
+      color: $font-white;
+      font-size: 30px;
+      opacity: 1;
+    }
+
+    .mat-slider-thumb-label {
+      transform: rotate(45deg);
+      border-radius: 50% 50% 0;
+      width: 50px;
+      height: 50px;
+      top: -60px;
+      right: -26px;
+    }
+
+    .mat-slider-thumb {
+      transform: scale(0);
+    }
+  }
 }

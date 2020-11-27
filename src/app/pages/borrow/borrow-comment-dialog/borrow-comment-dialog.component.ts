@@ -20,11 +20,11 @@ export class BorrowCommentDialogComponent implements OnInit {
   form!: FormGroup;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: BorrowCommentDialogData,
+    private dialogRef: MatDialogRef<BorrowCommentDialogComponent>,
     private formBuilder: FormBuilder,
     private rentalService: RentalService,
-    private snakeBarService: SnakeBarService,
-    private dialogRef: MatDialogRef<BorrowCommentDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: BorrowCommentDialogData
+    private snakeBarService: SnakeBarService
   ) {}
 
   ngOnInit(): void {
@@ -48,9 +48,5 @@ export class BorrowCommentDialogComponent implements OnInit {
           this.snakeBarService.open(err.error.message);
         }
       );
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 }
