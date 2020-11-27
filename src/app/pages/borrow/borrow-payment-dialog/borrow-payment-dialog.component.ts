@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { ApiModel } from '@models/api-model';
-import { Rental } from '@models/rental/rental';
 import { User } from '@models/user/user.model';
 
 import { UserService } from '@services/api/user.service';
@@ -25,11 +24,11 @@ export class BorrowPaymentDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: BorrowPaymentDialog,
+    private dialogRef: MatDialogRef<BorrowPaymentDialogComponent>,
     private formBuilder: FormBuilder,
     private rentalStatusService: RentalStatusService,
     private userService: UserService,
-    private snakeBarService: SnakeBarService,
-    private dialogRef: MatDialogRef<BorrowPaymentDialogComponent>
+    private snakeBarService: SnakeBarService
   ) {}
 
   ngOnInit(): void {
@@ -96,9 +95,5 @@ export class BorrowPaymentDialogComponent implements OnInit {
           this.snakeBarService.open(err.error.message);
         }
       );
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 }
