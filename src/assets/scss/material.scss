@@ -49,28 +49,3 @@ mat-form-field.mat-form-field-round {
     color: $font-white;
   }
 }
-
-// mat-dialog
-.dialog-title {
-  position: relative;
-  padding: 1rem 0;
-  color: $font-white;
-  background-color: $primary-color;
-
-  mat-icon {
-    font-size: xx-large;
-  }
-
-  &::after {
-    position: absolute;
-    top: 100%;
-    border-top: solid 1rem $primary-color;
-    border-left: solid 1rem transparent;
-    border-right: solid 1rem transparent;
-    content: "";
-  }
-}
-
-.dialog-content {
-  padding: 1rem 1.5rem;
-}
