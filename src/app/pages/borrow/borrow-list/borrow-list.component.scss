@@ -44,6 +44,11 @@ $font-gray: map-get($colors, gray);
 }
 
 .record {
+  &:after {
+    width: 32%;
+    content: "";
+  }
+
   mat-card {
     margin-bottom: 15px;
     border-style: solid;

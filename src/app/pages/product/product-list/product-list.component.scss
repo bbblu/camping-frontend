@@ -6,6 +6,11 @@ $font-red: map-get($colors, red);
 $bg-white: map-get($colors, white);
 
 .product {
+  &:after {
+    width: 32%;
+    content: "";
+  }
+
   .mat-card-image {
     border-radius: 20px;
     background-color: $bg-white;
