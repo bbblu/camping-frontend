@@ -27,14 +27,13 @@ import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/p
 })
 export class ProductFormComponent implements OnInit {
   form!: FormGroup;
+  productId!: number;
+  coverImage: string = '';
+  products: Product[] = [];
   cities: string[] = [];
   areas: City[] = [];
-  coverImage: string = '';
-  isEdit = false;
-
-  productId!: number;
-  products: Product[] = [];
   productTypes: ProductType[] = [];
+  isEdit = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +41,7 @@ export class ProductFormComponent implements OnInit {
     private cityService: CityService,
     private snakeBarService: SnakeBarService,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -69,6 +68,7 @@ export class ProductFormComponent implements OnInit {
         }
 
         this.productTypes = res.data;
+
         this.productId = Number(this.route.snapshot.paramMap.get('id'));
         if (this.productId) {
           this.isEdit = true;
@@ -97,7 +97,6 @@ export class ProductFormComponent implements OnInit {
   }
 
   updateFormValue(data: ProductGroupDetail): void {
-    console.log(data);
     this.form.patchValue({
       name: data.name,
       borrowStartDate: new Date(data.borrowStartDate),
@@ -166,7 +165,7 @@ export class ProductFormComponent implements OnInit {
       }
 
       this.form.patchValue({
-        coverImage: data,
+        coverImage: data.image,
       });
     });
   }
@@ -180,7 +179,6 @@ export class ProductFormComponent implements OnInit {
   openProductDialog(): void {
     const dialogRef = this.dialog.open(ProductFormDialogComponent, {
       width: '80%',
-      height: '80%',
     });
 
     dialogRef.afterClosed().subscribe((data) => {
