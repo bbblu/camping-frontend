@@ -81,18 +81,16 @@ export class ProductFormComponent implements OnInit {
   }
 
   updateFormValue(data: ProductGroupEdit): void {
-    data.city = '台北市 中正區';
-    const city = data.city.split(' ');
-    this.cityService.selectCity = city[0];
-    this.cityService.selectArea = city[1];
+    this.cityService.selectCity = data.city.name;
+    this.cityService.selectArea = data.city.areaName;
 
     this.form.patchValue({
       name: data.name,
       borrowStartDate: new Date(data.borrowStartDate),
       borrowEndDate: new Date(data.borrowEndDate),
       cityId: this.cityService.areaId,
-      cityName: city[0],
-      cityAreaName: city[1],
+      cityName: data.city.name,
+      cityAreaName: data.city.areaName,
       price: data.price,
       coverImage: data.coverImage,
       bankAccount: data.bankAccount,
@@ -127,16 +125,6 @@ export class ProductFormComponent implements OnInit {
   updateAreaId(): void {
     this.cityService.selectArea = this.form.value.cityAreaName;
     this.form.value.cityId = this.cityService.areaId;
-  }
-
-  imageToSliderObject(images: Image[]): object[] {
-    return images.map((image) => {
-      return {
-        image: image.url,
-        thumbImage: image.url,
-        alt: 'detail image',
-      };
-    });
   }
 
   openCoverImageDialog(isEdit: boolean): void {

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { BadRecord } from '@models/user/comment-and-bad-record.model';
 import { ProductGroup } from '@models/product/product-group.model';
 
 import { UserService } from '@services/api/user.service';
 import { ProductService } from '@services/api/product.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
-
-import { products } from '../../../fixtures/product-group.fixture';
 
 @Component({
   selector: 'app-user-product',
@@ -17,6 +16,8 @@ import { products } from '../../../fixtures/product-group.fixture';
 export class UserProductComponent implements OnInit {
   productGroups: ProductGroup[] = [];
   account: string = '';
+  comment: number = 0;
+  badRecords: BadRecord[] = [];
   nickName: string = '';
   isEdit = true;
 
@@ -34,6 +35,7 @@ export class UserProductComponent implements OnInit {
       this.account = account;
       this.nickName = nickName;
       this.isEdit = false;
+      this.getUserCommentAndBadRecord();
       this.getUserProductGroups();
     } else {
       this.getUserInfo();
@@ -49,7 +51,24 @@ export class UserProductComponent implements OnInit {
 
         this.account = res.data.account;
         this.nickName = res.data.nickName;
+        this.getUserCommentAndBadRecord();
         this.getUserProductGroups();
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
+  }
+
+  getUserCommentAndBadRecord(): void {
+    this.userService.getUserCommentAndBadRecord(this.account).subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.comment = res.data.comment;
+        this.badRecords = res.data.badRecordArray;
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
@@ -64,8 +83,7 @@ export class UserProductComponent implements OnInit {
           this.snakeBarService.open(res.message);
         }
 
-        // this.productGroups = res.data;
-        this.productGroups = products;
+        this.productGroups = res.data;
       },
       (err) => {
         this.snakeBarService.open(err.error.message);

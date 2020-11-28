@@ -16,8 +16,6 @@ import { ProductService } from '@services/api/product.service';
 import { CityService } from '@services/api/city.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
-import { products } from '../../../fixtures/product-group.fixture';
-
 @Component({
   selector: 'app-product-filter',
   templateUrl: './product-filter.component.html',
@@ -55,7 +53,7 @@ export class ProductFilterComponent implements OnInit {
     this.form = this.formBuilder.group({
       borrowStartDate: [null],
       borrowEndDate: [null],
-      cityAreaName: [null],
+      cityId: [null],
       typeArray: [[]],
       priceRange: [null],
     });
@@ -110,8 +108,7 @@ export class ProductFilterComponent implements OnInit {
           this.snakeBarService.open(res.message);
         }
 
-        // this.productGroups = res.data;
-        this.productGroups = products;
+        this.productGroups = res.data;
       },
       (err) => {
         this.snakeBarService.open(err.error.message);

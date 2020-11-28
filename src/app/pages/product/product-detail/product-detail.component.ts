@@ -48,38 +48,23 @@ export class ProductDetailComponent implements OnInit {
     );
   }
 
-  starFill(comment: number): number[] {
-    const fill = Math.floor(comment);
-    return [...Array(fill).keys()];
-  }
-
-  starHalf(comment: number): boolean {
-    return comment % 1 > 0;
-  }
-
-  starEmpty(comment: number): number[] {
-    const empty = Math.floor(5 - comment);
-    return [...Array(empty).keys()];
-  }
-
   toUserProduct() {
-    this.router.navigate(['user', 'admin', 'product'], {
-      queryParams: {
-        nickName: this.productGroup.productOwnerName,
-      },
-    });
+    this.router.navigate(
+      ['user', this.productGroup.productOwnerAccount, 'product'],
+      {
+        queryParams: {
+          nickName: this.productGroup.productOwnerName,
+        },
+      }
+    );
   }
 
   openDialog(): void {
-    let dialogWidth = '50%';
-    if (window.screen.width <= 960) {
-      dialogWidth = '100%';
-    }
     this.dialog.open(BorrowCreateDialogComponent, {
-      width: dialogWidth,
+      width: window.screen.width <= 960 ? '100%' : '50%',
       data: {
-        ...this.productGroup,
-        id: this.productGroupId,
+        productGroupId: this.productGroupId,
+        productGroup: this.productGroup,
       },
     });
   }

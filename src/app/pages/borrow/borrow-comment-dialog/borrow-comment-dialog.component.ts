@@ -3,12 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-import { ProductService } from '@services/api/product.service';
+import { RentalService } from '@services/api/rental.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 interface BorrowCommentDialogData {
   title: string;
-  productGroupId: number;
+  rentalId: number;
 }
 
 @Component({
@@ -21,7 +21,7 @@ export class BorrowCommentDialogComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private productService: ProductService,
+    private rentalService: RentalService,
     private snakeBarService: SnakeBarService,
     private dialogRef: MatDialogRef<BorrowCommentDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: BorrowCommentDialogData
@@ -34,8 +34,8 @@ export class BorrowCommentDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.productService
-      .addProductGroupComment(this.data.productGroupId, this.form.value)
+    this.rentalService
+      .addRentalComment(this.data.rentalId, this.form.value)
       .subscribe(
         (res) => {
           this.snakeBarService.open(res.message);

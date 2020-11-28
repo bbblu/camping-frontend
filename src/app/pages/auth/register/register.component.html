@@ -226,6 +226,25 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+
+            <mat-form-field
+              class="mat-form-field-round"
+              floatLabel="never"
+              appearance="outline"
+            >
+              <input
+                matInput
+                type="text"
+                placeholder="銀行帳號"
+                formControlName="bankAccount"
+              />
+              <mat-icon matPrefix>work_outline</mat-icon>
+              <mat-error
+                *ngIf="form.controls['bankAccount'].hasError('required')"
+              >
+                請輸入您的暱稱
+              </mat-error>
+            </mat-form-field>
           </div>
         </div>
 

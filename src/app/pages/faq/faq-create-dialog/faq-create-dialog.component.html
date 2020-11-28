@@ -1,5 +1,5 @@
 <div
-  class="title"
+  class="dialog-title"
   fxLayout="column"
   fxLayoutAlign="center center"
   fxLayoutGap="10px"
@@ -9,7 +9,7 @@
 </div>
 
 <form
-  class="content"
+  class="dialog-content"
   [formGroup]="form"
   (ngSubmit)="onSubmit()"
   fxLayout="column"
@@ -21,7 +21,12 @@
     floatLabel="never"
   >
     <mat-icon matPrefix>contact_support</mat-icon>
-    <input matInput type="text" placeholder="標題" formControlName="title" />
+    <input
+      matInput
+      type="text"
+      placeholder="標題"
+      formControlName="reportTitle"
+    />
   </mat-form-field>
 
   <mat-form-field
@@ -30,7 +35,7 @@
     floatLabel="never"
   >
     <mat-icon matPrefix>local_offer</mat-icon>
-    <mat-select formControlName="type">
+    <mat-select placeholder="類型" formControlName="type">
       <mat-option value="0">帳號相關</mat-option>
       <mat-option value="1">租借相關</mat-option>
       <mat-option value="2">款項相關</mat-option>
@@ -66,17 +71,17 @@
     ></textarea>
   </mat-form-field>
 
-  <div
-    fxLayout="row"
-    fxLayout.xs="column"
-    fxFlexAlign.gt-xs="center"
-    fxLayoutGap="10px"
-  >
-    <button mat-flat-button type="button" color="warn" (click)="onNoClick()">
+  <mat-dialog-actions align="center">
+    <button mat-flat-button mat-dialog-close type="button" color="warn">
       取消
     </button>
-    <button mat-flat-button class="submit" type="submit" color="accent">
+    <button
+      mat-flat-button
+      type="submit"
+      color="accent"
+      [disabled]="!form.valid"
+    >
       送出
     </button>
-  </div>
+  </mat-dialog-actions>
 </form>

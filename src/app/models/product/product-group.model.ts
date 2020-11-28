@@ -6,8 +6,7 @@ export interface ProductGroup {
   borrowStartDate: Date;
   borrowEndDate: Date;
   city: string;
-  createAccount: string;
   userName: string;
-  productTypeArray: number;
+  productTypeArray: string[];
   comment: number;
 }

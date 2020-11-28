@@ -50,6 +50,7 @@ export class RegisterComponent implements OnInit {
       gender: [null, [Validators.required]],
       birthday: [null, [Validators.required]],
       experience: [null, [Validators.required]],
+      bankAccount: [null, [Validators.required]],
     });
   }
 

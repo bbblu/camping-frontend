@@ -8,8 +8,8 @@ import {
 } from '@angular/material/dialog';
 
 import { ProductType } from '@models/product/product-group-filter.model';
-import { Product } from '@models/product/product-group-edit.model';
-import { Image } from '@models/product/image.model';
+import { Image, Product } from '@models/product/product-group-edit.model';
+import { SliderImage } from '@models/product/slider-image.model';
 
 import { ProductService } from '@services/api/product.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
@@ -28,7 +28,7 @@ export interface DialogData {
 export class ProductFormDialogComponent implements OnInit {
   form!: FormGroup;
   productTypes: ProductType[] = [];
-  productImages: Image[] = [];
+  productImages: SliderImage[] = [];
   imageIndex = 0;
 
   constructor(
@@ -58,6 +58,9 @@ export class ProductFormDialogComponent implements OnInit {
 
     if (this.data) {
       this.updateFormValue(this.data.product);
+      this.productImages = this.imageToSliderObject(
+        this.data.product.imageArray
+      );
     }
   }
 
@@ -88,6 +91,10 @@ export class ProductFormDialogComponent implements OnInit {
     this.form.patchValue({ type: productType?.id });
   }
 
+  imageToSliderObject(images: Image[]): SliderImage[] {
+    return images.map((image) => new SliderImage(image.url));
+  }
+
   updateImageIndex(arrow: string) {
     if (arrow === 'previous') {
       this.imageIndex -= 1;
@@ -111,20 +118,18 @@ export class ProductFormDialogComponent implements OnInit {
       }
 
       if (data.isEdit) {
-        this.productImages[this.imageIndex] = {
-          image: data.image,
-          thumbImage: data.image,
-        };
+        this.productImages[this.imageIndex] = new SliderImage(data.image);
         this.productImages = [...this.productImages];
       } else {
-        this.productImages.push({
-          image: data.image,
-          thumbImage: data.image,
-        });
+        this.productImages.push(new SliderImage(data.image));
       }
 
       this.form.patchValue({
-        imageArray: this.productImages,
+        imageArray: this.productImages.map((image) => {
+          return {
+            url: image.image,
+          };
+        }),
       });
 
       this.imageIndex = 0;

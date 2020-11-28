@@ -7,12 +7,12 @@ import { ApiModel } from '@models/api-model';
 import { Rental } from '@models/rental/rental';
 import { User } from '@models/user/user.model';
 
-import { RentalService } from '@services/api/rental.service';
 import { UserService } from '@services/api/user.service';
+import { RentalStatusService } from '@services/api/rental-status.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 interface BorrowPaymentDialog {
-  rental: Rental;
+  rentalId: number;
 }
 
 @Component({
@@ -26,7 +26,7 @@ export class BorrowPaymentDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: BorrowPaymentDialog,
     private formBuilder: FormBuilder,
-    private rentalService: RentalService,
+    private rentalStatusService: RentalStatusService,
     private userService: UserService,
     private snakeBarService: SnakeBarService,
     private dialogRef: MatDialogRef<BorrowPaymentDialogComponent>
@@ -82,14 +82,16 @@ export class BorrowPaymentDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.rentalService.payRental(this.data.rental.id, this.form.value).subscribe(
-      (res: ApiModel<string>) => {
-        this.snakeBarService.open(res.message);
-      },
-      (err) => {
-        this.snakeBarService.open(err.error.message);
-      }
-    );
+    this.rentalStatusService
+      .payRental(this.data.rentalId, this.form.value)
+      .subscribe(
+        (res: ApiModel<string>) => {
+          this.snakeBarService.open(res.message);
+        },
+        (err) => {
+          this.snakeBarService.open(err.error.message);
+        }
+      );
   }
 
   onNoClick(): void {

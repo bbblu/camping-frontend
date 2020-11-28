@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 
-export interface DialogData {
+interface ImageCropperDialogData {
   image: string;
   isEdit: boolean;
 }
@@ -19,8 +19,8 @@ export class ImageCropperDialogComponent implements OnInit {
   croppedImage: string = '';
 
   constructor(
-    public dialogRef: MatDialogRef<ImageCropperDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: ImageCropperDialogData,
+    private dialogRef: MatDialogRef<ImageCropperDialogComponent>
   ) {}
 
   ngOnInit(): void {}
@@ -43,10 +43,6 @@ export class ImageCropperDialogComponent implements OnInit {
 
   loadImageFailed(): void {
     // show message
-  }
-
-  onClose(): void {
-    this.dialogRef.close();
   }
 
   onSubmit(): void {

@@ -5,11 +5,13 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { ApiModel } from '@models/api-model';
 import { User } from '@models/user/user.model';
+import { BadRecord } from '@models/user/comment-and-bad-record.model';
 import { Experience } from '@models/user/experience.model';
 
 import { UserService } from '@services/api/user.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
-import { ChangePasswordDialogComponent } from '@pages/user/change-password-dialog/change-password-dialog.component';
+
+import { ChangePasswordDialogComponent } from '@pages/auth/change-password-dialog/change-password-dialog.component';
 
 @Component({
   selector: 'app-user-info',
@@ -18,6 +20,7 @@ import { ChangePasswordDialogComponent } from '@pages/user/change-password-dialo
 })
 export class UserInfoComponent implements OnInit {
   user!: User;
+  badRecords: BadRecord[] = [];
   experiences: Experience[] = [];
   form!: FormGroup;
   isEditable = false;
@@ -52,6 +55,7 @@ export class UserInfoComponent implements OnInit {
 
         this.user = res.data;
         this.updateFormValue(this.user);
+        this.getUserCommentAndBadRecord();
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
@@ -67,6 +71,21 @@ export class UserInfoComponent implements OnInit {
       cellPhone: data.cellPhone,
       address: data.address,
     });
+  }
+
+  getUserCommentAndBadRecord(): void {
+    this.userService.getUserCommentAndBadRecord(this.user.account).subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.badRecords = res.data.badRecordArray;
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
   }
 
   getExperiences(): void {
@@ -105,12 +124,8 @@ export class UserInfoComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogWidth = '50%';
-    if (window.screen.width <= 960) {
-      dialogWidth = '100%';
-    }
     this.dialog.open(ChangePasswordDialogComponent, {
-      width: dialogWidth,
+      width: window.screen.width <= 960 ? '100%' : '50%',
     });
   }
 }

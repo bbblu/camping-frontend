@@ -2,9 +2,24 @@
   <div fxLayout="column" fxFlex="80" fxLayoutGap="20px">
     <mat-card *ngIf="account">
       <mat-card-title fxLayout="row" fxLayoutAlign="space-between center">
-        <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
           <img class="seller" alt="seller" src="assets/image/seller.svg" />
-          <span class="nick-name">{{ nickName }} 的商品</span>
+          <div fxLayout="column">
+            <span>{{ nickName }} 的商品</span>
+            <div
+              class="bad-record"
+              fxLayout="row"
+              fxLayout.lt-sm="column"
+              fxLayoutAlign="start center"
+              fxLayoutAlign.lt-sm="center"
+              fxLayoutGap="10px"
+            >
+              <app-star [comment]="comment"></app-star>
+              <span *ngFor="let badRecord of badRecords">
+                {{ badRecord.typeName }}: {{ badRecord.count }}
+              </span>
+            </div>
+          </div>
         </div>
 
         <button

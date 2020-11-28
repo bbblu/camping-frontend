@@ -27,7 +27,7 @@ export class FaqCreateDialogComponent implements OnInit {
     this.getUserInfo();
 
     this.form = this.formBuilder.group({
-      title: [null, Validators.required],
+      reportTitle: [null, Validators.required],
       type: [null, Validators.required],
       reporterEmail: [null, Validators.required],
       reportContent: [null, Validators.required],
@@ -60,9 +60,5 @@ export class FaqCreateDialogComponent implements OnInit {
         this.snakeBarService.open(err.error.message);
       }
     );
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 }

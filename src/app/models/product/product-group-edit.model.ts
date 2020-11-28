@@ -1,8 +1,7 @@
 export interface ProductGroupEdit {
-  id: number;
   name: string;
   coverImage: string;
-  city: string;
+  city: City;
   price: number;
   borrowStartDate: Date;
   borrowEndDate: Date;
@@ -12,6 +11,12 @@ export interface ProductGroupEdit {
   comment: number;
   productArray: Product[];
   bankAccount: string;
+}
+
+export interface City {
+  id: number;
+  name: string;
+  areaName: string;
 }
 
 export interface Product {

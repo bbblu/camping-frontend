@@ -6,11 +6,30 @@
       fxLayout="column"
       fxFlexFill
     >
-      <mat-card-title fxLayout="row">
+      <mat-card-title fxLayout="row" fxLayoutGap="15px">
         <img class="avatar" alt="avatar" src="assets/image/avatar.svg" />
-        <mat-form-field class="nick-name" fxFlex="100">
-          <input matInput formControlName="nickName" [value]="user.nickName" />
-        </mat-form-field>
+        <div fxLayout="column">
+          <mat-form-field class="nick-name" fxFlex="100">
+            <input
+              matInput
+              formControlName="nickName"
+              [value]="user.nickName"
+            />
+          </mat-form-field>
+          <div
+            class="bad-record"
+            fxLayout="row"
+            fxLayout.lt-sm="column"
+            fxLayoutAlign="start center"
+            fxLayoutAlign.lt-sm="center"
+            fxLayoutGap="10px"
+          >
+            <app-star [comment]="user.comment"></app-star>
+            <span *ngFor="let badRecord of badRecords">
+              {{ badRecord.typeName }}: {{ badRecord.count }}
+            </span>
+          </div>
+        </div>
       </mat-card-title>
 
       <mat-form-field floatLabel="never">
@@ -70,7 +89,7 @@
         <input matInput placeholder="地址" formControlName="address" />
       </mat-form-field>
 
-      <div
+      <mat-card-actions
         fxLayout="row"
         fxLayout.xs="column"
         fxLayoutAlign="center"
@@ -107,7 +126,7 @@
         >
           修改
         </button>
-      </div>
+      </mat-card-actions>
     </form>
   </mat-card>
 </div>

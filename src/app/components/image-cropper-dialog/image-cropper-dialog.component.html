@@ -8,14 +8,18 @@
   [resizeToWidth]="300"
   [resizeToHeight]="200"
   [onlyScaleDown]="false"
-  format="png"
+  format="jpeg"
   (imageCropped)="imageCropped($event)"
   (imageLoaded)="imageLoaded()"
   (cropperReady)="cropperReady()"
   (loadImageFailed)="loadImageFailed()"
 ></image-cropper>
 
-<mat-dialog-actions>
-  <button mat-raised-button (click)="onClose()">取消</button>
-  <button mat-raised-button color="warn" (click)="onSubmit()">確定送出</button>
+<mat-dialog-actions align="end">
+  <button mat-flat-button mat-dialog-close type="button" color="warn">
+    取消
+  </button>
+  <button mat-flat-button type="submit" color="accent" (click)="onSubmit()">
+    完成
+  </button>
 </mat-dialog-actions>

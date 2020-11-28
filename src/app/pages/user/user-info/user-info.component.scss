@@ -23,6 +23,8 @@ mat-card {
 }
 
 mat-card-title {
+  color: $font-black;
+
   .avatar {
     height: 60px;
     padding: 7px;
@@ -32,9 +34,11 @@ mat-card-title {
 
   .nick-name {
     margin-top: 10px;
-    margin-left: 15px;
-    color: $font-black;
-    font-size: 20px;
+  }
+
+  .bad-record {
+    font-size: 15px;
+    font-weight: normal;
   }
 }
 
@@ -75,8 +79,4 @@ mat-card-title {
       }
     }
   }
-}
-
-.mat-flat-button {
-  color: $font-white;
 }

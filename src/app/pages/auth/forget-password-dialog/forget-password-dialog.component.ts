@@ -7,15 +7,15 @@ import { UserService } from '@services/api/user.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 @Component({
-  selector: 'app-change-password-dialog',
-  templateUrl: './change-password-dialog.component.html',
-  styleUrls: ['./change-password-dialog.component.scss'],
+  selector: 'app-forget-password-dialog',
+  templateUrl: './forget-password-dialog.component.html',
+  styleUrls: ['./forget-password-dialog.component.scss'],
 })
-export class ChangePasswordDialogComponent implements OnInit {
+export class ForgetPasswordDialogComponent implements OnInit {
   form!: FormGroup;
 
   constructor(
-    private dialogRef: MatDialogRef<ChangePasswordDialogComponent>,
+    private dialogRef: MatDialogRef<ForgetPasswordDialogComponent>,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private snakeBarService: SnakeBarService
@@ -23,13 +23,14 @@ export class ChangePasswordDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      password: [null, Validators.required],
-      newPassword: [null, Validators.required],
+      account: [null, Validators.required],
+      email: [null, Validators.required],
+      cellPhone: [null, Validators.required],
     });
   }
 
   onSubmit(): void {
-    this.userService.updateUserPassword(this.form.value).subscribe(
+    this.userService.forgetPassword(this.form.value).subscribe(
       (res) => {
         this.snakeBarService.open(res.message);
       },
@@ -37,9 +38,5 @@ export class ChangePasswordDialogComponent implements OnInit {
         this.snakeBarService.open(err.error.message);
       }
     );
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 }

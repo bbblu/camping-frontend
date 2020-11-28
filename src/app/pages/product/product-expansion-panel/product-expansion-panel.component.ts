@@ -4,9 +4,13 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 
+import { ProductType } from '@models/product/product-group-filter.model';
 import { Image, Product } from '@models/product/product-group-detail.model';
+import { SliderImage } from '@models/product/slider-image.model';
 
 import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/product-form-dialog.component';
+import { ProductService } from '@services/api/product.service';
+import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 @Component({
   selector: 'app-product-expansion-panel',
@@ -21,11 +25,14 @@ export class ProductExpansionPanelComponent implements OnInit {
     product: Product;
   }>();
   @Output() deleteProduct = new EventEmitter<number>();
+  productTypes: ProductType[] = [];
   isClickButton = false;
 
   constructor(
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
+    private productService: ProductService,
+    private snakeBarService: SnakeBarService,
     private dialog: MatDialog
   ) {
     iconRegistry.addSvgIcon(
@@ -34,20 +41,39 @@ export class ProductExpansionPanelComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getProductTypes();
+  }
 
   imageToSliderObject(images: Image[]): object[] {
     if (!images) {
       return [];
     }
 
-    return images.map((image) => {
-      return {
-        image: image.url,
-        thumbImage: image.url,
-        alt: 'detail image',
-      };
-    });
+    return images.map((image) => new SliderImage(image.url));
+  }
+
+  getProductTypes(): void {
+    this.productService.getProductTypes().subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.productTypes = res.data;
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
+  }
+
+  getProductType(product: Product): string {
+    if (this.isEdit) {
+      return this.productTypes.find((type) => type.id === product.type)!.name;
+    } else {
+      return product.type;
+    }
   }
 
   clickEdit(index: number): void {
