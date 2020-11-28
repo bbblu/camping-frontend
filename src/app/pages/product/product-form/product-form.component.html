@@ -8,7 +8,15 @@
       fxFlexFill
       fxLayoutGap="10px"
     >
-      <img class="cover" alt="cover" [src]="coverImage" />
+      <img
+        class="cover"
+        alt="cover"
+        [src]="
+          form.value.coverImage
+            ? form.value.coverImage
+            : '/assets/image/empty-image.jpg'
+        "
+      />
       <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
         <button
           mat-flat-button
@@ -88,16 +96,12 @@
         </mat-form-field>
         <mat-form-field floatLabel="never" fxFlex="50" fxFlex.lt-sm="100">
           <mat-icon matPrefix>gps_fixed</mat-icon>
-          <mat-select formControlName="cityAreaName" placeholder="區">
-            <mat-option
-              *ngFor="let areaName of areas"
-              [value]="areaName"
-              (click)="updateAreaId()"
-            >
-              {{ areaName }}
+          <mat-select formControlName="cityId" placeholder="區">
+            <mat-option *ngFor="let area of areas" [value]="area.id">
+              {{ area.areaName }}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="form.controls['cityAreaName'].hasError('required')">
+          <mat-error *ngIf="form.controls['cityId'].hasError('required')">
             此為必填
           </mat-error>
         </mat-form-field>
@@ -112,19 +116,6 @@
           formControlName="price"
         />
         <mat-error *ngIf="form.controls['price'].hasError('required')">
-          此為必填
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field floatLabel="never">
-        <mat-icon matPrefix>work_outline</mat-icon>
-        <input
-          matInput
-          type="text"
-          placeholder="銀行帳號"
-          formControlName="bankAccount"
-        />
-        <mat-error *ngIf="form.controls['bankAccount'].hasError('required')">
           此為必填
         </mat-error>
       </mat-form-field>
@@ -156,6 +147,7 @@
           mat-flat-button
           type="submit"
           color="accent"
+          [disabled]="!form.valid"
           fxFlex="30"
           fxFlex.lt-sm="100"
         >

@@ -90,7 +90,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <img class="banner" alt="banner" src="assets/image/banner.png" />
+    <img class="banner" alt="banner" [src]="getBannerImage()" />
     <mat-spinner [diameter]="50" *ngIf="showSpinner$ | async"></mat-spinner>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
@@ -110,8 +110,19 @@
 
 <mat-menu #notificationMenu="matMenu">
   <div *ngIf="notifications.length > 0; else emptyNotification">
-    <button mat-menu-item *ngFor="let notification of notifications">
-      <span>{{ notification.content }}</span>
+    <button
+      mat-menu-item
+      *ngFor="let notification of notifications; index as index"
+    >
+      <span
+        matBadge="0"
+        matBadgeColor="warn"
+        [matBadgeHidden]="index > notReadCount - 1"
+        matBadgePosition="before"
+        matBadgeSize="small"
+      >
+        {{ notification.content }}
+      </span>
     </button>
   </div>
   <ng-template #emptyNotification>

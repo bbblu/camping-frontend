@@ -8,8 +8,10 @@ import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
 
 import { ApiModel } from '@models/api-model';
-import { Image, Product } from '@models/product/product-group-detail.model';
-import { ProductGroupEdit } from '@models/product/product-group-edit.model';
+import { ProductGroupDetail } from '@models/product/product-group.model';
+import { Product, ProductEdit } from '@models/product/product.model';
+import { ProductType } from '@models/product/product-type.model';
+import { City } from '@models/city/city.model';
 
 import { ProductService } from '@services/api/product.service';
 import { CityService } from '@services/api/city.service';
@@ -26,12 +28,13 @@ import { ProductFormDialogComponent } from '@pages/product/product-form-dialog/p
 export class ProductFormComponent implements OnInit {
   form!: FormGroup;
   cities: string[] = [];
-  areas: string[] = [];
+  areas: City[] = [];
   coverImage: string = '';
   isEdit = false;
 
   productId!: number;
   products: Product[] = [];
+  productTypes: ProductType[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,30 +46,43 @@ export class ProductFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCities();
-
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
       borrowStartDate: [null, [Validators.required]],
       borrowEndDate: [null, [Validators.required]],
-      cityId: [null, [Validators.required]],
       cityName: [null, [Validators.required]],
-      cityAreaName: [null, [Validators.required]],
+      cityId: [null, [Validators.required]],
       price: [null, [Validators.required]],
       coverImage: [null],
-      bankAccount: [null, [Validators.required]],
       productArray: [[]],
     });
 
-    this.productId = Number(this.route.snapshot.paramMap.get('id'));
-    if (this.productId) {
-      this.isEdit = true;
-      this.getProductEdit(this.productId);
-    }
+    this.getCities();
+    this.getProductTypes();
   }
 
-  getProductEdit(id: number): void {
-    this.productService.getProductGroupForEdit(id).subscribe(
+  getProductTypes(): void {
+    this.productService.getProductTypes().subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.productTypes = res.data;
+        this.productId = Number(this.route.snapshot.paramMap.get('id'));
+        if (this.productId) {
+          this.isEdit = true;
+          this.getProductGroup(this.productId);
+        }
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
+  }
+
+  getProductGroup(id: number): void {
+    this.productService.getProductGroup(id).subscribe(
       (res) => {
         if (!res.result) {
           this.snakeBarService.open(res.message);
@@ -80,25 +96,38 @@ export class ProductFormComponent implements OnInit {
     );
   }
 
-  updateFormValue(data: ProductGroupEdit): void {
-    this.cityService.selectCity = data.city.name;
-    this.cityService.selectArea = data.city.areaName;
-
+  updateFormValue(data: ProductGroupDetail): void {
+    console.log(data);
     this.form.patchValue({
       name: data.name,
       borrowStartDate: new Date(data.borrowStartDate),
       borrowEndDate: new Date(data.borrowEndDate),
-      cityId: this.cityService.areaId,
       cityName: data.city.name,
-      cityAreaName: data.city.areaName,
+      cityId: data.city.id,
       price: data.price,
       coverImage: data.coverImage,
       bankAccount: data.bankAccount,
-      productArray: data.productArray,
+      productArray: data.productArray.map((product: Product) =>
+        this.transformDetailToEdit(product)
+      ),
     });
+    this.updateAreas();
 
     this.products = data.productArray;
-    this.updateAreas();
+  }
+
+  transformDetailToEdit(product: Product): ProductEdit {
+    return {
+      ...product,
+      type: this.productTypes.find((type) => type.name === product.type)!.id,
+    };
+  }
+
+  transformEditToDetail(product: ProductEdit): Product {
+    return {
+      ...product,
+      type: this.productTypes.find((type) => type.id === product.type)!.name,
+    };
   }
 
   getCities(): void {
@@ -119,19 +148,14 @@ export class ProductFormComponent implements OnInit {
 
   updateAreas(): void {
     this.cityService.selectCity = this.form.value.cityName;
-    this.areas = this.cityService.areaNames;
-  }
-
-  updateAreaId(): void {
-    this.cityService.selectArea = this.form.value.cityAreaName;
-    this.form.value.cityId = this.cityService.areaId;
+    this.areas = this.cityService.areas;
   }
 
   openCoverImageDialog(isEdit: boolean): void {
     const dialogRef = this.dialog.open(ImageCropperDialogComponent, {
       width: '70%',
       data: {
-        image: isEdit ? this.coverImage : '',
+        image: isEdit ? this.form.value.coverImage : '',
         isEdit: isEdit,
       },
     });
@@ -141,17 +165,15 @@ export class ProductFormComponent implements OnInit {
         return;
       }
 
-      this.coverImage = data.image;
       this.form.patchValue({
-        coverImage: this.coverImage,
+        coverImage: data,
       });
     });
   }
 
   deleteCoverImage(): void {
-    this.coverImage = '';
     this.form.patchValue({
-      coverImage: this.coverImage,
+      coverImage: null,
     });
   }
 
@@ -167,18 +189,18 @@ export class ProductFormComponent implements OnInit {
       }
 
       this.form.value.productArray.push(data);
-      this.products = this.form.value.productArray;
+      this.products.push(this.transformEditToDetail(data));
     });
   }
 
-  editProduct(value: { index: number; product: Product }): void {
-    this.products[value.index] = value.product;
-    this.form.value.productArray = this.products;
+  editProduct(value: { index: number; product: ProductEdit }): void {
+    this.form.value.productArray[value.index] = value.product;
+    this.products[value.index] = this.transformEditToDetail(value.product);
   }
 
   deleteProduct(index: number): void {
-    this.products.splice(index);
-    this.form.value.productArray = this.products;
+    this.form.value.productArray.splice(index, 1);
+    this.products.splice(index, 1);
   }
 
   dateFormatter(value: Date): string {

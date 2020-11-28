@@ -75,6 +75,11 @@
       </mat-form-field>
 
       <mat-form-field floatLabel="never">
+        <mat-icon matPrefix>work_outline</mat-icon>
+        <input matInput placeholder="銀行帳號" [value]="user.bankAccount" disabled />
+      </mat-form-field>
+
+      <mat-form-field floatLabel="never">
         <mat-icon matPrefix>email</mat-icon>
         <input matInput placeholder="電子郵件" formControlName="email" />
       </mat-form-field>

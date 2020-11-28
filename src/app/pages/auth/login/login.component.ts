@@ -72,13 +72,12 @@ export class LoginComponent implements OnInit {
           this.authService.isAuth = true;
 
           const redirectUrl = this.route.snapshot.queryParams['redirectUrl'];
-          if (redirectUrl) {
-            this.router
-              .navigateByUrl(redirectUrl)
-              .catch(() => this.router.navigate(['']));
-          } else {
-            this.router.navigate(['']);
-          }
+          this.router
+            .navigateByUrl(redirectUrl)
+            .then(() => {
+              window.location.reload();
+            })
+            .catch(() => this.router.navigate(['']));
         }
       },
       (err) => {

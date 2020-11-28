@@ -16,7 +16,7 @@ import { SnakeBarService } from '@services/ui/snake-bar.service';
 export class UserProductComponent implements OnInit {
   productGroups: ProductGroup[] = [];
   account: string = '';
-  comment: number = 0;
+  comment: number | null = null;
   badRecords: BadRecord[] = [];
   nickName: string = '';
   isEdit = true;

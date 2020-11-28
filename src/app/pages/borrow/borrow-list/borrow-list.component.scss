@@ -5,6 +5,7 @@ $light-primary-color: unquote($primary-color + "8f");
 $font-black: map-get($colors, black);
 $font-white: map-get($colors, white);
 $font-gray: map-get($colors, gray);
+$font-red: map-get($colors, red);
 
 .container {
   margin: 0 10%;
@@ -44,6 +45,11 @@ $font-gray: map-get($colors, gray);
 }
 
 .record {
+  &:after {
+    width: 32%;
+    content: "";
+  }
+
   mat-card {
     margin-bottom: 15px;
     border-style: solid;
@@ -62,6 +68,13 @@ $font-gray: map-get($colors, gray);
       padding: 5px 15px;
       border-radius: 20px;
       color: $font-white;
+    }
+  }
+
+  mat-card-subtitle {
+    .price {
+      color: $font-red;
+      font-weight: bold;
     }
   }
 

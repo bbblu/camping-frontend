@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./star.component.scss'],
 })
 export class StarComponent implements OnInit {
-  @Input() comment!: number;
+  @Input() comment: number | null = null;
 
   constructor() {}
 

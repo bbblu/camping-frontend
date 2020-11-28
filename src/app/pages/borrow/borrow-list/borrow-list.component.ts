@@ -44,7 +44,7 @@ export class BorrowListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.updateRentals();
+    this.getBorrows();
   }
 
   getBorrows(): void {
@@ -77,8 +77,8 @@ export class BorrowListComponent implements OnInit {
     );
   }
 
-  updateRentals(): void {
-    if (this.isRental) {
+  updateRentals(isRental: boolean): void {
+    if (isRental) {
       this.getRentals();
     } else {
       this.getBorrows();
@@ -194,6 +194,10 @@ export class BorrowListComponent implements OnInit {
       default:
         return this.openActionDialog(text, rental);
     }
+  }
+
+  trackByIndex(index: number, obj: StatusButton) {
+    return index;
   }
 
   openActionDialog(title: string, rental: Rental): void {

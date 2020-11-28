@@ -7,8 +7,9 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 
-import { ProductType } from '@models/product/product-group-filter.model';
-import { Image, Product } from '@models/product/product-group-edit.model';
+import { Product, ProductEdit } from '@models/product/product.model';
+import { ProductType } from '@models/product/product-type.model';
+import { ProductImage } from '@models/product/product-image.model';
 import { SliderImage } from '@models/product/slider-image.model';
 
 import { ProductService } from '@services/api/product.service';
@@ -41,8 +42,6 @@ export class ProductFormDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProductTypes();
-
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
       type: [null, [Validators.required]],
@@ -56,12 +55,7 @@ export class ProductFormDialogComponent implements OnInit {
       imageArray: [null],
     });
 
-    if (this.data) {
-      this.updateFormValue(this.data.product);
-      this.productImages = this.imageToSliderObject(
-        this.data.product.imageArray
-      );
-    }
+    this.getProductTypes();
   }
 
   getProductTypes(): void {
@@ -72,7 +66,12 @@ export class ProductFormDialogComponent implements OnInit {
         }
 
         this.productTypes = res.data;
-        this.updateFormType();
+        if (this.data) {
+          this.updateFormValue(this.data.product);
+          this.productImages = this.imageToSliderObject(
+            this.data.product.imageArray
+          );
+        }
       },
       (err) => {
         this.snakeBarService.open(err.error.message);
@@ -80,18 +79,23 @@ export class ProductFormDialogComponent implements OnInit {
     );
   }
 
+  transformDetailToEdit(product: Product): ProductEdit {
+    return {
+      ...product,
+      type: this.productTypes.find((type) => type.name === product.type)!.id,
+    };
+  }
+
   updateFormValue(data: Product) {
-    this.form.patchValue(data);
+    const productEdit = this.transformDetailToEdit(data);
+    this.form.patchValue(productEdit);
   }
 
-  updateFormType(): void {
-    const productType = this.productTypes.find(
-      (type) => type.name === this.form.value.type
-    );
-    this.form.patchValue({ type: productType?.id });
-  }
+  imageToSliderObject(images: ProductImage[] | null): SliderImage[] {
+    if (!images) {
+      return [];
+    }
 
-  imageToSliderObject(images: Image[]): SliderImage[] {
     return images.map((image) => new SliderImage(image.url));
   }
 

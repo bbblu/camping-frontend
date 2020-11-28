@@ -87,6 +87,10 @@ export class BorrowPaymentDialogComponent implements OnInit {
       .subscribe(
         (res: ApiModel<string>) => {
           this.snakeBarService.open(res.message);
+
+          if (res.result) {
+            this.dialogRef.close();
+          }
         },
         (err) => {
           this.snakeBarService.open(err.error.message);

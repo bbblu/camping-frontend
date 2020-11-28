@@ -39,6 +39,11 @@ export class TopBarComponent implements OnInit {
     this.getNotReadCount();
   }
 
+  getBannerImage(): string {
+    const mobile = document.body.scrollWidth < 600 ? '-mobile' : '';
+    return `assets/image/banner${mobile}.png`;
+  }
+
   getNotifications(): void {
     this.notificationService.getNotifications().subscribe(
       (res) => {

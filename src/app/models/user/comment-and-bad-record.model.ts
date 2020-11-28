@@ -1,5 +1,5 @@
 export interface CommentAndBadRecord {
-  comment: number;
+  comment: number | null;
   badRecordArray: BadRecord[];
 }
 

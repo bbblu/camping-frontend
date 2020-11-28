@@ -6,8 +6,10 @@ export interface User {
   gender: string;
   birthday: string;
   experience: number;
+  bankAccount: string;
   cellPhone: string;
   email: string;
   address: string;
-  comment: number;
+  comment: number | null;
+  notCompensate: null;
 }
