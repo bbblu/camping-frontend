@@ -19,6 +19,7 @@ $font-red: map-get($colors, red);
 
   ::ng-deep {
     $toggle-height: 25px;
+
     .mat-slide-toggle-bar {
       width: $toggle-height * 2;
       height: $toggle-height;
@@ -44,7 +45,7 @@ $font-red: map-get($colors, red);
   }
 }
 
-.record {
+.rentals {
   &:after {
     width: 32%;
     content: "";
@@ -90,9 +91,9 @@ $font-red: map-get($colors, red);
         padding: 10px;
         border: 2px solid $primary-color;
         border-radius: 50%;
-        font-size: 30px;
         color: $font-white;
         background-color: $light-primary-color;
+        font-size: 30px;
       }
     }
 
@@ -111,10 +112,6 @@ $font-red: map-get($colors, red);
 
   mat-card-actions {
     padding: 0 16px 16px;
-  }
-
-  .mat-flat-button {
-    color: $font-white;
   }
 }
 

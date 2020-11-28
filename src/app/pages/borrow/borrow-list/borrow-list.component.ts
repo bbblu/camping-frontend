@@ -4,14 +4,17 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Rental, User } from '@models/rental/rental';
+import { RentalStatusType } from '@models/rental/rental-status-type.model';
 
 import { BorrowStatus } from '@enums/borrow-status.enum';
 import { Color } from '@enums/color.enum';
 
 import { RentalService } from '@services/api/rental.service';
+import { RentalStatusService } from '@services/api/rental-status.service';
 import { SnakeBarService } from '@services/ui/snake-bar.service';
 
-import { BorrowActionDialogComponent } from '@pages/borrow/borrow-action-dialog/borrow-action-dialog.component';
+import { FoolProofDialogComponent } from '@components/fool-proof-dialog/fool-proof-dialog.component';
+import { BorrowTerminalDialogComponent } from '@pages/borrow/borrow-terminal-dialog/borrow-terminal-dialog.component';
 import { BorrowPaymentDialogComponent } from '@pages/borrow/borrow-payment-dialog/borrow-payment-dialog.component';
 import { BorrowCommentDialogComponent } from '@pages/borrow/borrow-comment-dialog/borrow-comment-dialog.component';
 
@@ -35,54 +38,41 @@ class StatusButton {
 export class BorrowListComponent implements OnInit {
   isRental = false;
   rentals: Rental[] = [];
+  rentalStatusTypes: RentalStatusType[] = [];
 
   constructor(
     private rentalService: RentalService,
+    private rentalStatusService: RentalStatusService,
     private snakeBarService: SnakeBarService,
     private dialog: MatDialog,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.getBorrows();
-  }
-
-  getBorrows(): void {
-    this.rentalService.getBorrows().subscribe(
-      (res) => {
-        if (!res.result) {
-          this.snakeBarService.open(res.message);
-        }
-
-        this.rentals = res.data;
-      },
-      (err) => {
-        this.snakeBarService.open(err.error.message);
-      }
-    );
-  }
-
-  getRentals(): void {
-    this.rentalService.getRentals().subscribe(
-      (res) => {
-        if (!res.result) {
-          this.snakeBarService.open(res.message);
-        }
-
-        this.rentals = res.data;
-      },
-      (err) => {
-        this.snakeBarService.open(err.error.message);
-      }
-    );
+    this.getRentalStatusType();
+    this.updateRentals(false);
   }
 
   updateRentals(isRental: boolean): void {
+    let rentals;
     if (isRental) {
-      this.getRentals();
+      rentals = this.rentalService.getRentals();
     } else {
-      this.getBorrows();
+      rentals = this.rentalService.getBorrows();
     }
+
+    rentals.subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.rentals = res.data;
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
   }
 
   toUserProduct(user: User): void {
@@ -91,35 +81,24 @@ export class BorrowListComponent implements OnInit {
     });
   }
 
+  getRentalStatusType(): void {
+    this.rentalService.getRentalStatusTypes().subscribe(
+      (res) => {
+        if (!res.result) {
+          this.snakeBarService.open(res.message);
+        }
+
+        this.rentalStatusTypes = res.data;
+      },
+      (err) => {
+        this.snakeBarService.open(err.error.message);
+      }
+    );
+  }
+
   getStatusText(status: BorrowStatus): string {
-    switch (status) {
-      case BorrowStatus.alreadyCancel:
-        return '已取消';
-      case BorrowStatus.alreadyReturn:
-        return '已退貨';
-      case BorrowStatus.alreadyTerminate:
-        return '已終止';
-      case BorrowStatus.alreadyRetrieve:
-        return '已取回';
-      case BorrowStatus.notAgree:
-        return '未同意';
-      case BorrowStatus.notPay:
-        return '未付款';
-      case BorrowStatus.notPlace:
-        return '未寄放';
-      case BorrowStatus.notPickUp:
-        return '未領取';
-      case BorrowStatus.notReturn:
-        return '未歸還';
-      case BorrowStatus.notRetrieve:
-        return '未取回';
-      case BorrowStatus.notComment:
-        return '未評價';
-      case BorrowStatus.alreadyComment:
-        return '已評價';
-      default:
-        return '未知';
-    }
+    const type = this.rentalStatusTypes.find((type) => type.id === status);
+    return type ? type.name : '未知';
   }
 
   getStatusColor(status: BorrowStatus): string {
@@ -184,15 +163,17 @@ export class BorrowListComponent implements OnInit {
     }
   }
 
-  clickStatusButton(text: string, rental: Rental): void {
+  clickStatusButton(text: string, rentalId: number): void {
     switch (text) {
       case '付款':
-        return this.openPaymentDialog(rental);
+        return this.openPaymentDialog(rentalId);
+      case '扣除手續費終止交易':
+        return this.openTerminalDialog(rentalId);
       case '評價租方':
       case '評價借方':
-        return this.openCommentDialog(text, rental);
+        return this.openCommentDialog(text, rentalId);
       default:
-        return this.openActionDialog(text, rental);
+        return this.openFoolProofDialog(text, rentalId);
     }
   }
 
@@ -200,43 +181,73 @@ export class BorrowListComponent implements OnInit {
     return index;
   }
 
-  openActionDialog(title: string, rental: Rental): void {
-    this.dialog.open(BorrowActionDialogComponent, {
-      width: window.screen.width <= 960 ? '100%' : '50%',
+  openFoolProofDialog(title: string, rentalId: number): void {
+    const dialogRef = this.dialog.open(FoolProofDialogComponent, {
+      width: document.body.scrollWidth <= 960 ? '100%' : '50%',
       data: {
+        icon: title.startsWith('同意') ? 'check_circle' : 'cancel',
         title: title,
-        rentalId: rental.id,
-        isCancel: !title.startsWith('同意'),
       },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) {
+        return;
+      }
+
+      let action;
+      switch (title) {
+        case '取消交易':
+          action = this.rentalStatusService.cancelRental(rentalId);
+          break;
+        case '同意出租':
+          action = this.rentalStatusService.agreeRental(rentalId);
+          break;
+        case '拒絕出租':
+          action = this.rentalStatusService.denyRental(rentalId);
+          break;
+      }
+
+      if (!action) {
+        return;
+      }
+
+      action.subscribe(
+        (res) => {
+          this.snakeBarService.open(res.message);
+        },
+        (err) => {
+          this.snakeBarService.open(err.error.message);
+        }
+      );
     });
   }
 
-  openPaymentDialog(rental: Rental): void {
+  openPaymentDialog(rentalId: number): void {
     this.dialog.open(BorrowPaymentDialogComponent, {
-      width: window.screen.width <= 960 ? '100%' : '50%',
+      width: document.body.scrollWidth <= 960 ? '100%' : '50%',
       data: {
-        rentalId: rental.id,
+        rentalId: rentalId,
       },
     });
   }
 
-  openCommentDialog(title: string, rental: Rental): void {
+  openTerminalDialog(rentalId: number): void {
+    this.dialog.open(BorrowTerminalDialogComponent, {
+      width: document.body.scrollWidth <= 960 ? '100%' : '50%',
+      data: {
+        rentalId: rentalId,
+      },
+    });
+  }
+
+  openCommentDialog(title: string, rentalId: number): void {
     this.dialog.open(BorrowCommentDialogComponent, {
-      width: window.screen.width <= 960 ? '100%' : '50%',
+      width: document.body.scrollWidth <= 960 ? '100%' : '50%',
       data: {
         title: title,
-        rentalId: rental.id,
+        rentalId: rentalId,
       },
-    });
-  }
-
-  imageToSliderObject(images: string[]): object[] {
-    return images.map((image) => {
-      return {
-        image: image,
-        thumbImage: image,
-        alt: 'detail image',
-      };
     });
   }
 }

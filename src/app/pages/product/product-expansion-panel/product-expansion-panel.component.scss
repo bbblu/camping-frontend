@@ -21,6 +21,7 @@ mat-expansion-panel {
   }
 
   mat-expansion-panel-header {
+    margin-bottom: 16px;
     border-bottom: 1px solid $primary-color;
     border-radius: 0;
   }
@@ -33,12 +34,16 @@ mat-expansion-panel {
       color: $font-white;
     }
   }
-
-  .product-detail {
-    padding-top: 16px;
-  }
 }
 
-.mat-flat-button {
-  color: $font-white;
+.slider {
+  width: 300px;
+  height: 200px;
+  border: solid 1px $primary-color;
+
+  ::ng-deep {
+    .ng-image-slider .ng-image-slider-container .main .main-inner .img-div img {
+      border-radius: 0;
+    }
+  }
 }

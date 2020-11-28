@@ -31,7 +31,6 @@ mat-card-title {
 
   .brand {
     font-weight: normal;
-    line-height: 50px;
   }
 }
 
@@ -47,19 +46,17 @@ mat-card-content {
       }
     }
 
-    a {
+    .forget-password {
       text-decoration: underline;
     }
 
     button {
       margin: 2% 0;
-      font-size: 70%;
-      font-weight: bold;
       border-style: solid;
       border-radius: 20px;
     }
 
-    .login-btn {
+    .login {
       color: $font-white;
       background-color: $button-color;
       border-color: $button-color;

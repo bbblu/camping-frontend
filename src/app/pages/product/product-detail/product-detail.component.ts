@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
+
 import { ProductGroupDetail } from '@models/product/product-group.model';
 
 import { ProductService } from '@services/api/product.service';
@@ -61,7 +62,7 @@ export class ProductDetailComponent implements OnInit {
 
   openDialog(): void {
     this.dialog.open(BorrowCreateDialogComponent, {
-      width: window.screen.width <= 960 ? '100%' : '50%',
+      width: document.body.scrollWidth <= 960 ? '100%' : '50%',
       data: {
         productGroupId: this.productGroupId,
         productGroup: this.productGroup,

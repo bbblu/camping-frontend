@@ -11,5 +11,5 @@ export interface User {
   email: string;
   address: string;
   comment: number | null;
-  notCompensate: null;
+  notCompensate: boolean;
 }

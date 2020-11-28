@@ -13,6 +13,7 @@ import { SnakeBarService } from '@services/ui/snake-bar.service';
 })
 export class ChangePasswordDialogComponent implements OnInit {
   form!: FormGroup;
+  isHide = true;
 
   constructor(
     private dialogRef: MatDialogRef<ChangePasswordDialogComponent>,
@@ -25,6 +26,7 @@ export class ChangePasswordDialogComponent implements OnInit {
     this.form = this.formBuilder.group({
       password: [null, Validators.required],
       newPassword: [null, Validators.required],
+      confirmPassword: [null, Validators.required],
     });
   }
 

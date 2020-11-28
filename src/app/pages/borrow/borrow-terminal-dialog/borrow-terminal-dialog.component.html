@@ -4,20 +4,25 @@
   fxLayoutAlign="center center"
   fxLayoutGap="10px"
 >
-  <mat-icon>star</mat-icon>
-  <span>{{ data.title }}</span>
+  <mat-icon>cancel</mat-icon>
+  <span>扣除手續費終止交易</span>
 </h2>
 
 <mat-dialog-content>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxFlexFill>
-    <mat-slider
-      min="1"
-      max="5"
-      step="1"
-      tickInterval="1"
-      [thumbLabel]="form.value.comment"
-      formControlName="comment"
-    ></mat-slider>
+    <mat-form-field
+      class="mat-form-field-round"
+      appearance="outline"
+      floatLabel="never"
+    >
+      <textarea
+        matInput
+        cols="50"
+        rows="10"
+        placeholder="請輸入原因..."
+        formControlName="reportContent"
+      ></textarea>
+    </mat-form-field>
 
     <mat-dialog-actions align="center">
       <button mat-flat-button mat-dialog-close type="button" color="warn">

@@ -14,12 +14,12 @@ import { SnakeBarService } from '@services/ui/snake-bar.service';
   styleUrls: ['./user-product.component.scss'],
 })
 export class UserProductComponent implements OnInit {
-  productGroups: ProductGroup[] = [];
   account: string = '';
+  nickName: string = '';
   comment: number | null = null;
   badRecords: BadRecord[] = [];
-  nickName: string = '';
-  isEdit = true;
+  productGroups: ProductGroup[] = [];
+  isEdit = false;
 
   constructor(
     private userService: UserService,
@@ -31,15 +31,20 @@ export class UserProductComponent implements OnInit {
   ngOnInit(): void {
     const account = this.route.snapshot.paramMap.get('account');
     const nickName = this.route.snapshot.queryParamMap.get('nickName') || '';
+
     if (account) {
-      this.account = account;
-      this.nickName = nickName;
-      this.isEdit = false;
-      this.getUserCommentAndBadRecord();
-      this.getUserProductGroups();
+      this.updateUserInfo(account, nickName);
     } else {
+      this.isEdit = true;
       this.getUserInfo();
     }
+  }
+
+  updateUserInfo(account: string, nickName: string): void {
+    this.account = account;
+    this.nickName = nickName;
+    this.getUserCommentAndBadRecord();
+    this.getUserProductGroups();
   }
 
   getUserInfo(): void {
@@ -49,10 +54,7 @@ export class UserProductComponent implements OnInit {
           this.snakeBarService.open(res.message);
         }
 
-        this.account = res.data.account;
-        this.nickName = res.data.nickName;
-        this.getUserCommentAndBadRecord();
-        this.getUserProductGroups();
+        this.updateUserInfo(res.data.account, res.data.nickName);
       },
       (err) => {
         this.snakeBarService.open(err.error.message);

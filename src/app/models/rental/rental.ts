@@ -1,5 +1,3 @@
-import { ProductImage } from '../product/product-image.model';
-
 export interface Rental {
   id: number;
   status: number;
@@ -24,7 +22,7 @@ export interface RentalDetail {
   useInformation: string;
   brokenCompensation: string;
   relatedLink: string | null;
-  imageArray: ProductImage[] | null;
+  imageArray: string[] | null;
 }
 
 export interface User {

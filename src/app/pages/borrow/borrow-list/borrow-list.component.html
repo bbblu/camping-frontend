@@ -14,7 +14,7 @@
   </div>
 
   <div
-    class="record"
+    class="rentals"
     *ngIf="rentals.length > 0; else emptyRentals"
     fxLayout="row wrap"
     fxLayoutAlign="space-between"
@@ -28,12 +28,12 @@
     >
       <img
         mat-card-image
+        alt="cover"
         [src]="
           rental.coverImage
             ? rental.coverImage
             : '/assets/image/empty-image.jpg'
         "
-        alt="product cover"
       />
 
       <mat-card-header fxLayout="column">
@@ -48,7 +48,7 @@
           >
             {{ getStatusText(rental.status) }}
           </span>
-          <p>{{ rental.name }}</p>
+          <span>{{ rental.name }}</span>
         </mat-card-title>
         <mat-card-subtitle fxLayout="column" fxLayoutGap="5px">
           <span>{{ rental.borrowStartDate }} ~ {{ rental.borrowEndDate }}</span>
@@ -58,7 +58,7 @@
               mat-flat-button
               color="primary"
               type="button"
-              routerLink="/product/16"
+              [routerLink]="'/product/' + rental.productGroupId"
             >
               商品資訊
             </button>
@@ -97,17 +97,17 @@
           "
           [style.background-color]="button.color"
           [disabled]="button.disable"
-          (click)="clickStatusButton(button.text, rental)"
+          (click)="clickStatusButton(button.text, rental.id)"
         >
           {{ button.text }}
         </button>
       </mat-card-actions>
     </mat-card>
   </div>
-
-  <ng-template #emptyRentals>
-    <div class="empty-rentals" fxLayout="row" fxLayoutAlign="center">
-      <h1>沒有任何{{ isRental ? "出租" : "借用" }}紀錄</h1>
-    </div>
-  </ng-template>
 </div>
+
+<ng-template #emptyRentals>
+  <div class="empty-rentals" fxLayout="row" fxLayoutAlign="center">
+    <h1>沒有任何{{ isRental ? "出租" : "借用" }}紀錄</h1>
+  </div>
+</ng-template>

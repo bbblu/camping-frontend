@@ -46,10 +46,6 @@ export class ProductFilterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProductTypes();
-    this.getCities();
-    this.getProductGroups();
-
     this.form = this.formBuilder.group({
       borrowStartDate: [null],
       borrowEndDate: [null],
@@ -57,6 +53,10 @@ export class ProductFilterComponent implements OnInit {
       typeArray: [[]],
       priceRange: [null],
     });
+
+    this.getProductTypes();
+    this.getCities();
+    this.getProductGroups();
   }
 
   getProductTypes() {
@@ -113,7 +113,7 @@ export class ProductFilterComponent implements OnInit {
   addType(value: string): void {
     const findType = this.productTypes.find((item) => item.name === value);
 
-    if (findType) {
+    if (findType && !this.chipTypes.includes(findType)) {
       this.form.value.typeArray.push(findType.id);
       this.chipTypes.push(findType);
     }

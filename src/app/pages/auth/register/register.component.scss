@@ -35,10 +35,6 @@ mat-card-content {
   .register-form {
     padding: 0 5% 3%;
 
-    .password-visibility {
-      cursor: pointer;
-    }
-
     .subtitle {
       text-align: left;
       margin: 15px 25px;
@@ -83,7 +79,6 @@ mat-card-content {
       margin: 0.6666666667em 10px 0;
       padding-left: 1em;
       font-size: 75%;
-      text-align: left;
     }
 
     // birthday
@@ -105,12 +100,11 @@ mat-card-content {
     button {
       margin: 2% 0;
       padding: 7px 0;
-      font-weight: bold;
       border-style: solid;
       border-radius: 30px;
     }
 
-    .register-btn {
+    .register {
       color: $font-white;
       background-color: $button-color;
       border-color: $button-color;

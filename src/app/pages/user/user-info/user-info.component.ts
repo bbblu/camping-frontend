@@ -126,7 +126,7 @@ export class UserInfoComponent implements OnInit {
 
   openDialog(): void {
     this.dialog.open(ChangePasswordDialogComponent, {
-      width: window.screen.width <= 960 ? '100%' : '50%',
+      width: document.body.scrollWidth <= 960 ? '100%' : '50%',
     });
   }
 }

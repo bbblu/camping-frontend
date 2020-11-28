@@ -23,7 +23,7 @@ import { ForgetPasswordDialogComponent } from '@pages/auth/forget-password-dialo
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup;
-  isVisibility = true;
+  isHide = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,14 +39,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      account: [
-        null,
-        [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+')],
-      ],
-      password: [
-        null,
-        [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+')],
-      ],
+      account: [null, [Validators.required]],
+      password: [null, [Validators.required]],
     });
 
     if (this.rememberMeService.isRememberMe) {
@@ -71,13 +65,7 @@ export class LoginComponent implements OnInit {
           this.accountService.account = this.form.value.account;
           this.authService.isAuth = true;
 
-          const redirectUrl = this.route.snapshot.queryParams['redirectUrl'];
-          this.router
-            .navigateByUrl(redirectUrl)
-            .then(() => {
-              window.location.reload();
-            })
-            .catch(() => this.router.navigate(['']));
+          this.redirectPreviousPage();
         }
       },
       (err) => {
@@ -86,9 +74,19 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  redirectPreviousPage(): void {
+    const redirectUrl = this.route.snapshot.queryParams['redirectUrl'];
+    this.router
+      .navigateByUrl(redirectUrl)
+      .then(() => {
+        window.location.reload();
+      })
+      .catch(() => this.router.navigate(['']));
+  }
+
   openDialog(): void {
     this.dialog.open(ForgetPasswordDialogComponent, {
-      width: window.screen.width <= 960 ? '100%' : '50%',
+      width: document.body.scrollWidth <= 960 ? '100%' : '50%',
     });
   }
 }

@@ -1,12 +1,18 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center">
   <mat-card fxFlex="60" fxFlex.lt-md="80">
-    <div fxLayoutGap="25px">
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="25px">
       <img
         mat-card-image
+        class="cover"
+        alt="cover"
+        [src]="
+          productGroup.coverImage
+            ? productGroup.coverImage
+            : '/assets/image/empty-image.jpg'
+        "
         fxFlex="50"
-        alt="product cover"
-        [src]="productGroup.coverImage"
       />
+
       <div fxFlex="50">
         <mat-card-title>{{ productGroup.name }}</mat-card-title>
         <mat-card-subtitle fxLayout="column" fxLayoutGap="10px">
@@ -30,14 +36,9 @@
             {{ productGroup.borrowEndDate }}
           </span>
 
-          <div
-            class="owner"
-            fxLayout="row"
-            fxLayoutAlign="start center"
-            fxLayoutGap="5px"
-          >
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
             <mat-icon>account_circle</mat-icon>
-            <a (click)="toUserProduct()">
+            <a class="owner" (click)="toUserProduct()">
               {{ productGroup.productOwnerName }}
             </a>
           </div>
