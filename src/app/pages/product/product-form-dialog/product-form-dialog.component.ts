@@ -17,7 +17,7 @@ import { SnakeBarService } from '@services/ui/snake-bar.service';
 
 import { ImageCropperDialogComponent } from '@components/image-cropper-dialog/image-cropper-dialog.component';
 
-export interface DialogData {
+interface ProductFormDialogData {
   product: Product;
 }
 
@@ -33,12 +33,12 @@ export class ProductFormDialogComponent implements OnInit {
   imageIndex = 0;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) private data: ProductFormDialogData,
+    private dialogRef: MatDialogRef<ImageCropperDialogComponent>,
     private formBuilder: FormBuilder,
     private productService: ProductService,
     private snakeBarService: SnakeBarService,
-    private dialogRef: MatDialogRef<ImageCropperDialogComponent>,
-    private dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) private data: DialogData
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -68,9 +68,6 @@ export class ProductFormDialogComponent implements OnInit {
         this.productTypes = res.data;
         if (this.data) {
           this.updateFormValue(this.data.product);
-          this.productImages = this.imageToSliderObject(
-            this.data.product.imageArray
-          );
         }
       },
       (err) => {
@@ -89,6 +86,7 @@ export class ProductFormDialogComponent implements OnInit {
   updateFormValue(data: Product) {
     const productEdit = this.transformDetailToEdit(data);
     this.form.patchValue(productEdit);
+    this.productImages = this.imageToSliderObject(this.data.product.imageArray);
   }
 
   imageToSliderObject(images: ProductImage[] | null): SliderImage[] {

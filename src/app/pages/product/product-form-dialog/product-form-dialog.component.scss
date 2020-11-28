@@ -1,11 +1,16 @@
 @import "~src/assets/scss/color.scss";
+@import "~src/assets/scss/mat-dialog.scss";
 
 $primary-color: map-get($colors, primary4);
 $icon-color: map-get($colors, primary2);
 $font-white: map-get($colors, white);
 
-form {
-  padding: 3% 5%;
+.mat-dialog-title {
+  background-color: $primary-color;
+
+  &::after {
+    border-top: solid 1rem $primary-color;
+  }
 }
 
 :host ::ng-deep mat-form-field {
@@ -20,18 +25,15 @@ form {
   }
 }
 
-.mat-flat-button {
-  color: $font-white;
-}
-
-.slider,
-.empty-image {
+.slider {
   width: 300px;
   height: 200px;
   margin: 0 auto;
   border: solid 1px $primary-color;
-}
 
-.submit-btn {
-  margin-top: 20px;
+  ::ng-deep {
+    .ng-image-slider .ng-image-slider-container .main .main-inner .img-div img {
+      border-radius: 0;
+    }
+  }
 }
