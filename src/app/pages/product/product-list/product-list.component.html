@@ -10,14 +10,14 @@
       <mat-card>
         <img
           mat-card-image
-          alt="product-image"
+          alt="cover"
           [src]="
             productGroup.coverImage
               ? productGroup.coverImage
               : '/assets/image/empty-image.jpg'
           "
         />
-        <mat-card-content>
+        <mat-card-header>
           <mat-card-title fxLayout="column" fxFlex="60" fxLayoutGap="5px">
             <span>{{ productGroup.name }}</span>
             <div class="date">
@@ -25,6 +25,7 @@
               {{ productGroup.borrowEndDate | date: "yyyy-MM-dd" }}
             </div>
           </mat-card-title>
+
           <mat-card-subtitle
             fxLayout="column"
             fxLayoutAlign="center end"
@@ -44,7 +45,7 @@
             </div>
             <span>{{ productGroup.city }}</span>
           </mat-card-subtitle>
-        </mat-card-content>
+        </mat-card-header>
 
         <mat-card-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
           <button
@@ -67,6 +68,7 @@
           </button>
           <button
             mat-flat-button
+            type="button"
             color="primary"
             (click)="toProductDetail(productGroup.id)"
           >

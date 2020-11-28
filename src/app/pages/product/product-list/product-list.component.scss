@@ -3,17 +3,11 @@
 $primary-color: map-get($colors, primary4);
 $font-white: map-get($colors, white);
 $font-red: map-get($colors, red);
-$bg-white: map-get($colors, white);
 
 .product {
   &:after {
     width: 32%;
     content: "";
-  }
-
-  .mat-card-image {
-    border-radius: 20px;
-    background-color: $bg-white;
   }
 
   mat-card {
@@ -25,6 +19,10 @@ $bg-white: map-get($colors, white);
     &:not([class*="mat-elevation-z"]) {
       box-shadow: none;
     }
+  }
+
+  .mat-card-image {
+    border-radius: 20px;
   }
 
   mat-card-title {
@@ -53,10 +51,6 @@ $bg-white: map-get($colors, white);
 
   mat-card-actions {
     padding: 0;
-
-    .mat-flat-button {
-      color: $font-white;
-    }
   }
 }
 
